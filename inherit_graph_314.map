@@ -1,9 +1,3 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classaudio__tools_1_1_seekable_source.html" title="Minimal seek+read interface a SourceSeekSampleTableStore needs from &quot;the original MP4 source&quot; &#45; kept ..." alt="" coords="5,44,130,72"/>
-<area shape="rect" id="Node000001" href="$classaudio__tools_1_1_file_seekable_source.html" title="Adapts a single concrete file/stream (Arduino&#39;s File, or anything else exposing position(),..." alt="" coords="178,5,325,50"/>
-<area shape="poly" id="edge905_Node000000_Node000001" title=" " alt="" coords="144,43,180,39,175,41,146,48"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_spool_storage.html" title="Minimal seek+read+write interface a SpoolFileSampleTableStore needs from its scratch file &#45; SeekableS..." alt="" coords="198,74,305,102"/>
-<area shape="poly" id="edge906_Node000000_Node000002" title=" " alt="" coords="145,68,200,79,195,79,145,73"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_file_spool_storage.html" title="Adapts any concrete file/stream type to SpoolStorage &#45; same role as FileSeekableSource,..." alt="" coords="373,74,564,102"/>
-<area shape="poly" id="edge907_Node000002_Node000003" title=" " alt="" coords="320,85,375,88,370,88,320,90"/>
+<area shape="rect" id="Node000000" href="$classaudio__tools_1_1_stack.html" title="LIFO Stack which is based on a List." alt="" coords="5,5,101,33"/>
 </map>

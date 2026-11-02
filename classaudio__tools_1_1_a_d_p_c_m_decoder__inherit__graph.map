@@ -1,17 +1,13 @@
 <map id="ADPCMDecoder" name="ADPCMDecoder">
 <area shape="rect" id="Node000001" title="Decoder for ADPCM. Depends on https://github.com/pschatzmann/adpcm." alt="" coords="78,308,202,336"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_audio_decoder_ext.html" title="Extended AudioDecoder interface to support block size configuration." alt="" coords="73,232,207,260"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_audio_decoder_ext.html" title="Extended AudioDecoder interface to support block size configuration." alt="" coords="73,232,207,260"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="142,274,142,309,138,306,138,278"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_audio_decoder.html" title="Decoding of encoded audio into PCM data." alt="" coords="84,157,196,184"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="133,197,135,233,130,231,130,202"/>
-<area shape="poly" id="edge9_Node000002_Node000003" title=" " alt="" coords="150,198,150,233,145,231,147,202"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="" coords="23,81,121,109"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="87,118,123,155,118,157,87,124"/>
-<area shape="poly" id="edge7_Node000003_Node000004" title=" " alt="" coords="102,117,138,156,132,157,102,122"/>
-<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="5,5,139,33"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="64,46,68,81,62,80,63,51"/>
-<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="81,46,82,81,76,80,80,51"/>
-<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="146,81,273,109"/>
-<area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="177,122,147,158,143,154,180,118"/>
-<area shape="poly" id="edge8_Node000003_Node000006" title=" " alt="" coords="192,123,161,158,157,154,196,119"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_audio_decoder.html" title="Decoding of encoded audio into PCM data." alt="" coords="84,157,196,184"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="141,198,143,233,137,231,139,202"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="" coords="23,81,121,109"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="95,118,131,156,125,157,94,123"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="5,5,139,33"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="72,46,75,81,69,80,72,51"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="146,81,273,109"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="185,122,154,158,150,154,188,118"/>
 </map>

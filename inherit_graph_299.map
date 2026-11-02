@@ -1,9 +1,9 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classaudio__tools_1_1_r_t_s_p_media_streamer_base.html" title="RTSPMediaStreamerBase &#45; Core RTP Media Streaming Engine." alt="" coords="5,75,191,119"/>
-<area shape="rect" id="Node000001" href="$classaudio__tools_1_1_r_t_s_p_media_streamer.html" title="RTSPMediaStreamer &#45; Timer&#45;driven RTP Media Streaming Engine." alt="" coords="266,5,430,50"/>
-<area shape="poly" id="edge896_Node000000_Node000001" title=" " alt="" coords="195,68,268,49,263,52,197,73"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_r_t_s_p_media_streamer_taskless.html" title="RTSPMediaStreamerTaskless &#45; Manual RTP Audio Streaming Engine (no Task)." alt="" coords="244,75,452,119"/>
-<area shape="poly" id="edge897_Node000000_Node000002" title=" " alt="" coords="206,94,246,96,241,98,207,100"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_r_t_s_p_media_streamer_using_task.html" title="RTSPMediaStreamerUsingTask &#45; Task&#45;driven RTP Media Streaming Engine." alt="" coords="239,144,458,189"/>
-<area shape="poly" id="edge898_Node000000_Node000003" title=" " alt="" coords="196,121,268,143,262,144,196,127"/>
+<area shape="rect" id="Node000000" href="$classaudio__tools_1_1_seekable_source.html" title="Minimal seek+read interface a SourceSeekSampleTableStore needs from &quot;the original MP4 source&quot; &#45; kept ..." alt="" coords="5,44,130,72"/>
+<area shape="rect" id="Node000001" href="$classaudio__tools_1_1_file_seekable_source.html" title="Adapts a single concrete file/stream (Arduino&#39;s File, or anything else exposing position(),..." alt="" coords="178,5,325,50"/>
+<area shape="poly" id="edge715_Node000000_Node000001" title=" " alt="" coords="144,43,180,39,175,41,146,48"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_spool_storage.html" title="Minimal seek+read+write interface a SpoolFileSampleTableStore needs from its scratch file &#45; SeekableS..." alt="" coords="198,74,305,102"/>
+<area shape="poly" id="edge716_Node000000_Node000002" title=" " alt="" coords="145,68,200,79,195,79,145,73"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_file_spool_storage.html" title="Adapts any concrete file/stream type to SpoolStorage &#45; same role as FileSeekableSource,..." alt="" coords="373,74,564,102"/>
+<area shape="poly" id="edge717_Node000002_Node000003" title=" " alt="" coords="320,85,375,88,370,88,320,90"/>
 </map>

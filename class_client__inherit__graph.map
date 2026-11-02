@@ -1,7 +1,11 @@
 <map id="Client" name="Client">
-<area shape="rect" id="Node000001" title=" " alt="" coords="10,157,69,184"/>
-<area shape="rect" id="Node000002" href="$class_stream.html" title=" " alt="" coords="5,81,74,109"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="41,123,42,157,37,156,38,126"/>
-<area shape="rect" id="Node000003" href="$class_print.html" title=" " alt="" coords="14,5,65,33"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="40,46,42,81,37,80,39,51"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="64,157,124,184"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_wi_fi_client_zephyr.html" title=" " alt="" coords="27,232,161,260"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="95,198,97,233,91,231,93,203"/>
+<area shape="rect" id="Node000002" href="$class_stream.html" title=" " alt="" coords="60,81,128,109"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="95,122,97,157,91,156,93,127"/>
+<area shape="rect" id="Node000003" href="$class_print.html" title=" " alt="" coords="68,5,120,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="95,46,97,81,91,80,93,51"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_wi_fi_client_secure_zephyr.html" title=" " alt="" coords="5,308,183,336"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="96,274,96,309,92,307,92,278"/>
 </map>

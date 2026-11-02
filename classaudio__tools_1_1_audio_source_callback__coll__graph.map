@@ -1,20 +1,19 @@
 <map id="AudioSourceCallback" name="AudioSourceCallback">
-<area shape="rect" id="Node000001" title="Callback Audio Data Source which is used by the Audio Players." alt="" coords="228,330,387,357"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players." alt="" coords="146,207,248,234"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="220,243,298,329,293,329,218,248"/>
-<area shape="rect" id="Node000003" href="$classint.html" title=" " alt="" coords="56,5,95,33"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="94,43,103,56,119,94,135,132,161,173,188,206,182,206,157,176,130,135,114,96,98,58,94,49"/>
-<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="14,106,65,134"/>
-<area shape="poly" id="edge8_Node000007_Node000003" title=" " alt="" coords="44,45,37,58,34,82,38,106,32,106,28,82,32,56,46,40"/>
-<area shape="rect" id="Node000004" href="$classbool.html" title=" " alt="" coords="318,106,367,134"/>
-<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="335,147,321,207,313,276,310,331,306,328,308,275,316,206,331,150"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="300,134,300,136,269,140,243,139,221,143,200,159,194,170,193,182,195,207,190,206,187,182,189,168,196,156,219,138,243,134,269,135,299,131,305,132"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="404,207,480,234"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="419,244,324,331,321,327,414,245"/>
-<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="5,207,74,234"/>
-<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="46,246,61,278,70,292,82,303,106,315,142,323,230,336,225,338,141,329,105,320,79,308,66,295,56,280,45,251"/>
-<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="32,146,36,206,30,206,31,151"/>
-<area shape="poly" id="edge9_Node000006_Node000007" title=" " alt="" coords="48,146,49,206,43,206,47,151"/>
-<area shape="rect" id="Node000008" title=" " alt="" coords="531,207,580,234"/>
-<area shape="poly" id="edge10_Node000001_Node000008" title=" " alt="" coords="551,248,539,281,517,308,495,319,463,327,387,338,387,333,462,322,493,314,514,304,535,278,547,251"/>
+<area shape="rect" id="Node000001" title="Callback Audio Data Source which is used by the Audio Players." alt="" coords="213,300,372,328"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players." alt="" coords="134,191,237,218"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="210,227,282,300,277,300,208,232"/>
+<area shape="rect" id="Node000003" href="$classint.html" title=" " alt="" coords="48,5,86,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="83,44,92,56,107,91,123,124,150,160,176,190,170,191,146,163,119,127,102,93,87,58,84,49"/>
+<area shape="rect" id="Node000007" href="$class_print.html" title=" " alt="" coords="5,98,57,126"/>
+<area shape="poly" id="edge8_Node000007_Node000003" title=" " alt="" coords="35,47,30,58,27,78,30,97,24,98,22,78,25,56,37,41"/>
+<area shape="rect" id="Node000004" href="$classbool.html" title=" " alt="" coords="302,98,352,126"/>
+<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="319,138,306,191,298,252,295,301,290,298,293,251,301,190,315,142"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="285,126,285,128,255,132,230,132,209,135,189,151,183,170,184,191,179,189,177,169,184,148,207,130,230,126,255,127,284,123,289,124"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="385,191,461,218"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="398,228,309,302,307,298,393,229"/>
+<area shape="rect" id="Node000006" href="$class_stream.html" title=" " alt="" coords="22,191,90,218"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="58,231,64,256,76,274,98,286,132,295,215,308,210,309,131,300,96,291,73,278,59,258,56,236"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="39,138,55,190,50,191,38,143"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="510,191,560,218"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="527,231,512,258,491,279,471,288,441,296,372,307,372,302,440,290,469,283,488,274,508,254,522,234"/>
 </map>

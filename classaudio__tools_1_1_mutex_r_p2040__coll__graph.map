@@ -1,7 +1,7 @@
 <map id="MutexRP2040" name="MutexRP2040">
-<area shape="rect" id="Node000001" title="Mutex API for non IRQ mutual exclusion between cores. Mutexes are application level locks usually use..." alt="" coords="52,106,163,134"/>
+<area shape="rect" id="Node000001" title="Mutex API for non IRQ mutual exclusion between cores. Mutexes are application level locks usually use..." alt="" coords="52,98,163,126"/>
 <area shape="rect" id="Node000002" href="$classaudio__tools_1_1_mutex_base.html" title="Empty Mutex implementation which does nothing." alt="" coords="5,5,100,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="69,44,102,105,97,106,65,49"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="70,44,102,97,97,98,67,48"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="124,5,200,33"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="150,46,117,107,112,104,145,47"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="149,45,117,99,113,96,144,47"/>
 </map>

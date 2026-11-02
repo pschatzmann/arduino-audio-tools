@@ -1,6 +1,0 @@
-<map id="AllocatorExt" name="AllocatorExt">
-<area shape="rect" id="Node000001" title="Memory allocateator which uses ps_malloc (on the ESP32) and if this fails it resorts to malloc." alt="" coords="5,81,106,109"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="16,5,95,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="49,47,51,81,46,80,45,50"/>
-<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="66,47,65,81,60,80,62,50"/>
-</map>

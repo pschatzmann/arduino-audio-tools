@@ -1,10 +1,107 @@
 <map id="AudioEncoder" name="AudioEncoder">
-<area shape="rect" id="Node000001" title="Encoding of PCM data." alt="" coords="78,157,188,184"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="" coords="23,81,121,109"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="94,118,125,156,120,156,91,123"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="5,5,139,33"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="64,46,68,81,62,80,62,51"/>
-<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="82,46,82,81,76,80,80,51"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_mime_source.html" title="Abstract interface for classes that can provide MIME type information." alt="" coords="145,81,247,109"/>
-<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="177,120,146,158,143,154,172,122"/>
+<area shape="rect" id="Node000001" title="Encoding of PCM data." alt="" coords="337,993,447,1021"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_a_a_c_encoder_f_a_a_c.html" title="AAC Encoder (AAC&#45;LC and HE&#45;AAC v1) using faac: https://github.com/pschatzmann/codec&#45;faac." alt="" coords="540,5,674,33"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="392,977,401,777,421,481,435,331,451,200,471,100,481,65,493,44,514,28,541,20,538,24,517,33,497,48,486,68,476,101,457,201,440,332,426,481,407,777,397,978"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_a_a_c_encoder_f_d_k.html" title="Encodes PCM data to the AAC format and writes the result to a stream This is basically just a wrapper..." alt="" coords="543,57,671,85"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="392,977,402,786,423,507,437,366,453,242,472,148,482,116,493,96,516,79,545,71,541,75,518,84,497,100,487,118,477,150,458,243,442,367,428,507,408,787,397,978"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_a_a_c_encoder_v_o.html" title="AAC Encoder based on the VisualOn vo&#45;aacenc implementation (https://github.com/pschatzmann/codec&#45;vo&#45;a..." alt="" coords="547,109,667,137"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="392,977,403,797,424,534,438,402,454,285,473,197,483,167,493,148,518,131,549,123,545,126,520,135,497,152,487,169,478,198,460,286,444,402,430,534,409,797,398,978"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_a_d_p_c_m_encoder_x_q.html" title="Encoder for ADPCM&#45;XQ &#45; Depends on https://github.com/pschatzmann/codec&#45;adpcm&#45;xq." alt="" coords="537,161,677,189"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="390,978,391,818,401,585,414,464,432,354,458,263,475,227,493,200,513,185,538,177,535,181,515,190,497,204,479,230,463,265,437,355,419,465,407,585,396,818,396,978"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1_a_m_r_n_b_encoder.html" title="AMR NB Encoder See https://github.com/pschatzmann/codec&#45;amr." alt="" coords="546,213,668,241"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="391,977,392,827,405,609,417,497,435,395,460,310,476,277,493,252,517,235,548,227,544,231,520,240,497,256,480,280,465,312,440,396,422,498,410,610,398,827,396,978"/>
+<area shape="rect" id="Node000010" href="$classaudio__tools_1_1_a_m_r_w_b_encoder.html" title="AMR Wideband Encoder See https://github.com/pschatzmann/codec&#45;amr." alt="" coords="544,265,670,293"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="391,978,394,837,408,635,420,531,438,436,462,358,477,327,493,304,516,287,546,279,542,283,519,292,497,308,481,330,467,360,443,437,426,532,413,635,400,837,396,978"/>
+<area shape="rect" id="Node000011" href="$classaudio__tools_1_1_a_p_t_x_encoder.html" title="Encoder for OpenAptx &#45; Depends on https://github.com/pschatzmann/codec&#45;openaptx." alt="" coords="553,317,661,345"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="391,978,396,846,411,660,424,564,441,477,464,405,478,377,493,356,521,338,555,330,551,334,523,342,497,360,482,380,469,407,446,478,429,565,416,660,401,846,397,978"/>
+<area shape="rect" id="Node000012" href="$classaudio__tools_1_1_audio_encoder_ext.html" title="Extended AudioEncoder interface to support block size configuration." alt="" coords="541,369,673,397"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="392,977,398,855,414,684,427,597,444,518,466,453,479,427,493,408,515,392,543,384,539,388,517,397,497,412,484,430,471,455,450,519,433,598,420,685,403,855,397,978"/>
+<area shape="rect" id="Node000014" href="$classaudio__tools_1_1_binary_container_encoder.html" title="Wraps the encoded data into Config, Data, and Meta segments so that we can recover the audio configur..." alt="" coords="518,421,696,449"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="392,977,400,864,418,709,431,631,448,559,468,500,493,460,519,444,516,448,497,464,473,503,453,561,436,632,423,710,405,865,398,978"/>
+<area shape="rect" id="Node000015" href="$classaudio__tools_1_1_codec2_encoder.html" title="Encoder for Codec2 &#45; Depends on https://github.com/pschatzmann/codec&#45;codec2." alt="" coords="546,473,668,501"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="393,977,402,874,421,735,434,665,451,601,470,548,493,512,518,495,548,487,544,491,520,500,497,516,475,550,456,602,440,666,426,736,408,875,398,978"/>
+<area shape="rect" id="Node000016" href="$classaudio__tools_1_1_codec_chain.html" title="CodecChain &#45; allows to chain multiple decoders and encoders together." alt="" coords="558,525,656,553"/>
+<area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="394,978,405,884,425,761,438,698,454,642,472,596,493,564,523,545,559,538,555,542,525,550,497,568,477,598,459,644,443,700,430,762,410,885,399,979"/>
+<area shape="rect" id="Node000017" href="$classaudio__tools_1_1_codec_n_o_p.html" title="Dummy no implmentation Codec. This is used so that we can initialize some pointers to decoders and en..." alt="" coords="562,577,652,605"/>
+<area shape="poly" id="edge16_Node000001_Node000017" title=" " alt="" coords="395,977,407,894,428,786,457,683,474,643,493,616,509,605,526,597,564,590,560,593,527,602,511,609,497,620,479,646,462,685,433,787,413,895,400,979"/>
+<area shape="rect" id="Node000018" href="$classaudio__tools_1_1_copy_encoder.html" title="Dummy Encoder which just copies the provided data to the output." alt="" coords="554,629,660,657"/>
+<area shape="poly" id="edge17_Node000001_Node000018" title=" " alt="" coords="391,977,395,913,409,830,422,786,440,743,463,703,494,668,521,651,555,643,551,647,523,656,497,672,468,706,444,745,427,788,414,831,400,914,396,978"/>
+<area shape="rect" id="Node000019" href="$classaudio__tools_1_1_d_s_f_encoder.html" title="DSF (DSD Stream File) format encoder." alt="" coords="557,681,657,709"/>
+<area shape="poly" id="edge18_Node000001_Node000019" title=" " alt="" coords="393,977,399,922,416,853,429,817,446,781,467,748,494,720,523,702,559,695,555,699,525,707,497,724,471,752,451,784,434,819,421,855,405,923,398,978"/>
+<area shape="rect" id="Node000020" href="$classaudio__tools_1_1_encoder_a_l_a_c.html" title="ALAC (Apple Lossless Audio Codec) encoder. This class is responsible for encoding audio data into ALA..." alt="" coords="553,733,661,761"/>
+<area shape="poly" id="edge19_Node000001_Node000020" title=" " alt="" coords="395,978,405,932,423,877,452,820,471,794,494,772,521,756,554,748,550,752,523,761,497,776,475,798,457,823,428,879,410,934,400,979"/>
+<area shape="rect" id="Node000021" href="$classaudio__tools_1_1_encoder_base64.html" title="EncoderBase64s &#45; Encodes the input data into a Base64 string. By default each audio frame is followed..." alt="" coords="546,785,668,813"/>
+<area shape="poly" id="edge20_Node000001_Node000021" title=" " alt="" coords="399,978,412,942,432,900,459,859,494,824,519,810,548,803,544,806,521,815,497,828,463,862,436,903,417,944,404,979"/>
+<area shape="rect" id="Node000022" href="$classaudio__tools_1_1_encoder_basic.html" title="EncoderBasic &#45; supports mime type audio/basic. The content of the &quot;audio/basic&quot; subtype is single cha..." alt="" coords="553,837,661,865"/>
+<area shape="poly" id="edge21_Node000001_Node000022" title=" " alt="" coords="406,978,441,925,465,898,494,876,522,862,554,855,550,858,524,867,497,880,469,902,445,929,410,981"/>
+<area shape="rect" id="Node000023" href="$classaudio__tools_1_1_encoder_float.html" title="EncoderFloats &#45; Encodes 16 bit PCM data stream to floats data." alt="" coords="554,889,660,917"/>
+<area shape="poly" id="edge22_Node000001_Node000023" title=" " alt="" coords="417,981,452,953,494,927,523,916,556,909,552,913,525,921,497,932,455,957,421,985"/>
+<area shape="rect" id="Node000024" href="$classaudio__tools_1_1_encoder_l16.html" title="EncoderL16s &#45; Condenses 16 bit PCM data stream to 8 bits data. Most microcontrollers can not process ..." alt="" coords="559,941,655,969"/>
+<area shape="poly" id="edge23_Node000001_Node000024" title=" " alt="" coords="461,988,495,979,560,965,556,968,496,984,464,992"/>
+<area shape="rect" id="Node000025" href="$classaudio__tools_1_1_encoder_l8.html" title="EncoderL8s &#45; Condenses 16 bit PCM data stream to 8 bits data. Most microcontrollers can not process 8..." alt="" coords="563,993,651,1021"/>
+<area shape="poly" id="edge24_Node000001_Node000025" title=" " alt="" coords="461,1005,565,1006,560,1009,464,1010"/>
+<area shape="rect" id="Node000026" href="$classaudio__tools_1_1_encoder_network_format.html" title="Encoder which converts from the host format to the network format." alt="" coords="520,1045,694,1073"/>
+<area shape="poly" id="edge25_Node000001_Node000026" title=" " alt="" coords="462,1022,496,1030,548,1044,543,1046,495,1035,464,1027"/>
+<area shape="rect" id="Node000027" href="$classaudio__tools_1_1_f_l_a_c_encoder.html" title="FLACEncoder." alt="" coords="553,1097,661,1125"/>
+<area shape="poly" id="edge26_Node000001_Node000027" title=" " alt="" coords="418,1029,455,1057,496,1082,556,1102,551,1104,494,1087,452,1061,420,1034"/>
+<area shape="rect" id="Node000028" href="$classaudio__tools_1_1_g722_encoder.html" title="Encoder for G.722 &#45; Depends on https://github.com/pschatzmann/codec&#45;g722. Inspired by g722enc...." alt="" coords="553,1149,661,1177"/>
+<area shape="poly" id="edge27_Node000001_Node000028" title=" " alt="" coords="408,1032,445,1086,469,1112,497,1134,524,1147,555,1157,550,1159,522,1152,494,1139,465,1116,441,1089,408,1038"/>
+<area shape="rect" id="Node000029" href="$classaudio__tools_1_1_g729_encoder.html" title="G.729 encoder using the bcg729 library." alt="" coords="553,1201,661,1229"/>
+<area shape="poly" id="edge28_Node000001_Node000029" title=" " alt="" coords="402,1033,417,1070,436,1111,463,1152,497,1186,524,1201,555,1210,551,1212,522,1206,494,1191,459,1156,432,1114,412,1072,401,1038"/>
+<area shape="rect" id="Node000030" href="$classaudio__tools_1_1_g7xx_encoder.html" title="g723_24, g721, g723_40 Encoder based on https://github.com/pschatzmann/codec&#45;g7xx" alt="" coords="553,1253,661,1281"/>
+<area shape="poly" id="edge29_Node000001_Node000030" title=" " alt="" coords="398,1033,410,1081,428,1136,457,1191,475,1217,497,1238,524,1254,555,1263,550,1265,522,1259,494,1243,471,1220,452,1194,423,1138,405,1082,397,1039"/>
+<area shape="rect" id="Node000037" href="$classaudio__tools_1_1_g_s_m_encoder.html" title="Encoder for GSM &#45; Depends on https://github.com/pschatzmann/codec&#45;gsm. Inspired by gsmenc...." alt="" coords="555,1305,659,1333"/>
+<area shape="poly" id="edge36_Node000001_Node000037" title=" " alt="" coords="396,1034,405,1091,421,1160,434,1196,451,1230,471,1263,497,1290,525,1307,558,1316,553,1318,523,1312,494,1295,467,1266,446,1233,429,1198,416,1161,399,1092,395,1039"/>
+<area shape="rect" id="Node000038" href="$classaudio__tools_1_1_i_l_b_c_encoder.html" title="Encoder for iLBC &#45; Depends on https://github.com/pschatzmann/libopenilbc." alt="" coords="556,1357,658,1385"/>
+<area shape="poly" id="edge37_Node000001_Node000038" title=" " alt="" coords="394,1034,400,1100,414,1183,427,1227,444,1269,468,1308,497,1342,525,1359,558,1369,553,1371,523,1364,494,1347,463,1311,440,1271,422,1228,409,1184,395,1101,393,1039"/>
+<area shape="rect" id="Node000039" href="$classaudio__tools_1_1_l_c3_encoder.html" title="Encoder for LC3 &#45; Depends on https://github.com/pschatzmann/codec&#45;lc3." alt="" coords="558,1409,656,1437"/>
+<area shape="poly" id="edge38_Node000001_Node000039" title=" " alt="" coords="398,1034,413,1119,433,1227,462,1329,479,1368,497,1395,526,1412,560,1422,555,1423,524,1417,494,1398,474,1371,457,1331,428,1228,407,1120,397,1039"/>
+<area shape="rect" id="Node000040" href="$classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html" title="Encodes PCM data to the MP3 format and writes the result to a stream This is basically just a wrapper..." alt="" coords="538,1461,676,1489"/>
+<area shape="poly" id="edge39_Node000001_Node000040" title=" " alt="" coords="397,1034,410,1129,430,1253,443,1315,459,1371,477,1416,497,1447,516,1460,540,1470,535,1471,513,1465,493,1450,472,1419,454,1372,438,1316,425,1254,405,1130,396,1039"/>
+<area shape="rect" id="Node000041" href="$classaudio__tools_1_1_m_p3_encoder_shine.html" title="Lean MP3 Encoder using the shine library." alt="" coords="538,1513,676,1541"/>
+<area shape="poly" id="edge40_Node000001_Node000041" title=" " alt="" coords="396,1034,408,1139,426,1279,440,1349,456,1412,475,1464,497,1499,516,1512,541,1523,536,1524,514,1517,493,1502,470,1466,451,1414,434,1350,421,1279,402,1140,395,1039"/>
+<area shape="rect" id="Node000042" href="$classaudio__tools_1_1_m_p3_parser_encoder.html" title="Parses MP3 frames, extracts audio info, and outputs complete frames. The frame duration is determined..." alt="" coords="536,1565,678,1593"/>
+<area shape="poly" id="edge41_Node000001_Node000042" title=" " alt="" coords="395,1034,405,1150,423,1304,436,1383,453,1454,473,1512,497,1551,515,1564,538,1574,533,1575,513,1569,493,1554,468,1514,448,1455,431,1384,418,1305,400,1150,394,1039"/>
+<area shape="rect" id="Node000043" href="$classaudio__tools_1_1_meta_data_filter_encoder.html" title="MetaDataFilter applied to an encoder: filters out ID3v1 / ID3v2 metadata from the mp3 input stream be..." alt="" coords="522,1617,692,1645"/>
+<area shape="poly" id="edge42_Node000001_Node000043" title=" " alt="" coords="395,1034,403,1159,420,1330,433,1416,450,1495,471,1559,484,1584,497,1603,524,1622,519,1622,493,1606,479,1587,466,1561,444,1496,427,1417,414,1330,398,1160,394,1039"/>
+<area shape="rect" id="Node000044" href="$classaudio__tools_1_1_o_s_c_container_encoder.html" title="Wraps the encoded data into OSC info and data segments so that the receiver can recover the audio con..." alt="" coords="525,1669,689,1697"/>
+<area shape="poly" id="edge43_Node000001_Node000044" title=" " alt="" coords="395,1034,401,1168,416,1354,429,1449,446,1536,469,1607,482,1634,497,1655,510,1665,527,1675,522,1676,507,1670,493,1658,478,1637,464,1609,441,1537,424,1450,411,1355,396,1168,393,1039"/>
+<area shape="rect" id="Node000045" href="$classaudio__tools_1_1_ogg_container_encoder.html" title="Encoder for Ogg Container. Encodes a packet for an Ogg container. The Ogg begin segment contains the ..." alt="" coords="526,1721,688,1749"/>
+<area shape="poly" id="edge44_Node000001_Node000045" title=" " alt="" coords="394,1034,400,1177,413,1379,426,1483,443,1577,467,1655,481,1684,497,1707,511,1718,528,1728,523,1728,508,1722,493,1710,477,1687,462,1657,438,1578,420,1483,408,1380,394,1178,393,1039"/>
+<area shape="rect" id="Node000047" href="$classaudio__tools_1_1_opus_audio_encoder.html" title="Encode for Opus audio." alt="" coords="535,1773,679,1801"/>
+<area shape="poly" id="edge46_Node000001_Node000047" title=" " alt="" coords="394,1034,398,1188,410,1405,422,1516,440,1619,465,1702,480,1734,497,1759,515,1772,537,1783,532,1783,512,1777,493,1762,476,1737,460,1704,435,1620,417,1517,405,1405,392,1188,393,1039"/>
+<area shape="rect" id="Node000048" href="$classaudio__tools_1_1_opus_multi_stream_audio_encoder.html" title="Encoder for Opus multistream audio. Supports up to 255 channels by combining multiple Opus streams in..." alt="" coords="495,1825,719,1853"/>
+<area shape="poly" id="edge47_Node000001_Node000048" title=" " alt="" coords="394,1034,396,1196,407,1429,419,1549,437,1659,463,1750,479,1785,497,1811,513,1825,508,1824,493,1814,475,1787,458,1752,432,1661,414,1550,401,1429,391,1196,392,1039"/>
+<area shape="rect" id="Node000049" href="$classaudio__tools_1_1_r_t_s_p_video_encoder.html" title="Common base for RTP video payloaders (JPEGRtpEncoder, H264RtpEncoder, ...): an AudioEncoder that acce..." alt="" coords="536,1877,678,1905"/>
+<area shape="poly" id="edge48_Node000001_Node000049" title=" " alt="" coords="396,1034,409,1217,430,1480,444,1612,460,1728,478,1816,487,1845,497,1863,515,1876,538,1887,533,1887,512,1881,493,1866,483,1847,473,1817,454,1729,438,1613,424,1481,403,1218,394,1039"/>
+<area shape="rect" id="Node000052" href="$classaudio__tools_1_1_s_b_c_encoder.html" title="Encoder for SBC &#45; Depends on https://github.com/pschatzmann/codec&#45;sbc. Inspired by sbcenc...." alt="" coords="557,1929,657,1957"/>
+<area shape="poly" id="edge51_Node000001_Node000052" title=" " alt="" coords="396,1034,408,1228,428,1507,442,1648,458,1771,477,1865,487,1896,497,1915,510,1925,525,1933,560,1944,554,1943,523,1938,507,1930,493,1918,482,1898,472,1866,453,1772,437,1648,423,1508,402,1228,394,1039"/>
+<area shape="rect" id="Node000053" href="$classaudio__tools_1_1_w_a_v_encoder.html" title="A simple WAV file encoder. If no AudioEncoderExt is specified the WAV file contains PCM data,..." alt="" coords="556,1981,658,2009"/>
+<area shape="poly" id="edge52_Node000001_Node000053" title=" " alt="" coords="395,1034,407,1237,426,1533,440,1682,457,1814,476,1913,486,1947,497,1967,510,1977,524,1985,558,1996,553,1995,522,1990,507,1982,493,1970,481,1949,471,1915,451,1815,435,1683,421,1533,401,1237,394,1039"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="" coords="189,967,287,994"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="301,989,339,996,334,999,304,994"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="5,967,139,994"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="153,978,190,979,186,982,156,983"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_mime_source.html" title="Abstract interface for classes that can provide MIME type information." alt="" coords="187,1019,289,1046"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="303,1020,339,1014,335,1018,306,1024"/>
+<area shape="rect" id="Node000013" href="$classaudio__tools_1_1_a_d_p_c_m_encoder.html" title="Encoder for ADPCM &#45; Depends on https://github.com/pschatzmann/adpcm&gt;" alt="" coords="772,369,894,397"/>
+<area shape="poly" id="edge12_Node000012_Node000013" title=" " alt="" coords="686,381,774,382,769,385,689,385"/>
+<area shape="rect" id="Node000031" href="$classaudio__tools_1_1_g711_encoder.html" title="64 kbit/s g711 ULOW Encoder based on https://github.com/pschatzmann/codec&#45;g7xx Supported encoder para..." alt="" coords="779,1176,886,1204"/>
+<area shape="poly" id="edge30_Node000030_Node000031" title=" " alt="" coords="674,1251,718,1238,742,1227,766,1214,797,1203,793,1206,768,1219,744,1232,720,1243,677,1256"/>
+<area shape="rect" id="Node000034" href="$classaudio__tools_1_1_g721_encoder.html" title="32Kbps G721 Encoder based on https://github.com/pschatzmann/codec&#45;g7xx" alt="" coords="779,1228,886,1256"/>
+<area shape="poly" id="edge33_Node000030_Node000034" title=" " alt="" coords="675,1257,781,1247,776,1249,677,1262"/>
+<area shape="rect" id="Node000035" href="$classaudio__tools_1_1_g723__24_encoder.html" title="24Kbps G723 Encoder based on https://github.com/pschatzmann/codec&#45;g7xx" alt="" coords="768,1280,898,1308"/>
+<area shape="poly" id="edge34_Node000030_Node000035" title=" " alt="" coords="676,1273,770,1285,765,1287,677,1278"/>
+<area shape="rect" id="Node000036" href="$classaudio__tools_1_1_g723__40_encoder.html" title="40Kbps G723 Encoder based on https://github.com/pschatzmann/codec&#45;g7xx" alt="" coords="768,1332,898,1360"/>
+<area shape="poly" id="edge35_Node000030_Node000036" title=" " alt="" coords="675,1278,720,1291,744,1304,768,1317,797,1331,792,1332,765,1322,742,1308,718,1296,676,1283"/>
+<area shape="rect" id="Node000032" href="$classaudio__tools_1_1_g711___a_l_a_w_encoder.html" title="64 kbit/s g711 ALOW Encoder based on https://github.com/pschatzmann/codec&#45;g7xx" alt="" coords="948,1151,1100,1178"/>
+<area shape="poly" id="edge31_Node000031_Node000032" title=" " alt="" coords="901,1178,949,1173,945,1176,903,1183"/>
+<area shape="rect" id="Node000033" href="$classaudio__tools_1_1_g711___u_l_a_w_encoder.html" title="64 kbit/s g711 ULOW Encoder based on https://github.com/pschatzmann/codec&#45;g7xx" alt="" coords="947,1203,1100,1230"/>
+<area shape="poly" id="edge32_Node000031_Node000033" title=" " alt="" coords="901,1197,949,1205,944,1207,903,1202"/>
+<area shape="rect" id="Node000046" href="$classaudio__tools_1_1_opus_ogg_encoder.html" title="Opus Encoder which uses the Ogg Container: see https://datatracker.ietf.org/doc/html/rfc7845 Dependen..." alt="" coords="767,1721,899,1749"/>
+<area shape="poly" id="edge45_Node000045_Node000046" title=" " alt="" coords="703,1733,769,1735,763,1736,704,1738"/>
+<area shape="rect" id="Node000050" href="$classaudio__tools_1_1_h264_rtp_encoder.html" title="H.264 RTP Encoder &#45; Packetizes Annex&#45;B H.264 access units per RFC 6184 for RTSP video streaming." alt="" coords="768,1852,898,1880"/>
+<area shape="poly" id="edge49_Node000049_Node000050" title=" " alt="" coords="693,1879,770,1873,765,1873,694,1884"/>
+<area shape="rect" id="Node000051" href="$classaudio__tools_1_1_j_p_e_g_rtp_encoder.html" title="JPEG RTP Encoder &#45; Fragments JPEG frames per RFC 2435 for RTSP video streaming." alt="" coords="770,1904,896,1932"/>
+<area shape="poly" id="edge50_Node000049_Node000051" title=" " alt="" coords="693,1899,772,1910,767,1911,693,1904"/>
 </map>

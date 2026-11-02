@@ -1,3 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classaudio__tools_1_1_f_f_t_display.html" title=" " alt="" coords="5,5,99,33"/>
+<area shape="rect" id="Node000000" href="$classaudio__tools_1_1_filter.html" title=" " alt="" coords="5,32,98,60"/>
+<area shape="rect" id="Node000001" href="$classaudio__tools_1_1_filter_chain.html" title="A cascade of N arbitrary filters applied in series. Each sample is passed through all filters in orde..." alt="" coords="146,5,293,33"/>
+<area shape="poly" id="edge657_Node000000_Node000001" title=" " alt="" coords="112,34,148,30,143,32,114,39"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_s_o_s_filter.html" title="Second Order Sections (SOS) filter — a cascade of N BiQuad DF2 stages. Higher&#45;order filters should be..." alt="" coords="151,57,288,85"/>
+<area shape="poly" id="edge658_Node000000_Node000002" title=" " alt="" coords="113,52,153,60,148,61,113,58"/>
 </map>

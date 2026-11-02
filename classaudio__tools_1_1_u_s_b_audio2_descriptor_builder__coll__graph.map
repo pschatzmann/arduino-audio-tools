@@ -1,24 +1,24 @@
 <map id="USBAudio2DescriptorBuilder" name="USBAudio2DescriptorBuilder">
-<area shape="rect" id="Node000001" title="USB Audio Class 2.0 descriptor generator." alt="" coords="5,751,212,779"/>
-<area shape="rect" id="Node000002" href="$classuint8__t.html" title=" " alt="" coords="179,5,246,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="203,51,177,145,149,267,129,415,118,559,111,751,106,751,113,559,124,415,144,266,172,143,204,45"/>
-<area shape="rect" id="Node000003" href="$structaudio__tools_1_1_u_s_b_audio_config.html" title="Configuration for USB Audio (inherits sample_rate / channels / bits_per_sample from AudioInfo)." alt="" coords="604,651,730,678"/>
-<area shape="poly" id="edge9_Node000003_Node000002" title=" " alt="" coords="215,46,232,159,248,235,272,318,304,403,346,486,371,525,400,561,431,595,466,624,489,635,524,644,606,658,601,658,523,649,487,640,463,629,428,599,396,565,367,528,341,489,299,405,267,320,243,236,227,160,214,51"/>
-<area shape="rect" id="Node000004" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="426,160,509,188"/>
-<area shape="poly" id="edge6_Node000004_Node000002" title=" " alt="" coords="233,42,256,62,280,80,300,89,317,93,335,96,356,104,408,131,451,159,446,161,405,136,354,108,333,101,316,98,298,94,277,84,253,67,234,47"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="590,682,184,753,183,748,589,677"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="468,201,474,284,491,395,506,456,528,516,556,573,592,625,607,638,626,650,620,650,604,642,588,628,551,576,523,518,501,457,486,396,469,284,466,206"/>
-<area shape="rect" id="Node000005" href="$classuint32__t.html" title=" " alt="" coords="365,5,439,33"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="400,46,406,81,416,104,429,125,457,160,452,160,425,128,411,106,401,83,399,51"/>
-<area shape="rect" id="Node000006" title=" " alt="" coords="527,5,602,33"/>
-<area shape="poly" id="edge10_Node000003_Node000006" title=" " alt="" coords="585,43,592,56,601,96,610,162,628,341,645,520,658,626,665,651,660,649,653,627,640,520,623,341,605,163,596,97,587,58,584,49"/>
-<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="534,46,526,59,494,114,474,161,469,159,489,111,522,55,538,42"/>
-<area shape="rect" id="Node000007" href="$classbool.html" title=" " alt="" coords="781,160,830,188"/>
-<area shape="poly" id="edge7_Node000003_Node000007" title=" " alt="" coords="794,200,765,245,745,256,737,260,730,268,703,319,685,375,673,432,666,488,664,586,668,652,663,649,659,586,661,487,668,431,680,373,699,317,725,265,734,256,743,251,761,241,790,204"/>
-<area shape="rect" id="Node000008" href="$classint16__t.html" title=" " alt="" coords="854,160,920,188"/>
-<area shape="poly" id="edge8_Node000003_Node000008" title=" " alt="" coords="889,201,885,438,876,561,868,604,859,628,838,641,806,651,731,662,730,656,805,646,836,637,854,625,863,602,870,560,880,438,885,205"/>
-<area shape="rect" id="Node000009" title=" " alt="" coords="944,160,993,188"/>
-<area shape="poly" id="edge11_Node000003_Node000009" title=" " alt="" coords="970,202,968,439,959,561,951,604,941,628,927,639,906,647,852,658,790,664,731,666,730,661,789,659,851,653,904,642,924,634,937,625,946,603,953,560,962,438,967,206"/>
-<area shape="rect" id="Node000010" title=" " alt="" coords="1022,160,1168,188"/>
-<area shape="poly" id="edge12_Node000003_Node000010" title=" " alt="" coords="1105,201,1127,285,1135,340,1139,400,1137,462,1126,523,1104,579,1088,605,1067,629,1050,637,1019,644,930,655,731,664,731,659,930,649,1018,639,1048,632,1064,625,1083,602,1099,577,1121,521,1132,461,1134,400,1130,341,1121,286,1103,205"/>
+<area shape="rect" id="Node000001" title="USB Audio Class 2.0 descriptor generator." alt="" coords="5,613,212,640"/>
+<area shape="rect" id="Node000002" href="$classuint8__t.html" title=" " alt="" coords="175,5,242,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="202,45,184,127,163,224,129,457,112,613,107,612,124,456,158,224,179,126,200,50"/>
+<area shape="rect" id="Node000003" href="$structaudio__tools_1_1_u_s_b_audio_config.html" title="Configuration for USB Audio (inherits sample_rate / channels / bits_per_sample from AudioInfo)." alt="" coords="591,520,717,548"/>
+<area shape="poly" id="edge9_Node000003_Node000002" title=" " alt="" coords="214,45,239,137,258,197,283,261,316,326,355,389,403,446,459,494,482,503,514,512,593,526,588,526,513,517,480,509,456,498,399,450,351,393,311,329,278,263,253,198,233,139,213,51"/>
+<area shape="rect" id="Node000004" href="$structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="412,135,496,163"/>
+<area shape="poly" id="edge6_Node000004_Node000002" title=" " alt="" coords="233,41,277,72,310,85,344,96,429,134,424,136,342,100,308,90,275,76,234,46"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="576,551,188,615,188,609,575,545"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="457,176,468,242,488,325,503,370,523,414,547,456,576,494,591,507,611,520,606,519,589,512,572,498,542,459,518,417,498,372,483,327,463,243,455,181"/>
+<area shape="rect" id="Node000005" href="$classuint32__t.html" title=" " alt="" coords="357,5,431,33"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="392,46,398,73,418,107,442,135,436,135,413,110,393,75,391,51"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="514,5,588,33"/>
+<area shape="poly" id="edge10_Node000003_Node000006" title=" " alt="" coords="569,43,576,56,614,268,654,520,649,519,609,269,571,58,568,49"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="522,46,514,59,484,100,463,136,459,133,480,97,510,55,526,42"/>
+<area shape="rect" id="Node000007" href="$classbool.html" title=" " alt="" coords="761,135,810,163"/>
+<area shape="poly" id="edge7_Node000003_Node000007" title=" " alt="" coords="768,173,745,202,731,213,719,226,700,265,685,308,666,394,658,470,656,521,652,518,653,469,661,393,680,307,695,263,715,222,727,209,741,198,764,176"/>
+<area shape="rect" id="Node000008" href="$classint16__t.html" title=" " alt="" coords="834,135,900,163"/>
+<area shape="poly" id="edge8_Node000003_Node000008" title=" " alt="" coords="870,176,874,253,873,348,863,438,854,473,840,498,820,510,790,519,718,531,717,525,789,514,818,505,836,494,849,471,858,437,868,347,869,253,867,181"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="924,135,973,163"/>
+<area shape="poly" id="edge11_Node000003_Node000009" title=" " alt="" coords="950,177,943,358,934,448,928,480,920,498,906,508,886,516,834,527,774,533,717,535,717,530,774,527,833,522,884,511,903,503,916,494,923,478,929,447,938,358,946,180"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="997,135,1142,163"/>
+<area shape="poly" id="edge12_Node000003_Node000010" title=" " alt="" coords="1079,176,1094,243,1100,329,1097,375,1087,420,1070,462,1042,498,1025,506,996,513,910,523,718,534,717,528,909,518,995,508,1024,501,1039,494,1065,459,1082,418,1092,374,1095,329,1089,244,1076,180"/>
 </map>

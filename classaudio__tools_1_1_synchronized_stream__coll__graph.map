@@ -1,32 +1,30 @@
 <map id="SynchronizedStream" name="SynchronizedStream">
-<area shape="rect" id="Node000001" title="Wrapper class that can turn any Stream into a thread save implementation. This is done by adding a Mu..." alt="" coords="55,394,210,422"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="5,271,74,299"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="40,312,47,342,60,368,74,381,93,393,87,394,71,386,56,372,42,344,39,317"/>
-<area shape="poly" id="edge5_Node000001_Node000002" title=" " alt="" coords="51,310,68,345,82,368,111,393,106,394,78,372,63,347,50,315"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="14,149,65,177"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="32,190,33,234,36,271,31,270,28,234,31,195"/>
-<area shape="poly" id="edge4_Node000002_Node000003" title=" " alt="" coords="48,190,51,234,48,271,43,270,46,234,47,195"/>
-<area shape="rect" id="Node000004" href="$classint.html" title=" " alt="" coords="100,5,139,33"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="84,28,59,39,37,59,28,81,28,105,37,149,32,149,22,106,23,80,33,55,56,35,87,24"/>
-<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_single_buffer.html" title=" " alt="" coords="374,271,550,299"/>
-<area shape="poly" id="edge10_Node000006_Node000004" title=" " alt="" coords="113,45,110,82,109,121,116,161,123,180,134,196,148,209,171,221,232,242,304,258,377,272,371,273,303,264,230,247,169,226,145,214,129,200,118,182,111,162,104,121,105,81,112,51"/>
-<area shape="rect" id="Node000011" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="543,149,680,177"/>
-<area shape="poly" id="edge15_Node000011_Node000004" title=" " alt="" coords="153,33,241,68,348,102,397,111,436,114,475,116,524,126,585,148,580,149,523,131,474,122,436,119,396,116,347,107,239,73,154,38"/>
-<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_mutex_base.html" title="Empty Mutex implementation which does nothing." alt="" coords="136,271,231,299"/>
-<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="178,312,157,371,143,396,139,392,152,369,173,315"/>
-<area shape="poly" id="edge7_Node000001_Node000006" title=" " alt="" coords="418,305,243,373,174,396,173,391,241,367,412,305"/>
-<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="892,149,1059,177"/>
-<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="938,184,875,220,803,250,738,265,671,276,551,286,550,280,671,271,737,260,801,244,873,216,933,186"/>
-<area shape="poly" id="edge9_Node000006_Node000007" title=" " alt="" coords="954,185,897,221,827,250,756,266,683,277,551,286,550,281,682,272,755,261,825,244,894,216,949,187"/>
-<area shape="rect" id="Node000008" href="$classbool.html" title=" " alt="" coords="384,5,434,33"/>
-<area shape="poly" id="edge11_Node000006_Node000008" title=" " alt="" coords="404,46,397,117,398,158,406,197,427,238,452,271,447,270,422,241,401,199,393,158,392,117,401,50"/>
-<area shape="poly" id="edge18_Node000011_Node000008" title=" " alt="" coords="418,44,435,75,457,102,473,113,488,117,524,126,580,148,575,149,523,131,487,123,471,118,453,106,430,78,417,50"/>
-<area shape="rect" id="Node000009" href="$classuint64__t.html" title=" " alt="" coords="268,149,342,177"/>
-<area shape="poly" id="edge12_Node000006_Node000009" title=" " alt="" coords="296,190,293,220,295,234,301,245,312,253,329,260,377,273,372,274,327,266,309,258,297,249,290,235,288,220,293,194"/>
-<area shape="rect" id="Node000010" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="716,5,795,33"/>
-<area shape="poly" id="edge13_Node000006_Node000010" title=" " alt="" coords="774,44,779,56,784,81,779,105,764,138,746,160,694,200,654,226,610,246,526,273,525,268,608,241,651,221,691,196,742,156,759,135,774,103,779,81,774,58,772,49"/>
-<area shape="poly" id="edge17_Node000011_Node000010" title=" " alt="" coords="718,40,699,59,683,81,668,106,627,151,624,147,664,103,678,78,695,55,714,43"/>
-<area shape="poly" id="edge14_Node000006_Node000011" title=" " alt="" coords="586,185,480,273,477,268,581,188"/>
-<area shape="rect" id="Node000012" href="$classuint8__t_01_5.html" title=" " alt="" coords="574,5,652,33"/>
-<area shape="poly" id="edge16_Node000011_Node000012" title=" " alt="" coords="614,47,614,150,609,148,611,51"/>
+<area shape="rect" id="Node000001" title="Wrapper class that can turn any Stream into a thread save implementation. This is done by adding a Mu..." alt="" coords="76,341,231,368"/>
+<area shape="rect" id="Node000002" href="$class_stream.html" title=" " alt="" coords="28,231,96,259"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="65,271,72,295,82,315,97,328,115,340,110,340,94,332,78,318,67,297,63,276"/>
+<area shape="poly" id="edge4_Node000001_Node000002" title=" " alt="" coords="74,270,88,294,104,315,134,340,128,340,100,319,84,297,73,276"/>
+<area shape="rect" id="Node000003" href="$class_print.html" title=" " alt="" coords="5,127,57,154"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="40,166,60,230,55,231,39,172"/>
+<area shape="rect" id="Node000004" href="$classint.html" title=" " alt="" coords="89,5,128,33"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="73,29,50,40,30,59,24,75,22,93,29,126,24,127,17,93,18,74,25,55,47,36,76,25"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_single_buffer.html" title=" " alt="" coords="283,231,459,259"/>
+<area shape="poly" id="edge8_Node000006_Node000004" title=" " alt="" coords="103,46,102,76,102,106,108,137,122,164,150,184,194,201,301,229,296,232,193,206,147,188,118,168,103,139,97,107,96,75,102,51"/>
+<area shape="rect" id="Node000011" href="$classaudio__tools_1_1_vector.html" title=" " alt="" coords="516,127,653,154"/>
+<area shape="poly" id="edge13_Node000011_Node000004" title=" " alt="" coords="141,30,231,59,339,88,417,101,497,112,543,126,538,126,496,118,417,106,337,94,229,64,142,35"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_mutex_base.html" title="Empty Mutex implementation which does nothing." alt="" coords="154,231,249,259"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="193,272,175,318,162,342,159,338,170,316,189,275"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="341,267,253,319,195,343,193,338,251,314,336,268"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_base_buffer.html" title="Shared functionality of all buffers." alt="" coords="859,127,990,154"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="892,162,842,189,786,210,701,228,613,239,459,247,459,242,613,234,700,223,785,204,840,184,887,163"/>
+<area shape="rect" id="Node000008" href="$classbool.html" title=" " alt="" coords="368,5,417,33"/>
+<area shape="poly" id="edge9_Node000006_Node000008" title=" " alt="" coords="392,46,375,231,370,229,388,50"/>
+<area shape="poly" id="edge16_Node000011_Node000008" title=" " alt="" coords="403,45,418,69,436,89,475,104,541,126,535,126,473,109,433,93,414,72,402,50"/>
+<area shape="rect" id="Node000009" href="$classuint64__t.html" title=" " alt="" coords="248,127,323,154"/>
+<area shape="poly" id="edge10_Node000006_Node000009" title=" " alt="" coords="276,167,274,188,280,206,292,219,310,230,304,230,289,223,275,208,269,189,273,171"/>
+<area shape="rect" id="Node000010" href="$classaudio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="691,5,771,33"/>
+<area shape="poly" id="edge11_Node000006_Node000010" title=" " alt="" coords="747,45,754,69,751,92,735,120,717,139,667,168,616,193,562,211,460,235,459,230,561,206,614,188,664,164,714,134,731,117,746,90,749,69,744,50"/>
+<area shape="poly" id="edge15_Node000011_Node000010" title=" " alt="" coords="696,40,674,59,659,75,644,93,602,128,599,124,640,89,655,72,671,55,691,43"/>
+<area shape="poly" id="edge12_Node000006_Node000011" title=" " alt="" coords="546,160,399,233,397,228,541,162"/>
+<area shape="rect" id="Node000012" href="$classuint8__t_01_5.html" title=" " alt="" coords="554,5,631,33"/>
+<area shape="poly" id="edge14_Node000011_Node000012" title=" " alt="" coords="592,47,588,128,583,125,589,51"/>
 </map>

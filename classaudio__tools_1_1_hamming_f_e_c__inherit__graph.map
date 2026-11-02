@@ -1,11 +1,9 @@
 <map id="HammingFEC&lt; bytecount, block_t &gt;" name="HammingFEC&lt; bytecount, block_t &gt;">
 <area shape="rect" id="Node000001" title="Hamming forware error correction. Inspired by https://github.com/nasserkessas/hamming&#45;codes." alt="" coords="5,232,200,277"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer,size_t size) and readBytes(uint8..." alt="" coords="52,157,153,184"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer, size_t size) and readBytes(uint..." alt="" coords="52,157,153,184"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="104,198,105,233,100,231,101,202"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="68,81,137,109"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="95,122,98,157,93,156,93,127"/>
-<area shape="poly" id="edge5_Node000002_Node000003" title=" " alt="" coords="112,122,112,157,107,155,110,127"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="77,5,128,33"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="94,46,98,81,93,80,93,51"/>
-<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="112,46,112,81,107,80,110,51"/>
+<area shape="rect" id="Node000003" href="$class_stream.html" title=" " alt="" coords="68,81,137,109"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="104,122,105,157,100,156,101,127"/>
+<area shape="rect" id="Node000004" href="$class_print.html" title=" " alt="" coords="77,5,128,33"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="103,46,105,81,100,80,102,51"/>
 </map>

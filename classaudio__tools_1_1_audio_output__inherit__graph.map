@@ -1,11 +1,83 @@
 <map id="AudioOutput" name="AudioOutput">
-<area shape="rect" id="Node000001" title="Abstract Audio Ouptut class." alt="" coords="96,81,198,109"/>
-<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_audio_output_with_callback.html" title="ESP8266Audio AudioOutput class which stores the data in a temporary buffer. The buffer can be consume..." alt="" coords="53,157,241,184"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="149,123,149,158,145,155,145,126"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="5,5,57,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="65,39,129,79,124,82,64,44"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="80,5,214,33"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="148,47,150,81,144,80,146,51"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="238,5,365,33"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="258,41,176,83,173,78,262,39"/>
+<area shape="rect" id="Node000001" title="Abstract Audio Ouptut class." alt="" coords="187,646,289,674"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_audio_e_s_p32_u_l_p.html" title="Outputs to ESP32 DAC through the ULP (Ultra&gt; Low Power coprocessor), freeing I2S for other uses...." alt="" coords="398,22,522,50"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="237,630,242,508,257,337,270,250,286,170,308,105,321,80,335,60,364,41,400,33,396,37,366,46,339,64,325,83,313,107,291,172,275,251,262,337,248,508,242,631"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_audio_output_adapter.html" title="Base class for Output Adpapters." alt="" coords="384,74,537,102"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="238,630,244,517,261,362,273,283,289,212,310,153,322,130,335,112,357,97,385,88,381,92,359,101,339,116,326,133,315,155,295,213,278,284,266,363,250,518,243,631"/>
+<area shape="rect" id="Node000010" href="$classaudio__tools_1_1_audio_output_with_callback.html" title="ESP8266Audio AudioOutput class which stores the data in a temporary buffer. The buffer can be consume..." alt="" coords="366,126,554,154"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="238,630,247,527,264,387,277,317,293,253,312,200,335,164,367,146,364,150,339,168,317,203,298,254,282,318,269,388,252,527,243,631"/>
+<area shape="rect" id="Node000011" href="$classaudio__tools_1_1_audio_server_ex.html" title="A powerfull Web server which is based on https://github.com/pschatzmann/TinyHttp. It supports multipl..." alt="" coords="402,178,518,206"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="239,630,249,537,268,413,280,351,296,294,314,248,335,217,350,205,366,197,404,190,400,193,368,202,352,210,339,220,319,251,301,296,286,352,273,414,254,537,244,631"/>
+<area shape="rect" id="Node000013" href="$classaudio__tools_1_1_audio_sync_writer.html" title="Audio Writer which is synchronizing the amount of data that can be processed with the AudioReceiver." alt="" coords="396,230,525,258"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="240,630,252,546,271,438,299,336,316,296,335,268,363,251,397,243,393,246,365,256,339,272,321,298,304,337,277,439,257,547,245,631"/>
+<area shape="rect" id="Node000014" href="$classaudio__tools_1_1_channel_split_output.html" title="Simple functionality to extract mono streams from a multichannel (e.g. stereo) signal." alt="" coords="386,282,534,310"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="236,629,239,566,252,482,264,438,282,395,305,355,335,320,359,305,388,297,384,301,361,310,339,324,309,358,286,397,269,440,257,483,244,566,241,630"/>
+<area shape="rect" id="Node000015" href="$classaudio__tools_1_1_channels_select_output.html" title="Flexible functionality to extract one or more channels from a multichannel signal...." alt="" coords="378,334,543,362"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="238,630,244,575,259,505,271,469,288,433,309,401,335,372,355,359,379,352,375,355,357,364,339,376,313,404,293,436,276,471,264,507,249,576,243,631"/>
+<area shape="rect" id="Node000016" href="$classaudio__tools_1_1_csv_output.html" title="Stream Wrapper which can be used to print the values as readable ASCII to the screen to be analyzed i..." alt="" coords="396,386,524,414"/>
+<area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="240,630,249,585,266,529,294,472,313,447,335,424,364,408,398,400,394,404,366,413,339,428,317,450,299,475,271,531,254,586,245,631"/>
+<area shape="rect" id="Node000017" href="$classaudio__tools_1_1_f_f_t_effect.html" title="Abstract base class for effects that operate on audio in the frequency domain: incoming samples are t..." alt="" coords="420,438,501,466"/>
+<area shape="poly" id="edge16_Node000001_Node000017" title=" " alt="" coords="244,630,256,594,275,553,301,511,335,476,355,465,377,457,421,450,417,454,378,462,357,469,339,480,305,514,279,555,261,596,249,632"/>
+<area shape="rect" id="Node000023" href="$classaudio__tools_1_1_hex_dump_output.html" title="Creates a Hex Dump." alt="" coords="395,490,525,518"/>
+<area shape="poly" id="edge22_Node000001_Node000023" title=" " alt="" coords="250,631,284,578,308,551,336,528,364,514,397,507,393,511,366,519,338,533,311,554,288,581,255,633"/>
+<area shape="rect" id="Node000024" href="$classaudio__tools_1_1_memory_output.html" title="Writes to a preallocated memory." alt="" coords="400,542,520,570"/>
+<area shape="poly" id="edge23_Node000001_Node000024" title=" " alt="" coords="262,633,296,605,336,580,367,568,402,561,398,565,369,573,338,585,299,609,266,636"/>
+<area shape="rect" id="Node000025" href="$classaudio__tools_1_1_meta_data_filter.html" title="Class which filters out ID3v1 and ID3v2 Metadata and provides only the audio data to the decoder." alt="" coords="401,594,519,622"/>
+<area shape="poly" id="edge24_Node000001_Node000025" title=" " alt="" coords="302,640,336,632,403,618,398,622,338,637,306,645"/>
+<area shape="rect" id="Node000026" href="$classaudio__tools_1_1_meta_data_output.html" title="ID3 and Icecast/Shoutcast metadata output support. Just write the audio data to an object of this cla..." alt="" coords="396,646,525,674"/>
+<area shape="poly" id="edge25_Node000001_Node000026" title=" " alt="" coords="304,657,397,658,393,661,306,662"/>
+<area shape="rect" id="Node000027" href="$classaudio__tools_1_1_modifying_output.html" title="Abstract class: Objects can be put into a pipleline." alt="" coords="396,698,525,726"/>
+<area shape="poly" id="edge26_Node000001_Node000027" title=" " alt="" coords="303,674,338,682,397,697,392,699,336,688,305,679"/>
+<area shape="rect" id="Node000030" href="$classaudio__tools_1_1_o_s_c_container_encoder_1_1_o_s_c_output.html" title="Output Encoded Audio via OSC." alt="" coords="414,750,506,778"/>
+<area shape="poly" id="edge29_Node000001_Node000030" title=" " alt="" coords="263,682,299,710,338,735,376,748,416,758,411,760,375,753,336,739,296,714,264,687"/>
+<area shape="rect" id="Node000031" href="$classaudio__tools_1_1_ogg_container_output.html" title="Output class for the OggContainerEncoder. Each write is ending up as container entry." alt="" coords="383,802,537,830"/>
+<area shape="poly" id="edge30_Node000001_Node000031" title=" " alt="" coords="253,685,288,738,311,765,338,787,360,798,385,807,380,809,358,803,336,791,308,769,284,742,253,690"/>
+<area shape="rect" id="Node000033" href="$classaudio__tools_1_1_p_w_m_audio_output.html" title="Common functionality for PWM output. We generate audio using PWM with a frequency that is above the h..." alt="" coords="337,854,583,882"/>
+<area shape="poly" id="edge32_Node000001_Node000033" title=" " alt="" coords="247,686,261,723,279,764,305,805,339,839,361,853,356,854,335,843,301,808,275,767,256,725,246,691"/>
+<area shape="rect" id="Node000034" href="$classaudio__tools_1_1_pitch_shift_output.html" title="Real&#45;time pitch shifting audio effect." alt="" coords="384,905,537,950"/>
+<area shape="poly" id="edge33_Node000001_Node000034" title=" " alt="" coords="243,686,255,733,272,787,300,843,318,869,339,891,360,905,386,917,381,918,358,910,335,895,313,872,295,846,267,789,250,734,243,691"/>
+<area shape="rect" id="Node000035" href="$classaudio__tools_1_1_r2_r_output.html" title="Output to R&#45;2R DAC. You need to define the used digital pins in the configuration...." alt="" coords="414,974,506,1002"/>
+<area shape="poly" id="edge34_Node000001_Node000035" title=" " alt="" coords="240,687,247,747,261,821,274,859,290,896,312,931,339,960,355,972,374,979,416,988,411,990,373,985,353,976,335,964,308,934,286,899,269,861,256,822,242,748,239,692"/>
+<area shape="rect" id="Node000036" href="$classaudio__tools_1_1_r_t_s_p_output.html" title="RTSPOutput &#45; Audio Output Stream for RTSP Streaming." alt="" coords="368,1026,552,1054"/>
+<area shape="poly" id="edge35_Node000001_Node000036" title=" " alt="" coords="244,687,259,765,279,862,306,953,322,988,339,1011,371,1031,365,1032,335,1015,317,991,301,955,274,864,254,766,243,692"/>
+<area shape="rect" id="Node000037" href="$classaudio__tools_1_1_r_t_t_t_l_output.html" title="RTTTL (Ring Tone Text Transfer Language) parser and player stream." alt="" coords="389,1078,531,1106"/>
+<area shape="poly" id="edge36_Node000001_Node000037" title=" " alt="" coords="243,686,256,775,275,888,303,995,320,1036,339,1063,362,1079,391,1089,386,1090,360,1083,335,1067,315,1038,298,996,270,889,251,776,242,692"/>
+<area shape="rect" id="Node000038" href="$classaudio__tools_1_1_s_p_i_audio_master.html" title="SPI master endpoint for remote audio sink configuration and PCM data transfer." alt="" coords="398,1130,522,1158"/>
+<area shape="poly" id="edge37_Node000001_Node000038" title=" " alt="" coords="242,687,254,786,272,914,285,978,300,1036,318,1084,339,1115,367,1133,401,1143,396,1144,364,1138,335,1119,313,1086,295,1038,279,979,267,915,248,786,241,692"/>
+<area shape="rect" id="Node000039" href="$classaudio__tools_1_1_s_p_i_reg_audio_master.html" title="SPI master which streams audio to a SPIRegAudioSlave (based on the TinySPISlave library) using its re..." alt="" coords="386,1182,534,1210"/>
+<area shape="poly" id="edge38_Node000001_Node000039" title=" " alt="" coords="241,687,251,796,268,939,281,1012,297,1078,316,1131,339,1167,361,1182,388,1193,383,1194,358,1187,335,1171,311,1134,292,1079,276,1013,263,940,246,796,240,692"/>
+<area shape="rect" id="Node000040" href="$classaudio__tools_1_1_wake_word_detector.html" title="Template&#45;based wake word detector for microcontrollers using dominant frequency patterns." alt="" coords="360,1234,561,1262"/>
+<area shape="poly" id="edge39_Node000001_Node000040" title=" " alt="" coords="241,686,249,805,265,964,277,1045,294,1119,314,1179,326,1202,339,1219,362,1237,356,1236,335,1223,321,1205,309,1181,288,1120,272,1046,259,965,244,805,239,691"/>
+<area shape="rect" id="Node000041" href="$classaudio__tools_1_1_web_socket_output.html" title="A simple wrapper class that lets you use the standard Arduino Print class output commands to send aud..." alt="" coords="392,1286,528,1314"/>
+<area shape="poly" id="edge40_Node000001_Node000041" title=" " alt="" coords="240,687,247,815,261,990,274,1079,291,1161,312,1227,325,1252,339,1271,363,1288,394,1299,389,1299,361,1293,335,1275,320,1255,307,1229,285,1162,269,1080,256,991,242,815,239,692"/>
+<area shape="rect" id="Node000002" href="$class_print.html" title=" " alt="" coords="46,594,98,622"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="111,618,193,644,189,647,114,623"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="5,646,139,674"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="153,658,188,658,184,661,156,662"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="8,698,136,726"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="131,691,193,672,190,676,135,695"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_adapter_audio_stream_to_audio_output.html" title="Wrapper which converts a AudioStream to a AudioOutput." alt="" coords="631,5,839,50"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="541,68,583,58,633,49,629,52,584,64,544,72"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_adapter_print_to_audio_output.html" title="Wrapper which converts a Print to a AudioOutput." alt="" coords="636,74,834,102"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="551,85,638,86,634,89,554,90"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1_audio_writer_to_audio_output.html" title="Adapter class which lets an AudioWriter behave like a Print." alt="" coords="638,126,832,154"/>
+<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="551,103,660,124,655,126,553,107"/>
+<area shape="rect" id="Node000012" href="$classaudio__tools_1_1_audio_w_a_v_server_ex.html" title="A powerfull WAV Web server which is based on https://github.com/pschatzmann/TinyHttp...." alt="" coords="662,178,808,206"/>
+<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="533,189,664,190,660,193,535,194"/>
+<area shape="rect" id="Node000018" href="$classaudio__tools_1_1_f_f_t_equalizer.html" title="Graphic Equalizer implemented as an FFT effect: boosts or cuts logarithmically spaced frequency bands..." alt="" coords="683,334,787,362"/>
+<area shape="poly" id="edge17_Node000017_Node000018" title=" " alt="" coords="515,445,549,436,582,423,597,411,605,398,614,385,630,372,655,360,685,354,680,357,657,365,633,377,618,389,610,401,600,415,585,427,551,441,518,449"/>
+<area shape="rect" id="Node000019" href="$classaudio__tools_1_1_f_f_t_nop.html" title="Apply FFT and IFFT w/o any changes to the frequency domain." alt="" coords="700,386,770,414"/>
+<area shape="poly" id="edge18_Node000017_Node000019" title=" " alt="" coords="515,439,701,405,697,408,517,444"/>
+<area shape="rect" id="Node000020" href="$classaudio__tools_1_1_f_f_t_pitch_shift.html" title="Apply Pitch Shift FFT Effect on frequency domain data: we just move the bins up or down." alt="" coords="682,438,788,466"/>
+<area shape="poly" id="edge19_Node000017_Node000020" title=" " alt="" coords="515,449,684,450,680,453,517,454"/>
+<area shape="rect" id="Node000021" href="$classaudio__tools_1_1_f_f_t_robotize.html" title="Apply Robotize FFT Effect on frequency domain data. See https://learn.bela.io/tutorials/c&#45;plus&#45;plus&#45;f..." alt="" coords="684,490,786,518"/>
+<area shape="poly" id="edge20_Node000017_Node000021" title=" " alt="" coords="515,460,686,493,682,495,517,465"/>
+<area shape="rect" id="Node000022" href="$classaudio__tools_1_1_f_f_t_whisper.html" title="Apply Whisper FFT Effect on frequency domain data: keep the magnitude of each bin but randomize its p..." alt="" coords="686,542,784,570"/>
+<area shape="poly" id="edge21_Node000017_Node000022" title=" " alt="" coords="515,454,551,462,585,476,600,489,610,502,618,515,633,527,659,539,689,548,684,550,657,544,630,531,614,518,605,505,597,492,582,481,549,467,517,459"/>
+<area shape="rect" id="Node000028" href="$classaudio__tools_1_1_encoded_audio_output.html" title="A more natural Print class to process encoded data (aac, wav, mp3...). Just define the output and the..." alt="" coords="656,672,814,700"/>
+<area shape="poly" id="edge27_Node000027_Node000028" title=" " alt="" coords="539,702,658,692,653,695,541,707"/>
+<area shape="rect" id="Node000029" href="$classaudio__tools_1_1_multi_output.html" title="Replicates the output to multiple destinations." alt="" coords="686,724,784,752"/>
+<area shape="poly" id="edge28_Node000027_Node000029" title=" " alt="" coords="539,717,688,732,683,735,541,722"/>
+<area shape="rect" id="Node000032" href="$classaudio__tools_1_1_opus_ogg_writer.html" title=" " alt="" coords="675,802,795,830"/>
+<area shape="poly" id="edge31_Node000031_Node000032" title=" " alt="" coords="552,813,677,815,672,817,553,818"/>
 </map>

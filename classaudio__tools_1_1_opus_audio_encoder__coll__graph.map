@@ -1,46 +1,43 @@
 <map id="OpusAudioEncoder" name="OpusAudioEncoder">
-<area shape="rect" id="Node000001" title="Encode for Opus audio." alt="" coords="552,676,696,704"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_audio_encoder.html" title="Encoding of PCM data." alt="" coords="141,350,251,378"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="200,391,213,449,236,520,252,556,273,591,297,623,327,650,365,666,423,676,554,688,549,688,423,681,364,671,324,654,293,627,268,594,247,559,231,522,208,451,199,396"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="" coords="23,106,121,134"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="80,146,134,253,188,349,182,350,129,255,80,151"/>
-<area shape="poly" id="edge6_Node000002_Node000003" title=" " alt="" coords="91,144,151,252,196,350,191,350,146,254,91,150"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="5,5,139,33"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="64,45,68,105,63,105,64,51"/>
-<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="80,45,81,106,76,105,80,51"/>
-<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_mime_source.html" title="Abstract interface for classes that can provide MIME type information." alt="" coords="145,106,247,134"/>
-<area shape="poly" id="edge5_Node000002_Node000005" title=" " alt="" coords="191,147,190,255,194,350,189,350,184,255,189,152"/>
-<area shape="poly" id="edge7_Node000002_Node000005" title=" " alt="" coords="203,147,208,255,203,350,198,349,202,255,201,152"/>
-<area shape="rect" id="Node000006" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="272,106,355,134"/>
-<area shape="poly" id="edge8_Node000002_Node000006" title=" " alt="" coords="273,145,261,159,233,210,215,265,204,315,200,351,194,349,199,314,209,264,228,208,257,156,276,140"/>
-<area shape="rect" id="Node000014" href="$structaudio__tools_1_1_opus_settings.html" title="Setting for Opus Decoder." alt="" coords="381,350,488,378"/>
-<area shape="poly" id="edge17_Node000014_Node000006" title=" " alt="" coords="328,145,431,350,425,350,325,150"/>
-<area shape="rect" id="Node000007" href="$classuint32__t.html" title=" " alt="" coords="422,5,496,33"/>
-<area shape="poly" id="edge9_Node000006_Node000007" title=" " alt="" coords="453,45,445,67,431,84,395,105,357,116,354,111,393,100,428,80,440,65,450,50"/>
-<area shape="rect" id="Node000008" title=" " alt="" coords="179,5,253,33"/>
-<area shape="poly" id="edge10_Node000006_Node000008" title=" " alt="" coords="223,45,233,64,244,80,259,93,278,104,273,106,256,97,240,84,228,67,223,50"/>
+<area shape="rect" id="Node000001" title="Encode for Opus audio." alt="" coords="547,580,690,608"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_audio_encoder.html" title="Encoding of PCM data." alt="" coords="166,296,276,324"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="225,337,234,387,250,446,279,505,298,532,322,554,338,563,360,570,418,580,549,592,544,592,417,586,358,575,335,567,318,558,294,535,274,508,245,448,229,388,223,341"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="" coords="23,98,121,126"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="92,135,214,294,209,296,90,141"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="5,5,139,33"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="72,46,75,98,69,97,72,51"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_mime_source.html" title="Abstract interface for classes that can provide MIME type information." alt="" coords="145,98,247,126"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="201,138,222,295,217,295,198,143"/>
+<area shape="rect" id="Node000006" href="$structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="272,98,355,126"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="271,137,260,151,241,189,230,230,224,296,219,295,225,229,236,187,255,148,274,132"/>
+<area shape="rect" id="Node000014" href="$structaudio__tools_1_1_opus_settings.html" title="Setting for Opus Decoder." alt="" coords="376,296,483,324"/>
+<area shape="poly" id="edge14_Node000014_Node000006" title=" " alt="" coords="330,137,424,295,419,295,328,142"/>
+<area shape="rect" id="Node000007" href="$classuint32__t.html" title=" " alt="" coords="418,5,492,33"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="446,45,439,63,427,76,392,96,357,107,354,102,390,91,424,72,434,60,443,50"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="182,5,256,33"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="228,45,248,72,283,97,278,98,244,76,229,50"/>
 <area shape="rect" id="Node000009" href="$classuint8__t.html" title=" " alt="" coords="280,5,346,33"/>
-<area shape="poly" id="edge11_Node000006_Node000009" title=" " alt="" coords="314,46,316,106,311,105,313,51"/>
-<area shape="rect" id="Node000010" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="1213,524,1264,551"/>
-<area shape="poly" id="edge12_Node000001_Node000010" title=" " alt="" coords="1201,551,1038,606,961,632,882,655,785,672,696,684,696,679,785,667,881,649,959,627,1036,600,1196,552"/>
-<area shape="rect" id="Node000011" href="$classint.html" title=" " alt="" coords="571,106,610,134"/>
-<area shape="poly" id="edge26_Node000001_Node000011" title=" " alt="" coords="554,125,465,137,422,146,394,160,353,198,319,238,293,282,278,331,276,386,289,449,320,520,371,601,388,621,408,637,455,661,505,676,555,686,549,686,503,681,453,666,405,642,385,625,367,605,315,522,284,450,270,387,273,330,288,280,315,235,349,194,390,155,420,141,464,131,559,122"/>
-<area shape="poly" id="edge13_Node000010_Node000011" title=" " alt="" coords="624,119,758,122,939,137,1029,150,1110,169,1174,194,1198,210,1215,227,1237,266,1250,308,1258,351,1260,395,1254,472,1244,525,1240,522,1249,471,1254,395,1252,352,1245,309,1232,268,1211,231,1195,214,1172,199,1108,174,1028,155,938,142,758,128,626,124"/>
-<area shape="rect" id="Node000013" href="$structaudio__tools_1_1_opus_encoder_settings.html" title="Setting for Opus Encoder where the following values are valid: &#45;1 indicates that the default value sh..." alt="" coords="382,575,541,603"/>
-<area shape="poly" id="edge19_Node000013_Node000011" title=" " alt="" coords="587,147,557,301,533,400,503,501,470,577,466,573,497,499,528,399,552,299,584,151"/>
-<area shape="poly" id="edge18_Node000014_Node000011" title=" " alt="" coords="553,125,476,137,441,146,419,160,406,182,399,208,398,235,401,262,415,312,431,351,425,350,410,314,396,263,393,235,394,207,401,180,415,156,438,142,475,131,558,122"/>
-<area shape="rect" id="Node000016" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="887,575,1025,603"/>
-<area shape="poly" id="edge22_Node000016_Node000011" title=" " alt="" coords="624,123,714,136,825,157,879,171,928,188,968,206,994,227,1010,255,1021,293,1029,338,1033,387,1030,482,1023,522,1012,553,1001,567,986,577,984,572,997,563,1007,550,1017,521,1024,482,1028,387,1024,339,1016,295,1005,257,990,231,965,211,926,193,878,176,823,162,713,141,626,128"/>
-<area shape="rect" id="Node000012" title=" " alt="" coords="565,575,683,603"/>
-<area shape="poly" id="edge14_Node000001_Node000012" title=" " alt="" coords="626,617,626,677,622,674,622,620"/>
-<area shape="poly" id="edge15_Node000001_Node000013" title=" " alt="" coords="496,609,605,676,600,675,495,614"/>
-<area shape="poly" id="edge16_Node000013_Node000014" title=" " alt="" coords="440,391,462,576,457,574,436,395"/>
-<area shape="rect" id="Node000015" href="$classbool.html" title=" " alt="" coords="750,350,799,378"/>
-<area shape="poly" id="edge20_Node000001_Node000015" title=" " alt="" coords="770,391,744,489,723,547,697,604,669,646,639,678,637,673,665,642,692,602,718,545,738,487,766,395"/>
-<area shape="poly" id="edge25_Node000016_Node000015" title=" " alt="" coords="771,391,767,429,768,471,777,513,785,532,798,549,811,558,832,566,889,580,884,580,831,571,809,563,794,553,781,535,772,515,762,471,762,429,767,395"/>
-<area shape="poly" id="edge21_Node000001_Node000016" title=" " alt="" coords="900,608,750,655,670,678,669,673,749,649,895,608"/>
-<area shape="rect" id="Node000017" href="$classuint8__t_01_5.html" title=" " alt="" coords="903,350,980,378"/>
-<area shape="poly" id="edge23_Node000016_Node000017" title=" " alt="" coords="945,391,957,576,953,574,941,395"/>
-<area shape="rect" id="Node000018" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="1122,350,1201,378"/>
-<area shape="poly" id="edge24_Node000016_Node000018" title=" " alt="" coords="1155,392,1136,446,1105,501,1080,531,1048,554,998,577,996,572,1045,549,1076,527,1100,498,1131,444,1151,395"/>
+<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="314,46,316,98,311,97,313,51"/>
+<area shape="rect" id="Node000010" href="$class_print.html" title=" " alt="" coords="1196,436,1247,463"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="1184,465,1029,518,945,540,860,559,691,586,690,581,860,553,944,535,1027,512,1178,466"/>
+<area shape="rect" id="Node000011" href="$classint.html" title=" " alt="" coords="574,98,613,126"/>
+<area shape="poly" id="edge23_Node000001_Node000011" title=" " alt="" coords="556,114,486,123,445,134,408,152,381,175,366,209,337,296,326,334,320,369,320,404,326,438,341,474,366,513,383,532,403,548,450,571,499,584,550,593,544,592,498,589,448,576,400,552,380,536,362,517,337,477,321,440,314,404,315,369,321,332,332,294,362,207,377,172,405,147,444,129,485,118,561,111"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="628,110,757,112,930,124,1017,135,1095,152,1157,175,1181,190,1198,206,1216,235,1227,267,1234,300,1236,333,1234,394,1226,437,1222,434,1228,393,1231,333,1229,301,1222,268,1211,237,1194,209,1178,194,1155,180,1093,157,1016,141,930,129,757,117,629,115"/>
+<area shape="rect" id="Node000013" href="$structaudio__tools_1_1_opus_encoder_settings.html" title="Setting for Opus Encoder where the following values are valid: &#45;1 indicates that the default value sh..." alt="" coords="376,487,536,515"/>
+<area shape="poly" id="edge16_Node000013_Node000011" title=" " alt="" coords="588,139,577,184,540,300,497,413,464,489,460,485,492,411,535,298,572,183,585,143"/>
+<area shape="poly" id="edge15_Node000014_Node000011" title=" " alt="" coords="556,117,483,129,450,139,430,152,420,168,414,187,412,228,418,266,427,296,422,295,413,267,406,228,408,186,415,166,426,148,448,134,482,124,561,115"/>
+<area shape="rect" id="Node000016" href="$classaudio__tools_1_1_vector.html" title=" " alt="" coords="878,487,1015,515"/>
+<area shape="poly" id="edge19_Node000016_Node000011" title=" " alt="" coords="627,114,713,124,819,143,918,169,955,186,981,206,993,228,1003,258,1013,333,1012,408,1007,440,998,465,988,479,974,489,972,485,984,475,994,462,1002,439,1007,408,1008,333,998,259,989,230,977,209,953,191,916,175,818,148,712,130,628,119"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="560,487,677,515"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="621,528,621,581,617,578,617,532"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="494,520,598,580,592,579,492,526"/>
+<area shape="poly" id="edge13_Node000013_Node000014" title=" " alt="" coords="435,337,457,488,452,486,431,341"/>
+<area shape="rect" id="Node000015" href="$classbool.html" title=" " alt="" coords="745,296,794,324"/>
+<area shape="poly" id="edge17_Node000001_Node000015" title=" " alt="" coords="764,336,738,421,717,470,692,516,663,553,635,582,632,577,659,550,687,514,712,467,733,419,760,340"/>
+<area shape="poly" id="edge22_Node000016_Node000015" title=" " alt="" coords="766,337,764,368,765,401,773,433,790,462,803,470,824,478,880,492,875,492,823,483,800,475,786,465,768,435,760,401,759,368,762,341"/>
+<area shape="poly" id="edge18_Node000001_Node000016" title=" " alt="" coords="887,519,667,582,666,577,882,520"/>
+<area shape="rect" id="Node000017" href="$classuint8__t_01_5.html" title=" " alt="" coords="889,296,967,324"/>
+<area shape="poly" id="edge20_Node000016_Node000017" title=" " alt="" coords="933,337,948,488,943,485,929,341"/>
+<area shape="rect" id="Node000018" href="$classaudio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="1104,296,1184,324"/>
+<area shape="poly" id="edge21_Node000016_Node000018" title=" " alt="" coords="1134,336,1096,403,1068,437,1035,466,988,489,986,484,1032,461,1065,433,1092,400,1130,339"/>
 </map>

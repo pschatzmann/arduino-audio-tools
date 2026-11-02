@@ -1,9 +1,3 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classaudio__tools_1_1audio__tools_1_1_sound_generator.html" title=" " alt="" coords="5,57,170,85"/>
-<area shape="rect" id="Node000001" href="$classaudio__tools_1_1_float_sine_generator.html" title=" " alt="" coords="225,5,410,33"/>
-<area shape="poly" id="edge909_Node000000_Node000001" title=" " alt="" coords="166,51,255,32,250,35,168,56"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_float_sine_generator.html" title=" " alt="" coords="225,57,410,85"/>
-<area shape="poly" id="edge910_Node000000_Node000002" title=" " alt="" coords="185,69,227,70,221,72,186,74"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_sound_generator_modulation.html" title="SoundGenerator using the ModulationBaseClass to generate the samples." alt="" coords="218,109,417,154"/>
-<area shape="poly" id="edge911_Node000000_Node000003" title=" " alt="" coords="158,87,232,108,227,109,157,92"/>
+<area shape="rect" id="Node000000" href="$structaudio__tools_1_1_tf_lite_config.html" title="Configuration settings for TfLiteAudioStream." alt="" coords="5,5,105,33"/>
 </map>

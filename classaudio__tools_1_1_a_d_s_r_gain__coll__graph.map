@@ -1,22 +1,22 @@
 <map id="ADSRGain" name="ADSRGain">
-<area shape="rect" id="Node000001" title="ADSR Envelope: Attack, Decay, Sustain and Release. Attack is the time taken for initial run&#45;up oeffec..." alt="" coords="98,394,185,422"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects." alt="" coords="94,293,189,321"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="143,335,144,394,139,392,139,338"/>
-<area shape="rect" id="Node000003" href="$classbool.html" title=" " alt="" coords="58,149,107,177"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="77,189,76,230,79,250,86,268,97,281,112,292,106,294,93,285,81,271,74,251,71,230,75,195"/>
-<area shape="rect" id="Node000004" href="$classint.html" title=" " alt="" coords="220,149,258,177"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="223,188,152,294,148,291,219,192"/>
-<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_a_d_s_r.html" title="Generates ADSR values between 0.0 and 1.0." alt="" coords="418,293,475,321"/>
-<area shape="poly" id="edge10_Node000005_Node000004" title=" " alt="" coords="249,189,270,231,285,251,302,267,330,283,361,293,420,305,415,305,360,299,328,288,299,271,281,254,266,234,247,194"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="404,325,183,396,181,391,402,320"/>
-<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_abstract_parameter.html" title="Base class for all parameters." alt="" coords="657,149,799,177"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="707,187,659,232,629,254,597,272,533,294,476,305,475,300,532,289,595,267,626,249,655,228,702,190"/>
-<area shape="rect" id="Node000007" href="$classfloat.html" title=" " alt="" coords="552,5,603,33"/>
-<area shape="poly" id="edge11_Node000001_Node000007" title=" " alt="" coords="534,22,422,28,275,41,202,52,136,66,83,85,47,108,19,145,12,163,9,182,13,222,27,268,47,307,74,342,127,393,122,394,70,345,43,310,22,270,7,223,4,181,7,162,15,143,44,104,80,80,135,61,201,47,274,36,422,23,539,20"/>
-<area shape="poly" id="edge7_Node000005_Node000007" title=" " alt="" coords="581,46,584,95,578,154,562,216,548,245,530,271,505,291,477,302,475,297,502,286,526,267,544,242,557,214,573,153,578,94,579,50"/>
-<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="603,41,717,149,712,149,602,46"/>
-<area shape="rect" id="Node000008" title=" " alt="" coords="366,149,415,177"/>
-<area shape="poly" id="edge8_Node000005_Node000008" title=" " alt="" coords="384,189,381,230,383,250,390,268,402,283,420,296,415,295,399,287,385,271,378,251,375,230,381,194"/>
-<area shape="rect" id="Node000009" title=" " alt="" coords="439,149,529,177"/>
-<area shape="poly" id="edge9_Node000005_Node000009" title=" " alt="" coords="487,191,487,230,477,270,461,295,458,291,472,268,481,230,484,195"/>
+<area shape="rect" id="Node000001" title="ADSR Envelope: Attack, Decay, Sustain and Release. Attack is the time taken for initial run&#45;up oeffec..." alt="" coords="88,341,176,368"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects." alt="" coords="84,248,180,276"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="134,289,134,341,129,339,130,293"/>
+<area shape="rect" id="Node000003" href="$classbool.html" title=" " alt="" coords="49,127,98,154"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="68,167,69,197,77,223,87,235,102,247,97,248,84,239,72,225,64,197,67,172"/>
+<area shape="rect" id="Node000004" href="$classint.html" title=" " alt="" coords="203,127,242,154"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="205,165,144,249,140,246,201,169"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_a_d_s_r.html" title="Generates ADSR values between 0.0 and 1.0." alt="" coords="395,248,453,276"/>
+<area shape="poly" id="edge10_Node000005_Node000004" title=" " alt="" coords="237,165,258,196,286,222,313,236,342,246,398,258,392,259,341,251,311,241,283,226,254,199,235,170"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="382,279,175,343,174,337,379,274"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_abstract_parameter.html" title="Base class for all parameters." alt="" coords="627,127,770,154"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="673,163,628,198,576,226,511,248,454,259,453,254,510,242,574,222,626,193,668,165"/>
+<area shape="rect" id="Node000007" href="$classfloat.html" title=" " alt="" coords="531,5,581,33"/>
+<area shape="poly" id="edge11_Node000001_Node000007" title=" " alt="" coords="513,22,403,26,259,37,188,47,124,60,72,78,38,100,16,128,9,156,12,187,23,223,42,259,67,291,117,339,112,341,63,295,37,262,18,225,7,188,3,156,12,126,34,96,70,73,123,55,187,42,259,32,403,21,517,19"/>
+<area shape="poly" id="edge7_Node000005_Node000007" title=" " alt="" coords="558,46,556,88,547,136,529,184,516,206,499,226,477,242,454,253,452,248,475,237,495,222,512,203,525,182,542,134,551,87,555,50"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="584,41,686,126,680,126,583,46"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="345,127,394,154"/>
+<area shape="poly" id="edge8_Node000005_Node000008" title=" " alt="" coords="363,167,362,196,368,223,380,237,398,250,392,249,377,241,364,225,356,197,360,171"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="418,127,507,154"/>
+<area shape="poly" id="edge9_Node000005_Node000009" title=" " alt="" coords="463,168,460,197,452,225,437,250,433,245,447,223,455,196,459,172"/>
 </map>

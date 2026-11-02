@@ -1,19 +1,19 @@
 <map id="CameraFrameSource" name="CameraFrameSource">
-<area shape="rect" id="Node000001" title="VideoFrameSource that pulls frames from the ESP32 camera (esp_camera.h, the Arduino&#45;ESP32 &quot;esp32&#45;came..." alt="" coords="230,229,388,257"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_video_frame_source.html" title="Pull&#45;based provider of one already&#45;encoded video/image frame at a time &#45; e.g. wraps a camera capture ..." alt="" coords="5,128,149,156"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="122,160,280,227,276,230,121,165"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="173,128,301,156"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="257,166,302,229,297,228,254,171"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="326,128,439,156"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="366,167,320,231,317,226,361,169"/>
-<area shape="rect" id="Node000005" href="$structaudio__tools_1_1_video_info.html" title="Basic video information (width/height/codec/frame size), analogous to AudioInfo &#45; common to both Demu..." alt="" coords="463,128,547,156"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="468,163,336,231,334,226,463,164"/>
+<area shape="rect" id="Node000001" title="VideoFrameSource that pulls frames from the ESP32 camera (esp_camera.h, the Arduino&#45;ESP32 &quot;esp32&#45;came..." alt="" coords="230,208,388,235"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_video_frame_source.html" title="Pull&#45;based provider of one already&#45;encoded video/image frame at a time &#45; e.g. wraps a camera capture ..." alt="" coords="5,115,149,143"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="125,146,277,205,273,209,124,151"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="173,115,301,143"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="258,153,301,208,296,207,256,157"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="326,115,439,143"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="365,154,321,209,318,205,360,156"/>
+<area shape="rect" id="Node000005" href="$structaudio__tools_1_1_video_info.html" title="Basic video information (width/height/codec/frame size), analogous to AudioInfo &#45; common to both Demu..." alt="" coords="463,115,547,143"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="466,149,338,210,337,205,460,150"/>
 <area shape="rect" id="Node000006" title=" " alt="" coords="330,5,405,33"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="379,45,395,75,418,102,440,117,466,130,460,130,437,122,414,106,391,78,377,50"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="383,44,402,68,423,89,467,115,461,114,420,93,398,71,382,49"/>
 <area shape="rect" id="Node000007" href="$classfloat.html" title=" " alt="" coords="429,5,480,33"/>
-<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="467,45,502,128,497,127,464,50"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="468,45,502,116,497,114,466,49"/>
 <area shape="rect" id="Node000008" title=" " alt="" coords="504,5,608,33"/>
-<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="548,45,525,105,513,130,510,126,520,103,544,49"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="545,46,513,117,509,113,541,49"/>
 <area shape="rect" id="Node000009" href="$classuint32__t.html" title=" " alt="" coords="632,5,706,33"/>
-<area shape="poly" id="edge8_Node000005_Node000009" title=" " alt="" coords="655,45,631,78,600,106,575,121,548,132,546,127,572,116,597,102,627,74,650,48"/>
+<area shape="poly" id="edge8_Node000005_Node000009" title=" " alt="" coords="649,43,623,70,593,93,545,117,543,112,590,89,620,66,645,46"/>
 </map>

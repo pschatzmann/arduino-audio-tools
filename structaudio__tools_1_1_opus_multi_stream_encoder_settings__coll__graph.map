@@ -1,20 +1,20 @@
 <map id="OpusMultiStreamEncoderSettings" name="OpusMultiStreamEncoderSettings">
-<area shape="rect" id="Node000001" title="Settings for Opus MultiStream Encoder." alt="" coords="5,611,245,638"/>
-<area shape="rect" id="Node000002" href="$structaudio__tools_1_1_opus_multi_stream_settings.html" title="Settings for Opus MultiStream Decoder." alt="" coords="214,412,401,440"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="290,451,248,505,196,563,143,612,139,608,192,559,244,502,286,454"/>
-<area shape="rect" id="Node000003" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="554,114,637,142"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="595,156,586,212,575,241,559,268,536,295,509,320,451,361,393,393,345,414,342,409,391,388,448,357,506,316,532,292,555,265,570,239,580,211,592,160"/>
-<area shape="rect" id="Node000004" href="$classuint32__t.html" title=" " alt="" coords="438,5,513,33"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="483,45,492,64,503,80,528,96,565,113,559,115,525,100,499,84,488,67,482,50"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="558,5,633,33"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="597,46,598,115,593,113,594,51"/>
-<area shape="rect" id="Node000006" href="$classuint8__t.html" title=" " alt="" coords="660,5,726,33"/>
-<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="686,46,666,84,645,102,624,116,620,112,642,98,662,80,682,50"/>
-<area shape="rect" id="Node000007" href="$classint.html" title=" " alt="" coords="58,114,96,142"/>
-<area shape="poly" id="edge9_Node000001_Node000007" title=" " alt="" coords="69,160,56,230,43,332,41,389,44,447,53,505,70,560,87,587,110,610,104,610,83,591,65,562,48,506,39,448,36,389,38,332,51,229,70,155"/>
-<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="79,155,93,212,106,240,124,265,140,275,157,278,175,280,196,288,231,318,262,352,303,411,297,412,258,355,228,322,193,293,174,285,156,283,138,280,120,269,101,243,88,213,79,160"/>
-<area shape="rect" id="Node000008" title=" " alt="" coords="196,106,371,151"/>
-<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="284,164,288,266,297,349,308,412,303,411,292,350,282,267,282,169"/>
-<area shape="rect" id="Node000009" title=" " alt="" coords="450,114,530,142"/>
-<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="490,155,484,211,475,240,463,268,432,315,394,356,327,414,324,410,391,352,428,311,459,265,470,238,478,209,488,160"/>
+<area shape="rect" id="Node000001" title="Settings for Opus MultiStream Encoder." alt="" coords="5,512,245,540"/>
+<area shape="rect" id="Node000002" href="$structaudio__tools_1_1_opus_multi_stream_settings.html" title="Settings for Opus MultiStream Decoder." alt="" coords="207,347,395,374"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="279,386,141,513,138,509,274,384"/>
+<area shape="rect" id="Node000003" href="$structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="543,106,627,134"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="582,147,569,193,558,216,543,236,498,277,446,308,394,332,349,349,346,344,392,327,443,304,494,272,539,233,553,213,564,191,578,152"/>
+<area shape="rect" id="Node000004" href="$classuint32__t.html" title=" " alt="" coords="432,5,506,33"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="478,45,497,72,520,87,556,105,551,106,518,92,493,76,478,50"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="548,5,622,33"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="586,46,587,107,583,105,584,51"/>
+<area shape="rect" id="Node000006" href="$classuint8__t.html" title=" " alt="" coords="646,5,713,33"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="670,45,652,76,632,94,611,108,608,104,629,90,648,72,666,49"/>
+<area shape="rect" id="Node000007" href="$classint.html" title=" " alt="" coords="59,106,98,134"/>
+<area shape="poly" id="edge9_Node000001_Node000007" title=" " alt="" coords="70,152,60,209,51,288,49,331,52,376,59,420,71,462,88,489,110,511,105,512,84,492,66,464,53,421,46,376,44,331,45,287,55,208,71,147"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="83,147,99,192,110,214,125,233,140,243,154,246,170,249,189,256,220,278,249,302,292,346,287,346,245,306,217,282,186,261,169,254,153,251,138,248,122,237,106,217,94,194,83,152"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="190,98,364,143"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="277,155,281,234,290,297,300,347,295,346,285,298,276,235,275,160"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="440,106,520,134"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="479,147,471,192,453,236,423,273,389,305,326,349,323,344,386,300,420,269,448,233,466,191,476,152"/>
 </map>

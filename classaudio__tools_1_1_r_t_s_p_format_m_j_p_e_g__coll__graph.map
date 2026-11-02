@@ -1,28 +1,28 @@
 <map id="RTSPFormatMJPEG" name="RTSPFormatMJPEG">
-<area shape="rect" id="Node000001" title="MJPEG (Motion JPEG) format for RTSP video streaming." alt="" coords="350,348,491,376"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_r_t_s_p_format.html" title="Audio Format Definition &#45; Base class for RTSP audio formats." alt="" coords="371,261,470,289"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="422,303,422,349,418,346,418,306"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="304,128,353,156"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="321,169,319,199,322,213,327,226,346,246,373,262,368,261,343,250,322,229,316,215,314,199,318,173"/>
-<area shape="rect" id="Node000004" href="$classint.html" title=" " alt="" coords="144,128,182,156"/>
-<area shape="poly" id="edge14_Node000001_Node000004" title=" " alt="" coords="158,169,159,199,167,226,183,250,202,271,250,305,303,329,355,348,350,347,301,334,247,310,199,275,178,253,162,228,154,199,156,173"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="168,169,181,200,200,225,229,239,273,251,373,268,368,269,272,256,227,244,196,229,176,202,167,174"/>
-<area shape="rect" id="Node000005" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="380,128,463,156"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="470,162,485,179,493,203,485,229,470,248,450,263,447,258,466,245,481,226,488,203,481,181,469,167"/>
-<area shape="rect" id="Node000006" href="$classuint32__t.html" title=" " alt="" coords="74,5,148,33"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="57,31,36,41,18,59,8,82,10,92,17,102,37,111,76,117,186,122,366,126,382,130,377,131,365,131,186,128,76,122,36,116,14,106,5,94,3,81,13,55,33,37,60,26"/>
-<area shape="rect" id="Node000009" href="$structaudio__tools_1_1audio__tools_1_1_r_t_s_p_video_info.html" title="Video Information Structure." alt="" coords="513,128,629,156"/>
-<area shape="poly" id="edge13_Node000009_Node000006" title=" " alt="" coords="162,38,188,55,197,68,200,81,203,92,213,102,235,112,265,118,340,123,416,124,475,126,516,132,511,133,475,131,416,129,339,129,264,124,233,117,209,107,199,95,195,83,192,71,184,59,163,43"/>
-<area shape="rect" id="Node000007" title=" " alt="" coords="183,5,258,33"/>
-<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="166,35,139,47,122,59,113,82,114,92,121,102,135,108,162,113,240,120,366,126,382,130,377,131,365,131,239,125,162,119,134,114,118,106,110,94,107,81,118,55,137,42,170,32"/>
-<area shape="poly" id="edge9_Node000009_Node000007" title=" " alt="" coords="272,32,318,55,331,68,339,80,346,92,359,102,419,116,515,132,510,134,418,121,357,107,342,95,334,83,327,71,315,59,273,38"/>
-<area shape="rect" id="Node000008" href="$classuint8__t.html" title=" " alt="" coords="465,5,531,33"/>
-<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="447,35,435,45,424,58,417,75,415,94,420,129,415,127,410,94,412,74,419,56,432,41,452,32"/>
-<area shape="poly" id="edge12_Node000009_Node000008" title=" " alt="" coords="530,40,544,56,562,93,571,129,566,127,557,95,539,58,529,46"/>
-<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="563,169,548,201,526,229,498,249,467,263,465,258,495,245,523,225,544,199,559,172"/>
-<area shape="rect" id="Node000010" href="$classfloat.html" title=" " alt="" coords="822,5,872,33"/>
-<area shape="poly" id="edge15_Node000001_Node000010" title=" " alt="" coords="860,45,867,76,865,91,860,106,823,157,778,202,727,240,673,273,618,299,565,321,476,350,475,345,564,316,616,295,671,268,724,236,775,198,819,154,855,103,860,90,861,76,857,50"/>
-<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="810,39,787,59,776,71,771,83,764,95,751,107,722,121,691,132,630,142,629,137,689,127,720,117,748,102,760,92,766,81,772,68,783,55,806,41"/>
-<area shape="rect" id="Node000011" title=" " alt="" coords="632,5,769,33"/>
-<area shape="poly" id="edge11_Node000009_Node000011" title=" " alt="" coords="697,47,687,79,668,106,649,120,628,130,626,125,646,116,664,102,682,76,693,50"/>
+<area shape="rect" id="Node000001" title="MJPEG (Motion JPEG) format for RTSP video streaming." alt="" coords="330,308,471,336"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_r_t_s_p_format.html" title="Audio Format Definition &#45; Base class for RTSP audio formats." alt="" coords="351,228,450,256"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="402,269,402,309,398,306,398,273"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="286,115,336,143"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="304,155,303,179,310,199,328,217,353,231,347,231,325,221,305,202,298,180,301,160"/>
+<area shape="rect" id="Node000004" href="$classint.html" title=" " alt="" coords="134,115,173,143"/>
+<area shape="poly" id="edge14_Node000001_Node000004" title=" " alt="" coords="152,156,155,179,163,199,178,220,197,239,240,269,288,290,336,308,330,307,286,295,238,274,193,243,174,224,158,202,150,180,150,161"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="162,155,174,179,192,199,219,211,260,221,353,235,348,237,259,226,217,216,188,203,170,182,160,160"/>
+<area shape="rect" id="Node000005" href="$structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="361,115,445,143"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="450,149,464,165,470,184,464,202,451,218,434,230,432,225,447,214,459,199,464,184,459,168,448,154"/>
+<area shape="rect" id="Node000006" href="$classuint32__t.html" title=" " alt="" coords="64,5,139,33"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="48,33,31,43,15,58,8,75,14,89,34,97,71,103,176,109,349,112,363,117,358,118,348,118,176,114,70,108,32,102,11,93,3,75,10,56,27,39,51,28"/>
+<area shape="rect" id="Node000009" href="$structaudio__tools_1_1_r_t_s_p_video_info.html" title="Video Information Structure." alt="" coords="488,115,603,143"/>
+<area shape="poly" id="edge13_Node000009_Node000006" title=" " alt="" coords="147,38,174,55,186,74,191,82,199,89,222,97,252,103,324,108,456,112,490,118,485,119,456,118,324,114,251,108,220,102,196,93,187,85,182,76,170,59,148,43"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="171,5,245,33"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="154,36,129,47,112,59,106,74,112,89,130,101,156,108,223,112,294,110,349,112,363,117,358,118,348,118,294,116,223,117,155,113,127,105,108,93,101,74,108,55,126,42,158,32"/>
+<area shape="poly" id="edge9_Node000009_Node000007" title=" " alt="" coords="260,36,300,55,322,73,344,89,400,101,490,118,485,119,399,106,342,93,319,77,297,59,260,41"/>
+<area shape="rect" id="Node000008" href="$classuint8__t.html" title=" " alt="" coords="442,5,508,33"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="425,35,414,46,402,58,397,72,396,86,401,115,396,113,391,87,392,71,398,56,410,42,430,32"/>
+<area shape="poly" id="edge12_Node000009_Node000008" title=" " alt="" coords="505,41,518,55,535,86,545,116,540,114,530,88,514,59,504,46"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="534,155,519,181,498,203,474,218,447,230,446,225,471,214,495,199,514,178,530,158"/>
+<area shape="rect" id="Node000010" href="$classfloat.html" title=" " alt="" coords="788,5,839,33"/>
+<area shape="poly" id="edge15_Node000001_Node000010" title=" " alt="" coords="825,46,829,70,823,92,789,139,747,179,700,213,650,242,599,265,550,284,464,310,463,305,548,279,597,261,648,237,697,209,743,175,785,135,818,90,823,70,822,50"/>
+<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="779,40,753,59,734,77,712,93,658,113,604,124,603,119,656,108,710,89,730,73,750,55,774,42"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="603,5,739,33"/>
+<area shape="poly" id="edge11_Node000009_Node000011" title=" " alt="" coords="664,46,652,72,635,93,616,107,595,117,593,112,613,102,632,89,648,69,660,50"/>
 </map>

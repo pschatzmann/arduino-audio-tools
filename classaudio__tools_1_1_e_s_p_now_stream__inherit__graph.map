@@ -1,11 +1,9 @@
 <map id="ESPNowStream" name="ESPNowStream">
 <area shape="rect" id="Node000001" title="ESPNow as Arduino Stream. When use_send_ack is true we prevent any buffer overflows by blocking write..." alt="" coords="5,232,127,260"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer,size_t size) and readBytes(uint8..." alt="" coords="16,157,116,184"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer, size_t size) and readBytes(uint..." alt="" coords="16,157,116,184"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="68,198,69,233,63,231,64,202"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="32,81,100,109"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="58,122,62,157,56,156,56,127"/>
-<area shape="poly" id="edge5_Node000002_Node000003" title=" " alt="" coords="76,122,76,157,70,156,74,127"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="40,5,92,33"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="58,46,62,81,56,80,57,51"/>
-<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="75,46,76,81,70,80,74,51"/>
+<area shape="rect" id="Node000003" href="$class_stream.html" title=" " alt="" coords="32,81,100,109"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="67,122,69,157,63,156,65,127"/>
+<area shape="rect" id="Node000004" href="$class_print.html" title=" " alt="" coords="40,5,92,33"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="67,46,69,81,63,80,65,51"/>
 </map>

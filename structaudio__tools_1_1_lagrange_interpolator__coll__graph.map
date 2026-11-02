@@ -1,26 +1,25 @@
 <map id="LagrangeInterpolator" name="LagrangeInterpolator">
-<area shape="rect" id="Node000001" title="Cubic Lagrange interpolation using y[0]..y[3]." alt="" coords="595,471,752,499"/>
-<area shape="rect" id="Node000002" href="$structaudio__tools_1_1_base_interpolator.html" title="Base class for resampling algorithms using a buffer of float values." alt="" coords="609,394,738,422"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="675,435,675,472,671,469,671,439"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_single_buffer.html" title=" " alt="" coords="376,293,536,321"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="499,325,647,393,642,394,498,330"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="380,149,532,177"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="450,190,450,245,453,294,448,292,444,246,447,195"/>
-<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="465,190,467,246,464,294,459,291,462,245,462,195"/>
-<area shape="rect" id="Node000005" href="$classint.html" title=" " alt="" coords="39,5,78,33"/>
-<area shape="poly" id="edge5_Node000003_Node000005" title=" " alt="" coords="41,49,27,79,13,118,9,159,12,178,21,197,36,217,51,231,84,247,171,267,224,280,277,289,378,301,373,303,276,294,222,285,170,272,82,252,48,235,32,220,16,199,7,180,4,159,8,117,22,77,42,43"/>
-<area shape="rect" id="Node000009" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="555,149,677,177"/>
-<area shape="poly" id="edge10_Node000009_Node000005" title=" " alt="" coords="91,32,190,68,310,102,375,111,427,112,479,113,545,126,596,149,591,149,543,131,479,119,427,117,375,116,309,107,188,73,93,37"/>
-<area shape="rect" id="Node000006" href="$classbool.html" title=" " alt="" coords="613,5,662,33"/>
-<area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="676,30,695,40,709,56,713,70,714,89,709,134,692,199,661,236,622,263,579,282,537,295,535,290,577,277,620,258,658,232,687,197,704,133,709,89,708,71,704,58,692,45,676,35"/>
-<area shape="poly" id="edge13_Node000009_Node000006" title=" " alt="" coords="595,30,576,41,558,59,552,70,551,80,558,103,575,128,598,149,593,149,571,132,553,105,545,80,547,68,553,55,573,37,600,27"/>
-<area shape="rect" id="Node000007" href="$classuint64__t.html" title=" " alt="" coords="155,149,229,177"/>
-<area shape="poly" id="edge7_Node000003_Node000007" title=" " alt="" coords="183,190,179,232,182,251,191,268,202,276,219,284,266,295,321,301,378,305,373,307,320,306,265,300,218,289,200,281,187,271,177,253,173,232,181,195"/>
-<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="295,5,374,33"/>
-<area shape="poly" id="edge8_Node000003_Node000008" title=" " alt="" coords="320,44,305,79,292,118,288,158,291,178,298,197,322,229,354,255,388,276,421,292,416,293,385,280,351,260,318,233,294,199,286,179,283,159,287,117,300,77,317,49"/>
-<area shape="poly" id="edge12_Node000009_Node000008" title=" " alt="" coords="363,40,410,72,464,102,504,115,545,126,593,148,588,149,543,131,502,120,461,107,407,76,363,45"/>
-<area shape="poly" id="edge9_Node000003_Node000009" title=" " alt="" coords="592,186,472,295,469,291,587,189"/>
-<area shape="rect" id="Node000010" href="$classfloat.html" title=" " alt="" coords="816,5,866,33"/>
-<area shape="poly" id="edge14_Node000002_Node000010" title=" " alt="" coords="848,46,856,118,853,159,844,199,829,231,811,263,769,319,725,365,690,396,688,391,722,361,765,316,807,260,825,229,839,197,848,158,850,118,845,50"/>
-<area shape="poly" id="edge11_Node000009_Node000010" title=" " alt="" coords="811,40,713,107,639,151,637,147,710,102,807,43"/>
+<area shape="rect" id="Node000001" title="Cubic Lagrange interpolation using y[0]..y[3]." alt="" coords="558,418,715,445"/>
+<area shape="rect" id="Node000002" href="$structaudio__tools_1_1_base_interpolator.html" title="Base class for resampling algorithms using a buffer of float values." alt="" coords="572,341,701,368"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="638,382,639,419,634,416,635,386"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_single_buffer.html" title=" " alt="" coords="349,248,508,276"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="473,280,609,340,604,340,472,285"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_base_buffer.html" title="Shared functionality of all buffers." alt="" coords="363,127,494,154"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="430,168,431,249,426,247,427,172"/>
+<area shape="rect" id="Node000005" href="$classint.html" title=" " alt="" coords="35,5,73,33"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="35,48,24,74,12,104,9,136,12,151,19,164,38,183,70,199,110,213,156,224,256,242,351,254,346,256,255,247,155,229,108,218,68,204,35,187,14,168,7,152,4,136,7,103,19,71,37,43"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1_vector.html" title=" " alt="" coords="517,127,639,154"/>
+<area shape="poly" id="edge9_Node000009_Node000005" title=" " alt="" coords="87,30,184,59,303,88,359,97,404,100,449,103,506,112,546,126,541,126,505,118,449,108,404,105,359,102,302,94,183,64,89,35"/>
+<area shape="rect" id="Node000006" href="$classbool.html" title=" " alt="" coords="576,5,625,33"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="640,30,658,41,671,56,676,83,670,118,653,167,624,199,588,223,548,240,509,251,508,246,546,235,585,218,621,195,649,165,665,116,670,83,666,58,654,45,640,35"/>
+<area shape="poly" id="edge12_Node000009_Node000006" title=" " alt="" coords="559,31,540,42,524,58,519,74,524,90,538,109,558,126,552,126,534,113,519,92,513,74,519,56,537,38,563,28"/>
+<area shape="rect" id="Node000007" href="$classuint64__t.html" title=" " alt="" coords="145,127,219,154"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="174,167,173,198,176,211,182,222,208,237,249,248,351,259,346,261,248,253,205,242,178,226,171,213,168,198,172,172"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="278,5,358,33"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="303,44,291,74,280,104,277,135,286,165,306,192,333,215,363,232,392,247,387,248,360,237,330,219,302,196,281,167,272,136,275,103,286,71,300,49"/>
+<area shape="poly" id="edge11_Node000009_Node000008" title=" " alt="" coords="349,39,391,64,436,89,541,125,536,127,434,93,388,69,349,44"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="552,163,446,250,443,245,547,166"/>
+<area shape="rect" id="Node000010" href="$classfloat.html" title=" " alt="" coords="774,5,824,33"/>
+<area shape="poly" id="edge13_Node000002_Node000010" title=" " alt="" coords="805,46,808,104,805,136,796,167,766,224,727,274,687,314,654,343,652,338,683,311,723,270,762,221,791,165,799,135,803,104,802,51"/>
+<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="766,40,675,93,606,128,604,124,673,89,761,42"/>
 </map>

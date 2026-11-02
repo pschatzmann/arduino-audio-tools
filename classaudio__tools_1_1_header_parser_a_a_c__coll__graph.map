@@ -1,15 +1,15 @@
 <map id="HeaderParserAAC" name="HeaderParserAAC">
-<area shape="rect" id="Node000001" title="AAC header parser to check if the data is a valid ADTS aac which can extract some relevant audio info..." alt="" coords="122,575,258,603"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_a_d_t_s_parser.html" title="Structure to hold ADTS header field values." alt="" coords="142,475,238,502"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="192,516,192,576,187,574,188,520"/>
-<area shape="rect" id="Node000003" href="$classint.html" title=" " alt="" coords="5,352,44,379"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="26,392,36,423,52,449,72,463,95,473,144,485,139,487,93,478,69,468,49,452,31,425,26,397"/>
-<area shape="rect" id="Node000004" href="$structaudio__tools_1_1_a_d_t_s_parser_1_1_a_d_t_s_header.html" title=" " alt="" coords="138,352,242,379"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="191,393,192,475,187,473,188,397"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="90,5,164,33"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="118,50,109,103,101,175,101,214,105,253,115,291,130,326,141,339,157,350,151,352,138,343,126,329,110,293,100,254,96,214,96,175,104,102,119,45"/>
-<area shape="rect" id="Node000006" href="$classuint8__t.html" title=" " alt="" coords="219,5,286,33"/>
-<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="256,46,261,102,260,174,249,252,239,291,226,329,208,353,203,350,221,326,234,290,244,251,254,173,256,103,255,51"/>
-<area shape="rect" id="Node000007" href="$classbool.html" title=" " alt="" coords="275,352,324,379"/>
-<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="297,392,289,425,272,452,255,466,236,476,234,472,252,462,268,449,284,422,294,397"/>
+<area shape="rect" id="Node000001" title="AAC header parser to check if the data is a valid ADTS aac which can extract some relevant audio info..." alt="" coords="118,487,254,515"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_a_d_t_s_parser.html" title="Structure to hold ADTS header field values." alt="" coords="138,395,234,422"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="188,436,188,488,184,486,184,439"/>
+<area shape="rect" id="Node000003" href="$classint.html" title=" " alt="" coords="5,285,44,313"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="28,325,39,349,52,369,71,382,93,392,140,404,135,406,91,397,69,387,49,373,34,352,29,331"/>
+<area shape="rect" id="Node000004" href="$structaudio__tools_1_1_a_d_t_s_parser_1_1_a_d_t_s_header.html" title=" " alt="" coords="134,285,238,313"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="187,326,188,395,183,394,184,330"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="87,5,162,33"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="115,50,107,92,100,147,103,205,110,233,122,260,134,273,150,284,144,285,130,277,118,262,105,235,98,206,95,146,102,91,116,45"/>
+<area shape="rect" id="Node000006" href="$classuint8__t.html" title=" " alt="" coords="213,5,279,33"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="248,46,250,91,247,145,237,205,219,262,202,286,198,283,214,260,232,203,242,145,245,91,247,51"/>
+<area shape="rect" id="Node000007" href="$classbool.html" title=" " alt="" coords="263,285,312,313"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="282,326,274,351,260,372,243,386,225,396,222,392,240,382,256,369,269,349,279,330"/>
 </map>

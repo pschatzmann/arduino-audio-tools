@@ -1,8 +1,7 @@
 <map id="LowShelfFilterDF1&lt; T &gt;" name="LowShelfFilterDF1&lt; T &gt;">
 <area shape="rect" id="Node000001" title="Second&#45;order low&#45;shelf filter (BiQuad DF1). Same coefficients as LowShelfFilter. NOTE: switching to D..." alt="" coords="5,157,183,184"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_bi_quad_d_f1.html" title=" " alt="" coords="17,81,171,109"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_bi_quad_d_f1.html" title="Second&#45;order IIR filter in Direct Form I. Maintains separate input and output histories (x and y dela..." alt="" coords="28,81,160,109"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="96,123,96,157,92,155,92,126"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_filter.html" title=" " alt="" coords="37,5,151,33"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="86,46,90,81,84,80,84,51"/>
-<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="104,46,104,81,99,80,102,51"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_filter.html" title="Abstract filter interface definition. Subclasses implement process() to transform audio samples one a..." alt="" coords="48,5,140,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="95,46,97,81,91,80,93,51"/>
 </map>

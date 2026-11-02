@@ -1,15 +1,15 @@
 <map id="AudioEffectCommon" name="AudioEffectCommon">
-<area shape="rect" id="Node000001" title=" " alt="" coords="129,344,283,372"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="130,226,282,271"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="208,285,209,345,204,342,204,288"/>
-<area shape="rect" id="Node000003" href="$classint.html" title=" " alt="" coords="8,5,47,33"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="16,50,12,72,9,99,10,127,20,152,41,178,69,199,100,216,132,229,127,231,97,220,66,204,38,182,15,155,5,128,3,99,7,71,17,45"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects." alt="" coords="99,116,194,144"/>
-<area shape="poly" id="edge5_Node000004_Node000003" title=" " alt="" coords="42,44,72,80,95,98,121,114,116,116,92,103,68,84,42,49"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="155,156,174,201,190,226,185,226,169,204,153,161"/>
-<area shape="rect" id="Node000005" href="$classbool.html" title=" " alt="" coords="168,5,218,33"/>
-<area shape="poly" id="edge7_Node000002_Node000005" title=" " alt="" coords="217,42,226,56,237,96,239,129,226,203,219,227,214,224,221,202,234,128,232,97,221,58,217,48"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="154,45,147,58,142,72,141,88,145,116,140,115,136,88,137,71,142,56,157,40"/>
-<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="417,116,497,144"/>
-<area shape="poly" id="edge6_Node000002_Node000006" title=" " alt="" coords="413,152,254,228,252,223,417,149"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="124,307,279,334"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_vector.html" title=" " alt="" coords="125,197,278,242"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="204,255,204,308,199,305,200,259"/>
+<area shape="rect" id="Node000003" href="$classint.html" title=" " alt="" coords="6,5,45,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="14,50,8,90,10,111,18,131,39,155,66,175,95,190,127,202,123,204,93,195,63,180,35,159,13,133,5,112,3,89,14,45"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects." alt="" coords="93,101,188,129"/>
+<area shape="poly" id="edge5_Node000004_Node000003" title=" " alt="" coords="44,42,75,72,117,100,112,102,72,76,45,47"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="154,140,172,172,188,197,183,196,167,174,153,146"/>
+<area shape="rect" id="Node000005" href="$classbool.html" title=" " alt="" coords="164,5,213,33"/>
+<area shape="poly" id="edge7_Node000002_Node000005" title=" " alt="" coords="212,42,220,56,229,88,230,114,220,174,213,198,209,195,215,172,225,114,223,89,215,58,211,48"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="152,45,145,58,140,80,141,101,135,100,134,79,140,56,154,41"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="407,101,487,129"/>
+<area shape="poly" id="edge6_Node000002_Node000006" title=" " alt="" coords="399,137,255,199,253,194,404,134"/>
 </map>

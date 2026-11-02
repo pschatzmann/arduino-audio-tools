@@ -1,7 +1,7 @@
 <map id="MutexRecursiveRP2040" name="MutexRecursiveRP2040">
-<area shape="rect" id="Node000001" title="Recursive Mutex implementation using the RP2040 Pico SDK: the owning core/task can lock it multiple t..." alt="" coords="36,106,211,134"/>
+<area shape="rect" id="Node000001" title="Recursive Mutex implementation using the RP2040 Pico SDK: the owning core/task can lock it multiple t..." alt="" coords="36,98,211,126"/>
 <area shape="rect" id="Node000002" href="$classaudio__tools_1_1_mutex_base.html" title="Empty Mutex implementation which does nothing." alt="" coords="5,5,100,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="72,43,116,105,111,106,69,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="73,43,116,97,110,98,71,47"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="124,5,266,33"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="180,45,135,107,131,103,174,46"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="178,44,135,100,132,96,173,46"/>
 </map>

@@ -1,7 +1,7 @@
 <map id="BiQuadDF2&lt; T &gt;" name="BiQuadDF2&lt; T &gt;">
-<area shape="rect" id="Node000001" title="Second&#45;order IIR filter in Direct Form II. Uses a single delay line, requiring less memory than DF1...." alt="" coords="48,240,180,268"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_filter.html" title=" " alt="" coords="5,5,119,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="71,47,114,239,108,240,66,50"/>
-<area shape="rect" id="Node000003" href="$classfloat.html" title=" " alt="" coords="142,5,192,33"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="164,48,120,240,114,239,158,49"/>
+<area shape="rect" id="Node000001" title="Second&#45;order IIR filter in Direct Form II. Uses a single delay line, requiring less memory than DF1...." alt="" coords="33,200,166,228"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_filter.html" title="Abstract filter interface definition. Subclasses implement process() to transform audio samples one a..." alt="" coords="5,5,98,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="61,46,99,199,94,200,56,49"/>
+<area shape="rect" id="Node000003" href="$classfloat.html" title=" " alt="" coords="122,5,173,33"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="143,47,105,201,100,199,138,48"/>
 </map>

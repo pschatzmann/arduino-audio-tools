@@ -1,22 +1,20 @@
 <map id="WiFiClientSecureZephyr" name="WiFiClientSecureZephyr">
-<area shape="rect" id="Node000001" title=" " alt="" coords="95,438,273,465"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_wi_fi_client_zephyr.html" title=" " alt="" coords="117,361,251,388"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="186,402,186,439,182,436,182,406"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_client.html" title=" " alt="" coords="78,260,138,288"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="128,297,176,360,171,360,126,302"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="74,183,142,211"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="100,223,104,260,98,259,99,229"/>
-<area shape="poly" id="edge7_Node000003_Node000004" title=" " alt="" coords="118,224,118,260,112,259,116,229"/>
-<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="82,106,134,134"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="100,146,104,183,98,182,99,152"/>
-<area shape="poly" id="edge6_Node000004_Node000005" title=" " alt="" coords="117,146,118,183,112,182,116,152"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="77,422,254,449"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_wi_fi_client_zephyr.html" title=" " alt="" coords="99,345,232,372"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="167,386,168,423,163,420,163,390"/>
+<area shape="rect" id="Node000003" href="$class_client.html" title=" " alt="" coords="58,252,118,280"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="110,289,157,344,152,345,108,294"/>
+<area shape="rect" id="Node000004" href="$class_stream.html" title=" " alt="" coords="70,175,138,203"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="99,216,93,252,88,251,97,221"/>
+<area shape="rect" id="Node000005" href="$class_print.html" title=" " alt="" coords="60,98,111,126"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="92,138,103,175,98,175,92,143"/>
 <area shape="rect" id="Node000006" href="$classint.html" title=" " alt="" coords="7,5,46,33"/>
-<area shape="poly" id="edge8_Node000002_Node000006" title=" " alt="" coords="17,51,12,82,8,119,8,275,11,293,18,308,44,333,79,350,119,363,115,365,77,355,41,337,13,311,5,294,3,275,3,118,7,81,18,45"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="46,42,100,104,95,106,47,47"/>
-<area shape="rect" id="Node000007" href="$classuint32__t.html" title=" " alt="" coords="162,260,236,288"/>
-<area shape="poly" id="edge9_Node000002_Node000007" title=" " alt="" coords="189,300,188,312,186,361,181,359,183,311,186,305"/>
-<area shape="rect" id="Node000008" href="$classuint8__t.html" title=" " alt="" coords="275,260,341,288"/>
-<area shape="poly" id="edge10_Node000002_Node000008" title=" " alt="" coords="302,301,294,322,281,339,261,353,240,362,237,358,258,348,277,335,289,319,298,304"/>
-<area shape="rect" id="Node000009" href="$classbool.html" title=" " alt="" coords="397,260,446,288"/>
-<area shape="poly" id="edge11_Node000002_Node000009" title=" " alt="" coords="413,301,402,323,386,339,362,349,329,358,252,369,251,364,328,352,360,344,382,334,398,319,409,304"/>
+<area shape="poly" id="edge6_Node000002_Node000006" title=" " alt="" coords="17,50,12,78,8,111,8,267,10,282,16,296,37,317,66,333,101,345,96,348,64,338,34,322,11,299,5,284,3,267,3,110,6,77,17,45"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="43,44,80,97,74,98,44,49"/>
+<area shape="rect" id="Node000007" href="$classuint32__t.html" title=" " alt="" coords="142,252,216,280"/>
+<area shape="poly" id="edge7_Node000002_Node000007" title=" " alt="" coords="170,292,170,304,167,345,162,343,164,303,168,297"/>
+<area shape="rect" id="Node000008" href="$classuint8__t.html" title=" " alt="" coords="252,252,318,280"/>
+<area shape="poly" id="edge8_Node000002_Node000008" title=" " alt="" coords="277,292,258,323,238,337,216,347,214,342,235,332,254,319,273,296"/>
+<area shape="rect" id="Node000009" href="$classbool.html" title=" " alt="" coords="370,252,419,280"/>
+<area shape="poly" id="edge9_Node000002_Node000009" title=" " alt="" coords="383,291,370,310,355,323,326,337,294,348,233,358,232,353,293,343,324,333,352,318,366,306,378,294"/>
 </map>

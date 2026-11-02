@@ -1,10 +1,10 @@
 <map id="OutputFPSMeter" name="OutputFPSMeter">
-<area shape="rect" id="Node000001" title="Wraps a VideoOutput (typically a codec decoder, e.g. H264Decoder/ MJPEGDecoder/MPGDecoder or a MultiV..." alt="" coords="65,285,192,312"/>
+<area shape="rect" id="Node000001" title="Wraps a VideoOutput (typically a codec decoder, e.g. H264Decoder/ MJPEGDecoder/MPGDecoder or a MultiV..." alt="" coords="64,234,191,262"/>
 <area shape="rect" id="Node000002" href="$classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory...." alt="" coords="5,5,108,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="48,50,41,92,35,147,39,205,46,233,59,259,70,272,87,284,81,284,67,276,54,262,41,235,33,206,29,147,35,91,48,45"/>
-<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="57,46,62,162,69,220,81,259,91,272,105,284,100,284,87,276,76,262,64,221,57,162,55,51"/>
-<area shape="rect" id="Node000003" href="$classbool.html" title=" " alt="" coords="150,5,200,33"/>
-<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="176,46,170,144,162,203,148,261,138,286,134,282,143,260,157,202,165,143,173,50"/>
-<area shape="rect" id="Node000004" href="$classuint32__t.html" title=" " alt="" coords="277,5,351,33"/>
-<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="321,46,328,93,328,151,324,181,316,210,304,238,286,263,271,273,249,281,193,292,192,287,247,276,269,268,283,259,299,235,311,208,319,180,323,150,323,94,318,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="49,45,44,83,41,125,45,168,60,209,72,221,88,233,83,234,68,226,56,211,39,169,35,125,39,82,48,50"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="59,46,66,136,73,179,82,209,92,221,106,234,100,233,88,225,77,211,67,180,61,137,56,51"/>
+<area shape="rect" id="Node000003" href="$classbool.html" title=" " alt="" coords="148,5,197,33"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="172,46,164,123,146,211,136,235,132,232,141,209,159,122,169,51"/>
+<area shape="rect" id="Node000004" href="$classuint32__t.html" title=" " alt="" coords="266,5,340,33"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="309,46,313,85,310,128,299,173,289,193,276,212,262,221,242,229,192,240,191,235,240,224,260,216,272,208,285,191,294,171,305,127,307,85,306,51"/>
 </map>

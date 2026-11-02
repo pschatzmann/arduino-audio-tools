@@ -1,19 +1,19 @@
 <map id="Tremolo" name="Tremolo">
-<area shape="rect" id="Node000001" title="Tremolo AudioEffect." alt="" coords="332,251,405,279"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects." alt="" coords="37,106,132,134"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="101,144,136,187,158,208,182,225,220,241,260,252,334,263,329,264,259,257,218,247,179,230,154,212,132,191,100,149"/>
+<area shape="rect" id="Node000001" title="Tremolo AudioEffect." alt="" coords="323,225,396,252"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects." alt="" coords="34,98,130,126"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="104,135,140,169,183,198,219,212,256,222,325,235,320,235,255,228,217,218,181,203,136,173,102,140"/>
 <area shape="rect" id="Node000003" href="$classbool.html" title=" " alt="" coords="5,5,55,33"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="25,46,28,65,33,81,43,93,58,104,53,106,40,97,29,83,23,66,25,51"/>
-<area shape="rect" id="Node000004" href="$classint.html" title=" " alt="" coords="120,5,159,33"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="129,45,112,83,97,107,92,104,108,81,126,50"/>
-<area shape="rect" id="Node000005" href="$classint16__t.html" title=" " alt="" coords="157,106,223,134"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="188,147,191,189,197,209,208,225,228,237,260,246,334,260,329,260,259,251,226,242,204,229,192,211,186,190,185,151"/>
-<area shape="rect" id="Node000006" href="$classuint32__t.html" title=" " alt="" coords="273,106,347,134"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="306,147,304,187,307,207,314,226,325,239,340,251,334,250,321,243,310,229,302,209,299,188,302,151"/>
-<area shape="rect" id="Node000007" href="$classint32__t.html" title=" " alt="" coords="394,106,460,134"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="425,147,416,188,400,229,383,253,380,249,396,226,411,186,421,151"/>
-<area shape="rect" id="Node000008" href="$classuint8__t.html" title=" " alt="" coords="534,106,600,134"/>
-<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="568,147,561,191,551,211,537,229,514,241,480,251,406,263,406,257,479,246,512,236,534,225,547,209,556,189,564,151"/>
-<area shape="rect" id="Node000009" href="$classfloat.html" title=" " alt="" coords="645,106,695,134"/>
-<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="672,148,666,191,657,212,642,229,625,240,599,248,535,259,406,266,406,261,535,254,598,243,622,235,639,225,652,209,661,190,668,151"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="26,46,33,73,43,85,57,96,52,98,39,89,29,75,26,51"/>
+<area shape="rect" id="Node000004" href="$classint.html" title=" " alt="" coords="116,5,155,33"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="120,49,108,75,93,99,89,96,104,73,123,45"/>
+<area shape="rect" id="Node000005" href="$classint16__t.html" title=" " alt="" coords="154,98,220,126"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="188,139,193,171,199,186,208,199,227,209,256,218,325,233,319,233,255,223,224,214,205,203,194,189,188,173,185,143"/>
+<area shape="rect" id="Node000006" href="$classuint32__t.html" title=" " alt="" coords="266,98,340,126"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="299,139,300,170,308,199,318,212,332,225,327,223,314,216,303,202,294,171,296,143"/>
+<area shape="rect" id="Node000007" href="$classint32__t.html" title=" " alt="" coords="384,98,450,126"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="412,139,403,171,390,202,373,226,370,222,385,199,398,169,408,142"/>
+<area shape="rect" id="Node000008" href="$classuint8__t.html" title=" " alt="" coords="516,98,582,126"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="547,139,537,173,528,189,516,203,488,221,456,232,396,240,396,235,455,227,485,216,512,199,523,186,532,171,543,142"/>
+<area shape="rect" id="Node000009" href="$classfloat.html" title=" " alt="" coords="622,98,672,126"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="647,139,638,174,629,190,617,203,600,212,577,220,517,230,397,239,396,234,517,225,575,215,598,207,614,199,625,186,633,172,643,143"/>
 </map>

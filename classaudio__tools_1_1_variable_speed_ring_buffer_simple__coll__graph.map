@@ -1,18 +1,18 @@
 <map id="VariableSpeedRingBufferSimple&lt; T &gt;" name="VariableSpeedRingBufferSimple&lt; T &gt;">
-<area shape="rect" id="Node000001" title="Very Simple Buffer implementation for Pitch Shift." alt="" coords="142,271,407,299"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="5,138,173,166"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="114,174,156,209,204,245,247,270,242,270,201,249,152,213,113,179"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="324,138,462,166"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="374,177,288,273,285,268,369,178"/>
-<area shape="rect" id="Node000004" href="$classint.html" title=" " alt="" coords="224,5,263,33"/>
-<area shape="poly" id="edge7_Node000001_Node000004" title=" " alt="" coords="239,46,232,107,232,141,235,175,251,228,270,272,265,270,246,230,230,176,226,142,227,107,236,50"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="254,45,270,76,291,102,318,122,350,137,345,138,316,126,288,106,266,78,253,50"/>
-<area shape="rect" id="Node000005" href="$classint16__t.html" title=" " alt="" coords="328,5,394,33"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="364,46,376,104,389,138,384,137,370,105,362,51"/>
-<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="419,5,498,33"/>
-<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="451,46,427,106,405,140,401,136,423,103,447,49"/>
-<area shape="rect" id="Node000007" href="$classbool.html" title=" " alt="" coords="540,5,590,33"/>
-<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="562,46,553,79,533,106,497,122,439,140,438,135,496,117,530,102,548,76,558,50"/>
-<area shape="rect" id="Node000008" href="$classfloat.html" title=" " alt="" coords="485,138,536,166"/>
-<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="491,176,451,215,401,249,370,263,339,273,338,268,369,258,398,245,447,211,486,178"/>
+<area shape="rect" id="Node000001" title="Very Simple Buffer implementation for Pitch Shift." alt="" coords="104,231,370,259"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_base_buffer.html" title="Shared functionality of all buffers." alt="" coords="5,118,136,146"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="98,153,167,205,211,230,205,230,164,209,96,159"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_vector.html" title=" " alt="" coords="283,118,420,146"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="330,156,252,233,249,228,325,157"/>
+<area shape="rect" id="Node000004" href="$classint.html" title=" " alt="" coords="187,5,226,33"/>
+<area shape="poly" id="edge7_Node000001_Node000004" title=" " alt="" coords="201,46,195,96,195,122,198,148,214,194,232,231,227,230,209,196,193,150,190,123,190,95,198,50"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="220,44,237,68,257,89,280,104,307,117,302,118,277,109,253,93,233,72,219,50"/>
+<area shape="rect" id="Node000005" href="$classint16__t.html" title=" " alt="" coords="285,5,352,33"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="325,46,337,90,348,119,343,117,332,92,322,50"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="376,5,456,33"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="407,45,385,92,365,120,361,116,380,90,403,49"/>
+<area shape="rect" id="Node000007" href="$classbool.html" title=" " alt="" coords="494,5,543,33"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="512,46,501,72,483,93,453,107,410,120,409,115,451,103,480,89,496,69,508,49"/>
+<area shape="rect" id="Node000008" href="$classfloat.html" title=" " alt="" coords="444,118,494,146"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="443,154,403,184,357,209,292,233,290,228,355,205,400,179,438,156"/>
 </map>

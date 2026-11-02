@@ -1,11 +1,11 @@
 <map id="FilteredDelay&lt; effectsuite_t &gt;" name="FilteredDelay&lt; effectsuite_t &gt;">
-<area shape="rect" id="Node000001" title="Delay effect that filters the repeat delay." alt="" coords="664,48,884,76"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_delay_effect_base.html" title=" " alt="" coords="404,5,616,50"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="632,41,666,48,661,48,632,46"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_filter_effect_base.html" title=" " alt="" coords="406,75,614,119"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="629,79,661,77,667,77,630,84"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_effect_suite_base.html" title=" " alt="" coords="149,75,356,119"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="371,94,409,97,403,97,371,100"/>
-<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects." alt="" coords="5,83,101,111"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="116,94,151,97,145,97,116,100"/>
+<area shape="rect" id="Node000001" title="Delay effect that filters the repeat delay." alt="" coords="146,232,365,260"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_delay_effect_base.html" title="A Base class for delay based digital effects. Provides the basic methods that are shared amongst Flan..." alt="" coords="5,157,245,184"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="162,190,235,231,230,232,161,195"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_filter_effect_base.html" title="A Base class for filter based effects including methods for simple high, low and band pass filtering." alt="" coords="269,157,504,184"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="352,192,280,234,278,229,347,193"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_effect_suite_base.html" title="Base Class for Effects." alt="" coords="269,81,504,109"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="388,122,389,158,384,155,385,127"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects." alt="" coords="339,5,434,33"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="388,47,389,82,384,79,385,51"/>
 </map>

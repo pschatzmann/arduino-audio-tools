@@ -1,21 +1,21 @@
 <map id="QueueLockFree&lt; T &gt;" name="QueueLockFree&lt; T &gt;">
-<area shape="rect" id="Node000001" title="Lock&#45;free MPMC queue." alt="" coords="454,391,614,419"/>
-<area shape="rect" id="Node000002" href="$structaudio__tools_1_1_queue_lock_free_1_1_node.html" title=" " alt="" coords="433,128,488,156"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="470,169,533,391,528,390,466,173"/>
-<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="142,251,328,296"/>
-<area shape="poly" id="edge8_Node000006_Node000002" title=" " alt="" coords="434,164,420,182,406,206,400,218,389,229,361,246,330,258,328,253,358,242,386,225,396,215,402,204,416,178,430,168"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="392,5,473,33"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="430,46,432,76,437,103,451,128,445,127,432,105,426,76,428,51"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="505,5,640,33"/>
-<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="575,46,576,157,572,227,564,296,553,350,540,393,536,389,548,348,559,296,567,226,570,157,572,50"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="541,40,524,59,508,81,493,106,474,130,470,126,489,103,503,78,520,55,537,44"/>
-<area shape="rect" id="Node000005" href="$classsize__t.html" title=" " alt="" coords="618,260,677,288"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="640,300,625,337,601,369,567,393,565,388,597,365,620,334,636,304"/>
-<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="288,301,352,333,422,365,491,391,486,391,420,370,350,338,287,306"/>
-<area shape="rect" id="Node000007" href="$classint.html" title=" " alt="" coords="5,128,44,156"/>
-<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="28,169,40,200,57,225,76,239,97,250,144,265,139,268,95,255,73,244,54,229,35,202,28,174"/>
-<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="85,128,164,156"/>
-<area shape="poly" id="edge9_Node000006_Node000008" title=" " alt="" coords="128,169,137,199,152,226,181,250,176,251,148,229,132,201,127,174"/>
-<area shape="rect" id="Node000009" href="$classbool.html" title=" " alt="" coords="211,128,260,156"/>
-<area shape="poly" id="edge10_Node000006_Node000009" title=" " alt="" coords="237,169,238,252,233,250,234,174"/>
+<area shape="rect" id="Node000001" title="Lock&#45;free MPMC queue." alt="" coords="437,351,596,379"/>
+<area shape="rect" id="Node000002" href="$structaudio__tools_1_1_queue_lock_free_1_1_node.html" title=" " alt="" coords="420,115,475,143"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="457,155,515,351,510,350,453,159"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_vector.html" title=" " alt="" coords="134,225,320,269"/>
+<area shape="poly" id="edge8_Node000006_Node000002" title=" " alt="" coords="422,152,408,168,394,187,377,203,322,228,320,223,374,198,390,183,404,165,418,155"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="380,5,461,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="419,46,421,69,425,90,438,115,433,114,420,92,415,70,416,51"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="489,5,624,33"/>
+<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="558,47,557,147,544,270,534,315,523,353,519,349,529,314,539,269,551,147,555,51"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="526,41,508,59,459,117,456,113,504,55,521,44"/>
+<area shape="rect" id="Node000005" href="$classsize__t.html" title=" " alt="" coords="598,233,657,261"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="617,274,602,303,581,329,546,353,544,348,577,325,598,300,613,277"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="288,274,410,325,478,351,473,351,408,330,287,279"/>
+<area shape="rect" id="Node000007" href="$classint.html" title=" " alt="" coords="5,115,44,143"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="31,155,44,179,60,199,95,220,136,234,131,237,93,225,56,203,40,182,32,160"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="81,115,160,143"/>
+<area shape="poly" id="edge9_Node000006_Node000008" title=" " alt="" coords="126,155,136,179,148,199,178,224,172,225,144,202,131,181,125,161"/>
+<area shape="rect" id="Node000009" href="$classbool.html" title=" " alt="" coords="203,115,252,143"/>
+<area shape="poly" id="edge10_Node000006_Node000009" title=" " alt="" coords="229,156,230,225,225,223,226,160"/>
 </map>

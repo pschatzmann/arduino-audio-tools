@@ -1,17 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classaudio__tools_1_1_p_w_m_driver_base.html" title="Base Class for all PWM drivers." alt="" coords="5,161,132,189"/>
-<area shape="rect" id="Node000001" href="$classaudio__tools_1_1_p_w_m_complementary_driver_e_s_p32.html" title="Audio output to PWM pins for the ESP32. The ESP32 supports up to 16 channels." alt="" coords="180,5,419,33"/>
-<area shape="poly" id="edge863_Node000000_Node000001" title=" " alt="" coords="83,146,122,93,148,66,178,44,208,32,204,35,181,48,152,70,126,97,88,149"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_p_w_m_driver_a_v_r.html" title="Experimental: Audio output to PWM pins for the AVR. The AVR supports only up to 2 channels." alt="" coords="239,57,360,85"/>
-<area shape="poly" id="edge864_Node000000_Node000002" title=" " alt="" coords="95,150,133,121,179,95,241,78,237,82,181,100,136,125,99,153"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_p_w_m_driver_e_s_p32.html" title="Audio output to PWM pins for the ESP32. The ESP32 supports up to 16 channels." alt="" coords="232,109,366,137"/>
-<area shape="poly" id="edge865_Node000000_Node000003" title=" " alt="" coords="146,155,179,147,236,136,231,139,180,152,148,160"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_p_w_m_driver_m_b_e_d.html" title="Audio output to PWM pins for MBED based Arduino implementations." alt="" coords="233,161,366,189"/>
-<area shape="poly" id="edge866_Node000000_Node000004" title=" " alt="" coords="147,173,234,174,230,177,148,178"/>
-<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_p_w_m_driver_renesas.html" title="Audio output to PWM pins for Renesas based Arduino implementations." alt="" coords="225,213,374,241"/>
-<area shape="poly" id="edge867_Node000000_Node000005" title=" " alt="" coords="146,190,180,198,236,212,231,214,179,203,147,196"/>
-<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_p_w_m_driver_s_t_m32.html" title="Audio output to PWM pins for STM32. We use one timer to generate the sample rate and one timer for th..." alt="" coords="230,265,368,293"/>
-<area shape="poly" id="edge868_Node000000_Node000006" title=" " alt="" coords="97,196,136,225,181,250,232,268,227,269,179,255,133,229,97,202"/>
-<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_p_w_m_driver_zephyr.html" title="Audio output to PWM pins for Zephyr RTOS." alt="" coords="229,317,370,345"/>
-<area shape="poly" id="edge869_Node000000_Node000007" title=" " alt="" coords="86,200,126,254,152,280,181,302,204,313,231,323,226,323,202,318,178,307,148,284,122,257,85,205"/>
+<area shape="rect" id="Node000000" href="$class_r_t_s_p_client.html" title=" " alt="" coords="5,5,97,33"/>
+<area shape="rect" id="Node000001" href="$classaudiotools__rtsp_1_1_our_r_t_s_p_client.html" title=" " alt="" coords="145,5,259,33"/>
+<area shape="poly" id="edge693_Node000000_Node000001" title=" " alt="" coords="112,17,147,19,142,19,112,22"/>
 </map>

@@ -1,10 +1,10 @@
 <map id="ConverterAutoCenter" name="ConverterAutoCenter">
-<area shape="rect" id="Node000001" title="Makes sure that the avg of the signal is set to 0." alt="" coords="64,128,222,156"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_converter.html" title="Abstract Base class for Converters A converter is processing the data in the indicated array." alt="" coords="5,5,123,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="56,46,55,77,57,90,62,103,74,116,92,127,86,128,71,120,58,106,52,92,49,77,54,50"/>
-<area shape="poly" id="edge4_Node000001_Node000002" title=" " alt="" coords="65,46,72,76,84,103,96,116,113,128,108,128,93,120,79,106,67,77,63,51"/>
-<area shape="rect" id="Node000003" href="$classint.html" title=" " alt="" coords="182,5,221,33"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="197,47,174,106,157,130,153,126,170,103,192,49"/>
-<area shape="rect" id="Node000004" href="$classbool.html" title=" " alt="" coords="322,5,371,33"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="344,46,334,79,314,106,276,122,223,134,222,128,275,117,310,102,329,77,340,50"/>
+<area shape="rect" id="Node000001" title="Makes sure that the avg of the signal is set to 0." alt="" coords="62,115,220,143"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_base_converter.html" title="Abstract Base class for Converters A converter is processing the data in the indicated array." alt="" coords="5,5,123,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="56,46,56,70,62,90,74,103,91,114,86,115,71,107,58,92,51,71,54,51"/>
+<area shape="poly" id="edge4_Node000001_Node000002" title=" " alt="" coords="67,46,74,69,84,89,97,102,113,115,108,115,93,106,80,93,69,71,65,51"/>
+<area shape="rect" id="Node000003" href="$classint.html" title=" " alt="" coords="178,5,217,33"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="190,46,170,92,154,117,150,112,166,90,186,49"/>
+<area shape="rect" id="Node000004" href="$classbool.html" title=" " alt="" coords="314,5,363,33"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="332,46,320,72,302,93,263,114,221,125,220,120,261,109,298,89,316,69,328,49"/>
 </map>

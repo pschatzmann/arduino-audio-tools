@@ -1,20 +1,20 @@
 <map id="VariableSpeedRingBuffer&lt; T &gt;" name="VariableSpeedRingBuffer&lt; T &gt;">
-<area shape="rect" id="Node000001" title="Optimized buffer implementation for pitch shifting with interpolation." alt="" coords="483,271,703,299"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="5,138,173,166"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="111,175,152,213,177,231,203,245,254,258,324,267,485,280,480,281,324,272,253,263,201,249,174,235,149,217,109,180"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="407,138,544,166"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="499,175,584,271,579,270,496,180"/>
-<area shape="rect" id="Node000004" href="$classint.html" title=" " alt="" coords="224,5,263,33"/>
-<area shape="poly" id="edge7_Node000001_Node000004" title=" " alt="" coords="243,46,247,76,254,103,266,127,279,144,317,173,373,206,432,233,541,270,536,270,430,238,370,211,314,178,275,147,262,130,249,105,241,77,241,51"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="253,45,269,76,292,102,319,119,348,130,409,146,404,147,346,136,316,123,289,106,265,79,252,50"/>
-<area shape="rect" id="Node000005" href="$classint16__t.html" title=" " alt="" coords="709,5,776,33"/>
-<area shape="poly" id="edge9_Node000001_Node000005" title=" " alt="" coords="757,45,761,56,767,91,769,119,762,147,746,177,719,209,687,236,624,273,622,268,684,232,715,205,741,174,757,145,763,119,762,92,756,58,754,50"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="721,42,681,77,634,107,587,126,540,140,539,135,585,121,632,102,678,73,716,44"/>
-<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="325,5,405,33"/>
-<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="365,46,371,76,383,103,404,122,432,138,426,138,401,126,379,106,366,78,363,51"/>
-<area shape="rect" id="Node000007" href="$classbool.html" title=" " alt="" coords="536,5,586,33"/>
-<area shape="poly" id="edge10_Node000001_Node000007" title=" " alt="" coords="601,31,617,41,630,56,642,85,647,115,646,147,640,178,621,233,602,273,599,269,616,231,635,176,640,146,641,116,637,86,625,58,614,45,600,36"/>
-<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="519,29,498,41,479,59,471,78,469,99,474,139,469,137,464,100,466,77,474,55,495,36,524,27"/>
-<area shape="rect" id="Node000008" href="$classfloat.html" title=" " alt="" coords="881,138,932,166"/>
-<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="889,177,851,216,828,234,802,249,754,267,704,278,703,273,752,262,800,245,825,230,847,212,884,179"/>
+<area shape="rect" id="Node000001" title="Optimized buffer implementation for pitch shifting with interpolation." alt="" coords="435,231,655,259"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_base_buffer.html" title="Shared functionality of all buffers." alt="" coords="5,118,136,146"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="93,154,127,182,166,205,214,217,282,226,437,239,432,240,282,231,213,222,164,209,124,186,92,159"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_vector.html" title=" " alt="" coords="362,118,499,146"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="456,154,534,231,529,230,453,159"/>
+<area shape="rect" id="Node000004" href="$classint.html" title=" " alt="" coords="187,5,226,33"/>
+<area shape="poly" id="edge7_Node000001_Node000004" title=" " alt="" coords="210,46,216,69,224,90,245,123,276,147,326,175,380,198,483,230,478,230,379,203,324,180,273,151,241,126,219,92,211,71,208,51"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="220,44,238,69,259,89,283,102,309,112,364,126,359,127,308,117,281,107,256,93,234,72,219,50"/>
+<area shape="rect" id="Node000005" href="$classint16__t.html" title=" " alt="" coords="659,5,725,33"/>
+<area shape="poly" id="edge9_Node000001_Node000005" title=" " alt="" coords="700,46,704,98,700,125,689,150,666,178,637,202,580,233,578,228,634,197,662,175,684,148,694,124,699,97,696,50"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="666,41,628,70,585,93,543,109,500,120,499,115,541,104,583,89,625,65,661,44"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="284,5,364,33"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="327,46,334,70,345,89,362,104,384,118,379,118,359,109,340,93,329,72,324,51"/>
+<area shape="rect" id="Node000007" href="$classbool.html" title=" " alt="" coords="488,5,538,33"/>
+<area shape="poly" id="edge10_Node000001_Node000007" title=" " alt="" coords="552,31,569,42,581,56,590,79,594,104,588,154,572,199,555,233,551,229,567,197,583,153,589,104,585,80,576,58,565,46,552,36"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="471,30,452,42,434,59,428,73,426,89,429,119,425,117,421,89,423,71,429,55,449,37,476,27"/>
+<area shape="rect" id="Node000008" href="$classfloat.html" title=" " alt="" coords="824,118,874,146"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="827,155,791,185,749,209,703,225,656,235,655,230,702,220,747,205,788,181,822,157"/>
 </map>

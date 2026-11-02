@@ -1,8 +1,7 @@
 <map id="LowPassFilter&lt; T &gt;" name="LowPassFilter&lt; T &gt;">
-<area shape="rect" id="Node000001" title="Second&#45;order low&#45;pass filter (BiQuad DF2). Attenuates frequencies above the cutoff frequency...." alt="" coords="8,157,156,184"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_bi_quad_d_f2.html" title=" " alt="" coords="5,81,159,109"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="84,123,85,157,79,155,80,126"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_filter.html" title=" " alt="" coords="25,5,139,33"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="74,46,78,81,72,80,72,51"/>
-<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="92,46,92,81,86,80,90,51"/>
+<area shape="rect" id="Node000001" title="Second&#45;order low&#45;pass filter (BiQuad DF2). Attenuates frequencies above the cutoff frequency...." alt="" coords="5,157,153,184"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_bi_quad_d_f2.html" title="Second&#45;order IIR filter in Direct Form II. Uses a single delay line, requiring less memory than DF1...." alt="" coords="13,81,145,109"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="81,123,82,157,76,155,77,126"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_filter.html" title="Abstract filter interface definition. Subclasses implement process() to transform audio samples one a..." alt="" coords="33,5,125,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="80,46,82,81,76,80,78,51"/>
 </map>

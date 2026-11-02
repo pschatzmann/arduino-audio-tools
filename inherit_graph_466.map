@@ -1,0 +1,15 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$classaudio__tools_1_1_volume_control.html" title="Abstract class for handling of the linear input volume to determine the multiplication factor which s..." alt="" coords="5,136,123,164"/>
+<area shape="rect" id="Node000001" href="$classaudio__tools_1_1_cached_volume_control.html" title="In order to optimize the processing time we cache the last input &amp; factor and recalculate the new fac..." alt="" coords="185,5,350,33"/>
+<area shape="poly" id="edge744_Node000000_Node000001" title=" " alt="" coords="83,122,120,81,144,61,169,44,200,32,196,35,172,48,147,65,124,85,88,125"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_callback_volume_control.html" title="Provide the volume function as callback method: This is easy to use e.g together with a lamda functio..." alt="" coords="181,57,354,85"/>
+<area shape="poly" id="edge745_Node000000_Node000002" title=" " alt="" coords="103,126,170,95,210,84,206,87,172,100,106,131"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_exponential_volume_control.html" title="Simple exponentional volume control using the formula pow(2.0, input) &#45; 1.0;." alt="" coords="171,109,365,137"/>
+<area shape="poly" id="edge746_Node000000_Node000003" title=" " alt="" coords="137,138,172,135,168,137,139,143"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_linear_volume_control.html" title="The simplest possible implementation of a VolumeControl: The input = output which describes a linear ..." alt="" coords="189,161,346,189"/>
+<area shape="poly" id="edge747_Node000000_Node000004" title=" " alt="" coords="137,156,191,164,186,167,138,162"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_logarithmic_volume_control.html" title="Parametric Logarithmic volume control. Using the formula pow(b,input) * a &#45; a, where b is b = pow(((1..." alt="" coords="171,213,365,241"/>
+<area shape="poly" id="edge748_Node000000_Node000005" title=" " alt="" coords="105,168,172,198,211,212,206,213,170,203,105,174"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_simulated_audio_pot.html" title="Simple simulated audio pot volume control inspired by https://eepower.com/resistor&#45;guide/resistor&#45;typ..." alt="" coords="195,265,340,293"/>
+<area shape="poly" id="edge749_Node000000_Node000006" title=" " alt="" coords="86,173,124,214,172,250,201,265,196,265,169,255,121,217,85,178"/>
+</map>

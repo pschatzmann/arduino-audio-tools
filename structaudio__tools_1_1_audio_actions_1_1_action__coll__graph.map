@@ -1,17 +1,17 @@
 <map id="AudioActions::Action" name="AudioActions::Action">
-<area shape="rect" id="Node000001" title="Action definition per pin." alt="" coords="398,240,553,268"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="52,27,158,54"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="172,29,221,27,274,32,327,44,375,67,397,86,416,107,445,156,464,203,474,241,468,239,458,205,440,158,412,110,393,89,372,72,325,49,273,37,221,33,175,34"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="5,97,205,141"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="219,116,298,127,338,138,375,153,404,171,430,194,467,240,462,239,426,198,401,176,372,157,336,143,297,132,221,121"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="75,184,135,212"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="150,198,254,207,374,224,428,239,423,240,373,230,253,212,152,203"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="49,240,161,268"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="176,251,399,252,396,256,177,256"/>
-<area shape="rect" id="Node000006" title=" " alt="" coords="57,296,153,324"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="168,305,265,297,373,281,435,267,431,269,374,287,266,302,169,310"/>
-<area shape="rect" id="Node000007" href="$classbool.html" title=" " alt="" coords="80,396,130,424"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="145,411,194,413,252,410,314,399,344,389,372,376,404,352,431,322,465,270,469,266,435,325,408,356,375,380,346,394,316,404,253,415,194,418,146,417"/>
-<area shape="rect" id="Node000008" href="$classint.html" title=" " alt="" coords="86,475,124,502"/>
-<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="140,493,189,499,250,500,314,490,344,480,372,464,396,444,416,419,445,362,462,308,470,270,474,266,467,309,449,364,420,422,400,447,375,469,347,485,315,496,250,506,189,505,139,498"/>
+<area shape="rect" id="Node000001" title="Action definition per pin." alt="" coords="394,195,549,222"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="52,16,158,44"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="172,20,220,19,271,23,323,35,371,57,407,88,435,126,455,164,468,195,463,193,451,166,431,129,403,91,368,61,321,40,270,29,220,24,175,25"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,73,205,117"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="220,95,296,106,371,129,397,142,421,159,459,194,454,194,418,164,394,147,369,134,295,111,221,100"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="75,143,135,170"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="150,159,370,187,398,193,392,195,369,192,151,164"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="49,195,161,222"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="176,206,395,206,392,210,177,211"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="57,247,153,274"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="168,253,263,243,369,228,413,222,408,224,370,233,264,248,169,258"/>
+<area shape="rect" id="Node000007" href="$classbool.html" title=" " alt="" coords="80,324,130,352"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="145,338,192,338,250,334,310,323,369,302,397,285,422,263,458,224,462,221,426,267,400,289,371,307,312,328,250,339,193,343,146,343"/>
+<area shape="rect" id="Node000008" href="$classint.html" title=" " alt="" coords="86,389,124,417"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="140,406,188,411,248,410,310,400,340,389,368,375,388,359,406,340,434,297,453,255,464,225,468,221,458,257,438,300,410,344,392,363,371,379,342,394,312,405,248,415,188,416,140,411"/>
 </map>

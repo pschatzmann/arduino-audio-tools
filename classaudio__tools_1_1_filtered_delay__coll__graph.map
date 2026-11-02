@@ -1,22 +1,22 @@
 <map id="FilteredDelay&lt; effectsuite_t &gt;" name="FilteredDelay&lt; effectsuite_t &gt;">
-<area shape="rect" id="Node000001" title="Delay effect that filters the repeat delay." alt="" coords="1166,305,1385,333"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_delay_effect_base.html" title=" " alt="" coords="904,408,1117,452"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1079,398,1237,334,1243,333,1081,404"/>
-<area shape="rect" id="Node000003" href="$classfloat.html" title=" " alt="" coords="566,305,617,333"/>
-<area shape="poly" id="edge12_Node000001_Node000003" title=" " alt="" coords="632,317,1168,318,1163,321,632,322"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="620,341,665,376,692,392,720,405,766,418,813,426,906,435,901,435,812,432,764,423,718,410,690,397,662,381,618,346"/>
-<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_filter_effect_base.html" title=" " alt="" coords="907,140,1114,184"/>
-<area shape="poly" id="edge10_Node000006_Node000003" title=" " alt="" coords="632,312,780,293,879,277,902,262,930,237,985,186,990,183,934,241,905,266,881,282,781,298,633,317"/>
-<area shape="rect" id="Node000004" href="$classint.html" title=" " alt="" coords="11,249,49,277"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="63,275,169,320,235,344,302,364,461,404,588,424,716,432,880,431,906,433,901,434,880,437,716,437,587,430,460,409,300,369,233,349,167,325,64,281"/>
-<area shape="poly" id="edge11_Node000006_Node000004" title=" " alt="" coords="61,239,78,230,251,165,323,144,391,129,534,108,719,89,800,79,836,80,881,89,935,110,981,139,976,139,932,115,880,94,836,85,801,84,720,94,535,113,392,134,324,149,252,170,80,235,65,242"/>
-<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects." alt="" coords="182,249,277,277"/>
-<area shape="poly" id="edge9_Node000008_Node000004" title=" " alt="" coords="64,261,183,261,180,265,66,266"/>
-<area shape="rect" id="Node000005" href="$classbool.html" title=" " alt="" coords="5,505,55,533"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="70,518,205,521,406,518,641,503,762,489,880,469,945,453,950,452,881,474,763,494,641,508,406,523,205,526,70,524"/>
-<area shape="poly" id="edge8_Node000008_Node000005" title=" " alt="" coords="50,491,215,276,219,279,54,494"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="1064,190,1253,305,1248,305,1062,195"/>
-<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_effect_suite_base.html" title=" " alt="" coords="488,169,695,214"/>
-<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="631,157,672,132,719,113,763,103,799,101,881,113,922,123,962,139,956,139,920,128,880,118,799,106,764,108,720,118,674,137,634,162"/>
-<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="291,248,489,210,485,214,293,253"/>
+<area shape="rect" id="Node000001" title="Delay effect that filters the repeat delay." alt="" coords="258,537,477,564"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_delay_effect_base.html" title="A Base class for delay based digital effects. Provides the basic methods that are shared amongst Flan..." alt="" coords="49,456,288,484"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="217,488,337,536,332,537,216,493"/>
+<area shape="rect" id="Node000003" href="$classfloat.html" title=" " alt="" coords="252,259,302,286"/>
+<area shape="poly" id="edge12_Node000001_Node000003" title=" " alt="" coords="316,287,338,298,351,309,359,328,365,355,371,421,370,537,366,535,366,421,360,356,354,330,347,312,335,302,316,292"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="234,284,213,295,194,312,175,348,168,389,167,427,169,457,164,455,161,427,162,388,170,347,190,309,211,291,239,280"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_filter_effect_base.html" title="A Base class for filter based effects including methods for simple high, low and band pass filtering." alt="" coords="481,456,715,484"/>
+<area shape="poly" id="edge10_Node000006_Node000003" title=" " alt="" coords="317,284,357,291,372,297,388,308,399,324,405,340,406,370,408,400,413,414,424,427,455,442,504,456,499,456,453,447,421,431,409,416,403,401,401,371,400,341,395,327,384,312,370,301,355,296,318,289"/>
+<area shape="rect" id="Node000004" href="$classint.html" title=" " alt="" coords="317,5,356,33"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="303,43,251,88,223,118,200,151,182,192,169,236,162,281,160,326,162,404,169,457,164,456,157,404,154,326,157,281,164,235,177,190,195,148,219,115,247,85,306,39"/>
+<area shape="poly" id="edge11_Node000006_Node000004" title=" " alt="" coords="369,34,402,55,461,103,505,144,541,191,575,258,592,313,601,370,601,457,597,455,595,371,587,315,570,260,536,194,501,147,457,107,399,59,370,39"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects." alt="" coords="289,98,384,126"/>
+<area shape="poly" id="edge9_Node000008_Node000004" title=" " alt="" coords="338,46,339,98,334,97,336,51"/>
+<area shape="rect" id="Node000005" href="$classbool.html" title=" " alt="" coords="5,5,55,33"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="31,46,40,119,56,216,84,324,105,378,130,428,154,456,148,456,125,431,100,380,79,326,51,217,35,119,31,51"/>
+<area shape="poly" id="edge8_Node000008_Node000005" title=" " alt="" coords="69,29,294,96,290,99,70,35"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="547,489,407,539,406,534,542,490"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_effect_suite_base.html" title="Base Class for Effects." alt="" coords="326,259,560,286"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="495,291,520,309,594,457,589,456,516,312,495,296"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="355,136,437,258,432,258,353,141"/>
 </map>

@@ -1,0 +1,105 @@
+<map id="AudioInfo" name="AudioInfo">
+<area shape="rect" id="Node000001" title="Basic Audio information which drives e.g. I2S." alt="" coords="5,1140,89,1168"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_analog_config_e_s_p32.html" title="ESP32 specific configuration for i2s input via adc. The default input pin is GPIO34...." alt="" coords="175,5,322,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="46,1124,50,897,64,554,75,380,90,226,110,109,121,69,135,44,153,30,176,21,173,25,155,34,139,48,126,71,115,110,95,227,80,380,69,554,56,897,51,1124"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_analog_config_e_s_p32_v1.html" title="ESP32 specific configuration for i2s input via adc using the adc_continuous API." alt="" coords="167,57,331,85"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="46,1124,51,906,65,580,77,414,92,269,111,158,122,120,135,96,149,84,168,76,165,80,152,88,139,99,127,122,116,159,97,269,82,415,71,580,57,906,51,1124"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_analog_config_std.html" title="Generic ADC and DAC configuration." alt="" coords="185,109,313,137"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="46,1124,52,916,67,606,78,449,93,311,112,206,123,170,135,148,157,131,186,123,183,127,160,136,139,152,127,173,117,208,99,312,84,450,72,606,58,916,52,1124"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_analog_config_zephyr.html" title="Generic ADC and DAC configuration." alt="" coords="172,161,326,189"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="46,1124,53,925,69,632,80,484,95,354,113,255,123,221,135,200,151,186,173,178,170,182,154,191,139,204,128,223,118,256,100,355,85,485,74,633,58,926,52,1124"/>
+<area shape="rect" id="Node000006" href="$structaudio__tools_1_1_audio_f_f_t_config.html" title="Configuration for AudioFFT. If there are more then 1 channel the channel_used is defining which chann..." alt="" coords="188,213,310,241"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="47,1124,54,935,70,659,82,520,96,397,114,304,124,272,135,252,159,235,189,226,186,230,161,239,139,256,129,274,119,305,102,398,87,520,75,659,59,936,52,1125"/>
+<area shape="rect" id="Node000007" href="$structaudio__tools_1_1_audio_info_format.html" title="AudioInfo extended with a WAVEFORMATEX&#45;style codec tag (the &quot;wav code&quot;): identifies the codec (PCM,..." alt="" coords="184,265,314,293"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="47,1124,55,945,72,685,84,555,98,440,115,353,124,323,135,304,157,288,185,279,182,283,159,292,139,308,129,325,120,354,103,441,89,555,77,685,60,945,52,1124"/>
+<area shape="rect" id="Node000008" href="$structaudio__tools_1_1_audio_lo_ra_config.html" title="Configuration for AudioLoRa." alt="" coords="183,317,314,345"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="47,1125,56,956,73,712,85,590,99,483,116,401,125,374,135,356,156,340,185,331,181,336,159,344,139,360,130,376,121,403,105,484,91,591,79,713,61,956,52,1125"/>
+<area shape="rect" id="Node000009" href="$structaudio__tools_1_1_audio_m_p34_d_t05_config.html" title="Config for MP34DT05 Microphone. Supported sample rates 16000, 41667, Supported bits_per_sample only 1..." alt="" coords="164,369,334,397"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="47,1124,57,965,75,738,101,526,117,450,125,424,135,408,148,397,165,389,162,394,151,401,139,412,130,426,122,451,106,526,80,738,62,965,53,1124"/>
+<area shape="rect" id="Node000010" href="$structaudio__tools_1_1_audio_server_ex_config.html" title="Config information for AudioServerEx." alt="" coords="170,421,328,449"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="45,1124,46,984,55,785,66,682,82,589,104,512,118,482,135,459,151,446,172,438,168,442,153,450,139,462,123,484,109,514,87,590,71,683,61,785,51,984,50,1124"/>
+<area shape="rect" id="Node000011" href="$structaudio__tools_1_1_automatic_gain_control_stream_config.html" title="Configuration for AutomaticGainControlStream." alt="" coords="143,473,355,518"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="46,1124,49,997,61,819,72,728,88,645,108,576,121,549,135,528,151,516,148,520,139,532,125,552,113,578,93,646,78,729,67,820,54,997,51,1124"/>
+<area shape="rect" id="Node000012" href="$structaudio__tools_1_1_config_equalizer3_bands.html" title="Configuration for 3 Band Equalizer." alt="" coords="164,541,334,569"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="46,1124,50,1006,63,843,74,760,89,685,109,623,121,599,135,580,165,562,162,566,139,584,126,601,114,625,95,686,79,761,68,844,56,1006,51,1124"/>
+<area shape="rect" id="Node000013" href="$structaudio__tools_1_1_d_s_f_metadata.html" title="Metadata structure for DSF (DSD Stream File) format." alt="" coords="194,593,304,621"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="47,1125,52,1017,66,869,78,795,92,727,111,671,135,632,162,614,196,606,192,610,164,619,139,636,116,673,98,728,83,796,72,870,57,1017,52,1125"/>
+<area shape="rect" id="Node000014" href="$structaudio__tools_1_1_f_f_t_effect_config.html" title="Common configuration for FFT effects." alt="" coords="188,645,310,673"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="47,1125,54,1026,70,895,81,828,96,768,113,718,135,684,159,667,189,659,185,663,161,672,139,688,118,720,101,769,86,829,75,895,60,1027,52,1125"/>
+<area shape="rect" id="Node000017" href="$structaudio__tools_1_1_goertzel_config.html" title="Configuration for Goertzel algorithm detectors." alt="" coords="190,697,308,725"/>
+<area shape="poly" id="edge16_Node000001_Node000017" title=" " alt="" coords="48,1124,57,1035,73,919,99,809,115,766,135,736,160,719,191,711,188,715,162,724,139,740,120,768,104,810,79,920,62,1036,53,1125"/>
+<area shape="rect" id="Node000018" href="$classaudio__tools_1_1_i2_s_config_e_s_p32.html" title="Configuration for ESP32 legacy i2s." alt="" coords="188,749,310,777"/>
+<area shape="poly" id="edge17_Node000001_Node000018" title=" " alt="" coords="49,1124,59,1046,77,945,102,850,117,813,135,788,159,772,189,764,186,768,161,776,139,792,122,816,107,852,82,946,65,1046,54,1125"/>
+<area shape="rect" id="Node000022" href="$classaudio__tools_1_1_i2_s_config_e_s_p32_v1.html" title="Configuration for ESP32 i2s for IDF &gt; 5.0." alt="" coords="179,801,318,829"/>
+<area shape="poly" id="edge21_Node000001_Node000022" title=" " alt="" coords="45,1124,47,1065,59,988,71,948,87,909,108,872,135,840,155,826,180,818,177,822,157,831,138,844,112,875,91,911,76,950,65,989,53,1065,50,1125"/>
+<area shape="rect" id="Node000023" href="$classaudio__tools_1_1_i2_s_config_std.html" title="Configuration for i2s." alt="" coords="197,853,300,881"/>
+<area shape="poly" id="edge22_Node000001_Node000023" title=" " alt="" coords="47,1124,53,1074,67,1011,93,947,112,918,135,892,164,875,198,867,195,871,166,879,138,896,116,921,98,949,72,1013,58,1074,52,1124"/>
+<area shape="rect" id="Node000024" href="$classaudio__tools_1_1_i2_s_config_zephyr.html" title="Configuration for i2s." alt="" coords="185,905,313,933"/>
+<area shape="poly" id="edge23_Node000001_Node000024" title=" " alt="" coords="50,1125,58,1084,74,1035,99,986,115,963,135,944,158,930,186,922,182,926,160,935,138,948,120,967,104,989,79,1037,64,1085,55,1125"/>
+<area shape="rect" id="Node000025" href="$classaudio__tools_1_1_mini_audio_config.html" title="Configuration for MiniAudio." alt="" coords="185,957,312,985"/>
+<area shape="poly" id="edge24_Node000001_Node000025" title=" " alt="" coords="54,1125,66,1094,83,1059,106,1025,135,996,159,983,187,975,183,979,161,987,138,1000,110,1028,87,1062,71,1096,59,1126"/>
+<area shape="rect" id="Node000026" href="$structaudio__tools_1_1_mozzi_config.html" title=" " alt="" coords="199,1009,299,1037"/>
+<area shape="poly" id="edge25_Node000001_Node000026" title=" " alt="" coords="62,1126,93,1085,113,1065,135,1048,166,1034,200,1026,196,1030,168,1039,138,1052,116,1069,97,1088,67,1128"/>
+<area shape="rect" id="Node000027" href="$structaudio__tools_1_1_n_r_f24_config.html" title="NRF24L01 Audio Configuration optimized for low&#45;latency audio streaming. Uses the RF24 library from TM..." alt="" coords="196,1061,302,1089"/>
+<area shape="poly" id="edge26_Node000001_Node000027" title=" " alt="" coords="79,1130,136,1099,197,1082,194,1086,138,1104,84,1133"/>
+<area shape="rect" id="Node000028" href="$structaudio__tools_1_1_opus_multi_stream_settings.html" title="Settings for Opus MultiStream Decoder." alt="" coords="155,1113,342,1141"/>
+<area shape="poly" id="edge27_Node000001_Node000028" title=" " alt="" coords="102,1144,156,1138,153,1142,106,1148"/>
+<area shape="rect" id="Node000030" href="$structaudio__tools_1_1_opus_settings.html" title="Setting for Opus Decoder." alt="" coords="195,1165,302,1193"/>
+<area shape="poly" id="edge29_Node000001_Node000030" title=" " alt="" coords="103,1159,197,1171,193,1174,106,1163"/>
+<area shape="rect" id="Node000032" href="$structaudio__tools_1_1_p_w_m_config_a_v_r.html" title="Configuration data for PWM audio output." alt="" coords="188,1217,310,1245"/>
+<area shape="poly" id="edge31_Node000001_Node000032" title=" " alt="" coords="81,1174,138,1202,190,1219,186,1222,136,1207,83,1178"/>
+<area shape="rect" id="Node000033" href="$structaudio__tools_1_1_p_w_m_config_s_t_d.html" title="Configuration data for PWM audio output." alt="" coords="188,1269,310,1297"/>
+<area shape="poly" id="edge32_Node000001_Node000033" title=" " alt="" coords="64,1178,97,1219,116,1238,138,1254,162,1266,190,1274,186,1277,161,1271,135,1259,113,1242,93,1222,65,1183"/>
+<area shape="rect" id="Node000034" href="$structaudio__tools_1_1_p_w_m_config_zephyr.html" title="Configuration data for PWM audio output. Define the pins as follows: config.pins = {PWM_PIN(pwm_led_0..." alt="" coords="178,1321,320,1349"/>
+<area shape="poly" id="edge33_Node000001_Node000034" title=" " alt="" coords="56,1180,88,1245,110,1278,138,1306,157,1317,180,1326,176,1329,155,1322,135,1311,106,1282,83,1248,57,1185"/>
+<area shape="rect" id="Node000035" href="$structaudio__tools_1_1_pitch_shift_info.html" title="Configuration for PitchShiftOutput." alt="" coords="195,1373,302,1401"/>
+<area shape="poly" id="edge34_Node000001_Node000035" title=" " alt="" coords="52,1180,64,1223,79,1270,104,1318,120,1340,138,1358,165,1374,197,1383,193,1386,163,1379,135,1363,116,1343,99,1321,75,1272,59,1224,53,1186"/>
+<area shape="rect" id="Node000036" href="$classaudio__tools_1_1_port_audio_config.html" title="PortAudio information." alt="" coords="186,1425,312,1453"/>
+<area shape="poly" id="edge35_Node000001_Node000036" title=" " alt="" coords="49,1181,58,1233,72,1294,98,1357,116,1386,138,1410,161,1425,188,1434,184,1437,159,1430,135,1415,112,1389,93,1360,67,1296,53,1234,50,1186"/>
+<area shape="rect" id="Node000037" href="$classaudio__tools_1_1_progress_stream_info.html" title="Configuration for ProgressStream." alt="" coords="174,1477,324,1505"/>
+<area shape="poly" id="edge36_Node000001_Node000037" title=" " alt="" coords="48,1180,53,1242,65,1318,76,1357,91,1396,112,1431,138,1463,155,1475,176,1484,172,1486,153,1479,135,1466,108,1434,87,1398,71,1359,60,1319,48,1243,48,1186"/>
+<area shape="rect" id="Node000038" href="$classaudio__tools_1_1_r2_r_config.html" title="R2R configuration." alt="" coords="205,1529,293,1557"/>
+<area shape="poly" id="edge37_Node000001_Node000038" title=" " alt="" coords="51,1180,65,1261,82,1361,107,1454,122,1490,139,1515,153,1525,169,1533,207,1542,202,1545,168,1538,150,1530,135,1518,117,1493,102,1456,77,1362,59,1262,52,1186"/>
+<area shape="rect" id="Node000039" href="$structaudio__tools_1_1_resample_config.html" title="Optional Configuration object. The critical information is the channels and the step_size...." alt="" coords="185,1581,312,1609"/>
+<area shape="poly" id="edge38_Node000001_Node000039" title=" " alt="" coords="51,1181,62,1271,79,1387,104,1496,120,1538,139,1567,160,1582,187,1591,183,1594,158,1586,135,1570,115,1541,99,1498,73,1387,57,1272,51,1186"/>
+<area shape="rect" id="Node000040" href="$structaudio__tools_1_1_s_p_d_i_f_config.html" title="SPDIF configuration." alt="" coords="199,1633,299,1661"/>
+<area shape="poly" id="edge39_Node000001_Node000040" title=" " alt="" coords="50,1181,60,1281,75,1412,87,1478,101,1538,118,1586,139,1619,151,1629,166,1636,201,1645,196,1648,164,1641,149,1633,135,1622,113,1588,96,1539,81,1479,70,1413,54,1282,50,1186"/>
+<area shape="rect" id="Node000041" href="$structaudio__tools_1_1_s_p_i_audio_master_config.html" title="Configuration for SPIAudioMaster." alt="" coords="167,1685,331,1713"/>
+<area shape="poly" id="edge40_Node000001_Node000041" title=" " alt="" coords="49,1181,58,1291,72,1438,83,1512,98,1579,116,1634,139,1671,152,1681,169,1690,164,1693,149,1686,135,1674,111,1636,93,1580,78,1513,66,1438,52,1291,49,1186"/>
+<area shape="rect" id="Node000042" href="$structaudio__tools_1_1_s_p_i_audio_slave_config.html" title="Configuration for SPIAudioSlave." alt="" coords="171,1737,326,1765"/>
+<area shape="poly" id="edge41_Node000001_Node000042" title=" " alt="" coords="49,1181,56,1301,68,1463,80,1545,95,1620,114,1682,126,1705,139,1723,154,1735,173,1744,168,1746,151,1739,135,1726,121,1708,109,1684,89,1622,74,1546,63,1464,50,1301,49,1186"/>
+<area shape="rect" id="Node000043" href="$structaudio__tools_1_1_s_p_i_reg_audio_master_config.html" title="Configuration for SPIRegAudioMaster." alt="" coords="154,1789,344,1817"/>
+<area shape="poly" id="edge42_Node000001_Node000043" title=" " alt="" coords="48,1180,54,1310,65,1488,76,1579,92,1661,112,1729,125,1755,139,1775,156,1789,151,1791,135,1778,120,1758,107,1731,86,1663,71,1580,60,1489,48,1310,48,1186"/>
+<area shape="rect" id="Node000044" href="$structaudio__tools_1_1_s_p_i_reg_audio_slave_config.html" title="Configuration for SPIRegAudioSlave." alt="" coords="159,1841,339,1869"/>
+<area shape="poly" id="edge43_Node000001_Node000044" title=" " alt="" coords="48,1180,52,1319,62,1513,73,1612,88,1702,110,1777,124,1805,139,1827,161,1844,156,1845,135,1830,119,1808,105,1779,83,1704,67,1613,57,1513,46,1319,48,1186"/>
+<area shape="rect" id="Node000045" href="$structaudio__tools_1_1_throttle_config.html" title="Configure Throttle setting." alt="" coords="192,1893,306,1921"/>
+<area shape="poly" id="edge44_Node000001_Node000045" title=" " alt="" coords="50,1180,63,1339,81,1560,107,1767,122,1840,130,1864,139,1879,163,1896,194,1905,189,1908,161,1901,135,1882,126,1866,117,1841,102,1768,76,1561,57,1339,50,1186"/>
+<area shape="rect" id="Node000046" href="$structaudio__tools_1_1_timer_callback_audio_stream_info.html" title="TimerCallbackAudioStream Configuration." alt="" coords="137,1945,361,1973"/>
+<area shape="poly" id="edge45_Node000001_Node000046" title=" " alt="" coords="50,1181,62,1349,79,1587,91,1706,105,1810,121,1889,130,1915,139,1931,154,1944,149,1946,135,1934,125,1917,116,1890,100,1811,86,1706,74,1588,56,1350,50,1186"/>
+<area shape="rect" id="Node000047" href="$structaudio__tools_1_1_u_s_b_audio_config.html" title="Configuration for USB Audio (inherits sample_rate / channels / bits_per_sample from AudioInfo)." alt="" coords="186,1997,312,2025"/>
+<area shape="poly" id="edge46_Node000001_Node000047" title=" " alt="" coords="50,1180,61,1359,78,1613,90,1741,104,1853,120,1937,129,1966,139,1983,160,1998,188,2008,183,2011,158,2003,135,1986,124,1968,115,1939,98,1853,84,1741,72,1614,55,1359,49,1186"/>
+<area shape="rect" id="Node000048" href="$classaudio__tools_1_1_v_b_a_n_config.html" title=" " alt="" coords="199,2049,298,2077"/>
+<area shape="poly" id="edge47_Node000001_Node000048" title=" " alt="" coords="49,1180,60,1369,76,1640,88,1776,102,1895,119,1986,129,2017,139,2035,151,2046,166,2053,201,2063,197,2065,164,2058,148,2050,135,2038,124,2019,114,1988,97,1896,82,1776,71,1640,54,1369,49,1186"/>
+<area shape="rect" id="Node000049" href="$classaudio__tools_1_1_v_s1053_config.html" title="Configuration for VS1053Stream." alt="" coords="193,2101,304,2129"/>
+<area shape="poly" id="edge48_Node000001_Node000049" title=" " alt="" coords="49,1180,59,1378,74,1666,86,1811,101,1938,118,2035,128,2067,139,2087,163,2104,195,2114,190,2116,161,2109,135,2090,123,2069,113,2036,95,1939,81,1811,69,1666,53,1378,49,1186"/>
+<area shape="rect" id="Node000050" href="$structaudio__tools_1_1_volume_stream_config.html" title="Config for VolumeStream." alt="" coords="170,2153,328,2181"/>
+<area shape="poly" id="edge49_Node000001_Node000050" title=" " alt="" coords="49,1180,58,1388,73,1692,84,1846,99,1981,117,2084,128,2118,139,2139,153,2151,172,2161,166,2162,150,2155,135,2142,123,2120,112,2085,94,1982,79,1846,67,1692,52,1388,49,1186"/>
+<area shape="rect" id="Node000051" href="$structaudio__tools_1_1_w_a_v_audio_info.html" title="Sound information which is available in the WAV header." alt="" coords="193,2205,304,2233"/>
+<area shape="poly" id="edge50_Node000001_Node000051" title=" " alt="" coords="49,1180,57,1397,71,1718,83,1881,97,2024,116,2133,127,2169,139,2191,163,2208,195,2218,190,2219,161,2213,135,2194,122,2171,111,2134,92,2025,77,1881,66,1719,52,1398,49,1186"/>
+<area shape="rect" id="Node000052" href="$structaudio__tools_1_1_wav_i_m_a_audio_info.html" title="Sound information which is available in the WAV header &#45; adjusted for IMA ADPCM." alt="" coords="181,2257,317,2285"/>
+<area shape="poly" id="edge51_Node000001_Node000052" title=" " alt="" coords="49,1180,56,1407,70,1744,81,1916,96,2067,115,2181,126,2220,139,2243,158,2258,183,2269,178,2268,155,2262,135,2246,122,2222,110,2182,91,2067,76,1916,64,1745,51,1407,49,1186"/>
+<area shape="rect" id="Node000015" href="$structaudio__tools_1_1_f_f_t_equalizer_config.html" title="Equalizer FFT Effect Configuration." alt="" coords="456,593,601,621"/>
+<area shape="poly" id="edge14_Node000014_Node000015" title=" " alt="" coords="324,643,458,619,454,623,327,647"/>
+<area shape="rect" id="Node000016" href="$structaudio__tools_1_1_f_f_t_pitch_shift_config.html" title="Pitch Shift FFT Effect Configuration." alt="" coords="456,645,602,673"/>
+<area shape="poly" id="edge15_Node000014_Node000016" title=" " alt="" coords="324,657,457,657,453,661,327,661"/>
+<area shape="rect" id="Node000019" href="$classaudio__tools_1_1_audio_kit_stream_config.html" title="Configuration for AudioKitStream: we use as subclass of I2SConfig." alt="" coords="446,697,611,725"/>
+<area shape="poly" id="edge18_Node000018_Node000019" title=" " alt="" coords="324,747,452,724,448,728,327,751"/>
+<area shape="rect" id="Node000020" href="$structaudio__tools_1_1_i2_s_codec_config.html" title="Configuration for I2SCodecStream." alt="" coords="468,749,590,777"/>
+<area shape="poly" id="edge19_Node000018_Node000020" title=" " alt="" coords="324,761,469,761,465,765,327,765"/>
+<area shape="rect" id="Node000021" href="$classaudio__tools_1_1_w_m8960_config.html" title="Configuration for WM8960." alt="" coords="469,801,588,829"/>
+<area shape="poly" id="edge20_Node000018_Node000021" title=" " alt="" coords="324,775,471,803,466,806,327,780"/>
+<area shape="rect" id="Node000029" href="$structaudio__tools_1_1_opus_multi_stream_encoder_settings.html" title="Settings for Opus MultiStream Encoder." alt="" coords="409,1113,648,1141"/>
+<area shape="poly" id="edge28_Node000028_Node000029" title=" " alt="" coords="356,1125,411,1126,407,1129,359,1129"/>
+<area shape="rect" id="Node000031" href="$structaudio__tools_1_1_opus_encoder_settings.html" title="Setting for Opus Encoder where the following values are valid: &#45;1 indicates that the default value sh..." alt="" coords="449,1165,608,1193"/>
+<area shape="poly" id="edge30_Node000030_Node000031" title=" " alt="" coords="317,1177,451,1177,446,1181,319,1181"/>
+</map>

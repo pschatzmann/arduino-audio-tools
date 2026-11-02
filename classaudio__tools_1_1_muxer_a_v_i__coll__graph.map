@@ -1,44 +1,42 @@
 <map id="MuxerAVI" name="MuxerAVI">
-<area shape="rect" id="Node000001" title="Configuration for the (single) video track written by MuxerAVI." alt="" coords="523,441,606,469"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_muxer.html" title="Common interface for muxers (MuxerAVI, MuxerMP4) that combine an already&#45;encoded video track (and opt..." alt="" coords="64,274,126,301"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="101,314,120,368,135,394,157,415,176,422,212,428,314,439,526,452,520,453,313,444,211,434,175,427,154,420,131,398,115,371,99,319"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory...." alt="" coords="5,128,108,156"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="59,169,67,208,78,249,89,273,84,273,73,251,62,210,59,174"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="138,128,189,156"/>
-<area shape="poly" id="edge6_Node000001_Node000004" title=" " alt="" coords="162,169,163,225,171,293,181,328,194,361,213,390,238,415,259,426,289,435,367,446,452,451,526,454,521,454,452,456,367,451,288,440,257,431,235,419,209,394,190,363,176,329,166,294,158,226,160,174"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="122,162,104,181,95,205,92,230,95,274,90,273,87,230,90,203,100,179,125,157"/>
-<area shape="rect" id="Node000005" href="$classint.html" title=" " alt="" coords="144,5,182,33"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="164,46,166,128,161,127,162,51"/>
-<area shape="rect" id="Node000006" href="$classuint32__t.html" title=" " alt="" coords="247,5,322,33"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="272,45,257,89,243,140,240,196,244,223,254,248,279,287,309,320,345,350,383,375,459,415,526,442,520,441,457,419,380,380,342,354,306,324,274,290,249,251,239,224,234,196,238,140,252,87,270,49"/>
-<area shape="rect" id="Node000014" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="555,128,638,156"/>
-<area shape="poly" id="edge15_Node000014_Node000006" title=" " alt="" coords="300,43,326,76,360,102,385,113,407,120,448,123,490,121,544,126,557,130,552,131,543,131,490,126,447,128,406,125,383,118,357,107,322,79,300,49"/>
-<area shape="rect" id="Node000007" href="$structaudio__tools_1_1_muxer_video_config.html" title="Shared video track configuration for muxers (MuxerAVI, MuxerMP4) &#45; call before begin()." alt="" coords="704,128,844,156"/>
-<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="741,163,682,212,652,241,628,275,613,312,611,345,610,379,598,419,580,443,577,438,593,416,605,378,606,344,608,311,623,272,648,238,678,208,737,166"/>
-<area shape="rect" id="Node000008" title=" " alt="" coords="586,5,660,33"/>
-<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="650,41,666,55,691,79,717,102,754,128,748,128,714,106,688,83,663,59,649,46"/>
-<area shape="poly" id="edge16_Node000014_Node000008" title=" " alt="" coords="605,44,601,58,596,95,597,129,592,127,590,95,596,56,602,48"/>
-<area shape="rect" id="Node000009" href="$classfloat.html" title=" " alt="" coords="919,5,970,33"/>
-<area shape="poly" id="edge9_Node000007_Node000009" title=" " alt="" coords="942,46,932,79,912,106,880,126,845,137,843,132,878,121,908,102,927,76,938,50"/>
-<area shape="rect" id="Node000010" title=" " alt="" coords="715,5,819,33"/>
-<area shape="poly" id="edge10_Node000007_Node000010" title=" " alt="" coords="770,46,775,129,771,126,767,51"/>
-<area shape="rect" id="Node000011" title=" " alt="" coords="844,5,893,33"/>
-<area shape="poly" id="edge11_Node000007_Node000011" title=" " alt="" coords="862,46,849,78,830,106,801,130,798,125,827,103,845,75,858,50"/>
-<area shape="rect" id="Node000012" title=" " alt="" coords="708,274,858,301"/>
-<area shape="poly" id="edge12_Node000001_Node000012" title=" " alt="" coords="761,311,705,365,634,420,593,443,591,438,631,415,701,361,756,313"/>
-<area shape="rect" id="Node000013" href="$structaudio__tools_1_1audio__tools_1_1_audio_info_format.html" title="AudioInfo extended with a WAVEFORMATEX&#45;style codec tag (the &quot;wavcode&quot;): identifies the codec (PCM,..." alt="" coords="428,274,557,301"/>
-<area shape="poly" id="edge13_Node000001_Node000013" title=" " alt="" coords="495,315,502,365,510,392,521,416,545,442,540,440,517,419,505,393,497,366,491,319"/>
-<area shape="poly" id="edge14_Node000013_Node000014" title=" " alt="" coords="579,168,559,211,532,251,505,275,502,271,528,248,555,208,576,171"/>
-<area shape="poly" id="edge19_Node000013_Node000014" title=" " alt="" coords="598,169,582,211,556,251,527,275,524,271,552,248,578,209,594,173"/>
-<area shape="rect" id="Node000015" href="$classuint8__t.html" title=" " alt="" coords="418,5,484,33"/>
-<area shape="poly" id="edge17_Node000014_Node000015" title=" " alt="" coords="452,46,459,77,474,102,504,114,557,130,552,131,502,119,470,106,454,78,450,51"/>
-<area shape="rect" id="Node000016" href="$classaudio__tools_1_1audio__tools_1_1_mime_source.html" title="Abstract interface for classes that can provide MIME type information." alt="" coords="300,128,402,156"/>
-<area shape="poly" id="edge18_Node000013_Node000016" title=" " alt="" coords="373,163,392,178,440,229,479,274,473,273,436,232,388,182,373,168"/>
-<area shape="poly" id="edge20_Node000013_Node000016" title=" " alt="" coords="395,162,416,178,463,229,493,274,488,273,459,232,412,182,395,168"/>
-<area shape="rect" id="Node000017" title=" " alt="" coords="427,128,531,156"/>
-<area shape="poly" id="edge21_Node000013_Node000017" title=" " alt="" coords="483,170,494,274,489,272,480,174"/>
-<area shape="rect" id="Node000018" href="$classbool.html" title=" " alt="" coords="882,274,932,301"/>
-<area shape="poly" id="edge22_Node000001_Node000018" title=" " alt="" coords="906,315,898,375,890,402,880,419,859,431,830,441,756,452,675,457,606,457,606,452,675,451,755,447,829,435,857,427,876,415,885,400,893,374,902,319"/>
-<area shape="rect" id="Node000019" href="$classsize__t.html" title=" " alt="" coords="995,274,1054,301"/>
-<area shape="poly" id="edge23_Node000001_Node000019" title=" " alt="" coords="1028,315,1028,342,1024,370,1013,397,995,419,974,428,936,436,828,446,606,456,606,450,827,441,935,430,972,423,992,415,1009,394,1018,368,1023,341,1025,319"/>
+<area shape="rect" id="Node000001" title="Configuration for the (single) video track written by MuxerAVI." alt="" coords="471,385,554,413"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_muxer.html" title="Common interface for muxers (MuxerAVI, MuxerMP4) that combine an already&#45;encoded video track (and opt..." alt="" coords="60,242,122,269"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="100,282,120,324,135,343,153,359,177,370,212,379,299,390,393,395,473,398,468,398,393,400,299,395,211,384,175,375,150,364,131,347,116,327,98,287"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory...." alt="" coords="5,115,108,143"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="61,155,78,217,87,241,82,241,73,218,60,160"/>
+<area shape="rect" id="Node000004" href="$class_print.html" title=" " alt="" coords="136,115,188,143"/>
+<area shape="poly" id="edge6_Node000001_Node000004" title=" " alt="" coords="161,155,164,204,173,260,181,288,193,315,209,339,230,359,248,368,273,376,338,387,474,397,468,398,337,392,272,381,246,373,227,363,205,343,188,318,176,290,167,261,159,204,159,160"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="121,150,104,168,96,186,92,206,92,242,87,241,87,205,91,185,100,165,124,145"/>
+<area shape="rect" id="Node000005" href="$classint.html" title=" " alt="" coords="143,5,181,33"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="163,46,164,115,159,114,161,51"/>
+<area shape="rect" id="Node000006" href="$classuint32__t.html" title=" " alt="" coords="239,5,314,33"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="264,45,250,83,238,127,234,173,238,195,246,216,266,249,292,277,321,303,353,325,417,360,474,385,469,385,415,364,350,329,318,307,288,281,262,252,241,219,233,197,229,173,232,126,245,82,261,49"/>
+<area shape="rect" id="Node000014" href="$structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="539,115,622,143"/>
+<area shape="poly" id="edge15_Node000014_Node000006" title=" " alt="" coords="296,42,324,68,355,89,401,104,439,107,478,107,528,112,541,117,536,118,527,118,478,113,438,113,400,109,353,93,320,72,296,47"/>
+<area shape="rect" id="Node000007" href="$structaudio__tools_1_1_muxer_video_config.html" title="Shared video track configuration for muxers (MuxerAVI, MuxerMP4) &#45; call before begin()." alt="" coords="680,115,820,143"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="702,148,633,188,601,213,573,243,558,273,555,300,553,329,543,362,526,387,523,383,538,360,548,328,550,299,553,271,569,240,597,209,630,183,697,150"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="565,5,639,33"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="629,40,693,89,731,115,725,114,690,93,628,46"/>
+<area shape="poly" id="edge16_Node000014_Node000008" title=" " alt="" coords="588,45,585,58,581,88,581,116,577,114,576,88,580,56,584,49"/>
+<area shape="rect" id="Node000009" href="$classfloat.html" title=" " alt="" coords="889,5,939,33"/>
+<area shape="poly" id="edge9_Node000007_Node000009" title=" " alt="" coords="905,46,892,72,873,93,848,108,821,118,819,113,846,103,869,89,888,69,901,49"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="686,5,790,33"/>
+<area shape="poly" id="edge10_Node000007_Node000010" title=" " alt="" coords="742,46,751,116,746,114,739,51"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="814,5,864,33"/>
+<area shape="poly" id="edge11_Node000007_Node000011" title=" " alt="" coords="829,46,801,93,772,117,770,112,797,89,825,49"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="650,242,799,269"/>
+<area shape="poly" id="edge12_Node000001_Node000012" title=" " alt="" coords="698,278,579,364,538,387,536,382,576,359,693,280"/>
+<area shape="rect" id="Node000013" href="$structaudio__tools_1_1_audio_info_format.html" title="AudioInfo extended with a WAVEFORMATEX&#45;style codec tag (the &quot;wav code&quot;): identifies the codec (PCM,..." alt="" coords="381,242,510,269"/>
+<area shape="poly" id="edge13_Node000001_Node000013" title=" " alt="" coords="449,282,456,322,471,360,494,386,489,384,466,363,451,323,445,286"/>
+<area shape="poly" id="edge14_Node000013_Node000014" title=" " alt="" coords="558,153,547,168,529,195,509,220,474,243,472,239,505,216,525,192,542,165,554,156"/>
+<area shape="rect" id="Node000015" href="$classuint8__t.html" title=" " alt="" coords="406,5,472,33"/>
+<area shape="poly" id="edge17_Node000014_Node000015" title=" " alt="" coords="443,46,451,70,463,89,491,100,541,116,536,117,489,105,460,93,446,72,441,51"/>
+<area shape="rect" id="Node000016" href="$classaudio__tools_1_1_mime_source.html" title="Abstract interface for classes that can provide MIME type information." alt="" coords="284,115,386,143"/>
+<area shape="poly" id="edge18_Node000013_Node000016" title=" " alt="" coords="372,149,392,165,422,204,442,242,437,240,418,207,388,169,371,154"/>
+<area shape="rect" id="Node000017" title=" " alt="" coords="411,115,515,143"/>
+<area shape="poly" id="edge19_Node000013_Node000017" title=" " alt="" coords="461,156,450,243,445,240,457,160"/>
+<area shape="rect" id="Node000018" href="$classbool.html" title=" " alt="" coords="824,242,873,269"/>
+<area shape="poly" id="edge20_Node000001_Node000018" title=" " alt="" coords="847,283,834,326,822,347,806,363,787,374,760,382,692,393,554,400,554,395,691,387,759,377,785,369,803,359,818,343,829,324,842,287"/>
+<area shape="rect" id="Node000019" href="$classsize__t.html" title=" " alt="" coords="932,242,992,269"/>
+<area shape="poly" id="edge21_Node000001_Node000019" title=" " alt="" coords="963,283,956,326,946,347,931,364,910,372,873,379,769,389,554,399,554,394,769,384,873,374,909,367,928,359,942,344,951,325,959,287"/>
 </map>

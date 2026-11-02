@@ -1,26 +1,26 @@
 <map id="NRF24Config" name="NRF24Config">
-<area shape="rect" id="Node000001" title="NRF24L01 Audio Configuration optimized for low&#45;latency audio streaming. Uses the RF24 library from TM..." alt="" coords="538,366,643,394"/>
-<area shape="rect" id="Node000002" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="266,72,349,99"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="363,90,402,98,442,112,482,131,516,158,536,183,552,211,575,271,587,326,591,367,586,365,581,327,570,272,548,213,532,186,512,162,479,136,440,117,401,103,365,95"/>
-<area shape="rect" id="Node000003" href="$classuint32__t.html" title=" " alt="" coords="5,9,80,37"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="94,26,155,35,219,50,275,70,271,72,218,55,154,41,97,31"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="5,65,80,93"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="94,78,267,82,263,86,97,83"/>
-<area shape="rect" id="Node000005" href="$classuint8__t.html" title=" " alt="" coords="9,142,76,170"/>
-<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="90,155,332,167,450,179,492,186,515,195,535,213,551,235,573,283,586,330,591,367,586,365,580,331,568,285,547,238,531,217,513,200,490,191,449,184,332,172,92,160"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="89,143,218,111,267,97,263,101,219,116,92,148"/>
-<area shape="rect" id="Node000006" href="$classint.html" title=" " alt="" coords="288,254,327,282"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="341,265,423,272,470,283,515,300,536,315,555,332,583,367,577,366,551,335,533,319,513,305,469,288,423,277,343,270"/>
-<area shape="rect" id="Node000007" title=" " alt="" coords="245,310,370,338"/>
-<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="384,329,449,338,515,351,556,365,551,366,513,356,448,343,385,334"/>
-<area shape="rect" id="Node000008" title=" " alt="" coords="247,366,368,394"/>
-<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="383,378,540,379,535,381,384,383"/>
-<area shape="rect" id="Node000009" href="$classuint64__t.html" title=" " alt="" coords="270,422,344,450"/>
-<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="359,431,433,423,513,408,561,394,556,396,515,413,434,428,361,436"/>
-<area shape="rect" id="Node000010" title=" " alt="" coords="262,478,352,506"/>
-<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="367,490,440,482,477,472,513,457,533,443,552,426,578,396,583,393,556,430,537,448,515,462,479,477,441,487,369,495"/>
-<area shape="rect" id="Node000011" href="$classbool.html" title=" " alt="" coords="283,557,332,585"/>
-<area shape="poly" id="edge11_Node000001_Node000011" title=" " alt="" coords="347,573,385,575,429,572,473,562,512,541,529,526,544,508,565,466,578,425,586,396,589,392,583,427,570,468,548,510,533,530,516,546,475,567,429,577,385,580,347,579"/>
-<area shape="rect" id="Node000012" title=" " alt="" coords="243,613,372,641"/>
-<area shape="poly" id="edge12_Node000001_Node000012" title=" " alt="" coords="387,636,420,636,453,632,484,622,512,606,535,583,552,556,565,526,575,495,585,437,588,396,591,392,590,438,580,497,570,528,557,559,539,586,516,610,486,627,454,637,420,641,387,642"/>
+<area shape="rect" id="Node000001" title="NRF24L01 Audio Configuration optimized for low&#45;latency audio streaming. Uses the RF24 library from TM..." alt="" coords="530,317,635,345"/>
+<area shape="rect" id="Node000002" href="$structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="262,67,345,94"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="359,83,397,90,436,101,474,118,508,143,526,163,541,186,563,235,576,281,582,318,577,316,571,282,558,237,536,188,522,166,504,146,471,123,434,106,396,95,361,88"/>
+<area shape="rect" id="Node000003" href="$classuint32__t.html" title=" " alt="" coords="5,5,80,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="94,24,215,49,265,65,260,67,214,54,96,29"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="5,57,80,85"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="94,71,263,77,259,81,96,75"/>
+<area shape="rect" id="Node000005" href="$classuint8__t.html" title=" " alt="" coords="9,129,76,157"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="89,139,190,138,312,141,428,153,474,165,507,180,525,194,539,211,561,249,574,287,581,318,576,316,569,288,556,251,535,214,521,198,505,184,472,170,427,159,312,146,190,143,92,144"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="89,129,263,88,260,93,92,134"/>
+<area shape="rect" id="Node000006" href="$classint.html" title=" " alt="" coords="284,213,323,241"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="337,227,417,239,463,250,507,267,542,290,570,317,565,316,539,294,505,272,461,255,416,244,339,232"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="241,265,366,293"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="381,287,507,309,532,316,527,317,505,314,381,292"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="243,317,364,345"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="379,329,532,330,527,332,380,334"/>
+<area shape="rect" id="Node000009" href="$classuint64__t.html" title=" " alt="" coords="266,369,340,397"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="355,375,427,365,505,351,539,345,534,346,507,356,428,371,356,380"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="258,421,348,449"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="364,429,433,417,470,406,505,392,540,369,567,347,571,344,543,373,507,397,472,411,434,422,365,434"/>
+<area shape="rect" id="Node000011" href="$classbool.html" title=" " alt="" coords="279,480,328,508"/>
+<area shape="poly" id="edge11_Node000001_Node000011" title=" " alt="" coords="343,496,380,497,422,493,465,483,504,464,532,437,553,404,567,371,576,347,580,344,572,373,558,407,537,441,508,469,467,488,423,499,380,502,343,501"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="239,532,368,560"/>
+<area shape="poly" id="edge12_Node000001_Node000012" title=" " alt="" coords="384,552,415,550,447,545,477,535,504,519,524,501,539,479,561,430,573,382,579,348,582,344,578,383,566,431,544,482,528,504,508,524,479,540,448,551,415,556,384,557"/>
 </map>

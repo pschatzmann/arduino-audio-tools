@@ -1,14 +1,14 @@
 <map id="FadeConverter&lt; T &gt;" name="FadeConverter&lt; T &gt;">
-<area shape="rect" id="Node000001" title="converter which does a fade out or fade in." alt="" coords="94,251,247,279"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_converter.html" title="Abstract Base class for Converters A converter is processing the data in the indicated array." alt="" coords="5,151,123,178"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="90,187,159,250,154,252,88,191"/>
+<area shape="rect" id="Node000001" title="converter which does a fade out or fade in." alt="" coords="94,225,247,252"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_base_converter.html" title="Abstract Base class for Converters A converter is processing the data in the indicated array." alt="" coords="5,132,123,160"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="92,167,158,223,153,225,90,172"/>
 <area shape="rect" id="Node000003" href="$classint.html" title=" " alt="" coords="174,5,213,33"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="193,48,174,251,169,250,188,50"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_fade.html" title="Fade In and Fade out in order to prevent popping sound when the audio is started or stopped...." alt="" coords="274,151,326,178"/>
-<area shape="poly" id="edge5_Node000004_Node000003" title=" " alt="" coords="198,46,212,87,221,107,233,125,253,141,276,154,271,155,250,146,229,128,216,110,207,89,197,51"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="274,187,189,253,187,248,268,188"/>
-<area shape="rect" id="Node000005" href="$classbool.html" title=" " alt="" coords="287,5,337,33"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="312,47,304,151,299,149,308,51"/>
-<area shape="rect" id="Node000006" href="$classfloat.html" title=" " alt="" coords="400,5,450,33"/>
-<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="426,46,419,89,411,110,398,128,382,142,363,152,327,162,325,157,361,147,379,137,394,125,406,107,414,88,423,51"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="193,48,175,225,169,223,188,49"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_fade.html" title="Fade In and Fade out in order to prevent popping sound when the audio is started or stopped...." alt="" coords="270,132,322,160"/>
+<area shape="poly" id="edge5_Node000004_Node000003" title=" " alt="" coords="202,45,216,77,235,106,252,121,273,134,267,134,249,125,231,110,211,80,200,50"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="268,168,190,226,188,222,263,169"/>
+<area shape="rect" id="Node000005" href="$classbool.html" title=" " alt="" coords="283,5,333,33"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="307,46,300,133,295,130,303,50"/>
+<area shape="rect" id="Node000006" href="$classfloat.html" title=" " alt="" coords="388,5,438,33"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="412,46,404,80,386,110,355,131,323,142,321,137,353,126,382,106,399,78,408,50"/>
 </map>

@@ -1,0 +1,43 @@
+<map id="SoundGenerator&lt; T &gt;" name="SoundGenerator&lt; T &gt;">
+<area shape="rect" id="Node000001" title="Base class to define the abstract interface for the sound generating classes." alt="" coords="5,499,170,527"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_float_sine_generator.html" title=" " alt="" coords="247,5,394,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="86,483,90,401,96,347,107,289,123,228,146,167,177,111,216,60,248,41,245,45,219,64,181,114,151,170,128,229,112,290,102,348,95,402,91,484"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_s_t_k_generator.html" title=" " alt="" coords="243,75,398,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="88,483,96,412,116,318,132,267,154,218,182,171,216,130,244,112,241,117,219,134,186,174,159,220,137,269,121,319,101,413,93,484"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_s_t_k_generator.html" title=" " alt="" coords="235,144,406,189"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="90,483,102,424,125,348,141,308,162,269,186,232,216,199,236,186,233,191,219,203,191,235,166,271,146,310,130,350,107,425,95,484"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_fast_int_sine_generator.html" title="Sine wave generator that does not use any floating point operations in the readSample() hot path: it ..." alt="" coords="223,212,418,240"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="92,483,106,433,131,370,166,306,189,276,216,251,239,239,236,243,219,255,193,280,171,309,135,372,111,435,97,485"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_float_sine_generator.html" title="Generates a Sound with the help of sin() function. If performance is of concern, I suggest to use the..." alt="" coords="228,264,413,292"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="96,484,113,443,138,394,173,345,216,303,242,291,238,295,219,307,177,348,143,397,118,445,101,486"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_generator_fixed_value.html" title="Just returns a constant value." alt="" coords="223,316,418,344"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="101,485,147,419,179,384,216,355,244,343,241,347,219,359,183,388,151,422,106,487"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1_generator_from_array.html" title="We generate the samples from an array which is provided in the constructor." alt="" coords="224,368,416,396"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="111,487,158,445,216,407,250,395,247,399,219,411,161,449,115,490"/>
+<area shape="rect" id="Node000010" href="$classaudio__tools_1_1_generator_from_stream.html" title="An Adapter Class which lets you use any Stream as a Generator." alt="" coords="218,420,422,448"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="133,491,217,458,261,447,257,451,219,464,137,495"/>
+<area shape="rect" id="Node000011" href="$classaudio__tools_1_1_generator_mixer.html" title="Generator which combines (mixes) multiple sound generators into one output." alt="" coords="240,472,400,500"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="184,500,242,494,238,497,187,504"/>
+<area shape="rect" id="Node000012" href="$classaudio__tools_1_1_generator_queue.html" title="Queues SoundGenerators and plays them sequentially. Queued SoundGenerators must be limited (eg: setPl..." alt="" coords="237,524,404,552"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="184,521,239,528,234,531,186,526"/>
+<area shape="rect" id="Node000013" href="$classaudio__tools_1_1_pink_noise_generator.html" title="Generates pink noise." alt="" coords="226,576,415,604"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="136,531,219,561,262,575,257,577,217,566,137,536"/>
+<area shape="rect" id="Node000014" href="$classaudio__tools_1_1_s_t_k_generator.html" title="The Synthesis ToolKit in C++ (STK) is a set of open source audio signal processing and algorithmic sy..." alt="" coords="221,628,420,656"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="113,535,161,576,219,613,251,627,246,629,216,618,158,580,114,540"/>
+<area shape="rect" id="Node000016" href="$classaudio__tools_1_1_saw_tooth_generator.html" title="Generates a saw tooth wave sound. Uses a 32 bit phase accumulator with an integer increment,..." alt="" coords="227,680,414,708"/>
+<area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="104,538,152,603,183,637,219,665,246,679,241,681,216,670,179,641,148,607,104,543"/>
+<area shape="rect" id="Node000017" href="$classaudio__tools_1_1_silence_generator.html" title="Provides a fixed value (e.g. 0) as sound data. This can be used e.g. to test the output functionality..." alt="" coords="235,732,406,760"/>
+<area shape="poly" id="edge16_Node000001_Node000017" title=" " alt="" coords="98,538,118,580,143,628,177,677,219,718,243,731,237,733,216,722,173,680,139,631,113,582,99,544"/>
+<area shape="rect" id="Node000018" href="$classaudio__tools_1_1_sine_from_table.html" title="A sine generator based on a table. The table is created using degrees where one full wave is 360 degr..." alt="" coords="243,784,398,812"/>
+<area shape="poly" id="edge17_Node000001_Node000018" title=" " alt="" coords="95,540,112,591,136,653,171,716,193,745,219,770,246,786,240,787,216,774,190,748,167,719,131,656,107,593,95,545"/>
+<area shape="rect" id="Node000019" href="$classaudio__tools_1_1_square_wave_generator.html" title="Generates a square wave sound. Uses the same 32 bit phase accumulator as SawToothGenerator/FastIntSin..." alt="" coords="218,836,423,864"/>
+<area shape="poly" id="edge18_Node000001_Node000019" title=" " alt="" coords="93,540,106,601,128,677,145,717,165,755,190,791,219,822,239,836,234,836,216,826,186,794,160,758,140,719,123,679,101,602,92,545"/>
+<area shape="rect" id="Node000020" href="$classaudio__tools_1_1_test_generator.html" title="Generates a test signal which is easy to check because the values are incremented or decremented by 1..." alt="" coords="245,888,396,916"/>
+<area shape="poly" id="edge19_Node000001_Node000020" title=" " alt="" coords="91,540,101,610,121,700,138,747,159,794,186,836,219,874,248,892,242,892,216,878,182,840,154,796,133,749,116,701,96,611,90,545"/>
+<area shape="rect" id="Node000021" href="$classaudio__tools_1_1_white_noise_generator.html" title="Generates a random noise sound with the help of rand() function." alt="" coords="221,940,420,968"/>
+<area shape="poly" id="edge20_Node000001_Node000021" title=" " alt="" coords="89,540,97,619,115,723,131,778,153,832,182,882,219,926,238,940,232,939,216,930,178,885,148,834,126,780,109,724,91,620,88,545"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_fast_sine_generator.html" title="Sine wave which is based on a fast approximation function using floating point math." alt="" coords="484,264,662,292"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="427,276,486,277,481,280,430,281"/>
+<area shape="rect" id="Node000015" href="$classaudio__tools_1_1_s_t_k_instrument.html" title="STK Stream for Instrument." alt="" coords="471,628,675,656"/>
+<area shape="poly" id="edge14_Node000014_Node000015" title=" " alt="" coords="434,640,473,641,468,643,436,645"/>
+</map>

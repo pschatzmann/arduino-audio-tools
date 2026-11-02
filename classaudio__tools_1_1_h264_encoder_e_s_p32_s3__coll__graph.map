@@ -1,22 +1,22 @@
 <map id="H264EncoderESP32S3&lt; Alloc &gt;" name="H264EncoderESP32S3&lt; Alloc &gt;">
-<area shape="rect" id="Node000001" title="H.264 video encoder for ESP32&#45;S3: wraps esp_h264::H264Encoder (https://github.com/pschatzmann/ESP32S3..." alt="" coords="755,180,919,224"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_video_encoder.html" title="Common interface for video encoders (e.g. H264Encoder, H264EncoderESP32S3 &#45; CodecH264...." alt="" coords="450,5,560,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="575,22,654,39,695,53,733,73,763,97,788,125,826,180,820,178,784,128,759,101,730,77,693,58,653,44,576,27"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="395,57,615,102"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="630,100,682,114,732,133,772,154,808,179,803,179,770,158,730,138,681,119,631,105"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="474,125,536,153"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="552,145,757,186,752,187,552,150"/>
-<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="183,323,235,350"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="250,343,284,349,378,356,451,357,524,347,615,324,670,304,722,277,804,226,809,224,725,281,672,309,616,329,525,352,452,362,378,362,284,354,250,348"/>
-<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_h264_encoder_e_s_p32_s3_1_1_dual_output_print.html" title=" " alt="" coords="443,263,568,290"/>
-<area shape="poly" id="edge8_Node000008_Node000005" title=" " alt="" coords="248,318,283,307,366,291,445,282,440,283,367,296,285,312,250,323"/>
-<area shape="poly" id="edge9_Node000008_Node000005" title=" " alt="" coords="250,340,308,344,370,338,432,315,480,292,484,290,434,320,372,343,308,349,250,345"/>
-<area shape="rect" id="Node000006" href="$classint.html" title=" " alt="" coords="5,323,44,350"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="59,334,184,334,181,339,60,339"/>
-<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory...." alt="" coords="158,211,260,238"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="275,218,284,218,756,202,754,207,284,223,277,223"/>
-<area shape="poly" id="edge10_Node000008_Node000007" title=" " alt="" coords="271,240,285,243,367,257,444,269,439,271,366,263,284,248,272,245"/>
-<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="583,268,655,259,731,243,786,226,791,224,732,248,656,264,584,273"/>
-<area shape="rect" id="Node000009" title=" " alt="" coords="453,428,557,456"/>
-<area shape="poly" id="edge11_Node000001_Node000009" title=" " alt="" coords="573,451,611,452,653,450,693,440,730,422,753,402,773,378,803,323,821,268,831,226,835,223,826,269,807,325,777,381,757,406,733,426,695,445,653,455,611,458,573,456"/>
+<area shape="rect" id="Node000001" title="H.264 video encoder for ESP32&#45;S3: wraps esp_h264::H264Encoder (https://github.com/pschatzmann/ESP32S3..." alt="" coords="743,172,907,216"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_video_encoder.html" title="Common interface for video encoders (e.g. H264Encoder, H264EncoderESP32S3 &#45; CodecH264...." alt="" coords="442,5,552,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="568,29,645,50,684,67,721,88,770,128,808,171,803,170,766,132,718,92,682,72,643,55,568,34"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="387,57,607,102"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="616,103,720,137,788,171,782,171,718,142,616,109"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="466,125,528,153"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="544,144,720,173,746,179,740,179,719,178,544,149"/>
+<area shape="rect" id="Node000005" href="$class_print.html" title=" " alt="" coords="179,299,231,326"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="246,317,280,322,373,329,445,332,517,325,607,304,659,286,709,263,789,218,794,216,711,267,661,291,608,309,518,330,446,337,373,335,280,327,246,323"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_h264_encoder_e_s_p32_s3_1_1_dual_output_print.html" title=" " alt="" coords="435,251,560,278"/>
+<area shape="poly" id="edge8_Node000008_Node000005" title=" " alt="" coords="245,299,280,291,437,270,432,272,281,296,247,304"/>
+<area shape="poly" id="edge9_Node000008_Node000005" title=" " alt="" coords="246,312,280,314,322,316,363,314,419,297,465,280,470,278,421,302,364,319,322,322,280,319,247,317"/>
+<area shape="rect" id="Node000006" href="$classint.html" title=" " alt="" coords="5,299,44,326"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="59,310,180,310,177,315,60,315"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory...." alt="" coords="154,199,256,226"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="271,208,744,194,742,199,272,213"/>
+<area shape="poly" id="edge10_Node000008_Node000007" title=" " alt="" coords="271,225,281,227,437,254,432,257,280,232,272,230"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="575,253,645,242,719,227,760,217,765,216,720,232,646,247,576,258"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="445,404,549,432"/>
+<area shape="poly" id="edge11_Node000001_Node000009" title=" " alt="" coords="565,423,603,423,643,419,682,408,718,390,739,372,758,351,786,303,806,255,817,218,821,214,811,256,791,305,762,354,743,376,721,394,684,413,643,424,603,428,565,428"/>
 </map>

@@ -1,16 +1,16 @@
 <map id="USBAudioHostBase::AltSetting" name="USBAudioHostBase::AltSetting">
-<area shape="rect" id="Node000001" title="One alternate setting of an audio streaming interface." alt="" coords="229,472,448,500"/>
-<area shape="rect" id="Node000002" href="$classuint8__t.html" title=" " alt="" coords="20,5,87,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="42,50,26,104,11,177,8,217,10,257,19,295,35,331,56,359,82,384,111,406,142,424,206,451,269,471,263,472,205,456,139,428,108,410,78,388,52,363,30,333,14,297,5,257,3,217,6,177,21,103,42,45"/>
-<area shape="rect" id="Node000004" href="$structaudio__tools_1_1_usb_endpoint_descriptor_view.html" title="Backend&#45;agnostic mirror of tusb_desc_endpoint_t (USB 2.0 spec Table 9&#45;13). wMaxPacketSize is kept in ..." alt="" coords="139,239,341,266"/>
-<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="60,45,79,96,92,123,108,147,133,175,163,200,218,237,213,239,159,204,130,179,104,151,87,125,74,98,60,51"/>
-<area shape="rect" id="Node000003" href="$classbool.html" title=" " alt="" coords="365,239,414,266"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="386,281,344,473,339,470,381,283"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="245,280,262,359,278,404,300,446,322,472,317,471,295,450,273,406,257,361,242,284"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="183,5,286,33"/>
-<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="237,46,242,239,237,238,234,50"/>
-<area shape="rect" id="Node000006" title=" " alt="" coords="311,5,385,33"/>
-<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="343,46,330,97,309,150,280,201,252,240,248,237,275,198,304,148,325,95,340,51"/>
-<area shape="rect" id="Node000007" href="$classuint32__t.html" title=" " alt="" coords="450,239,524,266"/>
-<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="491,279,493,318,489,363,476,409,465,430,451,450,435,464,415,474,414,469,432,460,447,446,461,428,471,407,483,362,488,318,488,284"/>
+<area shape="rect" id="Node000001" title="One alternate setting of an audio streaming interface." alt="" coords="222,384,441,412"/>
+<area shape="rect" id="Node000002" href="$classuint8__t.html" title=" " alt="" coords="13,5,80,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="34,49,22,93,10,150,8,181,10,211,17,240,31,267,49,290,71,311,123,343,179,366,236,383,230,384,177,371,120,348,68,315,45,294,26,269,12,242,5,212,3,181,5,149,17,91,35,44"/>
+<area shape="rect" id="Node000004" href="$structaudio__tools_1_1_usb_endpoint_descriptor_view.html" title="Backend&#45;agnostic mirror of tusb_desc_endpoint_t (USB 2.0 spec Table 9&#45;13). wMaxPacketSize is kept in ..." alt="" coords="127,195,329,222"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="55,45,75,85,101,123,124,145,150,164,201,193,196,195,147,168,121,149,97,127,70,87,55,50"/>
+<area shape="rect" id="Node000003" href="$classbool.html" title=" " alt="" coords="352,195,402,222"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="373,236,337,385,333,382,368,239"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="239,235,266,294,302,359,321,384,316,383,298,361,261,296,237,239"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="172,5,275,33"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="226,46,230,195,225,194,223,51"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="300,5,374,33"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="329,45,315,86,294,126,267,165,241,196,237,193,263,162,289,124,310,84,326,50"/>
+<area shape="rect" id="Node000007" href="$classuint32__t.html" title=" " alt="" coords="435,195,509,222"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="474,236,474,267,468,300,457,333,438,362,421,376,401,386,399,381,418,372,434,358,452,330,463,298,468,266,471,240"/>
 </map>

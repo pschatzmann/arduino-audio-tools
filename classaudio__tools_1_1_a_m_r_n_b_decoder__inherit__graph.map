@@ -1,14 +1,11 @@
 <map id="AMRNBDecoder" name="AMRNBDecoder">
 <area shape="rect" id="Node000001" title="AMR Narrowband Decoder See https://github.com/pschatzmann/codec&#45;amr." alt="" coords="78,232,202,260"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_audio_decoder.html" title="Decoding of encoded audio into PCM data." alt="" coords="84,157,196,184"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_audio_decoder.html" title="Decoding of encoded audio into PCM data." alt="" coords="84,157,196,184"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="142,198,142,233,138,231,138,202"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="" coords="23,81,121,109"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="87,118,123,156,118,157,86,124"/>
-<area shape="poly" id="edge6_Node000002_Node000003" title=" " alt="" coords="103,117,138,156,132,157,102,122"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="5,5,139,33"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="64,46,68,81,62,80,63,51"/>
-<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="81,46,82,81,76,80,80,51"/>
-<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="146,81,273,109"/>
-<area shape="poly" id="edge5_Node000002_Node000005" title=" " alt="" coords="181,118,147,158,143,154,177,121"/>
-<area shape="poly" id="edge7_Node000002_Node000005" title=" " alt="" coords="196,119,161,158,158,154,192,123"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="" coords="23,81,121,109"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="95,118,131,156,125,157,94,123"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="5,5,139,33"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="73,46,75,81,69,80,71,51"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="146,81,273,109"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="188,119,154,158,150,154,184,122"/>
 </map>

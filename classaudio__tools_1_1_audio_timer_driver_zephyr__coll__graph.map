@@ -1,19 +1,19 @@
 <map id="AudioTimerDriverZephyr" name="AudioTimerDriverZephyr">
-<area shape="rect" id="Node000001" title="Repeating Timer driver for Zephyr using k_timer." alt="" coords="492,203,674,231"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_audio_timer_driver_base.html" title=" " alt="" coords="162,16,330,44"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="345,22,409,30,440,39,469,53,491,69,510,87,542,129,565,170,579,204,574,202,560,172,537,132,506,91,487,73,467,58,438,44,408,35,346,27"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="5,16,66,44"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="80,28,163,28,159,32,82,33"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="190,68,302,96"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="317,80,392,89,432,99,469,113,502,133,531,157,573,203,568,202,527,160,499,137,467,118,430,104,391,95,318,85"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="191,124,300,152"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="316,140,390,149,469,165,515,182,557,203,552,203,513,187,467,170,389,154,317,145"/>
-<area shape="rect" id="Node000006" href="$classbool.html" title=" " alt="" coords="221,203,270,231"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="285,214,494,216,489,218,286,220"/>
-<area shape="rect" id="Node000007" title=" " alt="" coords="178,259,314,287"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="328,264,468,245,537,231,531,232,468,250,329,269"/>
-<area shape="rect" id="Node000008" href="$classuint64__t.html" title=" " alt="" coords="209,315,283,343"/>
-<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="298,325,379,315,424,305,467,292,522,261,563,232,568,230,525,266,469,296,425,311,380,320,299,330"/>
-<area shape="rect" id="Node000009" title=" " alt="" coords="189,371,303,399"/>
-<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="318,384,392,375,431,365,467,349,503,322,533,289,572,233,577,230,537,293,506,326,469,354,433,370,394,380,318,389"/>
+<area shape="rect" id="Node000001" title="Repeating Timer driver for Zephyr using k_timer." alt="" coords="480,175,662,203"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_audio_timer_driver_base.html" title=" " alt="" coords="158,8,326,36"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="341,26,400,38,457,61,493,87,523,118,564,175,559,174,519,121,489,91,455,66,399,43,342,31"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,8,66,36"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="80,20,159,20,155,24,82,25"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="186,60,298,88"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="313,78,384,90,457,112,512,142,556,175,550,175,509,146,455,117,383,95,314,83"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="187,112,296,140"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="311,129,382,137,457,150,533,174,528,175,455,156,381,143,312,134"/>
+<area shape="rect" id="Node000006" href="$classbool.html" title=" " alt="" coords="217,171,266,199"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="281,183,350,184,482,188,477,189,350,190,282,188"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="174,223,310,251"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="324,225,456,207,497,203,492,204,456,213,325,230"/>
+<area shape="rect" id="Node000008" href="$classuint64__t.html" title=" " alt="" coords="205,275,279,303"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="294,280,371,267,455,245,504,224,544,204,549,202,506,228,457,250,372,272,295,286"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="185,327,299,355"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="314,333,384,319,420,308,455,293,487,272,515,247,557,205,561,202,519,251,490,277,457,298,422,313,385,324,314,338"/>
 </map>

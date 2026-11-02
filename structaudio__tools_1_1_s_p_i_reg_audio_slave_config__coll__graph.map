@@ -1,16 +1,16 @@
 <map id="SPIRegAudioSlaveConfig" name="SPIRegAudioSlaveConfig">
-<area shape="rect" id="Node000001" title="Configuration for SPIRegAudioSlave." alt="" coords="362,293,542,321"/>
-<area shape="rect" id="Node000002" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="170,116,254,144"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="237,152,299,208,377,267,423,293,418,292,374,272,295,212,235,157"/>
+<area shape="rect" id="Node000001" title="Configuration for SPIRegAudioSlave." alt="" coords="346,248,526,276"/>
+<area shape="rect" id="Node000002" href="$structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="164,101,247,129"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="236,136,295,177,365,222,411,248,405,247,362,226,292,182,234,141"/>
 <area shape="rect" id="Node000003" href="$classuint32__t.html" title=" " alt="" coords="5,5,80,33"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="47,46,56,65,67,80,90,97,117,109,172,123,167,126,115,114,88,102,64,84,52,68,47,51"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="125,5,200,33"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="160,46,163,65,167,81,179,99,195,115,190,116,175,102,162,83,157,66,158,51"/>
-<area shape="rect" id="Node000005" href="$classuint8__t.html" title=" " alt="" coords="293,5,360,33"/>
-<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="363,40,378,56,412,159,451,294,446,292,407,161,374,58,362,45"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="281,43,263,59,238,88,220,117,216,114,233,85,259,55,285,39"/>
-<area shape="rect" id="Node000006" href="$classint.html" title=" " alt="" coords="490,116,528,144"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="502,157,458,295,454,291,498,160"/>
-<area shape="rect" id="Node000007" href="$classsize__t.html" title=" " alt="" coords="553,116,612,144"/>
-<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="582,157,571,215,559,245,540,271,523,285,503,295,502,290,520,281,537,268,554,242,566,213,578,160"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="49,45,58,60,67,72,89,87,114,98,166,110,161,113,112,103,87,92,64,76,53,63,49,50"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="121,5,196,33"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="156,46,163,73,173,87,187,101,182,101,169,91,158,75,155,51"/>
+<area shape="rect" id="Node000005" href="$classuint8__t.html" title=" " alt="" coords="284,5,350,33"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="351,40,366,56,400,142,434,249,429,247,395,144,362,58,351,46"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="274,43,255,59,233,81,216,103,212,99,229,77,251,55,278,39"/>
+<area shape="rect" id="Node000006" href="$classint.html" title=" " alt="" coords="470,101,508,129"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="481,142,443,249,439,246,477,145"/>
+<area shape="rect" id="Node000007" href="$classsize__t.html" title=" " alt="" coords="533,101,592,129"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="557,142,541,186,528,207,512,226,495,240,475,250,474,245,492,235,509,222,524,204,536,183,553,145"/>
 </map>

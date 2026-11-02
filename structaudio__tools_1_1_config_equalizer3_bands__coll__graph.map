@@ -1,15 +1,15 @@
 <map id="ConfigEqualizer3Bands" name="ConfigEqualizer3Bands">
-<area shape="rect" id="Node000001" title="Configuration for 3 Band Equalizer." alt="" coords="163,251,333,279"/>
-<area shape="rect" id="Node000002" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="121,106,204,134"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="180,145,243,251,237,251,177,149"/>
+<area shape="rect" id="Node000001" title="Configuration for 3 Band Equalizer." alt="" coords="159,225,329,252"/>
+<area shape="rect" id="Node000002" href="$structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="117,98,200,126"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="177,136,238,224,232,224,174,141"/>
 <area shape="rect" id="Node000003" href="$classuint32__t.html" title=" " alt="" coords="5,5,80,33"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="49,46,59,65,70,80,94,97,123,109,118,111,92,102,66,84,54,67,49,51"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="125,5,200,33"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="164,46,165,106,160,105,161,51"/>
-<area shape="rect" id="Node000005" href="$classuint8__t.html" title=" " alt="" coords="227,5,293,33"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="253,45,245,67,232,84,216,97,198,108,195,103,213,93,229,80,240,64,250,49"/>
-<area shape="rect" id="Node000006" href="$classint.html" title=" " alt="" coords="229,106,267,134"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="250,148,250,252,245,250,246,151"/>
-<area shape="rect" id="Node000007" href="$classfloat.html" title=" " alt="" coords="323,106,373,134"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="348,148,341,189,332,210,321,229,305,243,288,253,286,248,302,239,316,226,328,208,336,188,344,151"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="51,45,70,72,92,88,119,99,114,102,90,92,66,76,51,50"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="121,5,196,33"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="160,46,161,98,156,97,157,51"/>
+<area shape="rect" id="Node000005" href="$classuint8__t.html" title=" " alt="" coords="220,5,286,33"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="244,45,226,76,191,100,188,96,222,72,240,49"/>
+<area shape="rect" id="Node000006" href="$classint.html" title=" " alt="" coords="225,98,263,126"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="246,139,246,225,241,223,242,143"/>
+<area shape="rect" id="Node000007" href="$classfloat.html" title=" " alt="" coords="315,98,365,126"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="338,139,330,172,313,202,297,216,280,227,278,222,294,212,308,199,325,170,334,142"/>
 </map>

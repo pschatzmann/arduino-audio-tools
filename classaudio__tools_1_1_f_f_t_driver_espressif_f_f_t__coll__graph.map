@@ -1,18 +1,18 @@
 <map id="FFTDriverEspressifFFT" name="FFTDriverEspressifFFT">
-<area shape="rect" id="Node000001" title="fft Driver for espressif dsp library: https://espressif&#45;docs.readthedocs&#45;hosted.com/projects/esp&#45;dsp/..." alt="" coords="115,251,281,279"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_f_f_t_driver.html" title="Abstract Class which defines the basic FFT functionality." alt="" coords="5,128,90,156"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="76,163,184,249,179,252,74,168"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="114,128,195,156"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="166,169,196,251,191,250,162,173"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="327,128,448,156"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="359,164,264,230,223,253,221,248,261,225,354,166"/>
+<area shape="rect" id="Node000001" title="fft Driver for espressif dsp library: https://espressif&#45;docs.readthedocs&#45;hosted.com/projects/esp&#45;dsp/..." alt="" coords="115,225,281,252"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_f_f_t_driver.html" title="Abstract Class which defines the basic FFT functionality." alt="" coords="5,115,90,143"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="79,150,182,223,178,226,77,155"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="114,115,195,143"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="167,155,196,225,190,224,164,159"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_vector.html" title=" " alt="" coords="323,115,444,143"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="351,150,263,203,222,227,220,222,261,198,345,152"/>
 <area shape="rect" id="Node000005" href="$classint.html" title=" " alt="" coords="247,5,285,33"/>
-<area shape="poly" id="edge8_Node000001_Node000005" title=" " alt="" coords="263,46,246,130,218,228,207,253,203,249,213,226,241,129,259,50"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="277,45,293,75,314,102,331,115,351,128,346,128,328,120,310,106,288,78,275,50"/>
-<area shape="rect" id="Node000006" href="$classfloat.html" title=" " alt="" coords="360,5,410,33"/>
-<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="387,47,390,129,385,127,384,51"/>
-<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="434,5,514,33"/>
-<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="471,46,462,78,446,106,416,130,413,126,441,103,457,76,467,50"/>
-<area shape="rect" id="Node000008" href="$classbool.html" title=" " alt="" coords="559,5,608,33"/>
-<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="582,46,573,79,553,106,536,116,510,124,449,136,448,131,509,119,533,111,550,102,568,77,578,50"/>
+<area shape="poly" id="edge8_Node000001_Node000005" title=" " alt="" coords="260,47,213,201,204,226,201,222,208,200,255,49"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="280,44,295,68,314,89,352,114,346,115,310,93,291,71,278,50"/>
+<area shape="rect" id="Node000006" href="$classfloat.html" title=" " alt="" coords="356,5,406,33"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="383,46,386,116,381,114,380,50"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="430,5,510,33"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="462,46,452,71,437,93,409,117,406,112,434,89,448,69,459,50"/>
+<area shape="rect" id="Node000008" href="$classbool.html" title=" " alt="" coords="550,5,599,33"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="568,46,557,72,539,93,517,107,493,116,445,127,444,122,491,111,514,102,535,89,552,69,564,49"/>
 </map>

@@ -1,34 +1,31 @@
 <map id="RedisBuffer&lt; T &gt;" name="RedisBuffer&lt; T &gt;">
-<area shape="rect" id="Node000001" title="Buffer implementation that stores and retrieves data from a Redis server using the Arduino Client." alt="" coords="507,520,641,547"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="745,251,875,279"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="827,290,841,320,851,354,855,390,847,425,831,452,810,474,785,491,757,505,698,524,642,532,641,527,697,518,755,500,783,487,807,470,827,449,842,423,850,390,846,355,836,322,824,295"/>
-<area shape="rect" id="Node000009" href="$classaudio__tools_1_1audio__tools_1_1_single_buffer.html" title=" " alt="" coords="388,397,526,424"/>
-<area shape="poly" id="edge12_Node000009_Node000002" title=" " alt="" coords="796,292,775,337,760,358,741,375,722,384,697,389,636,395,527,399,526,394,636,390,696,384,720,378,738,370,756,354,771,334,792,295"/>
-<area shape="poly" id="edge13_Node000009_Node000002" title=" " alt="" coords="814,293,798,337,784,358,765,375,746,384,721,389,660,395,550,399,527,403,526,397,550,394,660,390,720,384,744,379,762,370,780,355,793,335,810,296"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_client.html" title=" " alt="" coords="10,397,69,424"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="39,437,47,469,53,482,62,494,85,503,127,510,247,521,508,529,505,534,247,526,126,516,83,508,59,498,48,485,42,470,38,442"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="5,251,74,279"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="32,292,33,348,37,396,31,396,28,348,32,297"/>
-<area shape="poly" id="edge7_Node000003_Node000004" title=" " alt="" coords="47,292,51,348,48,396,42,396,46,348,46,297"/>
-<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="14,106,65,134"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="32,147,33,203,37,251,31,251,28,203,32,152"/>
-<area shape="poly" id="edge6_Node000004_Node000005" title=" " alt="" coords="47,147,51,203,48,251,42,250,46,203,47,152"/>
-<area shape="rect" id="Node000006" href="$classint.html" title=" " alt="" coords="104,5,143,33"/>
-<area shape="poly" id="edge10_Node000001_Node000006" title=" " alt="" coords="124,46,126,118,126,412,129,425,137,437,167,459,212,478,269,493,394,514,509,528,504,528,393,520,267,498,211,483,164,464,133,441,124,427,121,412,121,118,123,51"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="88,28,63,39,41,59,36,69,35,82,38,105,33,106,30,82,31,68,37,55,60,35,91,24"/>
-<area shape="poly" id="edge14_Node000009_Node000006" title=" " alt="" coords="148,41,239,131,346,250,389,310,431,371,449,397,444,395,427,374,385,313,341,253,235,135,148,47"/>
-<area shape="rect" id="Node000007" title=" " alt="" coords="550,397,599,424"/>
-<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="576,438,576,521,572,517,572,442"/>
-<area shape="rect" id="Node000008" href="$classsize__t.html" title=" " alt="" coords="623,397,682,424"/>
-<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="644,437,612,497,590,522,588,517,608,494,640,440"/>
-<area shape="poly" id="edge11_Node000001_Node000009" title=" " alt="" coords="467,437,482,467,502,494,518,507,539,520,533,519,516,511,498,498,477,469,464,441"/>
-<area shape="rect" id="Node000010" href="$classbool.html" title=" " alt="" coords="666,251,715,279"/>
-<area shape="poly" id="edge19_Node000001_Node000010" title=" " alt="" coords="729,281,749,302,756,340,759,401,755,460,751,483,744,497,728,509,703,517,642,529,641,523,702,512,726,504,740,494,745,482,750,460,753,401,751,341,744,304,728,287"/>
-<area shape="poly" id="edge15_Node000009_Node000010" title=" " alt="" coords="654,279,635,292,620,305,610,322,606,339,602,357,589,375,563,388,524,399,523,393,561,383,586,371,597,355,601,338,605,320,616,301,632,288,649,281"/>
-<area shape="rect" id="Node000011" href="$classuint64__t.html" title=" " alt="" coords="257,251,331,279"/>
-<area shape="poly" id="edge16_Node000009_Node000011" title=" " alt="" coords="282,291,272,334,273,354,281,371,297,382,323,390,390,403,385,404,321,395,295,386,277,374,268,355,266,333,279,295"/>
-<area shape="rect" id="Node000012" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="406,251,486,279"/>
-<area shape="poly" id="edge17_Node000009_Node000012" title=" " alt="" coords="441,292,438,332,441,372,451,397,446,395,436,373,432,332,438,296"/>
-<area shape="rect" id="Node000013" title=" " alt="" coords="509,251,610,279"/>
-<area shape="poly" id="edge18_Node000009_Node000013" title=" " alt="" coords="548,291,544,304,531,341,525,356,512,374,483,399,480,394,508,371,520,354,526,339,539,302,544,295"/>
+<area shape="rect" id="Node000001" title="Buffer implementation that stores and retrieves data from a Redis server using the Arduino Client." alt="" coords="239,461,373,489"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_base_buffer.html" title=" " alt="" coords="252,225,382,252"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="304,264,287,306,273,352,272,382,279,412,300,461,295,460,274,414,267,383,268,351,282,305,301,268"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1_single_buffer.html" title=" " alt="" coords="594,351,733,379"/>
+<area shape="poly" id="edge10_Node000009_Node000002" title=" " alt="" coords="341,260,383,295,434,325,597,353,592,354,432,330,380,299,340,266"/>
+<area shape="rect" id="Node000003" href="$class_client.html" title=" " alt="" coords="22,351,81,379"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="50,392,55,416,65,435,93,450,137,460,241,471,236,473,136,465,91,455,62,439,50,418,48,397"/>
+<area shape="rect" id="Node000004" href="$class_stream.html" title=" " alt="" coords="5,225,74,252"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="43,265,53,351,48,351,41,270"/>
+<area shape="rect" id="Node000005" href="$class_print.html" title=" " alt="" coords="14,98,65,126"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="40,138,42,224,37,224,39,144"/>
+<area shape="rect" id="Node000006" href="$classint.html" title=" " alt="" coords="103,5,141,33"/>
+<area shape="poly" id="edge8_Node000001_Node000006" title=" " alt="" coords="123,46,125,110,125,366,128,385,135,402,147,416,162,428,199,447,241,462,236,462,197,452,159,433,143,420,131,405,122,387,120,367,120,110,122,51"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="86,29,64,40,44,58,38,78,39,97,34,97,33,77,39,56,61,36,89,25"/>
+<area shape="poly" id="edge11_Node000009_Node000006" title=" " alt="" coords="156,17,271,22,347,32,429,48,513,74,593,110,630,133,665,159,697,189,725,223,731,244,731,272,724,302,712,329,701,342,688,353,685,349,698,339,708,326,719,300,725,271,726,245,720,226,693,193,662,163,627,137,590,115,511,79,428,53,346,37,271,28,158,22"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="282,351,331,379"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="308,393,308,462,304,460,304,396"/>
+<area shape="rect" id="Node000008" href="$classsize__t.html" title=" " alt="" coords="355,351,414,379"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="371,391,340,439,320,463,317,458,336,435,367,393"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="629,386,573,415,510,440,440,457,374,468,373,463,439,452,508,434,571,410,624,387"/>
+<area shape="rect" id="Node000010" href="$classbool.html" title=" " alt="" coords="510,225,559,252"/>
+<area shape="poly" id="edge16_Node000001_Node000010" title=" " alt="" coords="525,265,522,277,499,361,484,407,474,426,464,439,444,453,421,464,374,475,373,469,420,458,441,449,460,435,470,423,479,405,494,360,517,275,521,269"/>
+<area shape="poly" id="edge12_Node000009_Node000010" title=" " alt="" coords="528,265,528,298,531,313,537,326,559,339,597,352,591,352,557,343,534,329,526,314,522,298,525,269"/>
+<area shape="rect" id="Node000011" href="$classuint64__t.html" title=" " alt="" coords="785,225,859,252"/>
+<area shape="poly" id="edge13_Node000009_Node000011" title=" " alt="" coords="813,265,795,300,768,329,746,343,722,353,720,348,743,338,764,325,791,296,809,268"/>
+<area shape="rect" id="Node000012" href="$classaudio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="406,225,486,252"/>
+<area shape="poly" id="edge14_Node000009_Node000012" title=" " alt="" coords="441,266,442,299,446,313,453,325,503,337,597,354,591,354,502,342,450,329,441,315,437,299,438,270"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="609,225,710,252"/>
+<area shape="poly" id="edge15_Node000009_Node000013" title=" " alt="" coords="662,266,665,352,661,350,659,270"/>
 </map>

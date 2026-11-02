@@ -1,19 +1,19 @@
 <map id="BufferRTOS&lt; T &gt;" name="BufferRTOS&lt; T &gt;">
-<area shape="rect" id="Node000001" title="Buffer implementation which is using a FreeRTOS StreamBuffer. The default allocator uses psram is ava..." alt="" coords="361,198,493,226"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="23,6,153,34"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="168,5,210,3,254,6,298,17,338,36,358,53,376,73,401,118,417,163,426,198,420,197,412,164,396,120,371,76,355,57,335,41,296,22,254,12,210,8,170,9"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="5,58,171,86"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="185,66,263,75,302,85,338,102,366,122,390,148,421,198,416,198,386,152,363,126,335,106,300,90,262,80,187,70"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="10,114,166,142"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="181,130,259,140,338,160,375,177,408,197,402,198,372,181,336,165,258,146,183,135"/>
-<area shape="rect" id="Node000005" href="$classuint8__t.html" title=" " alt="" coords="55,170,121,198"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="136,185,362,204,358,208,137,190"/>
-<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="48,226,128,254"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="142,240,234,239,336,232,379,225,374,227,337,237,234,245,144,244"/>
-<area shape="rect" id="Node000007" href="$classint.html" title=" " alt="" coords="69,349,107,376"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="122,365,168,369,223,368,281,359,309,350,335,338,365,313,389,282,419,228,422,224,394,285,369,317,338,342,311,355,282,364,223,374,168,374,124,370"/>
-<area shape="rect" id="Node000008" href="$classbool.html" title=" " alt="" coords="63,427,113,455"/>
-<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="128,447,174,454,229,455,285,446,311,436,335,422,358,402,376,377,402,321,416,266,423,228,426,224,421,267,407,322,381,380,362,405,338,427,313,441,286,451,229,460,174,459,128,453"/>
-<area shape="rect" id="Node000009" href="$classsize__t.html" title=" " alt="" coords="58,506,118,534"/>
-<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="133,530,179,538,233,541,287,533,312,523,335,509,351,489,366,458,392,375,410,288,422,228,425,224,416,289,397,376,371,460,356,492,338,513,315,528,288,538,233,546,179,543,133,535"/>
+<area shape="rect" id="Node000001" title="Buffer implementation which is using a FreeRTOS StreamBuffer. The default allocator uses psram is ava..." alt="" coords="357,185,489,213"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_base_buffer.html" title=" " alt="" coords="23,5,153,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="167,11,209,12,252,18,295,31,334,50,367,81,392,118,410,155,420,186,415,184,405,157,388,121,363,84,331,55,293,36,251,24,209,18,170,16"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,57,171,85"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="185,71,260,83,298,94,334,109,359,125,382,145,414,185,409,185,378,149,356,129,331,114,296,99,259,88,187,76"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="10,109,166,137"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="181,129,257,140,333,158,396,184,391,185,332,163,256,146,183,134"/>
+<area shape="rect" id="Node000005" href="$classuint8__t.html" title=" " alt="" coords="55,161,121,189"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="136,176,358,192,355,197,137,181"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="48,213,128,241"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="142,224,232,220,332,212,359,211,354,213,333,217,232,226,144,229"/>
+<area shape="rect" id="Node000007" href="$classint.html" title=" " alt="" coords="69,308,107,336"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="122,323,166,325,220,324,277,315,331,295,358,278,380,255,411,215,415,212,384,259,361,282,334,300,278,320,220,329,166,331,123,328"/>
+<area shape="rect" id="Node000008" href="$classbool.html" title=" " alt="" coords="63,373,113,401"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="128,392,173,396,226,396,281,387,307,377,331,364,350,349,366,330,391,288,407,246,417,216,420,211,412,247,396,290,371,333,354,353,334,369,309,382,282,392,227,401,173,402,128,397"/>
+<area shape="rect" id="Node000009" href="$classsize__t.html" title=" " alt="" coords="58,439,118,466"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="133,461,178,467,231,468,284,459,308,450,331,436,356,413,376,385,391,353,402,321,415,259,420,216,423,211,420,259,407,322,396,355,380,387,360,416,334,441,311,455,285,464,231,473,178,472,133,466"/>
 </map>

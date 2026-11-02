@@ -1,39 +1,38 @@
 <map id="VFS_SDMMC" name="VFS_SDMMC">
-<area shape="rect" id="Node000001" title="ESP32 Virtual File System for SDMMC. The default mount point is &quot;/sdcard&quot; DRAFT implementation: not t..." alt="" coords="1038,661,1142,688"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_v_f_s.html" title="Base class which uses c++ file functions. It is also used as base class for an ESP32 Virtual File Sys..." alt="" coords="752,191,797,219"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="801,227,903,339,962,414,1017,495,1041,540,1061,587,1087,662,1082,660,1056,589,1036,543,1012,497,958,417,898,342,800,233"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="20,54,70,82"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="68,42,87,27,108,16,149,5,183,3,260,16,336,32,411,53,555,104,674,155,754,193,749,195,672,160,553,109,410,59,334,37,259,21,183,9,150,10,110,21,89,31,72,44"/>
-<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_str_view.html" title="A simple wrapper to provide string functions on existing allocated char*. If the underlying char* is ..." alt="" coords="308,191,380,219"/>
-<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="84,68,182,76,228,84,261,95,288,116,310,142,339,190,333,191,306,145,284,120,258,100,227,89,181,81,87,72"/>
-<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="284,322,404,350"/>
-<area shape="poly" id="edge11_Node000008_Node000003" title=" " alt="" coords="66,91,88,110,110,125,131,134,151,138,188,138,223,140,242,147,262,161,274,177,278,193,280,210,286,230,312,280,336,322,331,322,308,283,281,232,275,211,273,194,269,179,258,165,240,152,222,145,188,143,150,143,130,139,107,130,84,114,68,96"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_str.html" title="Str which keeps the data on the heap. We grow the allocated memory only if the copy source is not fit..." alt="" coords="558,191,597,219"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="612,203,753,204,749,207,614,208"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="393,210,482,211,560,209,555,212,482,217,396,215"/>
-<area shape="poly" id="edge8_Node000004_Node000005" title=" " alt="" coords="393,195,482,194,560,199,555,201,482,199,396,200"/>
-<area shape="rect" id="Node000006" href="$classbool.html" title=" " alt="" coords="20,245,70,272"/>
-<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="68,233,87,218,108,207,161,194,216,190,266,192,310,198,305,201,266,197,216,195,162,199,110,212,89,222,72,235"/>
-<area shape="poly" id="edge13_Node000008_Node000006" title=" " alt="" coords="60,283,83,311,110,332,153,346,198,352,243,351,285,347,281,351,243,356,198,357,152,351,107,337,79,315,61,288"/>
-<area shape="rect" id="Node000007" href="$classint.html" title=" " alt="" coords="26,457,64,484"/>
-<area shape="poly" id="edge17_Node000001_Node000007" title=" " alt="" coords="78,478,109,484,225,505,276,510,343,512,775,512,845,507,901,499,928,499,955,503,984,513,1016,531,1046,560,1067,596,1081,631,1088,662,1084,659,1076,633,1062,598,1042,563,1013,535,982,518,954,508,928,504,902,505,846,512,776,517,342,517,276,516,225,510,108,489,81,482"/>
-<area shape="poly" id="edge7_Node000005_Node000007" title=" " alt="" coords="66,443,82,416,89,386,88,359,90,333,96,320,107,307,126,294,144,287,180,288,217,292,237,290,258,282,280,268,300,251,333,217,331,222,304,255,284,272,261,287,238,295,217,297,180,293,145,293,128,298,110,311,100,323,95,335,93,359,95,386,87,418,71,445"/>
-<area shape="poly" id="edge10_Node000008_Node000007" title=" " alt="" coords="78,474,118,478,165,478,213,471,258,453,286,431,308,402,339,348,336,352,313,405,290,434,261,458,215,476,165,483,118,483,81,479"/>
-<area shape="poly" id="edge9_Node000004_Node000008" title=" " alt="" coords="382,312,559,214,556,218,386,316"/>
-<area shape="rect" id="Node000009" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="5,378,85,406"/>
-<area shape="poly" id="edge12_Node000008_Node000009" title=" " alt="" coords="99,398,177,400,218,396,259,388,296,370,328,348,325,352,298,375,261,393,219,402,177,405,102,402"/>
-<area shape="rect" id="Node000010" title=" " alt="" coords="710,551,838,579"/>
-<area shape="poly" id="edge14_Node000001_Node000010" title=" " alt="" coords="853,560,934,567,976,578,1016,594,1037,608,1055,625,1082,661,1077,659,1051,629,1033,612,1013,598,974,583,933,573,854,565"/>
-<area shape="rect" id="Node000011" title=" " alt="" coords="716,605,832,632"/>
-<area shape="poly" id="edge15_Node000001_Node000011" title=" " alt="" coords="847,621,929,630,1015,645,1056,660,1051,660,1014,651,928,635,848,626"/>
-<area shape="rect" id="Node000012" title=" " alt="" coords="695,661,853,688"/>
-<area shape="poly" id="edge16_Node000001_Node000012" title=" " alt="" coords="869,672,1040,674,1035,675,869,677"/>
-<area shape="rect" id="Node000013" href="$classsize__t.html" title=" " alt="" coords="744,717,804,744"/>
-<area shape="poly" id="edge18_Node000001_Node000013" title=" " alt="" coords="819,727,910,720,1014,702,1056,690,1061,688,1015,708,910,725,820,732"/>
-<area shape="rect" id="Node000014" title=" " alt="" coords="744,773,805,800"/>
-<area shape="poly" id="edge19_Node000001_Node000014" title=" " alt="" coords="820,787,863,787,913,783,964,772,1013,753,1034,739,1052,722,1078,690,1082,687,1056,725,1037,743,1016,758,966,777,913,788,863,792,821,792"/>
-<area shape="rect" id="Node000015" title=" " alt="" coords="732,829,816,856"/>
-<area shape="poly" id="edge20_Node000001_Node000015" title=" " alt="" coords="831,848,874,850,922,848,969,837,1013,816,1042,788,1062,752,1076,717,1084,691,1088,687,1081,718,1067,754,1046,791,1016,820,971,842,923,853,874,856,832,854"/>
-<area shape="rect" id="Node000016" title=" " alt="" coords="726,997,823,1024"/>
-<area shape="poly" id="edge21_Node000001_Node000016" title=" " alt="" coords="839,1023,882,1027,928,1026,973,1016,994,1006,1012,993,1029,971,1043,937,1065,848,1078,755,1086,691,1089,687,1084,756,1070,849,1048,939,1033,974,1016,997,996,1011,975,1021,929,1031,881,1033,838,1028"/>
+<area shape="rect" id="Node000001" title="ESP32 Virtual File System for SDMMC. The default mount point is &quot;/sdcard&quot; DRAFT implementation: not t..." alt="" coords="1018,577,1122,604"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_v_f_s.html" title="Base class which uses c++ file functions. It is also used as base class for an ESP32 Virtual File Sys..." alt="" coords="736,233,781,260"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="794,261,840,287,893,322,948,365,996,415,1024,458,1045,503,1068,577,1063,575,1040,505,1019,460,992,419,944,369,890,326,837,291,794,266"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="20,39,70,67"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="76,29,108,15,149,5,182,3,215,6,256,14,331,34,406,60,546,122,661,184,738,232,732,233,658,189,543,127,404,65,330,40,255,20,214,11,182,8,150,11,109,20,80,32"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_str_view.html" title="A simple wrapper to provide string functions on existing allocated char*. If the underlying char* is ..." alt="" coords="304,174,376,202"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="84,53,180,61,225,69,257,80,284,100,305,126,334,173,329,174,301,129,280,104,254,85,224,74,179,67,87,57"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_vector.html" title=" " alt="" coords="280,265,400,292"/>
+<area shape="poly" id="edge10_Node000008_Node000003" title=" " alt="" coords="70,75,110,102,131,111,150,115,186,117,221,122,239,130,258,145,269,161,273,177,275,194,282,212,303,240,325,264,320,265,299,243,277,214,270,195,268,178,264,163,254,148,236,135,219,127,186,123,150,121,129,116,107,107,72,80"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_str.html" title="Str which keeps the data on the heap. We grow the allocated memory only if the copy source is not fit..." alt="" coords="548,233,587,260"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="602,244,738,245,733,248,603,249"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="390,198,550,240,545,243,391,203"/>
+<area shape="rect" id="Node000006" href="$classbool.html" title=" " alt="" coords="20,198,70,226"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="78,188,108,176,161,168,214,167,306,179,301,182,214,173,161,173,109,181,82,191"/>
+<area shape="poly" id="edge12_Node000008_Node000006" title=" " alt="" coords="63,236,85,258,110,274,152,287,196,292,240,292,281,289,277,292,240,297,196,297,151,292,108,279,82,262,64,241"/>
+<area shape="rect" id="Node000007" href="$classint.html" title=" " alt="" coords="26,378,64,406"/>
+<area shape="poly" id="edge16_Node000001_Node000007" title=" " alt="" coords="78,398,194,420,266,429,339,433,759,433,883,428,910,430,936,437,964,449,996,467,1023,491,1043,521,1067,577,1062,575,1039,524,1019,495,993,471,962,453,934,442,909,436,883,433,760,438,338,438,265,435,193,425,81,403"/>
+<area shape="poly" id="edge7_Node000005_Node000007" title=" " alt="" coords="72,365,82,351,90,325,90,303,92,280,107,258,125,244,143,237,177,236,213,239,233,238,255,232,288,217,320,200,317,204,291,222,257,237,234,243,213,244,177,241,144,243,128,249,111,262,97,282,95,303,95,326,87,353,77,367"/>
+<area shape="poly" id="edge9_Node000008_Node000007" title=" " alt="" coords="78,394,117,397,162,396,210,389,254,373,279,355,300,334,332,290,330,295,304,337,283,360,257,377,211,394,162,401,117,402,81,399"/>
+<area shape="poly" id="edge8_Node000004_Node000008" title=" " alt="" coords="414,266,550,247,545,251,416,270"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="5,313,85,340"/>
+<area shape="poly" id="edge11_Node000008_Node000009" title=" " alt="" coords="99,331,175,333,215,330,255,322,289,308,321,291,318,295,292,313,256,327,216,335,175,338,102,335"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="694,473,822,500"/>
+<area shape="poly" id="edge13_Node000001_Node000010" title=" " alt="" coords="837,486,916,497,956,508,996,523,1032,548,1060,577,1055,576,1029,552,993,527,955,513,914,502,837,491"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="700,525,816,552"/>
+<area shape="poly" id="edge14_Node000001_Node000011" title=" " alt="" coords="832,542,911,551,995,565,1028,576,1023,576,994,570,910,556,832,547"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="679,577,837,604"/>
+<area shape="poly" id="edge15_Node000001_Node000012" title=" " alt="" coords="853,588,1021,590,1015,591,854,593"/>
+<area shape="rect" id="Node000013" href="$classsize__t.html" title=" " alt="" coords="728,629,788,656"/>
+<area shape="poly" id="edge17_Node000001_Node000013" title=" " alt="" coords="803,636,891,627,994,610,1028,604,1022,606,995,615,892,632,804,642"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="728,681,789,708"/>
+<area shape="poly" id="edge18_Node000001_Node000014" title=" " alt="" coords="804,692,894,682,945,671,993,653,1028,629,1054,606,1059,604,1032,633,996,658,946,676,895,688,804,697"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="716,733,800,760"/>
+<area shape="poly" id="edge19_Node000001_Node000015" title=" " alt="" coords="815,748,857,747,903,742,950,730,993,709,1019,686,1038,657,1062,606,1066,603,1043,659,1023,689,996,714,952,735,904,747,857,753,815,753"/>
+<area shape="rect" id="Node000016" title=" " alt="" coords="710,863,807,891"/>
+<area shape="poly" id="edge20_Node000001_Node000016" title=" " alt="" coords="822,887,864,891,910,888,954,878,993,856,1006,838,1019,810,1041,737,1056,661,1065,607,1069,603,1061,662,1046,738,1024,812,1011,841,996,860,956,883,910,894,864,896,822,893"/>
 </map>

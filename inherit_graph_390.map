@@ -1,13 +1,3 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classaudio__tools_1_1_video_encoder.html" title="Common interface for video encoders (e.g. H264Encoder, H264EncoderESP32S3 &#45; CodecH264...." alt="" coords="5,135,116,162"/>
-<area shape="rect" id="Node000001" href="$classaudio__tools_1_1_h264_encoder.html" title="H.264 video encoder: wraps TinyH264Encoder (https://github.com/pschatzmann/TinyH264)...." alt="" coords="192,5,299,33"/>
-<area shape="poly" id="edge925_Node000000_Node000001" title=" " alt="" coords="79,121,115,80,162,42,193,30,189,33,165,47,119,84,83,124"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_h264_encoder_e_s_p32_p4.html" title="H.264 video encoder for ESP32&#45;P4: wraps esp_h264_p4::H264EncoderP4 (https://github...." alt="" coords="164,57,327,102"/>
-<area shape="poly" id="edge926_Node000000_Node000002" title=" " alt="" coords="112,127,186,100,182,104,115,131"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_h264_encoder_e_s_p32_s3.html" title="H.264 video encoder for ESP32&#45;S3: wraps esp_h264::H264Encoder (https://github.com/pschatzmann/ESP32S3..." alt="" coords="164,126,327,171"/>
-<area shape="poly" id="edge927_Node000000_Node000003" title=" " alt="" coords="130,146,165,147,161,150,132,151"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_m_j_p_e_g_encoder.html" title="Motion&#45;JPEG video encoder: wraps TinyJPEGEncoder (https://github.com/pschatzmann/TinyJPEG) as a Video..." alt="" coords="188,195,303,222"/>
-<area shape="poly" id="edge928_Node000000_Node000004" title=" " alt="" coords="118,165,164,181,200,194,195,195,163,186,118,170"/>
-<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_m_p_g_encoder.html" title="MPEG&#45;1 part 2 video encoder wrapper around TinyMPGEncoder." alt="" coords="194,247,297,274"/>
-<area shape="poly" id="edge929_Node000000_Node000005" title=" " alt="" coords="87,171,123,202,165,232,196,247,190,247,162,236,119,207,85,176"/>
+<area shape="rect" id="Node000000" href="$classaudio__tools_1_1_vector.html" title=" " alt="" coords="5,5,158,50"/>
 </map>

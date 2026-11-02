@@ -1,13 +1,13 @@
 <map id="AudioTimerDriverESP32" name="AudioTimerDriverESP32">
-<area shape="rect" id="Node000001" title="Repeating Timer functions for simple scheduling of repeated execution using esp_timer_create()." alt="" coords="252,207,428,234"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_audio_timer_driver_base.html" title=" " alt="" coords="5,106,174,134"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="137,137,309,204,305,208,136,142"/>
+<area shape="rect" id="Node000001" title="Repeating Timer functions for simple scheduling of repeated execution using esp_timer_create()" alt="" coords="252,191,428,218"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_audio_timer_driver_base.html" title=" " alt="" coords="5,98,174,126"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="141,129,306,188,302,192,140,134"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="59,5,120,33"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="91,46,92,106,87,105,88,51"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="198,106,347,134"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="285,146,306,181,328,207,323,205,302,184,282,150"/>
-<area shape="rect" id="Node000005" href="$classuint64__t.html" title=" " alt="" coords="371,106,445,134"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="400,147,381,184,358,208,355,204,377,181,396,150"/>
-<area shape="rect" id="Node000006" title=" " alt="" coords="470,106,584,134"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="508,144,486,167,460,185,431,199,401,209,400,203,429,194,457,180,482,163,503,146"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="91,46,92,98,87,97,88,51"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="198,98,347,126"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="290,137,310,165,330,191,325,189,306,168,287,142"/>
+<area shape="rect" id="Node000005" href="$classuint64__t.html" title=" " alt="" coords="371,98,445,126"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="398,138,381,168,357,193,355,188,377,165,394,141"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="470,98,584,126"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="502,135,452,169,391,193,390,187,450,164,497,136"/>
 </map>

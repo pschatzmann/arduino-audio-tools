@@ -1,27 +1,27 @@
 <map id="SDDirect&lt; SDT, FileT &gt;" name="SDDirect&lt; SDT, FileT &gt;">
-<area shape="rect" id="Node000001" title="We access the files directy with an index. The index is determined by a recurseve tree walk thru the ..." alt="" coords="340,394,514,422"/>
-<area shape="rect" id="Node000002" href="$class_string.html" title=" " alt="" coords="5,249,65,276"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="33,289,39,332,46,352,58,368,71,374,95,380,167,389,341,401,338,405,167,395,94,385,69,379,55,372,41,354,33,333,32,294"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="129,249,178,276"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="152,290,155,332,162,352,173,368,200,382,241,392,342,405,337,405,240,397,198,387,170,372,157,354,150,333,149,294"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="271,249,330,276"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="303,290,312,331,320,351,332,368,348,381,369,394,364,393,346,386,328,372,316,353,307,333,300,294"/>
-<area shape="rect" id="Node000005" href="$classint32__t.html" title=" " alt="" coords="354,249,420,276"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="381,289,376,329,378,350,384,369,393,381,406,394,401,393,389,385,379,371,372,351,371,329,377,293"/>
-<area shape="rect" id="Node000006" href="$classsize__t.html" title=" " alt="" coords="449,116,509,144"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="483,157,485,202,483,255,476,314,459,371,442,396,439,391,454,369,470,313,478,255,480,201,480,161"/>
-<area shape="rect" id="Node000009" href="$classaudio__tools_1_1audio__tools_1_1_list.html" title=" " alt="" coords="599,249,711,276"/>
-<area shape="poly" id="edge12_Node000009_Node000006" title=" " alt="" coords="490,155,509,196,526,223,555,236,601,250,596,250,554,241,523,227,504,198,488,160"/>
-<area shape="rect" id="Node000007" href="$classlong.html" title=" " alt="" coords="736,249,785,276"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="753,289,734,338,723,359,711,372,677,387,628,397,515,407,514,402,627,391,676,382,708,368,718,356,729,336,749,293"/>
-<area shape="rect" id="Node000008" href="$classbool.html" title=" " alt="" coords="820,249,869,276"/>
-<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="847,290,841,334,831,355,817,372,801,379,774,385,697,395,514,406,514,401,696,389,773,380,799,374,813,368,827,352,835,332,843,294"/>
-<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="627,285,495,372,453,396,451,391,492,368,621,286"/>
-<area shape="rect" id="Node000010" href="$structaudio__tools_1_1audio__tools_1_1_list_1_1_node.html" title=" " alt="" coords="535,116,591,144"/>
-<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="597,150,624,176,644,213,654,249,650,247,639,216,620,179,596,155"/>
-<area shape="poly" id="edge10_Node000010_Node000010" title=" " alt="" coords="607,117,614,122,617,130,609,141,592,143,590,138,606,136,612,129,610,125,606,123"/>
-<area shape="rect" id="Node000011" href="$class_t.html" title=" " alt="" coords="544,5,582,33"/>
-<area shape="poly" id="edge11_Node000010_Node000011" title=" " alt="" coords="564,46,565,117,561,114,562,50"/>
-<area shape="rect" id="Node000012" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="677,116,756,144"/>
-<area shape="poly" id="edge13_Node000009_Node000012" title=" " alt="" coords="713,157,704,192,689,226,670,250,667,246,685,223,699,190,709,161"/>
+<area shape="rect" id="Node000001" title="We access the files directy with an index. The index is determined by a recurseve tree walk thru the ..." alt="" coords="323,341,496,368"/>
+<area shape="rect" id="Node000002" href="$class_string.html" title=" " alt="" coords="5,214,65,242"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="36,255,44,288,50,303,60,314,95,325,162,335,324,347,321,351,161,340,94,331,58,319,46,305,39,290,34,260"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="125,214,174,242"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="149,255,154,288,160,302,169,315,194,328,231,337,325,350,320,351,230,343,192,333,166,319,156,305,149,289,146,260"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="252,214,311,242"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="289,254,302,286,322,315,339,328,361,340,355,340,336,332,318,319,297,289,286,259"/>
+<area shape="rect" id="Node000005" href="$classint32__t.html" title=" " alt="" coords="335,214,402,242"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="363,254,361,286,368,316,376,328,389,341,384,339,373,332,363,318,356,286,359,258"/>
+<area shape="rect" id="Node000006" href="$classsize__t.html" title=" " alt="" coords="428,101,487,129"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="461,142,459,224,452,271,439,318,423,343,420,338,434,316,447,270,454,223,457,146"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1_list.html" title=" " alt="" coords="575,214,687,242"/>
+<area shape="poly" id="edge12_Node000009_Node000006" title=" " alt="" coords="470,141,486,166,506,188,534,200,577,214,572,214,532,205,503,192,481,170,468,146"/>
+<area shape="rect" id="Node000007" href="$classlong.html" title=" " alt="" coords="712,214,761,242"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="727,254,706,290,691,306,674,319,643,331,598,340,497,351,497,346,598,335,641,326,671,314,687,302,701,286,722,256"/>
+<area shape="rect" id="Node000008" href="$classbool.html" title=" " alt="" coords="793,214,842,242"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="817,255,808,290,799,306,786,319,745,331,671,340,497,352,497,347,671,335,744,326,783,314,794,303,803,288,813,258"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="597,249,434,343,432,338,592,250"/>
+<area shape="rect" id="Node000010" href="$structaudio__tools_1_1_list_1_1_node.html" title=" " alt="" coords="514,101,569,129"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="579,135,600,154,618,184,630,215,625,212,614,187,596,158,578,141"/>
+<area shape="poly" id="edge10_Node000010_Node000010" title=" " alt="" coords="585,104,593,108,596,115,587,125,570,127,569,122,585,120,591,115,589,112,585,110"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="522,5,561,33"/>
+<area shape="poly" id="edge11_Node000010_Node000011" title=" " alt="" coords="543,46,544,102,539,100,540,51"/>
+<area shape="rect" id="Node000012" href="$classaudio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="650,101,729,129"/>
+<area shape="poly" id="edge13_Node000009_Node000012" title=" " alt="" coords="683,142,663,191,645,216,642,211,658,189,679,145"/>
 </map>

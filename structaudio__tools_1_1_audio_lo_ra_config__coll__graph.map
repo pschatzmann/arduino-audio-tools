@@ -1,17 +1,17 @@
 <map id="AudioLoRaConfig" name="AudioLoRaConfig">
-<area shape="rect" id="Node000001" title="Configuration for AudioLoRa." alt="" coords="248,385,379,413"/>
-<area shape="rect" id="Node000002" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="121,106,204,134"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="165,146,172,193,184,249,205,307,220,335,238,360,253,373,272,385,267,384,250,377,234,363,215,338,200,310,178,250,166,194,163,151"/>
+<area shape="rect" id="Node000001" title="Configuration for AudioLoRa." alt="" coords="241,327,372,354"/>
+<area shape="rect" id="Node000002" href="$structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="117,98,200,126"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="164,139,175,176,189,218,210,262,238,301,253,314,272,326,267,326,250,318,234,304,205,265,184,220,170,178,163,144"/>
 <area shape="rect" id="Node000003" href="$classuint32__t.html" title=" " alt="" coords="5,5,80,33"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="49,46,59,65,70,80,94,97,123,109,118,111,92,102,66,84,54,67,49,51"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="125,5,200,33"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="163,46,165,106,160,105,162,51"/>
-<area shape="rect" id="Node000005" href="$classuint8__t.html" title=" " alt="" coords="227,5,293,33"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="253,45,245,67,232,84,216,97,198,107,195,104,213,93,229,80,240,64,250,50"/>
-<area shape="rect" id="Node000006" href="$classint32__t.html" title=" " alt="" coords="228,106,294,134"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="255,147,248,193,243,247,247,305,254,333,265,360,275,373,288,385,283,384,271,376,261,363,249,335,242,306,238,247,243,192,252,151"/>
-<area shape="rect" id="Node000007" href="$classint.html" title=" " alt="" coords="346,106,384,134"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="367,147,363,245,354,304,338,362,325,387,322,383,333,360,349,303,358,245,364,151"/>
-<area shape="rect" id="Node000008" href="$classbool.html" title=" " alt="" coords="494,106,543,134"/>
-<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="526,146,533,194,533,252,529,282,521,311,509,339,491,363,473,375,446,383,380,395,379,389,444,378,471,370,487,359,504,336,516,309,524,281,528,251,528,195,523,151"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="51,45,70,72,92,88,119,99,114,102,90,92,66,76,51,50"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="121,5,196,33"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="159,46,161,98,156,97,158,51"/>
+<area shape="rect" id="Node000005" href="$classuint8__t.html" title=" " alt="" coords="220,5,286,33"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="244,45,226,76,191,100,188,96,222,72,241,49"/>
+<area shape="rect" id="Node000006" href="$classint32__t.html" title=" " alt="" coords="224,98,290,126"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="252,139,247,175,244,217,248,260,261,301,270,314,284,327,279,325,267,318,256,304,243,261,239,217,242,175,249,143"/>
+<area shape="rect" id="Node000007" href="$classint.html" title=" " alt="" coords="338,98,376,126"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="358,139,351,216,343,260,330,304,317,328,314,324,325,302,338,259,346,215,354,143"/>
+<area shape="rect" id="Node000008" href="$classbool.html" title=" " alt="" coords="478,98,527,126"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="509,139,512,177,510,221,499,266,489,286,475,305,458,315,433,324,373,335,372,330,432,318,456,310,471,301,484,283,494,264,505,220,507,178,506,143"/>
 </map>

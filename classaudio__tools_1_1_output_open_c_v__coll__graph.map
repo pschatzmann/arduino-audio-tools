@@ -1,23 +1,23 @@
 <map id="OutputOpenCV" name="OutputOpenCV">
-<area shape="rect" id="Node000001" title="Display a video frame with OpenCV, to be used on the desktop &#45; VideoFormat::MJPEG (the default) expec..." alt="" coords="297,288,414,316"/>
+<area shape="rect" id="Node000001" title="Display a video frame with OpenCV, to be used on the desktop &#45; VideoFormat::MJPEG (the default) expec..." alt="" coords="293,253,410,281"/>
 <area shape="rect" id="Node000002" href="$classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory...." alt="" coords="23,5,125,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="139,6,174,5,209,8,244,18,274,36,301,64,321,96,336,132,346,169,356,238,357,288,352,287,351,239,341,170,331,134,317,99,297,67,271,40,242,23,208,13,174,10,142,10"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="139,11,173,12,207,17,241,28,270,46,293,69,311,96,335,155,348,212,352,254,347,252,342,213,330,157,306,99,289,73,267,51,238,33,206,23,173,17,142,15"/>
 <area shape="rect" id="Node000003" href="$classaudio__tools_1_1_video_info_source.html" title="Provider of VideoInfo (width/height/fps/format) for whoever needs to size buffers/panel setup against..." alt="" coords="10,57,138,85"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="152,63,216,71,247,82,274,98,296,119,313,144,337,197,350,249,355,289,350,287,345,250,332,199,308,146,292,123,271,103,244,87,215,76,155,68"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="22,113,126,141"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="141,124,209,134,243,145,274,162,304,191,327,226,353,288,347,287,322,228,300,194,271,167,241,150,208,139,143,129"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="37,192,111,220"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="125,208,198,220,274,243,310,264,340,287,335,288,307,268,272,248,196,225,127,213"/>
-<area shape="rect" id="Node000006" href="$classbool.html" title=" " alt="" coords="49,248,99,276"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="113,265,298,292,294,295,114,270"/>
-<area shape="rect" id="Node000007" title=" " alt="" coords="5,327,143,354"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="158,345,215,344,272,336,302,326,332,315,327,318,304,331,273,341,215,349,160,350"/>
-<area shape="rect" id="Node000008" title=" " alt="" coords="49,383,99,410"/>
-<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="113,397,189,395,231,388,272,375,293,362,313,346,342,318,346,314,316,350,296,367,274,380,233,394,190,401,115,402"/>
-<area shape="rect" id="Node000009" href="$classsize__t.html" title=" " alt="" coords="44,439,104,466"/>
-<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="119,455,155,456,194,453,234,444,271,427,299,403,321,372,348,318,351,314,326,374,303,406,274,432,236,449,195,458,155,461,120,460"/>
-<area shape="rect" id="Node000010" href="$classuint64__t.html" title=" " alt="" coords="37,495,111,522"/>
-<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="126,514,162,515,200,513,237,504,271,486,291,468,307,447,330,399,344,351,351,318,354,314,349,353,335,400,311,450,295,472,274,490,239,509,200,518,162,521,127,519"/>
-<area shape="rect" id="Node000011" href="$classuint32__t.html" title=" " alt="" coords="37,551,111,578"/>
-<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="127,572,162,575,200,573,238,564,271,546,296,521,315,492,329,459,339,425,349,362,353,318,356,314,355,362,344,427,334,461,319,494,300,525,274,550,240,569,201,578,162,580,127,577"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="152,66,214,76,243,87,270,102,288,119,304,138,327,180,342,221,350,254,345,252,337,222,322,182,299,141,284,122,267,107,241,91,212,81,154,71"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="22,109,126,137"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="141,121,206,131,239,142,270,157,296,178,318,204,346,253,341,253,314,207,293,182,267,161,237,147,205,136,143,126"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="37,169,111,197"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="126,188,196,201,270,222,329,252,324,253,268,227,194,206,128,193"/>
+<area shape="rect" id="Node000006" href="$classbool.html" title=" " alt="" coords="49,221,99,249"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="114,237,294,258,290,262,115,242"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="5,281,143,309"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="157,300,213,300,268,295,321,280,317,283,269,300,213,306,159,305"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="49,333,99,361"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="113,346,187,342,228,335,268,323,304,303,333,283,337,280,307,307,270,328,229,340,187,347,115,351"/>
+<area shape="rect" id="Node000009" href="$classsize__t.html" title=" " alt="" coords="44,385,104,413"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="119,398,192,392,231,382,267,366,292,347,313,324,341,283,345,280,317,327,296,351,270,370,233,387,193,397,120,403"/>
+<area shape="rect" id="Node000010" href="$classuint64__t.html" title=" " alt="" coords="37,437,111,465"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="126,452,161,451,197,446,234,436,267,418,298,387,321,348,336,310,345,283,349,279,341,312,326,350,303,390,270,422,236,441,199,451,161,456,127,458"/>
+<area shape="rect" id="Node000011" href="$classuint32__t.html" title=" " alt="" coords="37,489,111,517"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="126,506,161,506,198,502,235,491,267,473,288,452,305,428,329,373,341,320,348,284,351,279,347,321,334,375,310,430,292,456,270,477,237,496,199,507,161,512,126,512"/>
 </map>

@@ -1,15 +1,15 @@
 <map id="R2RDriver" name="R2RDriver">
-<area shape="rect" id="Node000001" title="R2R driver which uses the Arduino API to setup and write to the digital pins." alt="" coords="43,251,130,279"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_r2_r_driver_base.html" title="R2R driver base class." alt="" coords="5,128,125,156"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="72,170,87,251,81,251,68,173"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="148,128,320,156"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="209,167,104,253,101,249,205,164"/>
-<area shape="rect" id="Node000004" href="$classint.html" title=" " alt="" coords="63,5,102,33"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="86,46,97,77,114,102,132,116,154,127,149,129,129,120,110,106,92,79,85,51"/>
+<area shape="rect" id="Node000001" title="R2R driver which uses the Arduino API to setup and write to the digital pins." alt="" coords="43,225,130,252"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_r2_r_driver_base.html" title="R2R driver base class." alt="" coords="5,115,125,143"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="73,156,86,225,81,224,68,160"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_vector.html" title=" " alt="" coords="148,115,320,143"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="206,153,106,227,103,222,202,151"/>
+<area shape="rect" id="Node000004" href="$classint.html" title=" " alt="" coords="64,5,103,33"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="94,45,108,69,126,89,146,102,171,114,166,115,144,107,122,93,104,72,93,50"/>
 <area shape="rect" id="Node000005" title=" " alt="" coords="126,5,233,33"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="185,46,195,75,206,103,224,128,219,128,201,106,190,77,184,51"/>
-<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="257,5,337,33"/>
-<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="287,45,258,106,244,130,240,126,253,103,283,49"/>
-<area shape="rect" id="Node000007" href="$classbool.html" title=" " alt="" coords="371,5,420,33"/>
-<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="393,46,384,79,366,106,345,121,322,131,320,126,342,116,362,102,380,77,390,50"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="191,45,213,90,228,115,222,114,208,92,189,50"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="257,5,337,33"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="285,45,261,92,245,116,241,113,256,90,281,49"/>
+<area shape="rect" id="Node000007" href="$classbool.html" title=" " alt="" coords="370,5,419,33"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="388,46,377,72,360,93,339,107,315,117,313,112,336,102,357,89,373,69,384,50"/>
 </map>

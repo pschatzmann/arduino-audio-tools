@@ -1,16 +1,15 @@
 <map id="Bin::BinStateT&lt; T &gt;" name="Bin::BinStateT&lt; T &gt;">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,251,157,279"/>
-<area shape="rect" id="Node000002" href="$structaudio__tools_1_1audio__tools_1_1_bin_1_1_bin_state.html" title=" " alt="" coords="21,151,98,178"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="68,192,81,251,75,251,64,195"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_bin_t.html" title=" " alt="" coords="122,151,210,178"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="148,190,94,253,91,249,143,190"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_base_converter.html" title="Abstract Base class for Converters A converter is processing the data in the indicated array." alt="" coords="18,5,136,33"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="87,44,121,100,155,150,150,150,116,103,86,50"/>
-<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="100,43,138,99,166,150,161,150,134,102,99,48"/>
-<area shape="rect" id="Node000005" href="$classint.html" title=" " alt="" coords="159,5,198,33"/>
-<area shape="poly" id="edge5_Node000003_Node000005" title=" " alt="" coords="171,46,171,57,167,108,168,151,163,149,162,108,166,57,169,51"/>
-<area shape="rect" id="Node000006" href="$classbool.html" title=" " alt="" coords="271,5,320,33"/>
-<area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="296,46,290,89,281,110,268,129,242,148,212,159,210,154,239,143,264,125,276,108,285,88,293,51"/>
-<area shape="rect" id="Node000007" title=" " alt="" coords="353,5,422,33"/>
-<area shape="poly" id="edge7_Node000003_Node000007" title=" " alt="" coords="389,47,383,90,374,111,360,129,334,142,296,152,212,163,210,157,295,146,333,137,357,125,369,108,378,89,386,51"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="66,225,217,252"/>
+<area shape="rect" id="Node000002" href="$structaudio__tools_1_1_bin_1_1_bin_state.html" title=" " alt="" coords="82,132,158,160"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="128,173,141,225,136,224,125,177"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_bin_t.html" title=" " alt="" coords="182,132,271,160"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="207,170,155,226,152,222,202,172"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_base_converter.html" title="Abstract Base class for Converters A converter is processing the data in the indicated array." alt="" coords="5,5,123,33"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="83,42,115,75,151,106,195,131,190,132,148,110,111,78,83,47"/>
+<area shape="rect" id="Node000005" href="$classint.html" title=" " alt="" coords="146,5,185,33"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="158,46,157,78,159,93,164,107,175,119,191,131,186,132,172,123,160,109,154,94,151,78,156,51"/>
+<area shape="rect" id="Node000006" href="$classbool.html" title=" " alt="" coords="262,5,311,33"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="282,46,273,79,260,109,241,134,238,130,255,107,268,77,279,50"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="340,5,409,33"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="372,46,362,81,342,110,308,131,272,142,270,137,306,126,338,106,357,78,368,50"/>
 </map>

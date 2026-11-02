@@ -1,31 +1,24 @@
 <map id="AudioOutputWithCallback" name="AudioOutputWithCallback">
-<area shape="rect" id="Node000001" title="ESP8266Audio AudioOutput class which stores the data in a temporary buffer. The buffer can be consume..." alt="" coords="86,459,275,487"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_audio_output.html" title="Abstract Audio Ouptut class." alt="" coords="52,232,154,260"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="114,273,178,458,173,459,110,276"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="356,5,407,33"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="338,23,267,32,175,52,129,69,85,92,46,122,13,158,9,169,9,178,22,198,45,215,73,230,69,233,43,220,18,202,4,180,3,168,9,155,42,118,82,88,127,65,174,47,266,26,343,20"/>
-<area shape="rect" id="Node000010" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="348,81,416,109"/>
-<area shape="poly" id="edge10_Node000010_Node000003" title=" " alt="" coords="374,46,377,81,372,80,372,51"/>
-<area shape="poly" id="edge11_Node000010_Node000003" title=" " alt="" coords="392,46,391,82,386,80,389,51"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="23,157,156,184"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="95,197,103,232,98,232,94,202"/>
-<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="" coords="192,232,297,260"/>
-<area shape="poly" id="edge13_Node000008_Node000004" title=" " alt="" coords="124,189,212,231,208,233,124,194"/>
-<area shape="poly" id="edge16_Node000008_Node000004" title=" " alt="" coords="138,188,226,231,222,233,139,194"/>
-<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="181,157,308,184"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="204,194,130,234,126,230,207,190"/>
-<area shape="poly" id="edge14_Node000008_Node000005" title=" " alt="" coords="237,197,240,233,235,231,235,202"/>
-<area shape="poly" id="edge17_Node000008_Node000005" title=" " alt="" coords="254,197,254,233,249,231,252,202"/>
-<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_buffered_stream.html" title="The Arduino Stream supports operations on single characters. This is usually not the best way to push..." alt="" coords="183,384,306,411"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="225,422,193,461,190,457,220,424"/>
-<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_modifying_stream.html" title="Abstract class: Objects can be put into a pipleline." alt="" coords="178,308,311,336"/>
-<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="237,349,240,384,235,382,234,353"/>
-<area shape="poly" id="edge19_Node000006_Node000007" title=" " alt="" coords="255,349,254,385,249,382,251,353"/>
-<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="237,273,240,308,235,307,234,278"/>
-<area shape="poly" id="edge18_Node000007_Node000008" title=" " alt="" coords="254,273,254,309,249,306,252,278"/>
-<area shape="rect" id="Node000009" href="$classaudio__tools_1_1audio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer,size_t size) and readBytes(uint8..." alt="" coords="332,157,432,184"/>
-<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="334,193,263,234,260,230,338,190"/>
-<area shape="poly" id="edge15_Node000008_Node000009" title=" " alt="" coords="349,194,277,234,274,230,353,191"/>
-<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="374,122,377,157,372,155,372,127"/>
-<area shape="poly" id="edge12_Node000009_Node000010" title=" " alt="" coords="392,122,391,157,386,155,389,126"/>
+<area shape="rect" id="Node000001" title="ESP8266Audio AudioOutput class which stores the data in a temporary buffer. The buffer can be consume..." alt="" coords="80,459,268,487"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_audio_output.html" title="Abstract Audio Ouptut class." alt="" coords="61,232,164,260"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="120,273,155,411,171,460,166,458,150,412,116,277"/>
+<area shape="rect" id="Node000003" href="$class_print.html" title=" " alt="" coords="5,5,57,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="21,50,16,78,10,113,12,149,23,183,33,198,47,211,80,231,75,233,44,215,29,202,18,186,6,150,5,112,10,77,21,45"/>
+<area shape="rect" id="Node000010" href="$class_stream.html" title=" " alt="" coords="194,81,262,109"/>
+<area shape="poly" id="edge10_Node000010_Node000003" title=" " alt="" coords="71,33,196,79,192,82,72,38"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="32,157,166,184"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="104,197,113,232,107,232,104,202"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="" coords="194,232,300,260"/>
+<area shape="poly" id="edge11_Node000008_Node000004" title=" " alt="" coords="139,189,223,231,218,233,139,194"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="190,157,317,184"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="213,194,139,234,136,230,217,190"/>
+<area shape="poly" id="edge12_Node000008_Node000005" title=" " alt="" coords="252,198,251,233,246,231,250,203"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_buffered_stream.html" title="The Arduino Stream supports operations on single characters. This is usually not the best way to push..." alt="" coords="164,384,287,411"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="210,423,185,461,181,457,205,425"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_modifying_stream.html" title="Abstract class: Objects can be put into a pipleline." alt="" coords="168,308,300,336"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="232,349,229,385,225,382,229,353"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="243,273,238,309,234,306,240,278"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer, size_t size) and readBytes(uint..." alt="" coords="341,157,441,184"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="350,193,274,234,271,230,354,190"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="271,113,365,155,360,157,271,118"/>
 </map>

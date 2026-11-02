@@ -1,5 +1,17 @@
 <map id="BiQuadDF1&lt; T &gt;" name="BiQuadDF1&lt; T &gt;">
-<area shape="rect" id="Node000001" title="Second&#45;order IIR filter in Direct Form I. Maintains separate input and output histories (x and y dela..." alt="" coords="5,81,138,109"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_filter.html" title=" " alt="" coords="15,5,128,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="73,47,74,81,69,80,70,51"/>
+<area shape="rect" id="Node000001" title="Second&#45;order IIR filter in Direct Form I. Maintains separate input and output histories (x and y dela..." alt="" coords="146,136,278,164"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_band_pass_filter_d_f1.html" title="Second&#45;order band&#45;pass filter (BiQuad DF1). Same coefficients as BandPassFilter; use this (not BandPa..." alt="" coords="326,5,507,33"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="233,122,273,82,325,44,356,32,351,35,327,48,276,86,236,126"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_high_pass_filter_d_f1.html" title="Second&#45;order high&#45;pass filter (BiQuad DF1). Same coefficients as HighPassFilter; use this (not HighPa..." alt="" coords="328,57,505,85"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="254,126,325,95,365,84,360,87,327,100,256,131"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_high_shelf_filter_d_f1.html" title="Second&#45;order high&#45;shelf filter (BiQuad DF1). Same coefficients as HighShelfFilter...." alt="" coords="326,109,507,137"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="292,137,328,134,323,136,294,142"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_low_pass_filter_d_f1.html" title="Second&#45;order low&#45;pass filter (BiQuad DF1). Same coefficients as LowPassFilter, but built on BiQuadDF1..." alt="" coords="330,161,503,189"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="293,157,332,164,327,165,294,163"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_low_shelf_filter_d_f1.html" title="Second&#45;order low&#45;shelf filter (BiQuad DF1). Same coefficients as LowShelfFilter. NOTE: switching to D..." alt="" coords="328,213,505,241"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="256,168,327,198,366,213,360,213,325,203,256,173"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_notch_filter_d_f1.html" title="Second&#45;order notch (band&#45;reject) filter (BiQuad DF1). Same coefficients as NotchFilter; use this (not..." alt="" coords="338,265,495,293"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="236,173,277,213,327,250,356,265,351,264,325,255,273,217,234,178"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_filter.html" title="Abstract filter interface definition. Subclasses implement process() to transform audio samples one a..." alt="" coords="5,136,98,164"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="112,147,148,148,143,151,114,152"/>
 </map>

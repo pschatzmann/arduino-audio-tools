@@ -1,16 +1,16 @@
 <map id="OpusEncoderSettings" name="OpusEncoderSettings">
-<area shape="rect" id="Node000001" title="Setting for Opus Encoder where the following values are valid: &#45;1 indicates that the default value sh..." alt="" coords="214,549,373,577"/>
-<area shape="rect" id="Node000002" href="$structaudio__tools_1_1_opus_settings.html" title="Setting for Opus Decoder." alt="" coords="153,350,260,378"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="220,390,290,548,285,548,216,394"/>
-<area shape="rect" id="Node000003" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="121,106,204,134"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="169,147,207,350,201,350,166,151"/>
+<area shape="rect" id="Node000001" title="Setting for Opus Encoder where the following values are valid: &#45;1 indicates that the default value sh..." alt="" coords="206,461,365,489"/>
+<area shape="rect" id="Node000002" href="$structaudio__tools_1_1_opus_settings.html" title="Setting for Opus Decoder." alt="" coords="149,296,256,324"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="217,335,281,460,276,460,214,339"/>
+<area shape="rect" id="Node000003" href="$structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="117,98,200,126"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="166,139,202,295,197,295,163,143"/>
 <area shape="rect" id="Node000004" href="$classuint32__t.html" title=" " alt="" coords="5,5,80,33"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="48,46,59,65,70,80,94,97,123,109,118,111,92,102,66,84,54,67,49,51"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="125,5,200,33"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="163,46,165,106,160,105,162,51"/>
-<area shape="rect" id="Node000006" href="$classuint8__t.html" title=" " alt="" coords="227,5,293,33"/>
-<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="250,50,245,67,232,84,216,97,198,107,195,104,213,93,229,80,240,64,253,45"/>
-<area shape="rect" id="Node000007" href="$classint.html" title=" " alt="" coords="295,106,334,134"/>
-<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="347,136,365,156,369,170,369,181,365,205,351,310,332,411,299,550,294,547,327,410,346,309,360,205,364,180,364,171,360,159,347,142"/>
-<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="278,125,242,135,224,145,210,159,197,183,189,208,187,263,194,313,205,350,199,350,189,314,182,263,184,208,192,181,205,156,221,141,240,131,282,121"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="50,45,70,72,92,88,119,99,114,102,90,92,66,76,51,50"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="121,5,196,33"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="159,46,161,98,156,97,158,51"/>
+<area shape="rect" id="Node000006" href="$classuint8__t.html" title=" " alt="" coords="220,5,286,33"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="241,49,226,76,191,99,188,96,222,72,244,45"/>
+<area shape="rect" id="Node000007" href="$classint.html" title=" " alt="" coords="287,98,326,126"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="339,131,353,149,356,166,353,184,340,268,323,348,291,462,287,459,317,347,335,267,348,183,351,166,348,151,338,136"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="270,117,236,128,219,138,206,151,196,169,191,188,188,228,193,266,201,296,195,295,188,267,183,228,185,187,191,167,201,148,216,134,234,123,274,114"/>
 </map>

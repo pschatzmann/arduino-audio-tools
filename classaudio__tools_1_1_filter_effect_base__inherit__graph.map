@@ -1,7 +1,17 @@
 <map id="FilterEffectBase&lt; effectsuite_t &gt;" name="FilterEffectBase&lt; effectsuite_t &gt;">
-<area shape="rect" id="Node000001" title="A Base class for filter based effects including methods for simple high, low and band pass filtering." alt="" coords="5,174,240,201"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_effect_suite_base.html" title=" " alt="" coords="19,81,226,126"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="124,140,125,174,120,172,121,143"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects." alt="" coords="75,5,170,33"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="124,46,125,81,120,80,121,51"/>
+<area shape="rect" id="Node000001" title="A Base class for filter based effects including methods for simple high, low and band pass filtering." alt="" coords="431,100,665,128"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_simple_l_p_f.html" title=" " alt="" coords="739,5,913,50"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="609,93,713,60,748,51,754,50,714,65,610,98"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_envelope_filter.html" title="EnvelopeFilter." alt="" coords="713,74,939,102"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="680,99,715,98,710,99,681,104"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_filtered_delay.html" title="Delay effect that filters the repeat delay." alt="" coords="716,126,936,154"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="681,124,718,130,713,130,681,129"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_simple_l_p_f.html" title="SimpleLPF." alt="" coords="726,178,926,206"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="608,131,714,162,764,178,759,177,713,168,608,136"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_effect_suite_base.html" title="Base Class for Effects." alt="" coords="149,100,383,128"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="398,112,433,114,428,115,399,117"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects." alt="" coords="5,100,101,128"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="115,112,151,113,146,115,117,117"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_simple_chorus.html" title="Simple Chorus effect with a single delay voice and mono output Chorus is effective between 15 and 20 ..." alt="" coords="987,178,1209,206"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="942,189,989,192,983,192,942,194"/>
 </map>

@@ -1,15 +1,15 @@
 <map id="TfLiteSineReader" name="TfLiteSineReader">
-<area shape="rect" id="Node000001" title="Generate a sine output from a model that was trained on the sine method. (=hello_world)." alt="" coords="235,128,368,156"/>
+<area shape="rect" id="Node000001" title="Generate a sine output from a model that was trained on the sine method. (=hello_world)" alt="" coords="226,115,358,143"/>
 <area shape="rect" id="Node000002" href="$classaudio__tools_1_1_tf_lite_reader.html" title="Input class which provides the next value if the TfLiteAudioStream is treated as an audio sourcce." alt="" coords="5,5,110,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="79,42,114,74,156,102,195,118,238,131,232,131,194,123,154,107,111,78,78,47"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="84,40,119,66,159,89,228,114,223,115,156,93,116,70,83,45"/>
 <area shape="rect" id="Node000003" href="$classfloat.html" title=" " alt="" coords="134,5,184,33"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="160,46,167,76,181,103,207,121,238,134,233,134,204,125,178,106,162,78,157,50"/>
-<area shape="rect" id="Node000004" href="$classint16__t.html" title=" " alt="" coords="231,5,297,33"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="261,46,262,76,268,103,287,129,281,127,263,105,257,76,258,51"/>
-<area shape="rect" id="Node000005" href="$classint.html" title=" " alt="" coords="321,5,359,33"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="334,47,308,129,304,126,329,49"/>
-<area shape="rect" id="Node000006" title=" " alt="" coords="383,5,494,33"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="434,46,422,78,401,106,381,120,359,130,357,125,378,116,397,102,417,76,430,49"/>
-<area shape="rect" id="Node000007" title=" " alt="" coords="518,5,656,33"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="567,43,530,78,484,107,426,127,368,138,368,133,425,122,482,102,527,74,562,45"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="162,46,169,70,181,89,202,105,228,118,223,117,199,109,178,93,164,72,159,50"/>
+<area shape="rect" id="Node000004" href="$classint16__t.html" title=" " alt="" coords="219,5,285,33"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="253,47,256,69,262,90,279,115,274,114,257,92,250,70,249,51"/>
+<area shape="rect" id="Node000005" href="$classint.html" title=" " alt="" coords="309,5,347,33"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="321,46,298,117,294,113,317,49"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="371,5,482,33"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="418,46,404,72,385,93,364,107,341,117,340,112,361,102,381,89,399,68,413,48"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="506,5,644,33"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="547,41,505,70,457,93,408,109,359,120,358,115,406,104,455,89,502,65,542,43"/>
 </map>

@@ -1,16 +1,15 @@
 <map id="VFSFile" name="VFSFile">
-<area shape="rect" id="Node000001" title="Arduino File support using std::fstream." alt="" coords="143,284,211,311"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="5,183,74,211"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="70,217,126,257,161,283,155,283,123,262,68,222"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="14,106,65,134"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="31,146,35,183,30,183,30,152"/>
-<area shape="poly" id="edge4_Node000002_Node000003" title=" " alt="" coords="49,146,49,183,44,182,48,152"/>
+<area shape="rect" id="Node000001" title="Arduino File support using std::fstream." alt="" coords="141,268,210,295"/>
+<area shape="rect" id="Node000002" href="$class_stream.html" title=" " alt="" coords="5,175,74,203"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="72,209,158,266,153,268,71,214"/>
+<area shape="rect" id="Node000003" href="$class_print.html" title=" " alt="" coords="14,98,65,126"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="40,138,42,175,37,174,39,144"/>
 <area shape="rect" id="Node000004" href="$classint.html" title=" " alt="" coords="20,5,59,33"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="40,46,42,106,37,105,39,51"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="98,183,170,211"/>
-<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="132,224,134,243,139,259,147,271,159,284,154,283,143,274,134,261,129,244,129,228"/>
-<area shape="rect" id="Node000006" href="$classbool.html" title=" " alt="" coords="195,183,244,211"/>
-<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="210,223,185,285,181,281,206,226"/>
-<area shape="rect" id="Node000007" title=" " alt="" coords="280,183,330,211"/>
-<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="294,223,281,245,265,262,239,278,212,289,211,284,237,273,262,258,277,241,289,226"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="40,46,42,98,37,97,39,51"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="98,175,170,203"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="134,216,140,243,159,267,154,267,135,245,131,220"/>
+<area shape="rect" id="Node000006" href="$classbool.html" title=" " alt="" coords="195,175,244,203"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="209,215,184,269,180,265,204,218"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="274,175,323,203"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="285,215,260,246,236,261,211,272,209,267,234,256,256,242,281,217"/>
 </map>

@@ -1,13 +1,3 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$structaudio__tools_1_1_base_interpolator.html" title="Base class for resampling algorithms using a buffer of float values." alt="" coords="5,109,135,137"/>
-<area shape="rect" id="Node000001" href="$structaudio__tools_1_1_b_spline_interpolator.html" title="Cubic B&#45;spline interpolation using y[0]..y[3]." alt="" coords="188,5,334,33"/>
-<area shape="poly" id="edge766_Node000000_Node000001" title=" " alt="" coords="99,98,137,70,181,43,214,32,210,35,184,48,140,74,102,102"/>
-<area shape="rect" id="Node000002" href="$structaudio__tools_1_1_hermite_interpolator.html" title="Cubic Hermite interpolation using y[0]..y[3]." alt="" coords="186,57,336,85"/>
-<area shape="poly" id="edge767_Node000000_Node000002" title=" " alt="" coords="137,102,210,84,206,87,140,107"/>
-<area shape="rect" id="Node000003" href="$structaudio__tools_1_1_lagrange_interpolator.html" title="Cubic Lagrange interpolation using y[0]..y[3]." alt="" coords="183,109,340,137"/>
-<area shape="poly" id="edge768_Node000000_Node000003" title=" " alt="" coords="150,121,185,122,180,124,151,126"/>
-<area shape="rect" id="Node000004" href="$structaudio__tools_1_1_linear_interpolator.html" title="Linear interpolation between y[0] and y[1]." alt="" coords="193,161,330,189"/>
-<area shape="poly" id="edge769_Node000000_Node000004" title=" " alt="" coords="139,139,210,160,205,162,138,144"/>
-<area shape="rect" id="Node000005" href="$structaudio__tools_1_1_parabolic_interpolator.html" title="Parabolic interpolation using y[0]..y[3]." alt="" coords="183,213,340,241"/>
-<area shape="poly" id="edge770_Node000000_Node000005" title=" " alt="" coords="101,144,140,172,184,198,214,213,209,213,181,203,137,176,100,149"/>
+<area shape="rect" id="Node000000" href="$structaudio__tools_1_1_channel_split_output_1_1_channel_selection_output_def.html" title=" " alt="" coords="5,5,215,50"/>
 </map>

@@ -1,7 +1,7 @@
 <map id="ChannelMixer&lt; T, SumT &gt;" name="ChannelMixer&lt; T, SumT &gt;">
-<area shape="rect" id="Node000001" title="We mix all input channels in a datastream. E.g. if we have stereo input data we end up with 2 identic..." alt="" coords="18,106,211,134"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_converter.html" title="Abstract Base class for Converters A converter is processing the data in the indicated array." alt="" coords="5,5,123,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="79,44,111,105,105,106,76,48"/>
+<area shape="rect" id="Node000001" title="We mix all input channels in a datastream. E.g. if we have stereo input data we end up with 2 identic..." alt="" coords="18,98,211,126"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_base_converter.html" title="Abstract Base class for Converters A converter is processing the data in the indicated array." alt="" coords="5,5,123,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="80,45,110,97,105,98,77,49"/>
 <area shape="rect" id="Node000003" href="$classint.html" title=" " alt="" coords="146,5,185,33"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="154,45,124,107,119,104,149,47"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="153,46,124,99,120,96,148,48"/>
 </map>

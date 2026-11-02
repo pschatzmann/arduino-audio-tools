@@ -1,18 +1,18 @@
 <map id="FFTEffectConfig" name="FFTEffectConfig">
-<area shape="rect" id="Node000001" title="Common configuration for FFT effects." alt="" coords="333,293,456,321"/>
-<area shape="rect" id="Node000002" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="170,183,254,210"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="248,216,375,292,370,293,246,221"/>
+<area shape="rect" id="Node000001" title="Common configuration for FFT effects." alt="" coords="321,248,444,276"/>
+<area shape="rect" id="Node000002" href="$structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="164,152,247,180"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="244,185,360,247,355,248,243,190"/>
 <area shape="rect" id="Node000003" href="$classuint32__t.html" title=" " alt="" coords="5,5,80,33"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="37,46,38,99,44,125,57,147,81,168,110,181,141,189,172,194,167,196,140,194,108,186,78,172,53,151,39,126,33,99,37,51"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="125,5,200,33"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="156,46,152,97,154,123,162,148,175,166,192,182,187,183,171,170,157,150,149,124,147,97,154,51"/>
-<area shape="rect" id="Node000005" href="$classuint8__t.html" title=" " alt="" coords="227,5,293,33"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="257,47,233,150,220,184,215,181,228,148,253,50"/>
-<area shape="rect" id="Node000006" href="$classint.html" title=" " alt="" coords="397,5,435,33"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="416,47,398,294,393,292,411,50"/>
-<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_window_function.html" title="FFT Window Function." alt="" coords="468,183,596,210"/>
-<area shape="poly" id="edge8_Node000007_Node000006" title=" " alt="" coords="414,46,418,98,425,124,437,147,458,167,485,182,480,182,455,171,433,151,420,126,413,99,411,51"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="506,220,412,295,410,290,501,221"/>
-<area shape="rect" id="Node000008" href="$classfloat.html" title=" " alt="" coords="551,5,601,33"/>
-<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="572,47,549,150,538,184,534,181,544,148,568,50"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="39,46,42,87,48,107,58,123,81,141,108,153,136,160,165,164,160,166,135,165,106,158,78,146,54,127,43,109,37,88,38,51"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="120,5,194,33"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="151,46,149,86,152,105,158,124,168,138,183,152,178,152,164,142,153,126,146,107,144,86,149,51"/>
+<area shape="rect" id="Node000005" href="$classuint8__t.html" title=" " alt="" coords="219,5,285,33"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="247,46,225,126,214,153,209,150,220,124,243,50"/>
+<area shape="rect" id="Node000006" href="$classint.html" title=" " alt="" coords="385,5,423,33"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="404,47,386,249,381,246,399,50"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_window_function.html" title="FFT Window Function." alt="" coords="452,152,580,180"/>
+<area shape="poly" id="edge8_Node000007_Node000006" title=" " alt="" coords="404,47,409,87,415,106,425,123,442,138,464,152,459,151,439,143,421,127,410,108,404,88,401,51"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="487,188,402,250,400,245,482,190"/>
+<area shape="rect" id="Node000008" href="$classfloat.html" title=" " alt="" coords="535,5,585,33"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="555,46,533,126,523,153,519,150,528,124,551,49"/>
 </map>

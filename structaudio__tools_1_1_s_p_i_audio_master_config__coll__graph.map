@@ -1,19 +1,19 @@
 <map id="SPIAudioMasterConfig" name="SPIAudioMasterConfig">
-<area shape="rect" id="Node000001" title="Configuration for SPIAudioMaster." alt="" coords="392,226,557,254"/>
-<area shape="rect" id="Node000002" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="190,116,274,144"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="275,147,448,225,443,227,274,153"/>
+<area shape="rect" id="Node000001" title="Configuration for SPIAudioMaster." alt="" coords="378,197,542,225"/>
+<area shape="rect" id="Node000002" href="$structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="185,101,268,129"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="274,132,430,196,424,197,273,138"/>
 <area shape="rect" id="Node000003" href="$classuint32__t.html" title=" " alt="" coords="5,5,80,33"/>
-<area shape="poly" id="edge6_Node000001_Node000003" title=" " alt="" coords="47,46,61,81,83,122,96,136,116,151,184,185,257,209,328,224,395,235,389,235,328,229,255,214,182,190,113,156,92,140,78,125,56,83,47,51"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="56,44,72,64,88,80,113,94,139,106,192,121,187,123,137,111,110,99,85,84,68,67,56,49"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="147,5,221,33"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="181,46,184,65,188,81,200,99,216,116,211,116,196,102,183,83,179,66,179,51"/>
-<area shape="rect" id="Node000005" href="$classuint8__t.html" title=" " alt="" coords="315,5,381,33"/>
-<area shape="poly" id="edge7_Node000001_Node000005" title=" " alt="" coords="384,40,399,55,413,81,418,103,422,125,431,152,469,227,464,225,426,154,417,127,413,104,408,83,395,59,383,45"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="307,39,284,59,259,88,241,117,237,114,254,85,280,55,303,42"/>
-<area shape="rect" id="Node000006" href="$classint.html" title=" " alt="" coords="521,116,559,144"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="527,155,484,228,481,224,522,158"/>
-<area shape="rect" id="Node000007" href="$classsize__t.html" title=" " alt="" coords="584,116,643,144"/>
-<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="603,156,587,183,567,204,546,218,523,228,521,223,543,213,563,200,583,179,598,159"/>
-<area shape="rect" id="Node000008" href="$classbool.html" title=" " alt="" coords="715,116,764,144"/>
-<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="730,156,714,183,691,205,667,214,634,222,557,234,557,229,633,217,666,209,688,200,710,180,725,159"/>
+<area shape="poly" id="edge6_Node000001_Node000003" title=" " alt="" coords="51,45,65,73,85,106,115,130,179,160,249,182,317,195,380,205,374,205,316,201,247,187,177,165,112,134,81,109,60,75,50,50"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="58,43,73,59,88,72,137,94,187,107,182,110,135,99,85,76,69,63,59,48"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="143,5,217,33"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="178,46,184,73,194,87,208,101,203,101,190,91,179,75,176,51"/>
+<area shape="rect" id="Node000005" href="$classuint8__t.html" title=" " alt="" coords="305,5,372,33"/>
+<area shape="poly" id="edge7_Node000001_Node000005" title=" " alt="" coords="372,40,387,55,399,75,405,92,419,131,454,197,449,196,414,133,400,94,395,77,383,59,371,45"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="300,39,276,59,254,81,237,103,233,99,250,77,272,55,295,42"/>
+<area shape="rect" id="Node000006" href="$classint.html" title=" " alt="" coords="501,101,539,129"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="506,141,470,199,467,194,501,143"/>
+<area shape="rect" id="Node000007" href="$classsize__t.html" title=" " alt="" coords="564,101,623,129"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="578,140,545,175,501,199,499,194,542,171,573,142"/>
+<area shape="rect" id="Node000008" href="$classbool.html" title=" " alt="" coords="691,101,740,129"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="700,140,682,160,661,175,602,197,543,208,542,203,601,192,659,171,679,156,695,142"/>
 </map>

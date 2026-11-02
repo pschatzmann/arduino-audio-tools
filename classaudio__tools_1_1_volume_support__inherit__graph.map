@@ -1,0 +1,43 @@
+<map id="VolumeSupport" name="VolumeSupport">
+<area shape="rect" id="Node000001" title="Supports the setting and getting of the volume." alt="" coords="5,240,126,268"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_a2_d_p_stream.html" title="Stream support for A2DP using https://github.com/pschatzmann/ESP32&#45;A2DP: begin(TX_MODE) opens a a2dp_..." alt="" coords="224,5,328,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="71,224,84,184,104,135,133,86,151,63,172,44,196,30,225,22,222,26,198,35,175,48,155,67,137,89,109,137,89,186,76,226"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_audio_player.html" title="High&#45;level audio playback pipeline and controller." alt="" coords="226,57,326,85"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="76,225,112,159,140,125,172,96,198,82,228,75,224,79,200,87,175,100,143,129,117,162,81,227"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_boost.html" title="Boost AudioEffect." alt="" coords="247,109,305,137"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="85,226,123,185,147,165,172,147,210,132,248,125,244,128,211,137,175,152,150,169,127,189,89,229"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_generator_from_stream.html" title="An Adapter Class which lets you use any Stream as a Generator." alt="" coords="174,161,378,189"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="104,230,173,199,214,188,210,191,175,204,108,235"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_i2_s_codec_stream.html" title="I2S Stream which also sets up a codec chip and i2s." alt="" coords="212,213,340,241"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="139,242,213,234,209,237,142,247"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_maximilian.html" title="AudioTools integration with Maximilian." alt="" coords="229,265,323,293"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="140,260,230,272,226,275,141,265"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1_mozzi_stream.html" title="Stream that provides audio information that was generated using the Mozzi API using the updateControl..." alt="" coords="223,317,329,345"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="107,272,175,302,225,318,220,320,173,307,107,278"/>
+<area shape="rect" id="Node000010" href="$classaudio__tools_1_1_u_s_b_audio_stream_base.html" title="Role&#45;independent front end shared by USB Audio devices (USBAudioDeviceBase, aliased as USBAudioStream..." alt="" coords="194,369,358,397"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="87,277,127,318,150,337,175,354,204,368,199,369,172,359,147,342,123,322,87,283"/>
+<area shape="rect" id="Node000020" href="$classaudio__tools_1_1_v_s1053_stream.html" title="Output Interface which processes PCM data by default using a VS1053 audio module. If you want to writ..." alt="" coords="217,421,334,449"/>
+<area shape="poly" id="edge19_Node000001_Node000020" title=" " alt="" coords="79,280,117,345,144,378,175,406,196,417,220,427,214,428,193,422,172,411,140,382,113,348,78,285"/>
+<area shape="rect" id="Node000021" href="$classaudio__tools_1_1_volume_stream.html" title="Adjust the volume of the related input or output: To work properly the class needs to know the bits p..." alt="" coords="217,473,334,501"/>
+<area shape="poly" id="edge20_Node000001_Node000021" title=" " alt="" coords="74,280,89,322,109,370,137,418,155,439,175,458,195,470,219,481,214,480,193,475,172,463,151,443,133,421,104,372,84,323,73,285"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_audio_board_stream.html" title="New functionality which replaces the AudioKitStream that is based on the legacy AudioKit library...." alt="" coords="436,213,579,241"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="355,225,437,226,432,228,356,230"/>
+<area shape="rect" id="Node000011" href="$classaudio__tools_1_1_u_s_b_audio_device_base.html" title="USB Audio Device class for audio streaming over USB." alt="" coords="426,344,588,372"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="373,370,428,366,423,367,374,375"/>
+<area shape="rect" id="Node000016" href="$classaudio__tools_1_1_u_s_b_audio_host_base.html" title="USB Audio Class (UAC1 and UAC2) host: reads PCM audio from an attached USB microphone and/or writes P..." alt="" coords="434,421,581,449"/>
+<area shape="poly" id="edge15_Node000010_Node000016" title=" " alt="" coords="356,398,445,420,439,421,356,404"/>
+<area shape="rect" id="Node000012" href="$classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html" title="USBAudioDeviceBase subclass for ESP32&#45;S2/S3 using the arduino&#45;esp32 stack." alt="" coords="644,265,814,293"/>
+<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="554,335,635,303,672,294,677,293,637,308,556,340"/>
+<area shape="rect" id="Node000013" href="$classaudio__tools_1_1_u_s_b_audio_device_renesas.html" title="USBAudioDeviceBase subclass for the Arduino UNO R4 / Nano R4 (Renesas RA4M1, arduino:renesas_uno core..." alt="" coords="636,317,822,345"/>
+<area shape="poly" id="edge12_Node000011_Node000013" title=" " alt="" coords="603,344,638,342,633,343,604,349"/>
+<area shape="rect" id="Node000014" href="$classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html" title="USBAudioDeviceBase subclass for RP2040 / Adafruit TinyUSB." alt="" coords="636,369,822,397"/>
+<area shape="poly" id="edge13_Node000011_Node000014" title=" " alt="" coords="604,366,638,372,633,373,604,372"/>
+<area shape="rect" id="Node000015" href="$classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b_free_r_t_o_s.html" title="Variant of USBAudioDeviceTinyUSB for RP2040 + FreeRTOS." alt="" coords="870,369,1117,397"/>
+<area shape="poly" id="edge14_Node000014_Node000015" title=" " alt="" coords="837,381,872,383,866,383,838,386"/>
+<area shape="rect" id="Node000017" href="$classaudio__tools_1_1_u_s_b_audio_host_e_s_p32.html" title="USB Audio host for ESP32&#45;S2/S3/P4 using the ESP&#45;IDF usb_host library: reads audio from an attached US..." alt="" coords="651,421,807,449"/>
+<area shape="poly" id="edge16_Node000016_Node000017" title=" " alt="" coords="596,433,654,435,648,435,597,438"/>
+<area shape="rect" id="Node000018" href="$classaudio__tools_1_1_u_s_b_audio_host_tiny_u_s_b.html" title="USB Audio host for the Adafruit TinyUSB host stack: reads audio from an attached USB microphone and/o..." alt="" coords="644,473,814,501"/>
+<area shape="poly" id="edge17_Node000016_Node000018" title=" " alt="" coords="584,450,669,473,664,473,584,456"/>
+<area shape="rect" id="Node000019" href="$classaudio__tools_1_1_u_s_b_audio_host_tiny_u_s_b_free_r_t_o_s.html" title="Variant of USBAudioHostTinyUSB for FreeRTOS (e.g. RP2040 + FreeRTOS, or ESP32 with the Adafruit TinyU..." alt="" coords="877,473,1110,501"/>
+<area shape="poly" id="edge18_Node000018_Node000019" title=" " alt="" coords="830,485,880,487,874,487,830,490"/>
+</map>

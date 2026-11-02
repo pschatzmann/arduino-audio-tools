@@ -1,10 +1,9 @@
 <map id="HighPassFilterDF1&lt; T &gt;" name="HighPassFilterDF1&lt; T &gt;">
-<area shape="rect" id="Node000001" title="Second&#45;order high&#45;pass filter (BiQuad DF1). Same coefficients as HighPassFilter; use this (not HighPa..." alt="" coords="5,362,183,389"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_bi_quad_d_f1.html" title=" " alt="" coords="17,285,171,312"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="96,326,96,362,92,360,92,330"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_filter.html" title=" " alt="" coords="37,5,151,33"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="89,46,88,173,93,285,87,284,82,173,87,51"/>
-<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="101,46,106,173,101,285,95,284,100,173,99,51"/>
-<area shape="rect" id="Node000004" href="$classfloat.html" title=" " alt="" coords="174,5,224,33"/>
-<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="196,45,174,145,153,205,127,262,109,286,105,283,122,259,148,203,168,144,193,50"/>
+<area shape="rect" id="Node000001" title="Second&#45;order high&#45;pass filter (BiQuad DF1). Same coefficients as HighPassFilter; use this (not HighPa..." alt="" coords="11,311,188,339"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_bi_quad_d_f1.html" title="Second&#45;order IIR filter in Direct Form I. Maintains separate input and output histories (x and y dela..." alt="" coords="33,234,166,262"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="101,275,102,312,97,310,98,279"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_filter.html" title="Abstract filter interface definition. Subclasses implement process() to transform audio samples one a..." alt="" coords="5,5,98,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="59,46,99,234,94,234,55,49"/>
+<area shape="rect" id="Node000004" href="$classfloat.html" title=" " alt="" coords="122,5,173,33"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="144,47,105,235,100,233,139,48"/>
 </map>

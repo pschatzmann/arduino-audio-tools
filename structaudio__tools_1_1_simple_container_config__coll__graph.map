@@ -1,19 +1,19 @@
 <map id="SimpleContainerConfig" name="SimpleContainerConfig">
-<area shape="rect" id="Node000001" title=" " alt="" coords="182,207,352,234"/>
-<area shape="rect" id="Node000002" href="$structaudio__tools_1_1_common_header.html" title=" " alt="" coords="140,106,267,134"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="213,146,231,181,253,207,248,206,227,184,211,151"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="178,191,348,218"/>
+<area shape="rect" id="Node000002" href="$structaudio__tools_1_1_common_header.html" title=" " alt="" coords="136,98,263,126"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="213,137,231,165,252,191,247,189,227,168,211,141"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="5,5,55,33"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="42,44,57,64,73,80,105,97,141,109,137,111,103,102,70,84,53,67,43,49"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="47,43,79,72,106,86,138,98,133,100,104,91,75,76,47,48"/>
 <area shape="rect" id="Node000004" title=" " alt="" coords="78,5,192,33"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="131,46,134,65,139,81,151,94,167,105,162,106,147,98,135,83,129,66,130,51"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="445,5,519,33"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="463,43,426,84,387,101,346,112,268,121,267,116,345,107,385,96,423,80,459,46"/>
-<area shape="rect" id="Node000007" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="380,106,464,134"/>
-<area shape="poly" id="edge8_Node000007_Node000005" title=" " alt="" coords="490,46,491,66,486,83,474,98,458,108,456,103,470,94,481,81,486,65,487,50"/>
-<area shape="rect" id="Node000006" href="$classuint8__t.html" title=" " alt="" coords="246,5,312,33"/>
-<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="230,36,219,46,208,58,201,82,203,107,198,105,196,82,203,56,215,42,234,33"/>
-<area shape="poly" id="edge9_Node000007_Node000006" title=" " alt="" coords="288,45,299,64,311,80,345,100,383,113,378,113,343,105,308,84,294,67,286,50"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="391,142,289,208,287,204,386,143"/>
-<area shape="rect" id="Node000008" href="$classuint32__t.html" title=" " alt="" coords="573,5,647,33"/>
-<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="597,44,582,67,562,84,513,106,465,117,464,112,512,101,559,80,578,63,593,47"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="132,45,135,61,139,73,151,86,167,97,161,98,147,90,135,75,130,62,130,51"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="429,5,503,33"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="450,44,433,63,414,76,377,92,338,102,264,112,263,107,337,97,375,87,411,72,430,59,445,46"/>
+<area shape="rect" id="Node000007" href="$structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="371,98,454,126"/>
+<area shape="poly" id="edge8_Node000007_Node000005" title=" " alt="" coords="474,47,470,75,459,89,444,100,442,95,455,85,465,73,470,51"/>
+<area shape="rect" id="Node000006" href="$classuint8__t.html" title=" " alt="" coords="242,5,308,33"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="226,36,215,46,204,58,198,78,199,99,194,96,193,77,199,56,211,42,230,33"/>
+<area shape="poly" id="edge9_Node000007_Node000006" title=" " alt="" coords="285,45,293,60,303,72,336,91,373,105,368,105,334,96,300,76,289,63,283,50"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="381,133,286,192,284,188,376,134"/>
+<area shape="rect" id="Node000008" href="$classuint32__t.html" title=" " alt="" coords="553,5,627,33"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="574,44,541,76,498,96,456,107,454,102,496,90,538,72,569,46"/>
 </map>

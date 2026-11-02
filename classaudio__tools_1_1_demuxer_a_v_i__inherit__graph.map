@@ -2,22 +2,18 @@
 <area shape="rect" id="Node000001" title="AVI Container Decoder which can be fed with small chunks of data. The minimum length must be bigger t..." alt="" coords="233,384,335,411"/>
 <area shape="rect" id="Node000002" href="$classaudio__tools_1_1_demuxer.html" title="Common interface for demuxers (DemuxerAVI, DemuxerMP4) that split a container&#39;s video and (optional) ..." alt="" coords="244,308,324,336"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="286,350,286,385,282,382,282,353"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_container_decoder.html" title="Parent class for all container formats." alt="" coords="71,232,209,260"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_container_decoder.html" title="Parent class for all container formats." alt="" coords="71,232,209,260"/>
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="180,265,261,307,256,308,179,270"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_audio_decoder.html" title="Decoding of encoded audio into PCM data." alt="" coords="84,157,196,184"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="132,197,136,232,130,231,130,202"/>
-<area shape="poly" id="edge10_Node000003_Node000004" title=" " alt="" coords="150,197,150,233,145,231,148,202"/>
-<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="" coords="23,81,121,109"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="86,118,123,155,118,157,87,124"/>
-<area shape="poly" id="edge8_Node000004_Node000005" title=" " alt="" coords="102,117,138,156,132,157,102,122"/>
-<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="5,5,139,33"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="63,46,68,81,62,80,63,51"/>
-<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="81,46,82,81,76,80,80,51"/>
-<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="146,81,273,109"/>
-<area shape="poly" id="edge7_Node000004_Node000007" title=" " alt="" coords="177,122,147,158,143,155,180,117"/>
-<area shape="poly" id="edge9_Node000004_Node000007" title=" " alt="" coords="193,123,161,158,157,155,196,119"/>
-<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_mime_source.html" title="Abstract interface for classes that can provide MIME type information." alt="" coords="233,232,335,260"/>
-<area shape="poly" id="edge11_Node000002_Node000008" title=" " alt="" coords="286,274,286,309,282,306,282,278"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_audio_decoder.html" title="Decoding of encoded audio into PCM data." alt="" coords="84,157,196,184"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="141,198,143,233,137,231,139,203"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="" coords="23,81,121,109"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="94,118,131,155,125,157,95,123"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="5,5,139,33"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="72,46,75,81,69,80,72,51"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="146,81,273,109"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="185,122,154,158,150,155,188,118"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_mime_source.html" title="Abstract interface for classes that can provide MIME type information." alt="" coords="233,232,335,260"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="286,274,286,309,282,306,282,278"/>
 <area shape="rect" id="Node000009" href="$classaudio__tools_1_1_video_info_source.html" title="Provider of VideoInfo (width/height/fps/format) for whoever needs to size buffers/panel setup against..." alt="" coords="359,232,486,260"/>
-<area shape="poly" id="edge12_Node000002_Node000009" title=" " alt="" coords="387,267,310,310,307,305,382,269"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="387,267,310,310,307,305,382,269"/>
 </map>

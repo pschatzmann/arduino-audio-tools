@@ -1,24 +1,21 @@
 <map id="RTSPVideoEncoder" name="RTSPVideoEncoder">
-<area shape="rect" id="Node000001" title="Common base for RTP video payloaders (JPEGRtpEncoder, H264RtpEncoder, ...): an AudioEncoder that acce..." alt="" coords="192,284,334,311"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_audio_encoder.html" title="Encoding of PCM data." alt="" coords="141,207,251,234"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="219,243,254,284,249,283,216,248"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="" coords="23,106,121,134"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="94,141,175,205,171,207,92,146"/>
-<area shape="poly" id="edge6_Node000002_Node000003" title=" " alt="" coords="108,140,188,205,183,207,106,145"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="5,5,139,33"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="64,45,68,106,63,105,63,51"/>
-<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="81,45,81,106,76,105,80,51"/>
-<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_mime_source.html" title="Abstract interface for classes that can provide MIME type information." alt="" coords="145,106,247,134"/>
-<area shape="poly" id="edge5_Node000002_Node000005" title=" " alt="" coords="189,147,192,207,187,205,186,151"/>
-<area shape="poly" id="edge7_Node000002_Node000005" title=" " alt="" coords="206,147,205,207,200,205,203,151"/>
-<area shape="rect" id="Node000006" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="276,106,359,134"/>
-<area shape="poly" id="edge8_Node000002_Node000006" title=" " alt="" coords="292,142,214,208,211,204,288,145"/>
+<area shape="rect" id="Node000001" title="Common base for RTP video payloaders (JPEGRtpEncoder, H264RtpEncoder, ...): an AudioEncoder that acce..." alt="" coords="194,268,336,295"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_audio_encoder.html" title="Encoding of PCM data." alt="" coords="144,191,254,218"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="221,227,256,268,251,267,219,232"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="" coords="24,98,122,126"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="104,132,183,189,178,191,103,137"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="5,5,139,33"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="73,46,76,98,70,97,72,51"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_mime_source.html" title="Abstract interface for classes that can provide MIME type information." alt="" coords="148,98,250,126"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="200,139,201,191,196,189,197,143"/>
+<area shape="rect" id="Node000006" href="$structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="274,98,358,126"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="289,134,217,192,214,188,285,137"/>
 <area shape="rect" id="Node000007" href="$classuint32__t.html" title=" " alt="" coords="163,5,237,33"/>
-<area shape="poly" id="edge9_Node000006_Node000007" title=" " alt="" coords="206,46,215,65,226,80,250,97,278,109,273,110,247,101,222,84,211,67,205,51"/>
-<area shape="rect" id="Node000008" title=" " alt="" coords="283,5,357,33"/>
-<area shape="poly" id="edge10_Node000006_Node000008" title=" " alt="" coords="321,46,320,106,315,104,318,51"/>
-<area shape="rect" id="Node000009" href="$classuint8__t.html" title=" " alt="" coords="384,5,450,33"/>
-<area shape="poly" id="edge11_Node000006_Node000009" title=" " alt="" coords="411,45,403,67,390,84,373,97,355,108,352,103,370,93,386,80,398,64,407,49"/>
-<area shape="rect" id="Node000010" href="$classaudio__tools_1_1_i_media_source.html" title="Media Source Interface &#45; Contract for Media Data Providers." alt="" coords="275,207,384,234"/>
-<area shape="poly" id="edge12_Node000001_Node000010" title=" " alt="" coords="310,245,276,286,273,281,305,247"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="209,45,228,72,250,88,276,100,271,101,247,92,224,76,208,50"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="279,5,353,33"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="317,46,318,99,314,97,315,51"/>
+<area shape="rect" id="Node000009" href="$classuint8__t.html" title=" " alt="" coords="378,5,444,33"/>
+<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="402,45,383,76,348,100,346,95,379,72,398,49"/>
+<area shape="rect" id="Node000010" href="$classaudio__tools_1_1_i_media_source.html" title="Media Source Interface &#45; Contract for Media Data Providers." alt="" coords="277,191,387,218"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="313,229,278,270,275,265,308,231"/>
 </map>

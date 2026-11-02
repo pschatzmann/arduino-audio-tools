@@ -1,10 +1,10 @@
 <map id="Decoder" name="Decoder">
-<area shape="rect" id="Node000002" href="$group__codecs.html" title="Audio Coder and Decoder." alt="" coords="5,716,74,744"/>
-<area shape="rect" id="Node000001" title="Audio Decoder." alt="" coords="357,716,432,744"/>
-<area shape="rect" id="Node000003" href="$group__encoder.html" title="Audio Encoder." alt="" coords="734,575,807,603"/>
-<area shape="rect" id="Node000005" href="$group__h264.html" title="H.264 encoding/decoding using https://github.com/pschatzmann/TinyH264." alt="" coords="743,627,798,655"/>
-<area shape="rect" id="Node000006" href="$group__h264esp32s3.html" title="H.264 encoding/decoding on ESP32&#45;S3 using https://github.com/pschatzmann/ESP32S3&#45;h264 (esp_h264,..." alt="" coords="715,688,826,716"/>
-<area shape="rect" id="Node000007" href="$group__mjpeg.html" title="Motion&#45;JPEG decoding and encoding using https://github.com/pschatzmann/TinyJPEG." alt="" coords="739,740,802,768"/>
-<area shape="rect" id="Node000008" href="$group__mpg.html" title="MPEG&#45;1 part 2 (video) encoding/decoding using https://github.com/pschatzmann/TinyMPG." alt="" coords="745,792,796,820"/>
-<area shape="rect" id="Node000004" href="$group__video.html" title="Video playback." alt="" coords="742,974,800,1001"/>
+<area shape="rect" id="Node000002" href="$group__codecs.html" title="Audio Coder and Decoder" alt="" coords="5,699,74,727"/>
+<area shape="rect" id="Node000001" title="Audio Decoder." alt="" coords="357,699,432,727"/>
+<area shape="rect" id="Node000003" href="$group__encoder.html" title="Audio Encoder." alt="" coords="734,558,807,585"/>
+<area shape="rect" id="Node000005" href="$group__h264.html" title="H.264 encoding/decoding using https://github.com/pschatzmann/TinyH264." alt="" coords="743,610,798,637"/>
+<area shape="rect" id="Node000006" href="$group__h264esp32s3.html" title="H.264 encoding/decoding on ESP32&#45;S3 using https://github.com/pschatzmann/ESP32S3&#45;h264 (esp_h264,..." alt="" coords="715,671,826,699"/>
+<area shape="rect" id="Node000007" href="$group__mjpeg.html" title="Motion&#45;JPEG decoding and encoding using https://github.com/pschatzmann/TinyJPEG." alt="" coords="739,723,802,751"/>
+<area shape="rect" id="Node000008" href="$group__mpg.html" title="MPEG&#45;1 part 2 (video) encoding/decoding using https://github.com/pschatzmann/TinyMPG." alt="" coords="745,775,796,803"/>
+<area shape="rect" id="Node000004" href="$group__video.html" title="Video playback." alt="" coords="742,956,800,984"/>
 </map>

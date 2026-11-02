@@ -1,18 +1,18 @@
 <map id="FFTDriverKissFFT" name="FFTDriverKissFFT">
-<area shape="rect" id="Node000001" title="Driver for RealFFT." alt="" coords="159,251,293,279"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_f_f_t_driver.html" title="Abstract Class which defines the basic FFT functionality." alt="" coords="5,128,90,156"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="71,164,108,195,149,225,196,251,190,251,146,230,104,199,71,169"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="113,128,208,156"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="156,169,156,199,164,226,175,239,191,251,186,250,172,243,159,229,151,200,153,173"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="351,128,520,156"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="409,164,363,198,311,230,261,253,259,248,309,225,360,194,404,166"/>
-<area shape="rect" id="Node000005" href="$classint.html" title=" " alt="" coords="304,5,343,33"/>
-<area shape="poly" id="edge8_Node000001_Node000005" title=" " alt="" coords="321,47,303,146,289,195,275,229,250,253,248,248,271,226,284,193,297,145,317,50"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="329,46,340,76,356,103,372,116,393,128,387,128,370,120,353,106,335,78,327,51"/>
-<area shape="rect" id="Node000006" href="$classkiss__fft__cpx_01_5.html" title=" " alt="" coords="372,5,481,33"/>
-<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="430,47,437,129,432,127,427,51"/>
-<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="505,5,584,33"/>
-<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="533,45,516,77,492,106,461,130,458,125,488,102,511,74,529,49"/>
-<area shape="rect" id="Node000008" href="$classbool.html" title=" " alt="" coords="622,5,671,33"/>
-<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="643,46,633,79,612,106,575,122,521,133,520,128,573,117,609,102,628,77,639,50"/>
+<area shape="rect" id="Node000001" title="Driver for RealFFT." alt="" coords="155,225,289,252"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_f_f_t_driver.html" title="Abstract Class which defines the basic FFT functionality." alt="" coords="5,115,90,143"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="77,149,150,198,196,224,191,224,147,203,76,155"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="113,115,208,143"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="157,156,158,179,164,199,175,212,190,225,185,224,171,216,159,202,153,180,154,160"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_vector.html" title=" " alt="" coords="339,115,508,143"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="392,151,303,203,253,227,252,222,301,198,387,152"/>
+<area shape="rect" id="Node000005" href="$classint.html" title=" " alt="" coords="295,5,333,33"/>
+<area shape="poly" id="edge8_Node000001_Node000005" title=" " alt="" coords="314,46,301,121,287,163,267,202,243,227,241,222,263,199,282,161,295,120,310,50"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="323,46,334,69,348,89,365,102,385,114,380,114,362,107,345,93,329,72,321,51"/>
+<area shape="rect" id="Node000006" href="$classkiss__fft__cpx_01_5.html" title=" " alt="" coords="358,5,468,33"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="417,46,425,116,420,114,414,50"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="492,5,571,33"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="515,44,475,93,444,117,442,112,471,89,511,47"/>
+<area shape="rect" id="Node000008" href="$classbool.html" title=" " alt="" coords="604,5,654,33"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="620,46,607,72,586,93,549,112,509,124,508,118,547,107,583,89,602,69,616,49"/>
 </map>

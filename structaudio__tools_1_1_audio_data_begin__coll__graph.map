@@ -1,19 +1,19 @@
 <map id="AudioDataBegin" name="AudioDataBegin">
-<area shape="rect" id="Node000001" title="Protocal Record To Start." alt="" coords="280,207,406,234"/>
-<area shape="rect" id="Node000002" href="$structaudio__tools_1_1_audio_header.html" title="Common Header for all records." alt="" coords="134,106,240,134"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="221,139,325,206,319,207,219,144"/>
-<area shape="rect" id="Node000003" href="$classuint8__t.html" title=" " alt="" coords="134,5,200,33"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="124,45,116,58,112,70,116,81,127,94,144,105,139,106,124,98,111,83,107,70,111,56,127,40"/>
-<area shape="rect" id="Node000006" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="301,106,384,134"/>
-<area shape="poly" id="edge8_Node000006_Node000003" title=" " alt="" coords="163,46,165,66,172,80,189,87,221,95,303,111,298,113,220,101,187,92,169,84,160,67,161,51"/>
+<area shape="rect" id="Node000001" title="Protocal Record To Start." alt="" coords="268,191,394,218"/>
+<area shape="rect" id="Node000002" href="$structaudio__tools_1_1_audio_header.html" title="Common Header for all records." alt="" coords="125,98,230,126"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="213,131,311,190,306,190,212,136"/>
+<area shape="rect" id="Node000003" href="$classuint8__t.html" title=" " alt="" coords="130,5,196,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="120,44,111,58,109,65,112,73,123,86,139,97,134,98,120,90,107,75,104,65,106,56,124,40"/>
+<area shape="rect" id="Node000006" href="$structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="289,98,372,126"/>
+<area shape="poly" id="edge8_Node000006_Node000003" title=" " alt="" coords="157,46,160,61,164,72,180,79,212,87,291,103,286,105,210,93,178,84,161,76,154,63,155,51"/>
 <area shape="rect" id="Node000004" title=" " alt="" coords="5,5,102,33"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="58,46,67,65,78,80,104,98,136,110,131,112,102,103,74,84,63,67,58,51"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="312,5,387,33"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="329,43,292,84,267,98,240,108,238,103,265,93,289,80,325,46"/>
-<area shape="poly" id="edge7_Node000006_Node000005" title=" " alt="" coords="354,46,355,82,349,107,345,104,350,82,351,50"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="345,148,345,208,341,205,341,151"/>
-<area shape="rect" id="Node000007" href="$classuint32__t.html" title=" " alt="" coords="442,5,516,33"/>
-<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="463,44,426,84,382,108,380,103,423,80,458,47"/>
-<area shape="rect" id="Node000008" title=" " alt="" coords="408,106,496,134"/>
-<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="429,143,359,208,356,204,424,145"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="61,46,79,72,101,87,127,99,122,101,98,92,76,76,61,51"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="296,5,371,33"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="315,43,280,76,228,100,226,95,277,72,311,46"/>
+<area shape="poly" id="edge7_Node000006_Node000005" title=" " alt="" coords="338,46,339,74,335,99,331,96,334,74,335,51"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="333,139,333,192,329,189,329,143"/>
+<area shape="rect" id="Node000007" href="$classuint32__t.html" title=" " alt="" coords="422,5,496,33"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="440,43,406,76,364,100,361,95,403,72,435,46"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="396,98,484,126"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="416,135,348,192,346,188,411,136"/>
 </map>

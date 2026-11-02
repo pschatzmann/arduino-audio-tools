@@ -1,23 +1,33 @@
 <map id="ReformatBaseStream" name="ReformatBaseStream">
-<area shape="rect" id="Node000001" title="Base class for chained converting streams." alt="" coords="116,384,278,411"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_modifying_stream.html" title="Abstract class: Objects can be put into a pipleline." alt="" coords="131,308,263,336"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="199,350,199,385,195,382,195,353"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="" coords="144,232,250,260"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="190,273,192,309,187,307,187,278"/>
-<area shape="poly" id="edge13_Node000002_Node000003" title=" " alt="" coords="207,273,206,309,202,306,204,278"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer,size_t size) and readBytes(uint8..." alt="" coords="5,157,106,184"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="87,190,167,231,162,233,87,195"/>
-<area shape="poly" id="edge10_Node000003_Node000004" title=" " alt="" coords="101,189,181,231,177,233,102,194"/>
-<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="21,81,90,109"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="47,121,51,156,46,156,47,127"/>
-<area shape="poly" id="edge7_Node000004_Node000005" title=" " alt="" coords="65,121,65,157,60,156,64,127"/>
-<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="30,5,81,33"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="47,46,51,81,46,80,47,51"/>
-<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="65,46,65,81,60,80,64,51"/>
-<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="130,157,264,184"/>
-<area shape="poly" id="edge8_Node000003_Node000007" title=" " alt="" coords="189,197,192,233,187,231,187,202"/>
-<area shape="poly" id="edge11_Node000003_Node000007" title=" " alt="" coords="207,197,206,233,201,231,204,202"/>
-<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="288,157,415,184"/>
-<area shape="poly" id="edge9_Node000003_Node000008" title=" " alt="" coords="301,193,219,234,216,230,305,189"/>
-<area shape="poly" id="edge12_Node000003_Node000008" title=" " alt="" coords="315,193,233,234,230,230,320,190"/>
+<area shape="rect" id="Node000001" title="Base class for chained converting streams." alt="" coords="736,204,897,232"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1_channel_format_converter_stream.html" title="Channel converter which does not use a template." alt="" coords="957,5,1189,33"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="829,188,846,154,872,114,904,75,944,42,965,35,970,32,947,47,908,79,876,117,851,157,832,192"/>
+<area shape="rect" id="Node000010" href="$classaudio__tools_1_1_channel_format_converter_stream_t.html" title="Converter for reducing or increasing the number of Channels." alt="" coords="957,57,1189,102"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="841,191,886,150,944,111,970,103,975,101,947,116,889,154,843,195"/>
+<area shape="rect" id="Node000011" href="$classaudio__tools_1_1_encoded_audio_stream.html" title="A more natural Stream class to process encoded data (aac, wav, mp3...) which also supports the decodi..." alt="" coords="993,125,1153,153"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="862,195,945,163,995,153,990,154,946,168,863,200"/>
+<area shape="rect" id="Node000012" href="$classaudio__tools_1_1_format_converter_stream.html" title="Converter which converts bits_per_sample, channels and the sample_rate. The conversion is supported b..." alt="" coords="984,177,1162,205"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="912,205,986,200,981,201,913,210"/>
+<area shape="rect" id="Node000013" href="$classaudio__tools_1_1_number_format_converter_stream.html" title="Converter which converts between bits_per_sample and 16 bits. The templated NumberFormatConverterStre..." alt="" coords="958,229,1188,257"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="913,225,960,232,955,232,913,230"/>
+<area shape="rect" id="Node000014" href="$classaudio__tools_1_1_number_format_converter_stream_t.html" title="A more generic templated Converter which converts from a source type to a target type: You can use e...." alt="" coords="958,281,1188,326"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="865,235,946,266,986,280,981,280,944,271,865,241"/>
+<area shape="rect" id="Node000015" href="$classaudio__tools_1_1_resample_stream.html" title="Dynamic Resampling. We can use a variable factor to speed up or slow down the playback." alt="" coords="1006,349,1140,377"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="839,241,885,291,915,315,947,335,976,347,1008,357,1003,357,974,352,944,340,911,320,882,295,837,246"/>
+<area shape="rect" id="Node000016" href="$classaudio__tools_1_1_resample_stream_t.html" title="A Stream implementation for resamping using a specified interpolation algorithm." alt="" coords="945,401,1201,429"/>
+<area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="832,243,851,278,877,317,909,355,947,386,973,401,968,400,944,391,905,359,872,320,847,281,830,248"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_modifying_stream.html" title="Abstract class: Objects can be put into a pipleline." alt="" coords="556,204,688,232"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="703,215,738,217,733,218,704,220"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="" coords="402,204,508,232"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="523,215,558,217,552,218,524,220"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer, size_t size) and readBytes(uint..." alt="" coords="238,152,338,180"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="349,182,411,203,405,204,349,188"/>
+<area shape="rect" id="Node000005" href="$class_stream.html" title=" " alt="" coords="105,152,173,180"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="187,163,239,164,235,167,189,168"/>
+<area shape="rect" id="Node000006" href="$class_print.html" title=" " alt="" coords="5,152,57,180"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="71,164,106,164,102,168,74,168"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="221,204,354,232"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="369,215,405,217,399,219,370,220"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="224,256,351,284"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="348,248,410,231,406,233,350,253"/>
 </map>

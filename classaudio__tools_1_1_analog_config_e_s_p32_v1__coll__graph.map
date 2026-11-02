@@ -1,27 +1,27 @@
 <map id="AnalogConfigESP32V1" name="AnalogConfigESP32V1">
-<area shape="rect" id="Node000001" title="ESP32 specific configuration for i2s input via adc using the adc_continuous API." alt="" coords="632,379,796,407"/>
-<area shape="rect" id="Node000002" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="295,111,378,139"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="392,125,443,132,500,144,558,166,610,197,632,218,651,241,680,293,701,342,712,380,707,378,696,343,676,295,646,245,628,222,606,202,555,171,499,150,442,137,394,130"/>
-<area shape="rect" id="Node000003" href="$classuint32__t.html" title=" " alt="" coords="5,26,80,53"/>
-<area shape="poly" id="edge7_Node000001_Node000003" title=" " alt="" coords="94,31,200,27,266,29,337,36,410,50,482,72,549,104,610,147,635,174,656,205,687,271,705,334,713,380,709,378,700,335,682,273,652,207,631,177,606,151,547,108,480,77,409,55,337,41,266,34,200,32,97,36"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="93,55,104,58,219,89,296,112,292,114,218,94,103,63,95,60"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="5,104,80,132"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="94,117,296,122,292,126,96,122"/>
-<area shape="rect" id="Node000005" href="$classuint8__t.html" title=" " alt="" coords="9,182,76,209"/>
-<area shape="poly" id="edge11_Node000001_Node000005" title=" " alt="" coords="91,194,381,207,527,219,579,227,609,236,630,250,648,268,677,307,698,347,711,379,706,378,693,349,672,310,644,271,626,254,607,241,578,232,526,224,381,212,92,199"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="90,182,296,132,293,137,92,186"/>
-<area shape="rect" id="Node000006" href="$classint.html" title=" " alt="" coords="317,272,356,300"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="370,283,479,290,545,301,609,320,660,347,699,379,694,378,657,351,607,325,544,306,478,295,372,288"/>
-<area shape="rect" id="Node000007" title=" " alt="" coords="291,328,382,356"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="396,344,496,354,608,369,649,378,644,379,608,374,496,359,397,350"/>
-<area shape="rect" id="Node000008" href="$classbool.html" title=" " alt="" coords="312,428,361,456"/>
-<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="376,445,482,450,545,448,607,439,651,424,687,408,692,406,653,429,609,444,545,453,482,456,377,450"/>
-<area shape="rect" id="Node000009" title=" " alt="" coords="243,484,430,512"/>
-<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="445,505,526,501,568,493,607,481,636,465,662,445,700,408,704,406,665,449,639,470,609,486,569,498,527,506,446,511"/>
-<area shape="rect" id="Node000010" title=" " alt="" coords="243,540,430,568"/>
-<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="445,566,486,565,527,561,568,552,607,536,643,507,671,471,692,435,705,409,709,405,697,438,676,474,646,511,609,540,570,557,528,566,486,571,446,571"/>
-<area shape="rect" id="Node000011" title=" " alt="" coords="292,596,380,624"/>
-<area shape="poly" id="edge12_Node000001_Node000011" title=" " alt="" coords="396,621,445,627,500,628,556,619,582,610,607,597,630,578,651,554,681,500,699,446,709,409,712,405,704,448,685,502,655,557,634,581,609,601,584,615,557,624,500,633,445,633,396,626"/>
-<area shape="rect" id="Node000012" title=" " alt="" coords="279,652,394,680"/>
-<area shape="poly" id="edge13_Node000001_Node000012" title=" " alt="" coords="402,681,451,689,504,690,558,682,583,673,606,660,636,633,659,601,677,566,690,528,705,458,711,409,714,405,710,458,695,530,682,568,663,604,640,637,610,664,585,678,559,687,505,696,450,694,402,687"/>
+<area shape="rect" id="Node000001" title="ESP32 specific configuration for i2s input via adc using the adc_continuous API." alt="" coords="624,331,788,358"/>
+<area shape="rect" id="Node000002" href="$structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="291,97,374,125"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="389,110,438,115,494,126,550,144,602,173,640,210,669,254,690,297,703,331,698,329,685,299,665,257,636,214,598,177,548,149,492,131,438,120,391,115"/>
+<area shape="rect" id="Node000003" href="$classuint32__t.html" title=" " alt="" coords="5,20,80,48"/>
+<area shape="poly" id="edge7_Node000001_Node000003" title=" " alt="" coords="93,25,198,19,262,20,332,26,403,39,474,59,541,88,602,128,625,151,645,177,676,235,695,290,705,332,700,329,690,291,671,237,641,180,621,154,598,132,538,92,472,64,402,44,331,32,262,26,198,25,96,30"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="93,47,104,50,292,99,288,103,103,55,96,52"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="5,88,80,116"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="94,101,292,108,289,112,96,106"/>
+<area shape="rect" id="Node000005" href="$classuint8__t.html" title=" " alt="" coords="9,160,76,188"/>
+<area shape="poly" id="edge11_Node000001_Node000005" title=" " alt="" coords="90,172,208,174,357,182,500,198,558,210,601,225,634,248,662,276,700,331,694,330,658,280,631,252,599,230,557,215,499,203,356,187,208,179,92,176"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="90,161,292,118,289,122,92,166"/>
+<area shape="rect" id="Node000006" href="$classint.html" title=" " alt="" coords="313,241,352,269"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="366,255,472,267,537,278,601,294,643,310,682,330,676,330,641,315,599,299,536,283,472,272,367,260"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="287,293,378,321"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="393,310,600,330,626,335,621,336,600,335,393,315"/>
+<area shape="rect" id="Node000008" href="$classbool.html" title=" " alt="" coords="308,367,357,394"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="372,383,476,389,538,388,599,381,639,370,672,360,677,358,640,375,601,386,538,393,476,395,373,388"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="239,419,426,446"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="441,435,520,430,560,423,599,412,625,401,649,387,687,360,692,358,652,391,627,406,601,417,562,428,521,435,442,441"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="239,471,426,498"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="441,490,521,482,561,473,599,458,631,436,658,409,695,360,699,357,662,412,634,440,601,463,563,478,522,488,442,495"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="288,523,376,550"/>
+<area shape="poly" id="edge12_Node000001_Node000011" title=" " alt="" coords="392,543,440,547,493,545,548,534,599,513,619,497,638,478,667,434,687,391,699,361,703,357,692,393,672,437,642,481,623,501,601,517,550,540,494,550,440,552,392,549"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="275,575,390,602"/>
+<area shape="poly" id="edge13_Node000001_Node000012" title=" " alt="" coords="405,600,452,604,502,602,553,592,599,570,624,548,645,521,662,492,675,461,693,402,701,361,705,357,698,403,680,463,667,494,649,524,628,552,601,574,554,597,503,608,452,609,405,606"/>
 </map>

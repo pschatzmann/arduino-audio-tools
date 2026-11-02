@@ -1,23 +1,22 @@
 <map id="AudioSourceZephyr" name="AudioSourceZephyr">
-<area shape="rect" id="Node000001" title="AudioSource using Zephyr FS API (NO mounting, only uses mounted FS). Mount using the ZephyrSD class." alt="" coords="139,450,287,478"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players." alt="" coords="101,106,203,134"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="157,147,180,287,213,450,208,449,175,288,154,151"/>
-<area shape="rect" id="Node000003" href="$classint.html" title=" " alt="" coords="81,5,119,33"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="114,44,147,105,142,106,114,49"/>
-<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="25,106,76,134"/>
-<area shape="poly" id="edge7_Node000007_Node000003" title=" " alt="" coords="67,41,55,58,49,82,51,106,45,105,44,82,50,56,69,36"/>
-<area shape="rect" id="Node000004" href="$classbool.html" title=" " alt="" coords="328,5,378,33"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="343,45,331,68,313,84,287,99,259,109,205,119,202,114,258,103,285,94,310,80,327,64,340,49"/>
-<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_zephyr_file.html" title="Arduino File API for Zephyr." alt="" coords="5,260,96,288"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="41,306,38,332,36,364,40,396,54,424,67,433,87,441,141,454,136,456,85,446,64,438,50,428,35,398,30,364,33,331,42,300"/>
-<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="16,183,85,211"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="51,223,53,260,48,259,50,229"/>
-<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="42,146,46,183,41,183,42,152"/>
-<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="60,146,60,183,55,182,59,152"/>
-<area shape="rect" id="Node000008" href="$classsize__t.html" title=" " alt="" coords="189,260,248,288"/>
-<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="217,301,218,312,216,450,210,449,213,312,214,306"/>
-<area shape="rect" id="Node000009" href="$classlong.html" title=" " alt="" coords="278,260,327,288"/>
-<area shape="poly" id="edge10_Node000001_Node000009" title=" " alt="" coords="305,301,301,364,291,397,275,428,262,441,246,452,244,447,259,437,271,424,286,395,295,363,302,305"/>
-<area shape="rect" id="Node000010" title=" " alt="" coords="352,260,402,288"/>
-<area shape="poly" id="edge11_Node000001_Node000010" title=" " alt="" coords="381,301,383,332,379,365,369,399,350,428,321,448,288,460,287,455,319,444,346,424,364,396,374,364,377,331,378,305"/>
+<area shape="rect" id="Node000001" title="AudioSource using Zephyr FS API (NO mounting, only uses mounted FS). Mount using the ZephyrSD class." alt="" coords="138,413,286,440"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players." alt="" coords="99,98,202,126"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="155,139,177,279,211,412,205,412,172,280,152,143"/>
+<area shape="rect" id="Node000003" href="$classint.html" title=" " alt="" coords="77,5,115,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="111,44,145,97,140,98,111,49"/>
+<area shape="rect" id="Node000007" href="$class_print.html" title=" " alt="" coords="24,98,75,126"/>
+<area shape="poly" id="edge7_Node000007_Node000003" title=" " alt="" coords="63,43,54,58,49,78,49,98,44,97,43,77,49,56,65,38"/>
+<area shape="rect" id="Node000004" href="$classbool.html" title=" " alt="" coords="319,5,368,33"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="331,45,320,63,305,76,281,89,254,99,204,109,201,105,253,94,279,85,302,72,316,60,328,49"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_zephyr_file.html" title="Arduino File API for Zephyr." alt="" coords="5,252,96,280"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="43,293,40,342,44,366,56,387,68,396,87,403,140,416,135,418,85,408,65,400,51,390,39,368,35,342,42,298"/>
+<area shape="rect" id="Node000006" href="$class_stream.html" title=" " alt="" coords="15,175,83,203"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="50,215,53,252,48,251,49,221"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="49,138,52,175,47,175,49,144"/>
+<area shape="rect" id="Node000008" href="$classsize__t.html" title=" " alt="" coords="186,252,246,280"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="216,293,216,304,214,413,209,411,211,304,213,297"/>
+<area shape="rect" id="Node000009" href="$classlong.html" title=" " alt="" coords="272,252,322,280"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="298,293,291,342,283,367,270,390,257,404,241,415,239,410,253,400,266,387,278,365,286,341,294,297"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="346,252,395,280"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="373,293,368,343,358,369,343,391,317,409,287,421,286,415,315,405,339,387,354,366,362,342,369,297"/>
 </map>

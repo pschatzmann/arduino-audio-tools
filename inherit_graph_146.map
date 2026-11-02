@@ -1,3 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$class_f_l_a_c____int32_01_5.html" title=" " alt="" coords="5,5,119,33"/>
+<area shape="rect" id="Node000000" href="$classaudio__tools_1_1_http_line_reader.html" title="We read a single line. A terminating 0 is added to the string to make it compliant for c string funct..." alt="" coords="5,5,128,33"/>
+<area shape="rect" id="Node000001" href="$classaudio__tools_1_1_http_chunk_reader.html" title="Http might reply with chunks. So we need to dechunk the data. see https://en.wikipedia...." alt="" coords="176,5,312,33"/>
+<area shape="poly" id="edge661_Node000000_Node000001" title=" " alt="" coords="143,17,178,19,172,19,143,22"/>
 </map>

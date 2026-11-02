@@ -1,29 +1,29 @@
 <map id="SimpleChorus&lt; effectsuite_t &gt;" name="SimpleChorus&lt; effectsuite_t &gt;">
-<area shape="rect" id="Node000001" title="Simple Chorus effect with a single delay voice and mono output Chorus is effective between 15 and 20 ..." alt="" coords="1451,187,1673,214"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_delay_effect_base.html" title=" " alt="" coords="267,324,479,368"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="394,310,439,256,469,229,502,209,536,195,565,187,618,182,673,187,741,190,1316,190,1453,195,1448,196,1316,195,741,195,673,192,618,188,566,192,537,200,504,214,472,234,443,259,399,313"/>
-<area shape="rect" id="Node000003" href="$classfloat.html" title=" " alt="" coords="5,247,56,274"/>
-<area shape="poly" id="edge17_Node000001_Node000003" title=" " alt="" coords="49,233,78,208,154,169,218,149,286,141,371,139,1316,139,1374,144,1432,155,1527,186,1522,187,1430,160,1374,149,1316,145,372,145,286,146,220,154,156,174,81,212,53,236"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="53,283,81,301,151,316,268,332,264,335,150,321,79,306,55,288"/>
-<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_modulation_base_class.html" title=" " alt="" coords="280,788,466,832"/>
-<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="38,287,58,391,63,543,70,636,75,670,82,687,100,702,117,709,135,710,154,708,196,703,219,704,244,712,275,727,304,747,351,787,346,788,300,751,272,732,242,716,218,710,196,708,155,713,135,715,116,714,97,706,78,690,70,671,64,637,58,543,53,392,38,293"/>
-<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_filter_effect_base.html" title=" " alt="" coords="971,388,1179,432"/>
-<area shape="poly" id="edge15_Node000008_Node000003" title=" " alt="" coords="63,238,79,231,124,222,161,220,243,231,312,246,363,263,480,309,504,317,629,345,755,367,974,398,969,400,754,372,627,350,502,322,478,314,362,268,310,251,242,237,161,226,125,227,80,237,68,241"/>
-<area shape="rect" id="Node000004" href="$classint.html" title=" " alt="" coords="11,832,50,860"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="31,816,44,693,58,631,67,607,78,590,98,573,119,566,161,566,203,566,222,559,241,544,252,527,256,511,254,478,251,443,254,424,264,404,285,383,313,367,309,371,288,387,269,408,260,426,256,443,260,477,262,512,257,529,245,547,225,564,204,571,161,571,120,571,100,578,82,593,72,609,63,633,50,694,36,817"/>
-<area shape="poly" id="edge7_Node000006_Node000004" title=" " alt="" coords="50,870,65,884,81,893,124,908,160,911,197,906,242,893,272,881,300,865,345,834,350,831,302,870,274,886,244,898,198,911,160,917,123,913,79,898,62,888,50,875"/>
-<area shape="poly" id="edge16_Node000008_Node000004" title=" " alt="" coords="43,872,59,898,81,917,137,942,187,953,233,952,278,942,323,924,370,900,478,842,569,792,658,736,824,617,959,508,1047,434,1051,431,963,512,827,621,661,741,571,797,480,847,372,905,325,929,279,947,234,958,186,958,135,947,78,922,55,901,42,877"/>
-<area shape="rect" id="Node000010" href="$classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects." alt="" coords="325,418,420,445"/>
-<area shape="poly" id="edge14_Node000010_Node000004" title=" " alt="" coords="62,829,79,823,104,818,127,817,167,821,203,819,221,812,241,798,262,772,283,732,320,627,349,520,367,448,370,443,354,521,325,629,287,734,266,775,244,802,224,816,204,824,166,826,127,823,105,824,80,829,66,833"/>
-<area shape="rect" id="Node000005" href="$classbool.html" title=" " alt="" coords="6,403,55,430"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="65,393,79,387,159,370,268,356,264,360,160,375,80,393,69,397"/>
-<area shape="poly" id="edge8_Node000006_Node000005" title=" " alt="" coords="32,443,37,516,44,603,58,685,69,716,82,737,100,753,117,761,135,765,153,765,194,762,243,767,305,786,300,788,242,773,194,768,154,770,135,770,116,766,97,757,78,741,64,719,53,686,39,604,32,516,32,449"/>
-<area shape="poly" id="edge13_Node000010_Node000005" title=" " alt="" coords="70,416,327,427,323,431,72,421"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="412,840,472,886,552,934,596,956,643,973,692,984,741,989,1316,989,1345,981,1373,960,1398,927,1422,884,1443,832,1462,773,1495,643,1520,507,1539,381,1558,217,1561,213,1544,382,1525,508,1500,644,1467,775,1448,834,1426,886,1403,930,1377,964,1348,986,1316,994,741,994,691,990,642,978,594,961,549,939,469,890,411,845"/>
-<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_simple_l_p_f.html" title=" " alt="" coords="1228,298,1401,343"/>
-<area shape="poly" id="edge9_Node000001_Node000007" title=" " alt="" coords="1375,289,1533,214,1529,216,1377,294"/>
-<area shape="poly" id="edge10_Node000007_Node000008" title=" " alt="" coords="1150,379,1255,342,1250,345,1152,384"/>
-<area shape="rect" id="Node000009" href="$classaudio__tools_1_1_effect_suite_base.html" title=" " alt="" coords="639,409,846,454"/>
-<area shape="poly" id="edge11_Node000008_Node000009" title=" " alt="" coords="861,421,973,416,968,418,863,426"/>
-<area shape="poly" id="edge12_Node000009_Node000010" title=" " alt="" coords="435,429,641,430,636,433,437,434"/>
+<area shape="rect" id="Node000001" title="Simple Chorus effect with a single delay voice and mono output Chorus is effective between 15 and 20 ..." alt="" coords="1539,151,1761,178"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_delay_effect_base.html" title="A Base class for delay based digital effects. Provides the basic methods that are shared amongst Flan..." alt="" coords="263,264,502,292"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="407,252,459,210,491,190,525,174,591,156,645,151,770,155,1391,155,1541,160,1535,161,1390,161,770,161,646,156,592,161,527,179,493,195,462,214,411,255"/>
+<area shape="rect" id="Node000003" href="$classfloat.html" title=" " alt="" coords="5,192,56,220"/>
+<area shape="poly" id="edge17_Node000001_Node000003" title=" " alt="" coords="54,180,78,164,159,130,225,112,294,106,381,105,1391,105,1451,109,1511,120,1612,150,1606,150,1510,125,1451,114,1390,110,381,110,294,111,226,117,160,135,81,168,58,183"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="59,227,81,237,113,246,158,254,264,267,260,270,157,259,112,251,79,242,61,232"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_modulation_base_class.html" title="Class provides a wave table that can be populated with a number of preallocated waveforms...." alt="" coords="302,633,463,678"/>
+<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="39,232,58,311,60,367,60,439,64,508,71,535,82,554,99,568,116,576,134,578,152,576,192,572,215,573,239,578,297,603,348,632,343,633,295,607,238,583,214,578,192,577,152,582,134,583,115,581,96,573,78,557,66,537,59,508,54,439,55,367,53,312,39,237"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_filter_effect_base.html" title="A Base class for filter based effects including methods for simple high, low and band pass filtering." alt="" coords="1005,319,1240,346"/>
+<area shape="poly" id="edge15_Node000008_Node000003" title=" " alt="" coords="69,189,79,186,124,180,159,179,239,186,321,197,383,211,446,226,526,242,788,284,1015,317,1010,319,787,289,526,248,445,231,382,216,320,202,238,191,159,184,124,185,80,191,73,192"/>
+<area shape="rect" id="Node000004" href="$classint.html" title=" " alt="" coords="11,674,50,701"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="32,658,48,560,61,512,78,480,98,464,118,457,159,455,199,454,218,447,237,432,246,419,250,406,248,378,247,350,251,335,261,320,282,302,310,290,306,294,285,307,265,324,256,337,252,351,254,378,255,406,251,421,241,435,221,451,200,459,159,461,119,462,100,469,82,484,66,514,53,561,38,659"/>
+<area shape="poly" id="edge7_Node000006_Node000004" title=" " alt="" coords="54,709,81,725,123,738,158,740,194,735,238,725,297,703,345,679,350,677,299,708,239,730,195,741,158,746,122,743,79,730,55,715"/>
+<area shape="poly" id="edge16_Node000008_Node000004" title=" " alt="" coords="46,712,62,732,81,746,140,770,193,782,241,782,288,774,335,758,384,737,501,688,596,647,691,600,867,500,1010,407,1099,348,1104,346,1013,412,870,504,693,605,598,652,503,692,386,742,337,763,289,779,242,787,192,787,139,775,78,751,58,736,45,717"/>
+<area shape="rect" id="Node000010" href="$classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects." alt="" coords="335,334,430,361"/>
+<area shape="poly" id="edge14_Node000010_Node000004" title=" " alt="" coords="63,678,79,674,126,670,164,672,199,668,217,660,237,648,249,633,265,603,305,519,373,364,377,360,310,521,270,606,253,636,240,652,220,665,200,673,164,677,126,675,80,679,66,682"/>
+<area shape="rect" id="Node000005" href="$classbool.html" title=" " alt="" coords="6,323,55,350"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="68,319,79,315,172,296,264,285,260,289,172,302,80,321,72,323"/>
+<area shape="poly" id="edge8_Node000006_Node000005" title=" " alt="" coords="33,363,48,492,62,556,71,580,81,595,303,638,300,643,78,600,66,582,57,557,43,493,33,369"/>
+<area shape="poly" id="edge13_Node000010_Node000005" title=" " alt="" coords="70,335,336,344,333,348,72,340"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="426,684,490,726,573,771,620,790,669,806,719,817,770,821,1390,821,1416,815,1440,798,1464,771,1486,735,1528,644,1564,537,1594,425,1617,320,1644,181,1648,177,1622,321,1599,426,1569,538,1533,646,1491,737,1468,774,1444,802,1418,820,1391,826,770,826,719,822,668,811,618,795,571,776,487,731,424,689"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_simple_l_p_f.html" title="SimpleLPF." alt="" coords="1289,248,1489,276"/>
+<area shape="poly" id="edge9_Node000001_Node000007" title=" " alt="" coords="1442,240,1613,178,1608,180,1443,245"/>
+<area shape="poly" id="edge10_Node000007_Node000008" title=" " alt="" coords="1191,312,1336,276,1331,277,1193,317"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1_effect_suite_base.html" title="Base Class for Effects." alt="" coords="654,334,888,361"/>
+<area shape="poly" id="edge11_Node000008_Node000009" title=" " alt="" coords="903,339,1008,337,1002,338,904,344"/>
+<area shape="poly" id="edge12_Node000009_Node000010" title=" " alt="" coords="445,345,656,346,651,349,447,350"/>
 </map>

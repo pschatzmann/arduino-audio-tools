@@ -1,3 +1,15 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$structaudio__tools_1_1_alloc_size.html" title=" " alt="" coords="5,5,86,33"/>
+<area shape="rect" id="Node000000" href="$classaudio__tools_1_1_analog_driver_base.html" title=" " alt="" coords="5,136,144,164"/>
+<area shape="rect" id="Node000001" href="$classaudio__tools_1_1_analog_driver_arduino.html" title="Please use the AnalogAudioStream: Reading Analog Data using a timer and the Arduino analogRead() meth..." alt="" coords="195,5,352,33"/>
+<area shape="poly" id="edge501_Node000000_Node000001" title=" " alt="" coords="96,123,138,82,190,44,220,32,216,35,193,48,141,86,100,126"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_analog_driver_e_s_p32.html" title="Please use AnalogAudioStream: A very fast ADC and DAC using the ESP32 I2S interface." alt="" coords="200,57,346,85"/>
+<area shape="poly" id="edge502_Node000000_Node000002" title=" " alt="" coords="117,127,191,95,228,84,224,87,193,100,120,132"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_analog_driver_e_s_p32_v1.html" title="AnalogAudioStream: A very fast DAC using DMA using the new dac_continuous API." alt="" coords="192,109,355,137"/>
+<area shape="poly" id="edge503_Node000000_Node000003" title=" " alt="" coords="158,136,194,133,189,135,160,141"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_analog_driver_e_s_p32_v2.html" title="AnalogAudioStream: A very fast DAC using DMA using the new dac_continuous API. This implementation as..." alt="" coords="192,161,355,189"/>
+<area shape="poly" id="edge504_Node000000_Node000004" title=" " alt="" coords="158,158,194,164,189,166,159,163"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_analog_driver_m_b_e_d.html" title="Please use AnalogAudioStream: A ADC and DAC API for the Arduino Giga." alt="" coords="201,213,346,241"/>
+<area shape="poly" id="edge505_Node000000_Node000005" title=" " alt="" coords="121,168,193,198,229,212,224,213,191,203,120,173"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_analog_driver_zephyr.html" title=" " alt="" coords="197,265,350,293"/>
+<area shape="poly" id="edge506_Node000000_Node000006" title=" " alt="" coords="99,173,141,213,193,250,221,265,216,265,190,255,138,217,98,178"/>
 </map>

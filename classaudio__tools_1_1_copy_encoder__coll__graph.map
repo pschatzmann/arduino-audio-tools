@@ -1,28 +1,25 @@
 <map id="CopyEncoder" name="CopyEncoder">
-<area shape="rect" id="Node000001" title="Dummy Encoder which just copies the provided data to the output." alt="" coords="288,307,394,335"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_audio_encoder.html" title="Encoding of PCM data." alt="" coords="141,207,251,234"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="228,241,325,306,319,307,227,246"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="" coords="23,106,121,134"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="93,141,175,205,171,207,92,146"/>
-<area shape="poly" id="edge6_Node000002_Node000003" title=" " alt="" coords="107,140,188,205,183,207,106,145"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="5,5,139,33"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="64,45,68,106,63,105,63,51"/>
-<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="81,45,81,106,76,105,80,51"/>
-<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_mime_source.html" title="Abstract interface for classes that can provide MIME type information." alt="" coords="145,106,247,134"/>
-<area shape="poly" id="edge5_Node000002_Node000005" title=" " alt="" coords="189,147,192,207,187,205,186,151"/>
-<area shape="poly" id="edge7_Node000002_Node000005" title=" " alt="" coords="206,147,205,207,200,205,203,151"/>
-<area shape="rect" id="Node000006" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="272,106,355,134"/>
-<area shape="poly" id="edge8_Node000002_Node000006" title=" " alt="" coords="288,142,213,208,210,204,284,145"/>
+<area shape="rect" id="Node000001" title="Dummy Encoder which just copies the provided data to the output." alt="" coords="314,283,420,311"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_audio_encoder.html" title="Encoding of PCM data." alt="" coords="184,191,294,218"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="270,225,351,283,345,283,269,230"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="" coords="24,98,122,126"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="111,131,217,189,212,191,110,136"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="5,5,139,33"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="73,46,76,98,70,97,72,51"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_mime_source.html" title="Abstract interface for classes that can provide MIME type information." alt="" coords="148,98,250,126"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="212,137,236,191,230,190,209,142"/>
+<area shape="rect" id="Node000006" href="$structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="274,98,358,126"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="297,136,251,192,248,188,293,139"/>
 <area shape="rect" id="Node000007" href="$classuint32__t.html" title=" " alt="" coords="163,5,237,33"/>
-<area shape="poly" id="edge9_Node000006_Node000007" title=" " alt="" coords="205,45,213,65,224,80,246,97,274,109,269,110,244,101,220,84,209,67,204,51"/>
-<area shape="rect" id="Node000008" title=" " alt="" coords="283,5,357,33"/>
-<area shape="poly" id="edge10_Node000006_Node000008" title=" " alt="" coords="320,46,317,106,312,104,317,50"/>
-<area shape="rect" id="Node000009" href="$classuint8__t.html" title=" " alt="" coords="384,5,450,33"/>
-<area shape="poly" id="edge11_Node000006_Node000009" title=" " alt="" coords="411,45,403,67,390,84,373,98,354,108,351,103,370,93,386,80,398,64,407,49"/>
-<area shape="rect" id="Node000010" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="324,207,375,234"/>
-<area shape="poly" id="edge12_Node000001_Node000010" title=" " alt="" coords="346,248,346,259,343,309,339,306,341,258,343,252"/>
-<area shape="rect" id="Node000011" href="$classint.html" title=" " alt="" coords="379,106,418,134"/>
-<area shape="poly" id="edge13_Node000010_Node000011" title=" " alt="" coords="387,146,358,208,354,204,383,149"/>
-<area shape="rect" id="Node000012" title=" " alt="" coords="406,207,455,234"/>
-<area shape="poly" id="edge14_Node000001_Node000012" title=" " alt="" coords="424,248,403,285,371,309,369,304,399,282,419,251"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="209,45,228,72,250,88,276,100,271,101,247,92,224,76,208,50"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="279,5,353,33"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="317,46,318,99,314,97,315,51"/>
+<area shape="rect" id="Node000009" href="$classuint8__t.html" title=" " alt="" coords="378,5,444,33"/>
+<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="402,45,383,76,348,100,346,95,379,72,398,49"/>
+<area shape="rect" id="Node000010" href="$class_print.html" title=" " alt="" coords="346,191,398,218"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="371,232,371,242,369,285,365,281,366,242,367,236"/>
+<area shape="rect" id="Node000011" href="$classint.html" title=" " alt="" coords="382,98,421,126"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="394,139,378,192,374,189,390,142"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="427,191,477,218"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="443,231,425,261,393,285,391,280,421,258,438,234"/>
 </map>

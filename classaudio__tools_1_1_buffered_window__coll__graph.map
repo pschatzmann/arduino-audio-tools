@@ -1,19 +1,19 @@
 <map id="BufferedWindow" name="BufferedWindow">
-<area shape="rect" id="Node000001" title="Buffered window function, so that we do not need to re&#45;calculate the values." alt="" coords="175,274,304,301"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_window_function.html" title="FFT Window Function." alt="" coords="177,173,305,201"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="239,214,240,225,241,275,236,272,234,225,236,219"/>
-<area shape="poly" id="edge4_Node000001_Node000002" title=" " alt="" coords="242,215,242,274,237,272,238,218"/>
-<area shape="rect" id="Node000003" href="$classfloat.html" title=" " alt="" coords="328,5,378,33"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="311,32,292,43,274,58,260,107,246,174,241,171,254,106,270,56,289,39,315,29"/>
-<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="371,173,492,201"/>
-<area shape="poly" id="edge7_Node000005_Node000003" title=" " alt="" coords="389,40,404,56,419,86,428,119,434,174,429,171,423,120,414,88,400,58,389,45"/>
-<area shape="rect" id="Node000004" href="$classint.html" title=" " alt="" coords="19,5,57,33"/>
-<area shape="poly" id="edge10_Node000001_Node000004" title=" " alt="" coords="21,49,21,58,11,100,9,135,18,167,43,199,74,224,109,244,182,272,177,274,107,249,71,228,39,203,13,169,4,136,6,99,16,56,22,44"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="29,51,27,72,26,99,30,125,42,147,58,154,91,162,178,176,174,180,90,167,57,159,38,151,25,126,21,99,22,72,30,45"/>
-<area shape="poly" id="edge6_Node000005_Node000004" title=" " alt="" coords="72,22,112,32,131,42,148,55,157,67,161,80,162,104,163,127,167,137,176,147,248,160,373,177,368,179,247,165,173,151,163,140,158,128,157,104,156,81,152,70,144,59,128,46,110,37,74,26"/>
-<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="395,208,266,276,264,271,390,208"/>
-<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="656,5,735,33"/>
-<area shape="poly" id="edge8_Node000005_Node000006" title=" " alt="" coords="699,47,695,101,685,128,668,151,638,166,594,176,493,186,492,181,593,171,636,161,664,147,680,125,690,100,696,51"/>
-<area shape="rect" id="Node000007" href="$classbool.html" title=" " alt="" coords="490,5,539,33"/>
-<area shape="poly" id="edge9_Node000005_Node000007" title=" " alt="" coords="515,46,509,98,500,125,487,151,475,164,460,175,457,170,471,160,483,147,495,123,504,97,512,51"/>
+<area shape="rect" id="Node000001" title="Buffered window function, so that we do not need to re&#45;calculate the values." alt="" coords="163,242,292,269"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_window_function.html" title="FFT Window Function." alt="" coords="165,149,293,177"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="227,190,228,201,228,243,224,240,222,201,224,195"/>
+<area shape="poly" id="edge4_Node000001_Node000002" title=" " alt="" coords="230,190,230,243,225,240,226,194"/>
+<area shape="rect" id="Node000003" href="$classfloat.html" title=" " alt="" coords="310,5,361,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="294,33,277,44,261,59,252,75,245,99,233,150,229,147,240,98,247,73,256,55,274,40,298,30"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_vector.html" title=" " alt="" coords="350,149,471,177"/>
+<area shape="poly" id="edge7_Node000005_Node000003" title=" " alt="" coords="369,40,383,56,396,80,404,105,412,150,407,148,399,107,391,82,379,58,368,46"/>
+<area shape="rect" id="Node000004" href="$classint.html" title=" " alt="" coords="14,5,52,33"/>
+<area shape="poly" id="edge10_Node000001_Node000004" title=" " alt="" coords="18,50,18,58,11,93,9,122,15,148,35,175,63,199,96,217,131,231,166,243,160,243,129,236,94,222,60,203,31,178,11,150,3,122,5,92,13,56,19,45"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="24,51,24,87,28,107,37,123,52,130,83,138,166,152,162,155,82,143,50,135,33,127,23,108,19,88,25,46"/>
+<area shape="poly" id="edge6_Node000005_Node000004" title=" " alt="" coords="67,23,105,34,139,55,150,73,153,91,156,108,167,123,234,136,351,153,346,155,233,141,164,127,151,110,148,92,145,75,135,59,102,39,68,28"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="373,184,255,244,253,239,367,184"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="627,5,706,33"/>
+<area shape="poly" id="edge8_Node000005_Node000006" title=" " alt="" coords="668,47,661,89,651,110,637,127,609,141,567,151,472,161,471,156,566,146,607,136,634,123,647,107,656,88,664,50"/>
+<area shape="rect" id="Node000007" href="$classbool.html" title=" " alt="" coords="464,5,514,33"/>
+<area shape="poly" id="edge9_Node000005_Node000007" title=" " alt="" coords="487,46,479,87,460,127,435,151,432,146,456,123,474,85,484,50"/>
 </map>

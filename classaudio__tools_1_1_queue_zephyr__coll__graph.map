@@ -1,15 +1,15 @@
 <map id="QueueZephyr&lt; T &gt;" name="QueueZephyr&lt; T &gt;">
-<area shape="rect" id="Node000001" title="FIFO Queue implementation based on Zephyr message queues." alt="" coords="303,128,450,156"/>
+<area shape="rect" id="Node000001" title="FIFO Queue implementation based on Zephyr message queues." alt="" coords="294,115,441,143"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="5,5,119,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="77,44,100,76,131,102,161,113,204,122,305,135,300,136,203,127,160,118,129,107,97,79,75,49"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="82,42,107,68,138,89,176,104,216,114,296,127,291,127,215,119,174,109,135,93,104,72,81,48"/>
 <area shape="rect" id="Node000003" href="$classuint32__t.html" title=" " alt="" coords="142,5,216,33"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="180,46,185,77,191,91,200,102,216,112,241,120,305,134,300,134,239,125,214,117,196,106,187,93,180,79,177,51"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="282,5,362,33"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="318,46,318,76,326,103,336,116,350,128,345,127,332,119,321,106,313,77,315,50"/>
-<area shape="rect" id="Node000005" href="$classint.html" title=" " alt="" coords="413,5,452,33"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="428,46,406,106,389,130,386,126,401,103,423,49"/>
-<area shape="rect" id="Node000006" href="$classuint8__t.html" title=" " alt="" coords="512,5,578,33"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="542,46,531,79,510,106,483,124,451,135,450,130,480,119,507,102,526,76,537,49"/>
-<area shape="rect" id="Node000007" href="$classbool.html" title=" " alt="" coords="603,5,652,33"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="626,47,616,79,607,94,596,106,571,119,535,128,451,139,450,133,534,122,569,114,592,102,603,91,611,77,621,50"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="182,46,189,70,201,89,216,98,238,105,296,119,291,119,236,110,213,102,197,93,184,72,179,51"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="274,5,354,33"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="311,46,312,70,318,90,328,102,342,115,337,114,324,106,313,92,306,70,307,50"/>
+<area shape="rect" id="Node000005" href="$classint.html" title=" " alt="" coords="401,5,440,33"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="413,46,394,92,378,117,375,112,389,90,409,49"/>
+<area shape="rect" id="Node000006" href="$classuint8__t.html" title=" " alt="" coords="496,5,562,33"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="521,46,509,72,490,93,468,107,442,117,441,112,465,103,487,89,505,69,517,49"/>
+<area shape="rect" id="Node000007" href="$classbool.html" title=" " alt="" coords="585,5,635,33"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="603,46,589,72,569,93,547,103,515,111,442,123,441,118,514,106,545,98,566,89,585,69,598,49"/>
 </map>

@@ -1,19 +1,19 @@
 <map id="CameraFrameSourceTinyCamera" name="CameraFrameSourceTinyCamera">
-<area shape="rect" id="Node000001" title="VideoFrameSource that pulls frames from a camera via TinyCamera (https://github.com/pschatzmann/TinyC..." alt="" coords="176,229,412,257"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_video_frame_source.html" title="Pull&#45;based provider of one already&#45;encoded video/image frame at a time &#45; e.g. wraps a camera capture ..." alt="" coords="5,128,149,156"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="120,160,267,227,263,230,119,165"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="172,128,272,156"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="242,166,287,229,282,228,239,171"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="297,128,438,156"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="359,169,338,207,313,231,310,226,334,203,354,172"/>
-<area shape="rect" id="Node000005" href="$structaudio__tools_1_1_video_info.html" title="Basic video information (width/height/codec/frame size), analogous to AudioInfo &#45; common to both Demu..." alt="" coords="462,128,545,156"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="478,164,446,188,411,207,347,231,346,226,409,203,443,183,473,166"/>
+<area shape="rect" id="Node000001" title="VideoFrameSource that pulls frames from a camera via TinyCamera (https://github.com/pschatzmann/TinyC..." alt="" coords="176,208,412,235"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_video_frame_source.html" title="Pull&#45;based provider of one already&#45;encoded video/image frame at a time &#45; e.g. wraps a camera capture ..." alt="" coords="5,115,149,143"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="123,146,265,205,261,209,122,152"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="172,115,272,143"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="243,153,287,208,281,207,241,157"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="297,115,438,143"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="354,154,332,185,310,209,307,205,328,182,349,157"/>
+<area shape="rect" id="Node000005" href="$structaudio__tools_1_1_video_info.html" title="Basic video information (width/height/codec/frame size), analogous to AudioInfo &#45; common to both Demu..." alt="" coords="462,115,545,143"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="469,150,399,186,336,210,335,204,397,181,464,151"/>
 <area shape="rect" id="Node000006" title=" " alt="" coords="329,5,404,33"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="377,45,394,75,416,102,438,117,464,130,459,130,436,122,413,106,390,78,375,50"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="382,44,400,68,422,89,465,115,460,114,418,93,396,71,381,49"/>
 <area shape="rect" id="Node000007" href="$classfloat.html" title=" " alt="" coords="428,5,478,33"/>
-<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="466,45,501,128,496,127,463,50"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="467,45,500,116,495,114,464,49"/>
 <area shape="rect" id="Node000008" title=" " alt="" coords="502,5,606,33"/>
-<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="546,45,523,105,512,130,508,126,519,103,542,49"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="544,46,511,117,508,113,540,49"/>
 <area shape="rect" id="Node000009" href="$classuint32__t.html" title=" " alt="" coords="630,5,705,33"/>
-<area shape="poly" id="edge8_Node000005_Node000009" title=" " alt="" coords="653,45,629,78,599,106,573,121,547,132,545,127,571,116,595,102,626,74,649,48"/>
+<area shape="poly" id="edge8_Node000005_Node000009" title=" " alt="" coords="648,43,622,70,592,93,544,117,542,112,589,89,619,66,643,46"/>
 </map>

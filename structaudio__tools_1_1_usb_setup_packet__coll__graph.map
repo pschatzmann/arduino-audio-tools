@@ -1,7 +1,7 @@
 <map id="UsbSetupPacket" name="UsbSetupPacket">
-<area shape="rect" id="Node000001" title="Backend&#45;agnostic mirror of the standard 8&#45;byte USB SETUP packet (TinyUSB&#39;s tusb_control_request_t)...." alt="" coords="46,151,172,178"/>
+<area shape="rect" id="Node000001" title="Backend&#45;agnostic mirror of the standard 8&#45;byte USB SETUP packet (TinyUSB&#39;s tusb_control_request_t)...." alt="" coords="42,132,168,160"/>
 <area shape="rect" id="Node000002" href="$classuint8__t.html" title=" " alt="" coords="5,5,72,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="32,45,31,87,34,107,42,125,54,138,70,149,65,151,50,142,38,128,29,108,26,87,31,51"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="144,5,218,33"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="180,47,172,88,154,128,130,152,127,148,150,125,167,86,176,51"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="33,46,34,78,42,107,53,119,69,131,64,132,50,123,37,109,28,79,31,51"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="136,5,210,33"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="169,46,161,79,146,109,124,134,121,129,142,107,156,77,166,50"/>
 </map>

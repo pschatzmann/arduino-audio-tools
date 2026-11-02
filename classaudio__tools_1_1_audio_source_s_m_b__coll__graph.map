@@ -1,33 +1,32 @@
 <map id="AudioSourceSMB" name="AudioSourceSMB">
-<area shape="rect" id="Node000001" title="An AudioSource that uses the SMBClient of the https://github.com/pschatzmann/TinySMB library to retri..." alt="" coords="456,397,587,424"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players." alt="" coords="273,151,376,178"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="326,192,334,245,341,273,352,300,366,324,381,341,422,370,474,396,469,396,419,375,377,345,362,327,347,303,336,275,329,246,324,196"/>
-<area shape="rect" id="Node000003" href="$classint.html" title=" " alt="" coords="119,5,157,33"/>
-<area shape="poly" id="edge17_Node000001_Node000003" title=" " alt="" coords="101,23,58,32,37,43,20,59,11,75,8,91,12,107,20,125,52,180,85,223,120,255,158,281,200,303,247,323,360,370,408,387,458,401,453,400,407,392,358,375,245,328,198,307,155,286,117,260,81,226,48,183,15,128,7,108,3,91,6,74,16,55,34,38,56,27,105,19"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="102,25,68,36,52,45,39,59,29,76,25,93,28,109,39,125,54,136,77,144,139,156,209,161,275,163,270,166,209,166,138,161,75,150,52,140,35,129,24,111,20,93,24,74,35,55,49,41,66,31,105,21"/>
-<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_str_view.html" title="A simple wrapper to provide string functions on existing allocated char*. If the underlying char* is ..." alt="" coords="517,151,588,178"/>
-<area shape="poly" id="edge10_Node000008_Node000003" title=" " alt="" coords="170,30,193,41,213,55,227,74,233,93,239,109,253,124,292,135,364,144,519,159,514,162,364,150,291,140,250,129,234,112,228,94,222,77,209,59,190,45,172,35"/>
-<area shape="rect" id="Node000010" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="612,151,733,178"/>
-<area shape="poly" id="edge13_Node000010_Node000003" title=" " alt="" coords="172,19,373,30,472,40,507,47,527,55,540,72,542,91,544,108,553,125,577,137,614,150,609,150,575,142,550,129,538,110,537,91,535,74,524,59,506,52,471,46,372,35,173,24"/>
-<area shape="rect" id="Node000004" href="$classbool.html" title=" " alt="" coords="438,5,488,33"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="421,26,389,38,372,47,358,59,343,81,334,106,327,151,322,149,329,104,338,78,354,55,369,43,387,33,426,24"/>
-<area shape="poly" id="edge9_Node000008_Node000004" title=" " alt="" coords="457,46,455,87,459,107,467,125,489,144,519,157,514,158,486,149,463,128,454,109,450,88,454,51"/>
-<area shape="poly" id="edge16_Node000010_Node000004" title=" " alt="" coords="503,17,566,26,598,37,628,55,642,71,648,87,659,126,669,151,664,149,654,128,643,89,637,74,624,59,596,42,565,31,504,22"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="361,274,461,301"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="423,313,439,343,459,371,494,397,489,396,456,375,434,346,420,318"/>
-<area shape="rect" id="Node000006" title=" " alt="" coords="485,274,558,301"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="524,315,524,398,520,394,520,319"/>
-<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_str.html" title="Str which keeps the data on the heap. We grow the allocated memory only if the copy source is not fit..." alt="" coords="582,274,621,301"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="591,314,557,374,536,399,534,394,553,371,587,317"/>
-<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="557,191,575,234,593,274,588,272,570,236,555,196"/>
-<area shape="poly" id="edge11_Node000007_Node000008" title=" " alt="" coords="572,190,592,234,605,274,600,272,587,236,570,195"/>
-<area shape="rect" id="Node000009" title=" " alt="" coords="920,5,969,33"/>
-<area shape="poly" id="edge19_Node000001_Node000009" title=" " alt="" coords="983,37,1000,56,1008,75,1011,92,1008,109,1000,128,962,186,914,236,858,279,798,315,738,344,679,368,580,399,579,393,677,363,736,339,796,310,855,275,910,232,958,183,995,125,1003,107,1006,92,1003,76,996,58,981,42"/>
-<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="902,26,868,38,850,47,835,59,825,75,823,93,821,111,809,129,791,138,766,144,707,149,647,150,601,153,589,156,588,151,600,148,647,145,707,144,765,139,789,133,805,125,816,109,818,92,820,74,831,55,847,42,866,33,907,24"/>
-<area shape="poly" id="edge14_Node000010_Node000009" title=" " alt="" coords="946,47,940,90,931,111,917,129,885,144,838,154,734,164,733,159,838,149,884,139,913,125,926,108,935,89,943,51"/>
-<area shape="poly" id="edge12_Node000007_Node000010" title=" " alt="" coords="659,190,611,275,608,271,655,193"/>
-<area shape="rect" id="Node000011" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="1021,5,1100,33"/>
-<area shape="poly" id="edge15_Node000010_Node000011" title=" " alt="" coords="1055,46,1037,91,1022,112,1003,129,982,139,954,147,883,158,733,166,733,160,882,152,953,142,980,134,1000,124,1018,108,1032,89,1051,50"/>
-<area shape="rect" id="Node000012" href="$classsize__t.html" title=" " alt="" coords="1053,274,1113,301"/>
-<area shape="poly" id="edge18_Node000001_Node000012" title=" " alt="" coords="1077,315,1062,348,1051,363,1036,375,1011,383,968,390,847,401,588,411,588,405,846,395,968,385,1010,378,1034,370,1047,359,1058,346,1073,318"/>
+<area shape="rect" id="Node000001" title="An AudioSource that uses the SMBClient of the https://github.com/pschatzmann/TinySMB library to retri..." alt="" coords="464,351,595,379"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players." alt="" coords="271,132,374,160"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="327,173,338,221,347,245,359,268,385,296,417,319,451,336,484,351,479,350,449,341,414,323,382,300,355,271,342,247,333,222,324,178"/>
+<area shape="rect" id="Node000003" href="$classint.html" title=" " alt="" coords="110,5,149,33"/>
+<area shape="poly" id="edge16_Node000001_Node000003" title=" " alt="" coords="93,23,52,33,33,44,17,59,10,71,8,82,17,107,58,164,109,211,168,251,231,283,295,309,358,328,466,355,461,355,356,333,294,314,229,288,165,256,106,216,54,167,12,109,3,82,5,69,13,55,29,39,50,28,96,19"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="93,25,60,36,45,46,32,59,25,71,22,83,24,94,32,106,43,112,64,117,127,127,273,140,269,144,126,132,63,123,41,117,28,110,19,96,17,83,20,69,28,55,41,41,58,31,96,21"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_str_view.html" title="A simple wrapper to provide string functions on existing allocated char*. If the underlying char* is ..." alt="" coords="436,132,508,160"/>
+<area shape="poly" id="edge10_Node000008_Node000003" title=" " alt="" coords="162,33,202,55,218,69,229,82,240,94,256,106,438,137,434,140,254,110,236,99,225,86,214,73,198,59,163,38"/>
+<area shape="rect" id="Node000010" href="$classaudio__tools_1_1_vector.html" title=" " alt="" coords="564,132,684,160"/>
+<area shape="poly" id="edge12_Node000010_Node000003" title=" " alt="" coords="163,19,354,31,447,42,481,48,500,55,511,67,515,81,518,94,526,106,545,119,568,131,563,131,543,124,522,110,513,96,510,82,506,70,497,59,479,53,447,47,353,37,165,25"/>
+<area shape="rect" id="Node000004" href="$classbool.html" title=" " alt="" coords="415,5,465,33"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="398,28,371,39,344,59,334,76,328,96,324,133,320,130,322,95,329,74,340,55,368,35,403,25"/>
+<area shape="poly" id="edge9_Node000008_Node000004" title=" " alt="" coords="437,46,438,77,444,107,460,132,455,131,439,109,433,78,435,51"/>
+<area shape="poly" id="edge15_Node000010_Node000004" title=" " alt="" coords="479,17,539,26,570,37,596,55,610,73,619,94,626,133,621,131,614,95,606,76,593,59,567,42,538,31,480,22"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="369,242,468,269"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="434,280,451,304,471,325,505,351,500,350,467,329,447,307,432,285"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="493,242,566,269"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="531,283,531,353,527,350,527,286"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_str.html" title="Str which keeps the data on the heap. We grow the allocated memory only if the copy source is not fit..." alt="" coords="590,242,629,269"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="594,281,561,329,541,353,539,348,557,326,589,283"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="501,167,595,241,590,241,500,172"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="877,5,926,33"/>
+<area shape="poly" id="edge18_Node000001_Node000009" title=" " alt="" coords="939,39,953,56,961,83,953,109,920,161,877,205,829,244,777,276,723,303,672,324,584,353,583,348,670,319,721,298,774,271,826,239,874,201,915,157,948,107,956,83,948,58,938,44"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="859,28,830,40,799,59,791,71,788,84,784,98,774,110,754,119,728,125,665,131,552,135,509,141,507,136,552,129,665,125,727,120,752,114,770,106,780,95,783,83,786,69,796,55,827,36,864,26"/>
+<area shape="poly" id="edge13_Node000010_Node000009" title=" " alt="" coords="901,46,894,81,885,97,874,110,841,125,792,135,685,145,684,140,792,130,839,120,870,106,881,94,889,79,898,50"/>
+<area shape="poly" id="edge11_Node000007_Node000010" title=" " alt="" coords="622,173,613,243,609,240,618,177"/>
+<area shape="rect" id="Node000011" href="$classaudio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="974,5,1053,33"/>
+<area shape="poly" id="edge14_Node000010_Node000011" title=" " alt="" coords="1004,45,984,81,969,97,952,110,903,127,832,137,685,146,684,141,832,132,902,121,949,106,965,93,979,78,1000,48"/>
+<area shape="rect" id="Node000012" href="$classsize__t.html" title=" " alt="" coords="1006,242,1066,269"/>
+<area shape="poly" id="edge17_Node000001_Node000012" title=" " alt="" coords="1027,282,1012,309,989,330,967,337,930,343,824,353,595,364,595,359,824,347,929,338,966,332,987,325,1008,306,1023,285"/>
 </map>

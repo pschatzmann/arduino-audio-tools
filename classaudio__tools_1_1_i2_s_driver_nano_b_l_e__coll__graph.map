@@ -1,26 +1,26 @@
 <map id="I2SDriverNanoBLE" name="I2SDriverNanoBLE">
-<area shape="rect" id="Node000001" title="Basic I2S API &#45; for the Arduino Nano BLE Sense See https://content.arduino.cc/assets/Nano_BLE_MCU&#45;nRF..." alt="" coords="98,464,237,491"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_i2_s_driver_base.html" title=" " alt="" coords="5,363,119,391"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="88,399,156,462,151,464,86,404"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_i2_s_config_std.html" title="Configuration for i2s." alt="" coords="378,363,482,391"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="383,397,203,466,202,461,378,395"/>
-<area shape="rect" id="Node000004" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="762,106,845,134"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="810,146,815,191,814,243,801,296,789,320,772,341,756,348,730,355,652,365,482,376,482,371,652,359,729,349,755,343,768,337,785,317,796,294,809,242,810,191,807,151"/>
-<area shape="rect" id="Node000005" href="$classuint32__t.html" title=" " alt="" coords="646,5,720,33"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="691,46,700,65,711,80,731,92,764,106,759,106,729,97,707,84,695,67,689,51"/>
-<area shape="rect" id="Node000006" title=" " alt="" coords="766,5,840,33"/>
-<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="805,46,806,107,801,104,802,51"/>
-<area shape="rect" id="Node000007" href="$classuint8__t.html" title=" " alt="" coords="868,5,934,33"/>
-<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="894,45,886,67,873,84,857,97,839,108,836,103,854,93,869,80,881,64,890,49"/>
-<area shape="rect" id="Node000008" title=" " alt="" coords="269,106,359,134"/>
-<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="310,147,308,190,309,240,318,291,328,315,342,337,358,352,381,365,375,365,355,357,338,341,323,318,313,293,303,240,302,190,308,151"/>
-<area shape="rect" id="Node000009" href="$classbool.html" title=" " alt="" coords="165,106,215,134"/>
-<area shape="poly" id="edge12_Node000001_Node000009" title=" " alt="" coords="188,147,189,158,177,339,170,464,165,463,171,339,183,157,186,152"/>
-<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="187,146,185,191,188,242,201,293,213,317,229,337,253,350,291,360,380,372,375,373,290,365,251,355,226,341,209,320,196,295,183,243,180,191,185,152"/>
-<area shape="rect" id="Node000010" title=" " alt="" coords="386,106,474,134"/>
-<area shape="poly" id="edge9_Node000003_Node000010" title=" " alt="" coords="432,148,433,364,427,362,428,151"/>
-<area shape="rect" id="Node000011" href="$classint.html" title=" " alt="" coords="520,106,559,134"/>
-<area shape="poly" id="edge10_Node000003_Node000011" title=" " alt="" coords="541,147,535,253,526,305,512,340,498,355,480,365,478,360,494,350,508,338,521,304,529,252,537,152"/>
-<area shape="rect" id="Node000012" title=" " alt="" coords="626,106,738,134"/>
-<area shape="poly" id="edge11_Node000003_Node000012" title=" " alt="" coords="684,147,680,254,671,306,664,327,654,341,625,357,581,367,483,377,482,371,580,362,624,352,651,337,659,324,666,305,674,253,680,151"/>
+<area shape="rect" id="Node000001" title="Basic I2S API &#45; for the Arduino Nano BLE Sense See https://content.arduino.cc/assets/Nano_BLE_MCU&#45;nRF..." alt="" coords="98,402,237,430"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_i2_s_driver_base.html" title=" " alt="" coords="5,310,119,337"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="90,345,154,401,149,403,87,350"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_i2_s_config_std.html" title="Configuration for i2s." alt="" coords="370,310,474,337"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="373,344,205,404,204,399,368,342"/>
+<area shape="rect" id="Node000004" href="$structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="742,98,825,126"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="789,139,792,174,789,214,778,254,768,272,754,288,739,295,714,301,639,311,474,322,474,317,639,305,713,296,738,290,751,284,764,269,773,252,784,213,787,174,786,143"/>
+<area shape="rect" id="Node000005" href="$classuint32__t.html" title=" " alt="" coords="630,5,704,33"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="677,45,695,72,717,88,744,100,738,101,715,92,691,76,675,50"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="746,5,820,33"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="785,46,786,99,781,96,782,50"/>
+<area shape="rect" id="Node000007" href="$classuint8__t.html" title=" " alt="" coords="845,5,911,33"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="869,46,851,76,816,100,813,95,847,72,865,49"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="264,98,354,126"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="307,138,307,173,310,211,319,250,338,284,353,298,372,310,367,310,350,302,334,287,314,251,304,212,302,173,304,143"/>
+<area shape="rect" id="Node000009" href="$classbool.html" title=" " alt="" coords="165,98,215,126"/>
+<area shape="poly" id="edge12_Node000001_Node000009" title=" " alt="" coords="188,139,189,150,171,403,165,402,183,149,186,144"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="189,139,192,174,197,213,210,251,233,284,255,296,290,305,372,318,367,319,289,310,253,300,230,288,205,254,192,214,186,175,187,144"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="378,98,466,126"/>
+<area shape="poly" id="edge9_Node000003_Node000010" title=" " alt="" coords="424,140,424,310,420,308,420,143"/>
+<area shape="rect" id="Node000011" href="$classint.html" title=" " alt="" coords="508,98,547,126"/>
+<area shape="poly" id="edge10_Node000003_Node000011" title=" " alt="" coords="527,139,520,221,512,260,500,287,485,301,468,312,466,307,482,297,496,284,506,259,514,220,524,143"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="606,98,718,126"/>
+<area shape="poly" id="edge11_Node000003_Node000012" title=" " alt="" coords="668,139,671,174,668,214,657,253,647,272,634,288,607,302,566,312,475,322,474,317,565,307,606,297,631,284,643,269,652,251,663,213,665,174,665,143"/>
 </map>

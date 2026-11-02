@@ -1,23 +1,22 @@
 <map id="BufferBlocking&lt; T &gt;" name="BufferBlocking&lt; T &gt;">
-<area shape="rect" id="Node000001" title="Buffer implementation which provides the same blocking, thread&#45;safe semantics as BufferRTOS (ESP32/ST..." alt="" coords="271,296,425,324"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="5,5,136,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="77,46,94,96,119,148,140,174,164,198,217,240,271,271,318,296,313,295,269,276,214,244,160,202,136,177,115,150,89,98,76,51"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_ring_buffer.html" title=" " alt="" coords="187,173,314,201"/>
-<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="87,41,103,55,124,81,137,103,151,124,174,147,212,172,207,173,170,151,147,127,133,106,119,84,99,59,88,47"/>
-<area shape="poly" id="edge4_Node000003_Node000002" title=" " alt="" coords="110,40,127,55,148,81,161,103,175,124,198,147,235,172,229,173,194,151,171,127,157,106,143,84,123,59,111,45"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="269,211,315,270,337,296,332,295,310,274,267,216"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="160,5,240,33"/>
-<area shape="poly" id="edge5_Node000003_Node000004" title=" " alt="" coords="194,46,192,97,195,123,204,148,213,160,227,173,222,173,209,164,199,150,190,124,187,97,192,51"/>
+<area shape="rect" id="Node000001" title="Buffer implementation which provides the same blocking, thread&#45;safe semantics as BufferRTOS (ESP32/ST..." alt="" coords="307,259,461,286"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_base_buffer.html" title=" " alt="" coords="5,5,136,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="74,46,87,86,95,106,107,123,132,149,160,171,221,209,283,237,338,258,333,258,281,242,219,214,157,176,128,153,103,127,91,108,82,88,74,51"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_ring_buffer.html" title=" " alt="" coords="239,149,366,177"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="93,41,141,83,198,123,256,148,251,149,196,127,138,87,93,47"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="320,188,352,233,373,259,368,257,348,236,317,192"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="160,5,240,33"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="202,46,211,87,219,106,230,123,244,136,263,148,258,149,241,141,226,127,214,108,206,88,200,51"/>
 <area shape="rect" id="Node000005" title=" " alt="" coords="263,5,363,33"/>
-<area shape="poly" id="edge6_Node000003_Node000005" title=" " alt="" coords="307,46,276,150,262,174,258,171,271,148,304,50"/>
-<area shape="rect" id="Node000006" href="$classint.html" title=" " alt="" coords="391,5,430,33"/>
-<area shape="poly" id="edge7_Node000003_Node000006" title=" " alt="" coords="409,46,400,106,393,133,383,151,352,172,316,184,314,179,349,168,379,147,388,131,395,105,406,50"/>
-<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_spin_lock.html" title="Busy&#45;wait lock based on std::atomic &#45; available on all platforms that support &lt;atomic&gt;." alt="" coords="407,173,486,201"/>
-<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="429,212,360,298,357,293,424,214"/>
-<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_mutex_base.html" title="Empty Mutex implementation which does nothing." alt="" coords="467,5,562,33"/>
-<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="518,46,516,98,509,125,498,150,487,164,473,175,470,170,483,160,494,148,504,123,511,97,515,51"/>
-<area shape="rect" id="Node000009" title=" " alt="" coords="586,5,710,33"/>
-<area shape="poly" id="edge10_Node000007_Node000009" title=" " alt="" coords="631,44,586,98,558,126,527,151,483,175,481,170,524,147,554,122,583,94,627,47"/>
-<area shape="rect" id="Node000010" href="$classuint32__t.html" title=" " alt="" coords="511,173,585,201"/>
-<area shape="poly" id="edge11_Node000001_Node000010" title=" " alt="" coords="533,212,506,246,472,274,445,288,416,298,415,293,443,283,469,270,502,242,528,215"/>
+<area shape="poly" id="edge5_Node000003_Node000005" title=" " alt="" coords="307,46,307,57,304,108,304,150,299,147,298,108,302,57,304,51"/>
+<area shape="rect" id="Node000006" href="$classint.html" title=" " alt="" coords="387,5,426,33"/>
+<area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="403,46,393,93,379,127,364,141,345,151,343,146,360,136,375,123,388,92,400,50"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_spin_lock.html" title="Busy&#45;wait lock based on std::atomic &#45; available on all platforms that support &lt;atomic&gt;." alt="" coords="427,149,506,177"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="450,188,395,261,392,256,445,190"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_mutex_base.html" title="Empty Mutex implementation which does nothing." alt="" coords="455,5,550,33"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="501,47,496,86,486,126,475,151,472,147,481,124,491,85,498,51"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="574,5,698,33"/>
+<area shape="poly" id="edge9_Node000007_Node000009" title=" " alt="" coords="611,42,484,151,481,146,606,44"/>
+<area shape="rect" id="Node000010" href="$classuint32__t.html" title=" " alt="" coords="531,149,605,177"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="549,187,522,214,490,237,435,261,434,256,488,232,519,210,544,189"/>
 </map>

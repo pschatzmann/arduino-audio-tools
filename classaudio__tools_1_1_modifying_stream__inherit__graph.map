@@ -1,20 +1,79 @@
 <map id="ModifyingStream" name="ModifyingStream">
-<area shape="rect" id="Node000001" title="Abstract class: Objects can be put into a pipleline." alt="" coords="131,308,263,336"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="" coords="144,232,250,260"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="199,274,199,309,195,306,195,278"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer,size_t size) and readBytes(uint8..." alt="" coords="5,157,106,184"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="87,190,167,231,162,233,87,195"/>
-<area shape="poly" id="edge9_Node000002_Node000003" title=" " alt="" coords="102,189,181,231,177,233,101,194"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="21,81,90,109"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="47,121,51,156,46,156,46,127"/>
-<area shape="poly" id="edge6_Node000003_Node000004" title=" " alt="" coords="65,122,65,157,60,156,64,127"/>
-<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="30,5,81,33"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="47,46,51,81,46,80,47,51"/>
-<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="65,46,65,81,60,80,64,51"/>
-<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="130,157,264,184"/>
-<area shape="poly" id="edge7_Node000002_Node000006" title=" " alt="" coords="190,198,192,233,187,231,187,202"/>
-<area shape="poly" id="edge10_Node000002_Node000006" title=" " alt="" coords="207,198,206,233,202,231,204,202"/>
-<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="288,157,415,184"/>
-<area shape="poly" id="edge8_Node000002_Node000007" title=" " alt="" coords="300,192,218,234,216,229,305,190"/>
-<area shape="poly" id="edge11_Node000002_Node000007" title=" " alt="" coords="320,191,232,234,230,229,315,193"/>
+<area shape="rect" id="Node000001" title="Abstract class: Objects can be put into a pipleline." alt="" coords="556,596,688,624"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_filtered_stream.html" title=" " alt="" coords="775,5,940,50"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="623,580,633,468,654,312,669,233,687,161,709,101,734,61,752,46,776,37,772,40,755,50,738,64,713,104,692,162,674,234,659,313,638,468,628,582"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1_audio_effect_stream.html" title="EffectsStream supporting variable bits_per_sample. This class is only available when __cplusplus &gt;= 2..." alt="" coords="786,74,929,102"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="623,580,635,476,657,336,671,265,689,201,710,148,734,112,758,96,788,88,784,91,760,101,738,116,715,151,694,203,677,267,662,337,640,477,628,582"/>
+<area shape="rect" id="Node000010" href="$classaudio__tools_1_1_audio_effect_stream_t.html" title="EffectsStreamT: the template class describes an input or output stream to which one or multiple effec..." alt="" coords="764,126,952,154"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="624,580,637,486,660,362,675,299,692,242,712,196,734,164,765,147,761,151,738,168,717,199,697,244,680,301,665,363,642,487,629,582"/>
+<area shape="rect" id="Node000011" href="$classaudio__tools_1_1_audio_input_monitor.html" title="Monitors audio input and reports if the volume exceeds a specified limit within a given period." alt="" coords="787,178,928,206"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="620,580,622,507,637,409,651,356,671,305,699,258,734,216,758,201,789,193,784,196,761,205,738,220,703,261,676,308,656,358,642,410,628,507,625,582"/>
+<area shape="rect" id="Node000012" href="$classaudio__tools_1_1_automatic_gain_control_stream.html" title="Slow automatic loudness normalization for PCM audio." alt="" coords="752,230,964,258"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="621,580,627,516,644,432,658,387,677,344,703,303,734,268,756,256,752,260,738,272,707,307,682,346,663,389,649,433,632,517,626,582"/>
+<area shape="rect" id="Node000013" href="$classaudio__tools_1_1_buffered_stream.html" title="The Arduino Stream supports operations on single characters. This is usually not the best way to push..." alt="" coords="796,282,919,310"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="623,580,632,525,651,455,665,418,684,382,707,349,734,320,763,304,798,296,793,299,765,309,738,324,711,352,688,385,670,420,656,456,637,526,628,582"/>
+<area shape="rect" id="Node000016" href="$classaudio__tools_1_1_callback_stream.html" title="CallbackStream: A Stream that allows to register callback methods for accessing and providing and upd..." alt="" coords="796,334,920,362"/>
+<area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="626,580,638,534,659,478,690,421,711,395,734,372,763,356,798,349,793,352,765,361,738,376,715,398,695,423,664,480,643,536,631,582"/>
+<area shape="rect" id="Node000017" href="$classaudio__tools_1_1_converter_stream.html" title="Both the data of the read or write operations will be converted with the help of the indicated conver..." alt="" coords="772,386,943,414"/>
+<area shape="poly" id="edge16_Node000001_Node000017" title=" " alt="" coords="630,581,644,544,667,501,696,459,735,423,775,407,770,410,737,427,700,462,671,504,649,547,634,583"/>
+<area shape="rect" id="Node000018" href="$classaudio__tools_1_1_equalizer3_bands_per_channel_t.html" title="3 Band Equalizer with per&#45;channel frequency and gain control Allows independent frequency and gain se..." alt="" coords="756,437,959,482"/>
+<area shape="poly" id="edge17_Node000001_Node000018" title=" " alt="" coords="640,582,680,536,706,512,735,492,762,481,758,484,737,497,710,516,684,540,644,586"/>
+<area shape="rect" id="Node000019" href="$classaudio__tools_1_1_equalizer3_bands_t.html" title="3 Band Equalizer with identical settings for all channels" alt="" coords="770,506,945,534"/>
+<area shape="poly" id="edge18_Node000001_Node000019" title=" " alt="" coords="654,586,692,563,735,543,774,533,769,535,737,547,695,567,657,590"/>
+<area shape="rect" id="Node000020" href="$classaudio__tools_1_1_equalizer_n_bands.html" title="N&#45;Band Equalizer using FIR filters with logarithmically spaced bands." alt="" coords="736,557,979,602"/>
+<area shape="poly" id="edge19_Node000001_Node000020" title=" " alt="" coords="702,597,738,594,733,597,704,602"/>
+<area shape="rect" id="Node000021" href="$classaudio__tools_1_1_fade_stream.html" title="Stream which can be used to manage fade in and fade out. Before you read or write data you need to ca..." alt="" coords="808,626,907,654"/>
+<area shape="poly" id="edge20_Node000001_Node000021" title=" " alt="" coords="703,618,811,633,805,634,704,623"/>
+<area shape="rect" id="Node000022" href="$classaudio__tools_1_1_filtered_stream.html" title="Stream to which we can apply Filters for each channel. The filter might change the result size!" alt="" coords="768,678,947,706"/>
+<area shape="poly" id="edge21_Node000001_Node000022" title=" " alt="" coords="661,629,737,662,781,677,776,678,735,668,662,634"/>
+<area shape="rect" id="Node000023" href="$classaudio__tools_1_1_measuring_stream.html" title="Class which measures the thruput." alt="" coords="790,730,926,758"/>
+<area shape="poly" id="edge22_Node000001_Node000023" title=" " alt="" coords="644,634,685,676,710,697,737,715,763,725,792,735,786,736,761,730,735,719,707,702,681,680,643,639"/>
+<area shape="rect" id="Node000024" href="$structaudio__tools_1_1_pipeline_1_1_modifying_stream_adapter.html" title="Support for ModifyingOutput." alt="" coords="766,782,949,810"/>
+<area shape="poly" id="edge23_Node000001_Node000024" title=" " alt="" coords="636,636,653,668,676,703,704,738,737,767,769,783,763,783,735,771,700,742,671,706,649,671,634,641"/>
+<area shape="rect" id="Node000025" href="$classaudio__tools_1_1_progress_stream.html" title="Generic calss to measure the the total bytes which were processed in order to calculate the progress ..." alt="" coords="796,834,920,862"/>
+<area shape="poly" id="edge24_Node000001_Node000025" title=" " alt="" coords="631,637,646,679,667,729,698,778,716,800,738,819,765,834,798,844,792,845,763,839,734,823,712,804,693,781,663,731,641,681,629,642"/>
+<area shape="rect" id="Node000026" href="$classaudio__tools_1_1_quality_analysis_stream.html" title="Analyzes audio stream quality by detecting clicks/pops, gaps/dropouts, clipping/corruption,..." alt="" coords="772,886,943,914"/>
+<area shape="poly" id="edge25_Node000001_Node000026" title=" " alt="" coords="628,637,640,690,660,753,691,817,713,846,738,871,754,882,775,892,769,892,752,886,734,875,709,849,687,820,655,755,635,691,626,642"/>
+<area shape="rect" id="Node000027" href="$classaudio__tools_1_1_reformat_base_stream.html" title="Base class for chained converting streams." alt="" coords="777,938,938,966"/>
+<area shape="poly" id="edge26_Node000001_Node000027" title=" " alt="" coords="626,637,635,700,652,777,667,817,685,856,709,892,738,923,756,935,779,946,774,946,754,940,734,927,705,895,681,859,662,819,647,778,629,701,624,642"/>
+<area shape="rect" id="Node000036" href="$classaudio__tools_1_1_throttle.html" title="Throttle the sending or receiving of the audio data to limit it to the indicated sample rate." alt="" coords="822,990,894,1018"/>
+<area shape="poly" id="edge35_Node000001_Node000036" title=" " alt="" coords="624,637,630,709,645,800,659,848,679,894,705,938,738,975,756,988,778,996,824,1005,818,1005,776,1001,754,992,734,979,701,941,674,897,654,849,640,801,624,709,622,642"/>
+<area shape="rect" id="Node000037" href="$classaudio__tools_1_1_timed_stream.html" title="AudioStream class that can define a start and (an optional) stop time Usually it is used to wrap an A..." alt="" coords="803,1042,912,1070"/>
+<area shape="poly" id="edge36_Node000001_Node000037" title=" " alt="" coords="628,637,644,728,667,845,699,956,718,999,738,1027,752,1038,768,1045,805,1056,800,1056,766,1050,749,1042,734,1031,713,1001,694,958,662,847,639,729,626,642"/>
+<area shape="rect" id="Node000038" href="$classaudio__tools_1_1_volume_meter.html" title="A simple class to determine the volume. You can use it as final output or as output or input in your ..." alt="" coords="804,1094,912,1122"/>
+<area shape="poly" id="edge37_Node000001_Node000038" title=" " alt="" coords="627,637,641,738,663,871,678,937,696,998,716,1047,738,1079,752,1090,768,1097,806,1108,800,1108,766,1103,749,1094,734,1083,711,1049,691,999,673,939,658,872,636,739,625,642"/>
+<area shape="rect" id="Node000039" href="$classaudio__tools_1_1_volume_stream.html" title="Adjust the volume of the related input or output: To work properly the class needs to know the bits p..." alt="" coords="799,1146,916,1174"/>
+<area shape="poly" id="edge38_Node000001_Node000039" title=" " alt="" coords="627,637,639,748,660,896,675,971,693,1039,714,1094,738,1131,766,1149,801,1160,796,1159,764,1154,734,1135,709,1097,688,1041,669,972,655,897,634,749,624,642"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="" coords="402,596,508,624"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="522,608,557,609,553,611,524,613"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer, size_t size) and readBytes(uint..." alt="" coords="238,544,338,572"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="349,575,410,595,406,597,350,580"/>
+<area shape="rect" id="Node000004" href="$class_stream.html" title=" " alt="" coords="105,544,173,572"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="187,556,239,557,235,560,190,561"/>
+<area shape="rect" id="Node000005" href="$class_print.html" title=" " alt="" coords="5,544,57,572"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="71,556,106,557,102,560,74,560"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="221,596,354,624"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="368,608,404,609,400,612,371,613"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="224,648,351,676"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="348,641,410,623,406,626,351,646"/>
+<area shape="rect" id="Node000014" href="$classaudio__tools_1_1_audio_output_with_callback.html" title="ESP8266Audio AudioOutput class which stores the data in a temporary buffer. The buffer can be consume..." alt="" coords="1061,256,1249,284"/>
+<area shape="poly" id="edge13_Node000013_Node000014" title=" " alt="" coords="934,287,1063,277,1058,280,935,292"/>
+<area shape="rect" id="Node000015" href="$classaudio__tools_1_1_timer_callback_audio_stream.html" title="Callback driven Audio Source (rx_tx_mode==RX_MODE) or Audio Sink (rx_tx_mode==TX_MODE)...." alt="" coords="1055,308,1255,336"/>
+<area shape="poly" id="edge14_Node000013_Node000015" title=" " alt="" coords="934,300,1057,312,1052,314,936,305"/>
+<area shape="rect" id="Node000028" href="$classaudio__tools_1_1_channel_format_converter_stream.html" title="Channel converter which does not use a template." alt="" coords="1039,740,1271,768"/>
+<area shape="poly" id="edge27_Node000027_Node000028" title=" " alt="" coords="952,939,978,923,992,906,998,889,1000,852,1003,814,1010,796,1026,778,1041,770,1046,767,1029,782,1015,798,1008,816,1006,852,1004,890,996,909,981,927,954,944"/>
+<area shape="rect" id="Node000029" href="$classaudio__tools_1_1_channel_format_converter_stream_t.html" title="Converter for reducing or increasing the number of Channels." alt="" coords="1039,792,1271,837"/>
+<area shape="poly" id="edge28_Node000027_Node000029" title=" " alt="" coords="952,936,978,923,994,905,1001,886,1009,866,1026,847,1044,838,1049,836,1029,851,1013,869,1006,888,998,908,981,927,954,941"/>
+<area shape="rect" id="Node000030" href="$classaudio__tools_1_1_encoded_audio_stream.html" title="A more natural Stream class to process encoded data (aac, wav, mp3...) which also supports the decodi..." alt="" coords="1075,860,1235,888"/>
+<area shape="poly" id="edge29_Node000027_Node000030" title=" " alt="" coords="951,931,978,923,1002,911,1026,899,1072,889,1077,887,1028,903,1005,915,980,927,953,936"/>
+<area shape="rect" id="Node000031" href="$classaudio__tools_1_1_format_converter_stream.html" title="Converter which converts bits_per_sample, channels and the sample_rate. The conversion is supported b..." alt="" coords="1066,912,1244,940"/>
+<area shape="poly" id="edge30_Node000027_Node000031" title=" " alt="" coords="953,941,1068,933,1063,934,954,946"/>
+<area shape="rect" id="Node000032" href="$classaudio__tools_1_1_number_format_converter_stream.html" title="Converter which converts between bits_per_sample and 16 bits. The templated NumberFormatConverterStre..." alt="" coords="1040,964,1270,992"/>
+<area shape="poly" id="edge31_Node000027_Node000032" title=" " alt="" coords="954,958,1042,968,1037,968,954,963"/>
+<area shape="rect" id="Node000033" href="$classaudio__tools_1_1_number_format_converter_stream_t.html" title="A more generic templated Converter which converts from a source type to a target type: You can use e...." alt="" coords="1040,1016,1270,1061"/>
+<area shape="poly" id="edge32_Node000027_Node000033" title=" " alt="" coords="953,967,980,976,1005,988,1028,1001,1063,1016,1058,1015,1026,1006,1002,993,978,981,952,972"/>
+<area shape="rect" id="Node000034" href="$classaudio__tools_1_1_resample_stream.html" title="Dynamic Resampling. We can use a variable factor to speed up or slow down the playback." alt="" coords="1088,1084,1222,1112"/>
+<area shape="poly" id="edge33_Node000027_Node000034" title=" " alt="" coords="953,961,981,976,993,988,1000,1000,1006,1025,1012,1049,1018,1060,1029,1071,1057,1086,1091,1097,1085,1096,1055,1091,1026,1075,1014,1064,1007,1051,1001,1026,995,1002,988,991,978,980,952,966"/>
+<area shape="rect" id="Node000035" href="$classaudio__tools_1_1_resample_stream_t.html" title="A Stream implementation for resamping using a specified interpolation algorithm." alt="" coords="1027,1136,1283,1164"/>
+<area shape="poly" id="edge34_Node000027_Node000035" title=" " alt="" coords="953,960,981,976,996,994,1004,1013,1006,1051,1008,1088,1015,1105,1029,1122,1048,1137,1043,1135,1026,1126,1010,1108,1003,1089,1001,1051,998,1014,992,997,978,980,952,965"/>
 </map>

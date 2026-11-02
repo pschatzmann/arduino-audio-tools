@@ -1,18 +1,18 @@
 <map id="VS1053Config" name="VS1053Config">
-<area shape="rect" id="Node000001" title="Configuration for VS1053Stream." alt="" coords="472,293,584,321"/>
-<area shape="rect" id="Node000002" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="170,127,254,155"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="236,163,298,216,336,244,377,267,425,285,474,298,469,298,423,290,375,272,333,248,294,220,235,168"/>
+<area shape="rect" id="Node000001" title="Configuration for VS1053Stream." alt="" coords="452,248,564,276"/>
+<area shape="rect" id="Node000002" href="$structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="164,110,247,137"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="235,144,294,184,365,222,409,237,454,251,449,250,407,242,363,226,291,188,233,149"/>
 <area shape="rect" id="Node000003" href="$classuint32__t.html" title=" " alt="" coords="5,5,80,33"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="47,45,57,65,67,80,91,99,117,113,172,131,168,134,115,118,88,103,64,84,52,67,48,51"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="125,5,200,33"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="160,46,167,81,181,105,199,126,194,127,177,108,162,83,159,51"/>
-<area shape="rect" id="Node000005" href="$classuint8__t.html" title=" " alt="" coords="293,5,360,33"/>
-<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="363,40,378,56,392,87,395,115,398,143,409,174,433,210,461,243,514,294,509,292,457,247,429,214,404,177,392,144,390,116,387,89,374,58,362,45"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="281,42,263,59,236,94,219,128,215,125,232,91,259,55,285,39"/>
-<area shape="rect" id="Node000006" title=" " alt="" coords="483,127,573,155"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="530,168,530,294,526,292,526,172"/>
-<area shape="rect" id="Node000007" href="$classint16__t.html" title=" " alt="" coords="597,127,664,155"/>
-<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="626,168,610,220,597,246,581,271,552,295,550,290,576,268,592,244,605,218,622,172"/>
-<area shape="rect" id="Node000008" href="$classbool.html" title=" " alt="" coords="696,127,746,155"/>
-<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="724,169,719,222,709,248,692,271,674,282,647,290,584,302,583,297,646,285,672,277,689,267,704,246,714,220,720,172"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="49,45,58,60,67,72,89,88,114,100,166,116,161,118,112,105,86,93,64,76,54,63,50,51"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="121,5,196,33"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="157,46,163,73,175,92,191,109,185,109,171,95,158,75,155,51"/>
+<area shape="rect" id="Node000005" href="$classuint8__t.html" title=" " alt="" coords="284,5,350,33"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="351,40,366,55,378,80,383,102,386,123,397,148,419,178,445,205,493,248,487,247,441,209,415,181,392,150,381,125,377,103,373,82,362,59,351,46"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="273,42,255,59,231,85,214,111,210,108,227,82,251,55,277,39"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="463,110,553,137"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="510,151,510,249,506,246,506,155"/>
+<area shape="rect" id="Node000007" href="$classint16__t.html" title=" " alt="" coords="577,110,644,137"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="601,150,582,189,556,226,529,250,527,245,553,222,578,186,597,153"/>
+<area shape="rect" id="Node000008" href="$classbool.html" title=" " alt="" coords="675,110,724,137"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="698,151,686,191,676,210,662,226,639,241,615,251,564,262,564,257,613,246,637,236,658,222,671,207,681,189,694,154"/>
 </map>

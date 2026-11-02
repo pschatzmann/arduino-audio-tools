@@ -1,17 +1,17 @@
 <map id="RingBuffer&lt; T &gt;" name="RingBuffer&lt; T &gt;">
-<area shape="rect" id="Node000001" title="Implements a typed Ringbuffer." alt="" coords="209,293,337,321"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="5,160,173,188"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="114,196,156,231,204,267,247,293,242,293,201,272,152,236,113,201"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="204,5,283,33"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="239,46,231,126,231,173,237,220,251,260,268,294,263,292,246,262,232,221,226,174,226,126,236,50"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="318,160,455,188"/>
-<area shape="poly" id="edge6_Node000004_Node000003" title=" " alt="" coords="255,45,271,75,291,103,327,134,364,160,359,160,324,138,287,106,267,77,254,50"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="368,199,286,295,283,291,363,201"/>
-<area shape="rect" id="Node000005" href="$classint.html" title=" " alt="" coords="664,5,703,33"/>
-<area shape="poly" id="edge8_Node000001_Node000005" title=" " alt="" coords="706,44,713,56,719,81,718,93,713,106,678,152,635,191,586,223,533,248,480,268,428,283,337,301,337,296,426,278,478,263,531,243,583,218,631,187,674,148,708,103,713,91,714,82,708,58,704,48"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="658,42,643,59,627,84,619,95,607,106,570,128,531,144,456,165,454,160,530,139,568,123,603,102,615,92,622,81,639,55,653,45"/>
-<area shape="rect" id="Node000006" href="$classuint8__t_01_5.html" title=" " alt="" coords="334,5,412,33"/>
-<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="375,46,380,104,387,161,382,159,374,105,372,51"/>
-<area shape="rect" id="Node000007" href="$classbool.html" title=" " alt="" coords="436,5,486,33"/>
-<area shape="poly" id="edge7_Node000004_Node000007" title=" " alt="" coords="454,46,431,106,397,162,393,158,427,103,450,49"/>
+<area shape="rect" id="Node000001" title="Implements a typed Ringbuffer." alt="" coords="171,248,298,276"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_base_buffer.html" title="Shared functionality of all buffers." alt="" coords="5,135,136,163"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="98,170,167,222,210,247,204,247,164,226,96,175"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="168,5,248,33"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="203,46,195,111,195,147,200,182,213,218,228,248,223,247,208,220,195,184,190,147,190,110,200,50"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_vector.html" title=" " alt="" coords="276,135,414,163"/>
+<area shape="poly" id="edge6_Node000004_Node000003" title=" " alt="" coords="220,44,235,68,252,89,284,114,318,134,313,135,281,118,249,93,231,71,219,49"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="324,173,249,250,246,245,319,175"/>
+<area shape="rect" id="Node000005" href="$classint.html" title=" " alt="" coords="614,5,652,33"/>
+<area shape="poly" id="edge8_Node000001_Node000005" title=" " alt="" coords="653,44,664,68,664,81,659,92,625,135,583,169,536,197,486,218,435,235,385,247,299,259,298,254,384,241,433,230,484,213,534,192,580,165,621,131,655,90,659,80,658,69,651,48"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="610,42,555,93,484,122,415,140,413,134,482,117,552,89,605,45"/>
+<area shape="rect" id="Node000006" href="$classuint8__t_01_5.html" title=" " alt="" coords="290,5,368,33"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="333,46,338,91,345,136,340,134,333,91,330,51"/>
+<area shape="rect" id="Node000007" href="$classbool.html" title=" " alt="" coords="392,5,442,33"/>
+<area shape="poly" id="edge7_Node000004_Node000007" title=" " alt="" coords="408,45,386,92,357,136,353,133,382,90,404,49"/>
 </map>

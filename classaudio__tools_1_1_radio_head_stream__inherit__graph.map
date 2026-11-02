@@ -1,8 +1,7 @@
 <map id="RadioHeadStream" name="RadioHeadStream">
 <area shape="rect" id="Node000001" title="Arduino Stream which is using the RadioHead library to send and receive data. We use the driver API d..." alt="" coords="5,157,145,184"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="41,81,109,109"/>
+<area shape="rect" id="Node000002" href="$class_stream.html" title=" " alt="" coords="41,81,109,109"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="77,123,78,157,72,155,73,126"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="49,5,101,33"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="67,46,71,81,65,80,65,51"/>
-<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="85,46,85,81,79,80,83,51"/>
+<area shape="rect" id="Node000003" href="$class_print.html" title=" " alt="" coords="49,5,101,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="76,46,78,81,72,80,74,51"/>
 </map>

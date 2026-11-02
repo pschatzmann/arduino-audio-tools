@@ -1,0 +1,7 @@
+<map id="Allocator" name="Allocator">
+<area shape="rect" id="Node000001" title="Memory allocateator which uses malloc." alt="" coords="84,5,163,33"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_allocator_ext.html" title="Memory allocateator which uses ps_malloc (on the ESP32) and if this fails it resorts to malloc." alt="" coords="5,81,106,109"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="104,44,69,83,66,79,98,45"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_allocator_zephyr.html" title="Zephyr allocator using the kernel heap (k_malloc / k_free). This is the standard allocator for Zephyr..." alt="" coords="130,81,256,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="148,42,183,81,178,80,145,47"/>
+</map>

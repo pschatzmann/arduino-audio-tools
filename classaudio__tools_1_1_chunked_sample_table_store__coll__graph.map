@@ -1,17 +1,17 @@
 <map id="ChunkedSampleTableStore&lt; T, ChunkSize &gt;" name="ChunkedSampleTableStore&lt; T, ChunkSize &gt;">
-<area shape="rect" id="Node000001" title="RAM&#45;backed like RamSampleTableStore, but grows by allocating additional fixed&#45;size chunks instead of ..." alt="" coords="164,229,359,274"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_sample_table_store.html" title="Sequential&#45;access storage for one MP4 sample table (e.g. stsz sample sizes, stco chunk offsets,..." alt="" coords="5,128,182,156"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="128,162,230,227,225,229,126,167"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="206,128,317,156"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="263,170,264,230,259,227,260,174"/>
-<area shape="rect" id="Node000004" href="$classint.html" title=" " alt="" coords="101,5,139,33"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="121,45,128,76,142,102,167,116,208,129,203,130,165,121,139,106,123,78,119,51"/>
-<area shape="rect" id="Node000005" href="$class_t.html" title=" " alt="" coords="201,5,239,33"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="216,46,217,76,224,103,232,116,244,128,239,128,228,119,219,105,212,76,214,51"/>
-<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="263,5,342,33"/>
-<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="295,46,268,129,264,126,292,49"/>
-<area shape="rect" id="Node000007" href="$classbool.html" title=" " alt="" coords="389,5,438,33"/>
-<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="409,46,397,79,377,106,352,119,317,130,315,125,350,114,373,102,393,76,405,50"/>
-<area shape="rect" id="Node000008" href="$classsize__t.html" title=" " alt="" coords="341,128,400,156"/>
-<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="355,167,323,207,294,231,292,226,320,203,351,170"/>
+<area shape="rect" id="Node000001" title="RAM&#45;backed like RamSampleTableStore, but grows by allocating additional fixed&#45;size chunks instead of ..." alt="" coords="164,208,359,252"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_sample_table_store.html" title="Sequential&#45;access storage for one MP4 sample table (e.g. stsz sample sizes, stco chunk offsets,..." alt="" coords="5,115,182,143"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="130,148,227,206,223,208,128,154"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_vector.html" title=" " alt="" coords="206,115,317,143"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="263,156,264,208,259,206,260,160"/>
+<area shape="rect" id="Node000004" href="$classint.html" title=" " alt="" coords="104,5,142,33"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="126,45,135,70,148,89,171,101,208,114,203,116,169,106,144,93,130,72,125,51"/>
+<area shape="rect" id="Node000005" href="$class_t_01_5_01_5.html" title=" " alt="" coords="190,5,242,33"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="216,46,220,69,227,90,246,115,241,114,222,92,215,70,214,51"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="266,5,345,33"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="296,46,269,116,265,113,292,50"/>
+<area shape="rect" id="Node000007" href="$classbool.html" title=" " alt="" coords="385,5,434,33"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="402,45,391,72,373,93,347,109,319,120,317,115,344,104,369,89,386,69,398,49"/>
+<area shape="rect" id="Node000008" href="$classsize__t.html" title=" " alt="" coords="341,115,400,143"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="350,153,319,186,291,210,288,205,316,182,345,155"/>
 </map>

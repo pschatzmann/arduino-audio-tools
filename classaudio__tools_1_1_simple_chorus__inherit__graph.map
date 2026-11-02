@@ -1,15 +1,15 @@
 <map id="SimpleChorus&lt; effectsuite_t &gt;" name="SimpleChorus&lt; effectsuite_t &gt;">
-<area shape="rect" id="Node000001" title="Simple Chorus effect with a single delay voice and mono output Chorus is effective between 15 and 20 ..." alt="" coords="920,83,1142,111"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_delay_effect_base.html" title=" " alt="" coords="659,5,872,50"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="869,52,977,83,972,82,868,57"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_modulation_base_class.html" title=" " alt="" coords="673,75,858,119"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="874,94,922,97,917,97,874,100"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_simple_l_p_f.html" title=" " alt="" coords="679,144,852,189"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="866,137,972,112,978,111,867,143"/>
-<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_filter_effect_base.html" title=" " alt="" coords="404,144,611,189"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="627,164,681,166,676,166,627,169"/>
-<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_effect_suite_base.html" title=" " alt="" coords="149,144,356,189"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="371,164,406,166,401,166,372,169"/>
-<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects." alt="" coords="5,152,101,180"/>
-<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="116,164,151,166,145,167,116,169"/>
+<area shape="rect" id="Node000001" title="Simple Chorus effect with a single delay voice and mono output Chorus is effective between 15 and 20 ..." alt="" coords="1001,65,1223,93"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_delay_effect_base.html" title="A Base class for delay based digital effects. Provides the basic methods that are shared amongst Flan..." alt="" coords="713,5,953,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="917,34,953,42,1048,65,1042,65,952,47,916,39"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_modulation_base_class.html" title="Class provides a wave table that can be populated with a number of preallocated waveforms...." alt="" coords="752,57,914,102"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="929,77,1003,79,998,79,929,82"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_simple_l_p_f.html" title="SimpleLPF." alt="" coords="733,125,933,153"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="916,119,952,111,1042,94,1048,93,953,116,917,124"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_filter_effect_base.html" title="A Base class for filter based effects including methods for simple high, low and band pass filtering." alt="" coords="431,125,665,153"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="681,137,735,139,730,139,681,142"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_effect_suite_base.html" title="Base Class for Effects." alt="" coords="149,125,383,153"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="398,137,433,139,428,139,398,142"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects." alt="" coords="5,125,101,153"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="116,137,151,139,146,139,116,142"/>
 </map>

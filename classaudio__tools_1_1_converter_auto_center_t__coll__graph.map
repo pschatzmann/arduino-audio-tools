@@ -1,17 +1,17 @@
 <map id="ConverterAutoCenterT&lt; T &gt;" name="ConverterAutoCenterT&lt; T &gt;">
-<area shape="rect" id="Node000001" title="Makes sure that the avg of the signal is set to 0." alt="" coords="116,316,321,343"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_converter.html" title="Abstract Base class for Converters A converter is processing the data in the indicated array." alt="" coords="5,138,123,166"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="77,178,109,234,130,263,154,290,190,315,185,315,150,294,125,266,104,236,75,183"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="261,138,382,166"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="309,179,228,317,224,314,303,180"/>
+<area shape="rect" id="Node000001" title="Makes sure that the avg of the signal is set to 0." alt="" coords="116,265,321,293"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_base_converter.html" title="Abstract Base class for Converters A converter is processing the data in the indicated array." alt="" coords="5,118,123,146"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="81,156,113,198,154,239,192,264,187,265,150,243,109,201,80,161"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_vector.html" title=" " alt="" coords="257,118,378,146"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="303,158,229,266,226,263,297,159"/>
 <area shape="rect" id="Node000004" href="$classint.html" title=" " alt="" coords="174,5,213,33"/>
-<area shape="poly" id="edge8_Node000001_Node000004" title=" " alt="" coords="191,46,186,128,186,175,201,255,217,316,212,314,196,256,181,176,181,128,189,51"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="204,45,220,75,241,102,265,121,291,137,286,138,262,126,237,106,216,78,203,50"/>
-<area shape="rect" id="Node000005" href="$classfloat.html" title=" " alt="" coords="286,5,336,33"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="313,46,319,104,322,139,317,137,313,105,311,51"/>
-<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="360,5,440,33"/>
-<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="394,46,385,77,370,106,339,140,336,136,366,103,380,75,391,50"/>
-<area shape="rect" id="Node000007" href="$classbool.html" title=" " alt="" coords="569,5,618,33"/>
-<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="633,31,650,41,662,56,670,80,662,105,638,148,613,181,586,206,557,226,490,259,404,294,363,308,322,319,321,313,362,303,402,289,487,254,555,222,583,202,609,177,634,145,658,103,665,80,658,58,646,45,632,36"/>
-<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="552,34,532,45,511,59,500,71,495,82,488,94,476,106,431,130,383,144,382,139,429,125,473,102,484,91,490,80,496,68,507,55,529,41,556,31"/>
+<area shape="poly" id="edge8_Node000001_Node000004" title=" " alt="" coords="190,46,185,115,185,149,199,214,216,265,211,264,194,215,179,149,179,115,188,51"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="206,44,222,68,239,89,260,104,284,117,278,118,257,108,236,93,217,71,205,50"/>
+<area shape="rect" id="Node000005" href="$classfloat.html" title=" " alt="" coords="280,5,330,33"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="309,46,315,91,318,119,313,117,309,91,306,51"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="355,5,434,33"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="386,45,362,93,336,120,332,115,358,89,382,49"/>
+<area shape="rect" id="Node000007" href="$classbool.html" title=" " alt="" coords="554,5,603,33"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="618,31,634,42,646,56,652,74,646,92,618,132,583,166,542,195,498,218,453,236,407,251,322,269,321,264,406,245,451,231,496,213,539,190,579,162,614,129,642,90,647,74,642,58,631,46,617,36"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="542,34,499,59,481,76,463,93,421,112,379,123,378,118,419,107,460,89,478,73,495,55,537,36"/>
 </map>
