@@ -1,0 +1,9 @@
+<map id="MPGDecoder" name="MPGDecoder">
+<area shape="rect" id="Node000001" title="MPEG&#45;1 (part 2) video decoder wrapper around TinyMPGDecoder." alt="" coords="81,157,186,184"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_video_decoder.html" title="Common interface for video decoders (e.g. H264Decoder, H264DecoderESP32S3 &#45; CodecH264...." alt="" coords="5,81,118,109"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="86,118,123,156,118,157,84,122"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory...." alt="" coords="10,5,113,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="62,46,64,81,59,80,61,51"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_video_info_source.html" title="Provider of VideoInfo (width/height/fps/format) for whoever needs to size buffers/panel setup against..." alt="" coords="142,81,269,109"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="185,119,148,158,145,154,180,121"/>
+</map>

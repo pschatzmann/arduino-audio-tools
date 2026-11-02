@@ -1,0 +1,9 @@
+<map id="VideoFrameSource" name="VideoFrameSource">
+<area shape="rect" id="Node000001" title="Pull&#45;based provider of one already&#45;encoded video/image frame at a time &#45; e.g. wraps a camera capture ..." alt="" coords="220,5,364,33"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_camera_frame_source.html" title="VideoFrameSource that pulls frames from the ESP32 camera (esp_camera.h, the Arduino&#45;ESP32 &quot;esp32&#45;came..." alt="" coords="5,81,163,109"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="243,40,122,83,120,78,239,37"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_camera_frame_source_open_c_v.html" title="VideoFrameSource that pulls frames from an OpenCV cv::VideoCapture (e.g. a USB/CSI webcam via V4L2 on..." alt="" coords="187,81,397,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="294,47,294,82,290,79,290,51"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_camera_frame_source_tiny_camera.html" title="VideoFrameSource that pulls frames from a camera via TinyCamera (https://github.com/pschatzmann/TinyC..." alt="" coords="420,81,657,109"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="351,35,497,80,492,81,350,40"/>
+</map>

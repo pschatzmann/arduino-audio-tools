@@ -1,0 +1,9 @@
+<map id="TfLiteConfig" name="TfLiteConfig">
+<area shape="rect" id="Node000001" title="Configuration settings for TfLiteAudioStream." alt="" coords="133,106,232,134"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_tf_lite_reader.html" title="Input class which provides the next value if the TfLiteAudioStream is treated as an audio sourcce." alt="" coords="5,5,110,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="83,41,129,80,165,105,159,106,126,84,81,46"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_tf_lite_writer.html" title="Output class which interprets audio data if TfLiteAudioStream is treated as audio sink." alt="" coords="134,5,232,33"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="185,47,185,107,180,104,181,50"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_tf_lite_abstract_recognize_commands.html" title="Base class for implementing different primitive decoding models on top of the instantaneous results f..." alt="" coords="256,5,510,33"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="345,40,211,108,208,103,340,40"/>
+</map>

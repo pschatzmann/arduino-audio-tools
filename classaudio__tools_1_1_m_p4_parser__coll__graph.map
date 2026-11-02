@@ -1,0 +1,28 @@
+<map id="MP4Parser" name="MP4Parser">
+<area shape="rect" id="Node000001" title="MP4Parser is a class that parses MP4 container files and extracts boxes (atoms). It provides a callba..." alt="" coords="903,230,992,257"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="245,28,455,72"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="470,70,632,106,809,153,846,163,880,180,911,203,936,230,931,228,907,207,877,184,844,168,808,158,631,111,470,75"/>
+<area shape="rect" id="Node000003" href="$structaudio__tools_1_1_m_p4_parser_1_1_callback_entry.html" title="Structure for type&#45;specific callbacks." alt="" coords="5,8,117,36"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="131,26,246,38,242,42,133,31"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="21,216,101,244"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="71,201,97,152,116,127,139,105,189,78,246,62,242,65,191,83,142,110,120,130,101,155,76,203"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_single_buffer.html" title=" " alt="" coords="633,167,809,195"/>
+<area shape="poly" id="edge7_Node000005_Node000004" title=" " alt="" coords="102,207,168,179,244,155,346,138,426,132,507,136,610,149,679,166,674,167,609,154,507,142,426,137,346,143,245,161,169,184,105,211"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="281,222,418,249"/>
+<area shape="poly" id="edge9_Node000007_Node000004" title=" " alt="" coords="115,228,283,232,279,236,116,234"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="479,271,609,299"/>
+<area shape="poly" id="edge11_Node000008_Node000004" title=" " alt="" coords="103,248,141,260,232,276,323,284,481,287,476,289,323,289,231,281,140,266,104,253"/>
+<area shape="rect" id="Node000010" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="246,345,454,390"/>
+<area shape="poly" id="edge15_Node000010_Node000004" title=" " alt="" coords="75,256,102,300,121,321,142,338,166,350,192,359,248,370,243,371,191,364,164,355,139,343,117,325,98,303,73,261"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="788,197,905,231,899,231,788,202"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="266,170,434,197"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="449,188,635,188,630,190,450,193"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="449,172,635,173,630,175,450,177"/>
+<area shape="poly" id="edge8_Node000005_Node000007" title=" " alt="" coords="434,229,519,222,609,210,679,194,674,196,610,215,519,228,435,235"/>
+<area shape="poly" id="edge10_Node000001_Node000008" title=" " alt="" coords="624,274,905,247,900,248,625,279"/>
+<area shape="rect" id="Node000009" href="$structaudio__tools_1_1_m_p4_parser_1_1_box.html" title="Represents an individual box in the MP4 file." alt="" coords="698,291,744,319"/>
+<area shape="poly" id="edge12_Node000001_Node000009" title=" " alt="" coords="760,303,816,299,878,285,905,271,926,259,931,257,907,276,880,290,817,304,760,308"/>
+<area shape="poly" id="edge13_Node000001_Node000010" title=" " alt="" coords="469,381,546,385,633,384,722,374,808,353,847,333,883,307,932,259,937,257,886,311,850,338,810,358,723,379,633,389,546,390,469,386"/>
+<area shape="rect" id="Node000011" href="$structaudio__tools_1_1_m_p4_parser_1_1_container_info.html" title="Structure for container box information." alt="" coords="6,384,116,412"/>
+<area shape="poly" id="edge14_Node000010_Node000011" title=" " alt="" coords="131,398,220,394,255,391,261,390,221,399,131,403"/>
+</map>

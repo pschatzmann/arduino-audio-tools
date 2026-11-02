@@ -1,0 +1,23 @@
+<map id="AudioSourceVFS" name="AudioSourceVFS">
+<area shape="rect" id="Node000001" title="AudioSource using the standard C++ api. In order to make this work you need to configure and provide ..." alt="" coords="103,408,229,436"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players." alt="" coords="5,307,108,335"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="83,343,154,406,149,408,81,348"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_v_f_s_file.html" title="Arduino File support using std::fstream." alt="" coords="132,307,200,335"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="168,349,168,408,163,406,164,352"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="130,207,199,234"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="166,248,168,307,163,306,163,252"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="139,106,190,134"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="157,146,161,207,156,206,155,151"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="174,146,173,207,168,205,172,151"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_v_f_s.html" title="Base class which uses c++ file functions. It is also used as base class for an ESP32 Virtual File Sys..." alt="" coords="226,307,271,335"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="231,346,201,386,180,410,177,405,197,382,227,349"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_str.html" title="Str which keeps the data on the heap. We grow the allocated memory only if the copy source is not fit..." alt="" coords="230,207,270,234"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="251,248,251,308,246,306,248,252"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_str_view.html" title="A simple wrapper to provide string functions on existing allocated char*. If the underlying char* is ..." alt="" coords="214,106,286,134"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="243,146,246,207,241,205,240,151"/>
+<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="259,146,259,207,254,205,257,151"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="310,106,430,134"/>
+<area shape="poly" id="edge10_Node000007_Node000009" title=" " alt="" coords="341,145,268,208,264,204,345,142"/>
+<area shape="rect" id="Node000010" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="330,5,410,33"/>
+<area shape="poly" id="edge11_Node000009_Node000010" title=" " alt="" coords="371,46,372,106,367,104,369,51"/>
+</map>

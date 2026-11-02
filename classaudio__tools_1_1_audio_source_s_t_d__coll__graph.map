@@ -1,0 +1,12 @@
+<map id="AudioSourceSTD" name="AudioSourceSTD">
+<area shape="rect" id="Node000001" title="AudioSource using the standard C++ api." alt="" coords="32,260,161,288"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players." alt="" coords="5,159,108,187"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="69,200,94,259,88,260,66,204"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_zephyr_file.html" title="Arduino File API for Zephyr." alt="" coords="131,159,222,187"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="159,198,109,261,105,257,154,199"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="142,82,211,110"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="178,123,179,160,174,158,175,128"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="151,5,202,33"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="169,46,172,83,167,81,167,51"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="186,46,186,83,181,81,184,51"/>
+</map>

@@ -1,0 +1,54 @@
+<map id="I2SCodecStream" name="I2SCodecStream">
+<area shape="rect" id="Node000001" title="I2S Stream which also sets up a codec chip and i2s." alt="" coords="1587,267,1715,295"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="" coords="1108,168,1213,196"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1228,182,1361,194,1437,205,1512,221,1572,241,1624,267,1619,266,1570,246,1511,226,1436,210,1360,199,1229,187"/>
+<area shape="rect" id="Node000015" href="$classaudio__tools_1_1_i2_s_stream.html" title="We support the Stream interface for the I2S access. In addition we allow a separate mute pin which mi..." alt="" coords="1407,359,1496,387"/>
+<area shape="poly" id="edge24_Node000015_Node000002" title=" " alt="" coords="1211,200,1302,242,1342,264,1369,285,1379,299,1382,313,1385,326,1393,339,1418,360,1413,358,1389,343,1380,328,1377,314,1374,301,1365,288,1339,268,1299,246,1210,205"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer,size_t size) and readBytes(uint8..." alt="" coords="910,168,1010,196"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="1025,188,1110,190,1105,191,1026,193"/>
+<area shape="poly" id="edge18_Node000002_Node000003" title=" " alt="" coords="1025,171,1110,174,1105,175,1026,176"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="596,272,664,300"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="679,275,809,236,928,198,933,196,810,241,680,280"/>
+<area shape="poly" id="edge6_Node000003_Node000004" title=" " alt="" coords="673,264,790,224,912,191,907,192,791,229,675,269"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="271,310,322,338"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="337,323,468,311,598,295,593,296,469,316,338,328"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="337,310,468,293,598,284,593,285,468,298,338,316"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_ring_buffer.html" title=" " alt="" coords="548,199,712,227"/>
+<area shape="poly" id="edge7_Node000003_Node000006" title=" " alt="" coords="728,201,912,186,907,188,728,207"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="213,186,380,214"/>
+<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="395,209,550,217,545,219,396,215"/>
+<area shape="poly" id="edge9_Node000006_Node000007" title=" " alt="" coords="395,193,550,201,545,203,396,198"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="5,134,85,162"/>
+<area shape="poly" id="edge10_Node000006_Node000008" title=" " alt="" coords="74,169,136,212,174,232,213,247,263,258,315,263,367,262,418,258,511,243,586,227,581,228,512,248,418,264,367,268,315,268,263,263,212,253,172,237,133,217,74,174"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="228,134,365,162"/>
+<area shape="poly" id="edge12_Node000009_Node000008" title=" " alt="" coords="99,145,229,146,226,150,101,150"/>
+<area shape="rect" id="Node000012" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="505,5,755,50"/>
+<area shape="poly" id="edge17_Node000012_Node000008" title=" " alt="" coords="84,124,144,95,212,68,306,40,404,25,507,22,503,24,404,30,307,45,214,73,146,100,88,128"/>
+<area shape="poly" id="edge11_Node000006_Node000009" title=" " alt="" coords="380,161,558,197,553,200,380,167"/>
+<area shape="rect" id="Node000010" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="230,82,363,110"/>
+<area shape="poly" id="edge13_Node000002_Node000010" title=" " alt="" coords="378,99,513,102,687,111,882,129,980,143,1076,161,1110,172,1105,173,1075,166,979,148,881,134,687,116,512,108,379,104"/>
+<area shape="poly" id="edge19_Node000002_Node000010" title=" " alt="" coords="378,84,512,82,687,88,882,105,980,119,1076,137,1116,149,1149,168,1144,168,1114,154,1075,142,979,124,881,111,687,94,512,88,379,89"/>
+<area shape="poly" id="edge16_Node000012_Node000010" title=" " alt="" coords="377,76,403,70,516,49,512,52,405,76,379,81"/>
+<area shape="rect" id="Node000011" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="896,23,1024,51"/>
+<area shape="poly" id="edge14_Node000002_Node000011" title=" " alt="" coords="1012,53,1046,64,1077,80,1101,100,1121,124,1150,169,1145,167,1117,127,1097,104,1074,85,1043,69,1012,58"/>
+<area shape="poly" id="edge20_Node000002_Node000011" title=" " alt="" coords="1039,38,1077,56,1106,82,1129,112,1158,169,1153,167,1125,115,1102,85,1074,61,1038,43"/>
+<area shape="poly" id="edge15_Node000011_Node000012" title=" " alt="" coords="770,29,899,34,893,36,771,34"/>
+<area shape="rect" id="Node000013" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="588,326,672,354"/>
+<area shape="poly" id="edge21_Node000002_Node000013" title=" " alt="" coords="687,325,755,309,890,273,1023,230,1120,197,1125,196,1025,235,891,278,756,314,688,330"/>
+<area shape="rect" id="Node000018" href="$classaudio__tools_1_1_i2_s_config_e_s_p32.html" title="Configuration for ESP32 legacy i2s." alt="" coords="899,435,1021,463"/>
+<area shape="poly" id="edge28_Node000018_Node000013" title=" " alt="" coords="687,355,918,434,913,435,686,361"/>
+<area shape="rect" id="Node000020" href="$classaudio__tools_1_1_i2_s_config_e_s_p32.html" title="Configuration for ESP32 legacy i2s." alt="" coords="919,326,1001,354"/>
+<area shape="poly" id="edge32_Node000020_Node000013" title=" " alt="" coords="687,337,921,339,916,340,687,342"/>
+<area shape="rect" id="Node000014" href="$classaudio__tools_1_1audio__tools_1_1_volume_support.html" title="Supports the setting and getting of the volume." alt="" coords="1391,235,1512,263"/>
+<area shape="poly" id="edge22_Node000001_Node000014" title=" " alt="" coords="1527,258,1589,271,1583,271,1526,264"/>
+<area shape="poly" id="edge23_Node000001_Node000015" title=" " alt="" coords="1511,367,1537,362,1561,353,1604,324,1635,296,1640,294,1608,328,1564,358,1538,367,1511,372"/>
+<area shape="rect" id="Node000016" href="$classaudio__tools_1_1_i2_s_driver_e_s_p32.html" title="Basic I2S API &#45; for the ESP32. If we receive 1 channel, we expand the result to 2 channels." alt="" coords="1100,422,1221,450"/>
+<area shape="poly" id="edge25_Node000015_Node000016" title=" " alt="" coords="1236,434,1301,429,1367,415,1400,402,1427,388,1432,387,1402,406,1368,421,1301,434,1237,439"/>
+<area shape="rect" id="Node000017" href="$classaudio__tools_1_1_i2_s_driver_base.html" title=" " alt="" coords="903,380,1017,408"/>
+<area shape="poly" id="edge29_Node000015_Node000017" title=" " alt="" coords="1032,389,1409,375,1404,375,1032,394"/>
+<area shape="poly" id="edge26_Node000016_Node000017" title=" " alt="" coords="1032,406,1102,423,1097,423,1032,412"/>
+<area shape="poly" id="edge27_Node000016_Node000018" title=" " alt="" coords="1036,450,1075,449,1096,448,1102,448,1076,454,1037,456"/>
+<area shape="rect" id="Node000019" href="$structaudio__tools_1_1_i2_s_codec_config.html" title="Configuration for I2SCodecStream." alt="" coords="1245,298,1367,326"/>
+<area shape="poly" id="edge30_Node000001_Node000019" title=" " alt="" coords="1383,306,1511,297,1583,291,1589,290,1512,302,1383,311"/>
+<area shape="poly" id="edge31_Node000019_Node000020" title=" " alt="" coords="1016,332,1247,316,1242,317,1017,338"/>
+</map>

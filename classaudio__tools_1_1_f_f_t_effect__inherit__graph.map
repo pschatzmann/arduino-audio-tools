@@ -1,0 +1,24 @@
+<map id="FFTEffect" name="FFTEffect">
+<area shape="rect" id="Node000001" title="Abstract base class for effects that operate on audio in the frequency domain: incoming samples are t..." alt="" coords="241,157,322,184"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_f_f_t_equalizer.html" title="Graphic Equalizer implemented as an FFT effect: boosts or cuts logarithmically spaced frequency bands..." alt="" coords="5,232,110,260"/>
+<area shape="poly" id="edge8_Node000001_Node000006" title=" " alt="" coords="228,192,98,234,97,229,226,187"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_f_f_t_nop.html" title="Apply FFT and IFFT w/o any changes to the frequency domain." alt="" coords="134,232,205,260"/>
+<area shape="poly" id="edge9_Node000001_Node000007" title=" " alt="" coords="252,192,191,234,188,230,246,194"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_f_f_t_pitch_shift.html" title="Apply Pitch Shift FFT Effect on frequency domain data: we just move the bins up or down." alt="" coords="229,232,334,260"/>
+<area shape="poly" id="edge10_Node000001_Node000008" title=" " alt="" coords="283,198,284,233,279,230,280,202"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1_f_f_t_robotize.html" title="Apply Robotize FFT Effect on frequency domain data. See https://learn.bela.io/tutorials/c&#45;plus&#45;plus&#45;f..." alt="" coords="359,232,460,260"/>
+<area shape="poly" id="edge11_Node000001_Node000009" title=" " alt="" coords="318,190,389,232,384,232,317,195"/>
+<area shape="rect" id="Node000010" href="$classaudio__tools_1_1_f_f_t_whisper.html" title="Apply Whisper FFT Effect on frequency domain data: keep the magnitude of each bin but randomize its p..." alt="" coords="485,232,582,260"/>
+<area shape="poly" id="edge12_Node000001_Node000010" title=" " alt="" coords="338,185,491,231,486,232,337,191"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_audio_output.html" title="Abstract Audio Ouptut class." alt="" coords="230,81,333,109"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="283,122,284,158,279,155,280,127"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="140,5,191,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="192,39,256,80,251,81,191,45"/>
+<area shape="poly" id="edge5_Node000002_Node000003" title=" " alt="" coords="205,37,270,80,265,81,204,43"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="215,5,348,33"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="274,46,277,82,272,80,271,51"/>
+<area shape="poly" id="edge6_Node000002_Node000004" title=" " alt="" coords="292,46,291,82,286,79,289,51"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="372,5,500,33"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="385,41,303,83,301,78,390,38"/>
+<area shape="poly" id="edge7_Node000002_Node000005" title=" " alt="" coords="400,42,317,83,315,78,404,39"/>
+</map>

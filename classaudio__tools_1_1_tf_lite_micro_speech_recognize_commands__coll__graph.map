@@ -1,0 +1,18 @@
+<map id="TfLiteMicroSpeechRecognizeCommands" name="TfLiteMicroSpeechRecognizeCommands">
+<area shape="rect" id="Node000001" title="This class is designed to apply a very primitive decoding model on top of the instantaneous results f..." alt="" coords="808,76,1016,120"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_tf_lite_abstract_recognize_commands.html" title="Base class for implementing different primitive decoding models on top of the instantaneous results f..." alt="" coords="5,5,259,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="273,13,283,13,355,10,428,13,607,31,785,65,823,75,818,75,783,70,606,37,427,18,355,16,283,18,275,18"/>
+<area shape="rect" id="Node000003" href="$structaudio__tools_1_1_tf_lite_config.html" title="Configuration settings for TfLiteAudioStream." alt="" coords="510,84,610,112"/>
+<area shape="poly" id="edge5_Node000003_Node000002" title=" " alt="" coords="233,34,428,69,513,87,507,88,427,74,233,39"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="625,95,810,97,805,98,625,100"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_tf_lite_reader.html" title="Input class which provides the next value if the TfLiteAudioStream is treated as an audio sourcce." alt="" coords="80,84,184,112"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="200,95,511,95,508,100,200,100"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_tf_lite_writer.html" title="Output class which interprets audio data if TfLiteAudioStream is treated as audio sink." alt="" coords="83,140,181,168"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="196,148,305,140,427,126,512,110,507,112,428,131,305,146,197,153"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="452,179,668,241"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="673,171,837,121,842,120,675,176"/>
+<area shape="rect" id="Node000007" href="$structaudio__tools_1_1_tf_lite_micro_speech_recognize_commands_1_1_result.html" title=" " alt="" coords="101,196,163,224"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="179,207,452,207,451,212,179,212"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="92,252,172,280"/>
+<area shape="poly" id="edge8_Node000006_Node000008" title=" " alt="" coords="187,261,298,253,427,238,449,236,454,236,428,243,299,258,188,266"/>
+</map>

@@ -1,0 +1,13 @@
+<map id="VFS" name="VFS">
+<area shape="rect" id="Node000001" title="Base class which uses c++ file functions. It is also used as base class for an ESP32 Virtual File Sys..." alt="" coords="269,5,314,33"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_v_f_s___little_f_s.html" title="ESP32 Virtual File System for the LittleFS. The default mount point is &quot;/littlefs&quot; DRAFT implementati..." alt="" coords="5,81,106,109"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="255,35,98,83,97,78,253,30"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_v_f_s___multi.html" title="Define multipe VFS with their mount point." alt="" coords="130,81,216,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="260,41,195,83,193,78,255,42"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_v_f_s___s_d_m_m_c.html" title="ESP32 Virtual File System for SDMMC. The default mount point is &quot;/sdcard&quot; DRAFT implementation: not t..." alt="" coords="240,81,343,109"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="293,47,294,82,289,79,290,51"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_v_f_s___s_d_s_p_i.html" title="ESP32 Virtual File System for SPI SD. The default mount point is &quot;/sdcard&quot; DRAFT implementation: not ..." alt="" coords="368,81,458,109"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="327,39,394,81,389,80,325,44"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_v_f_s___s_p_f_f_s.html" title="ESP32 Virtual File System for the SPFFS. The default mount point is &quot;/spiffs&quot; DRAFT implementation: n..." alt="" coords="482,81,573,109"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="329,29,488,80,483,81,328,35"/>
+</map>

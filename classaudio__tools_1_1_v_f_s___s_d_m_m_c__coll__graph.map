@@ -1,0 +1,14 @@
+<map id="VFS_SDMMC" name="VFS_SDMMC">
+<area shape="rect" id="Node000001" title="ESP32 Virtual File System for SDMMC. The default mount point is &quot;/sdcard&quot; DRAFT implementation: not t..." alt="" coords="5,384,109,412"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_v_f_s.html" title="Base class which uses c++ file functions. It is also used as base class for an ESP32 Virtual File Sys..." alt="" coords="34,307,80,335"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="59,349,60,385,54,383,55,352"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_str.html" title="Str which keeps the data on the heap. We grow the allocated memory only if the copy source is not fit..." alt="" coords="37,207,77,234"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="58,248,60,307,54,306,56,252"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_str_view.html" title="A simple wrapper to provide string functions on existing allocated char*. If the underlying char* is ..." alt="" coords="21,106,93,134"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="49,146,53,206,48,206,48,151"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="66,146,66,206,61,206,65,151"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="117,106,237,134"/>
+<area shape="poly" id="edge5_Node000003_Node000005" title=" " alt="" coords="149,146,75,208,71,204,151,141"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="137,5,217,33"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="178,46,180,106,174,105,176,51"/>
+</map>

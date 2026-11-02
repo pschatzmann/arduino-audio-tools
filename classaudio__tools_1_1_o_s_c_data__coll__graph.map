@@ -1,0 +1,11 @@
+<map id="OSCData" name="OSCData">
+<area shape="rect" id="Node000001" title="A simple OSC Data composer and parser. A OSC data starts with an address string followed by a format ..." alt="" coords="94,224,174,251"/>
+<area shape="rect" id="Node000002" href="$structaudio__tools_1_1_o_s_c_binary_data.html" title="Simple structure to hold binary data." alt="" coords="5,114,127,142"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="70,155,76,178,86,198,112,223,106,223,82,201,71,180,68,160"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="151,106,317,151"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="218,163,191,202,159,225,157,221,187,198,213,165"/>
+<area shape="rect" id="Node000004" href="$structaudio__tools_1_1_o_s_c_data_1_1_callback.html" title=" " alt="" coords="143,5,221,33"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="188,46,202,81,218,106,212,105,197,83,187,51"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="245,5,324,33"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="274,45,246,107,242,104,270,49"/>
+</map>

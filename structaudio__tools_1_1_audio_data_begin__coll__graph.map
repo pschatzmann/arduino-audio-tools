@@ -1,0 +1,7 @@
+<map id="AudioDataBegin" name="AudioDataBegin">
+<area shape="rect" id="Node000001" title="Protocal Record To Start." alt="" coords="54,106,180,134"/>
+<area shape="rect" id="Node000002" href="$structaudio__tools_1_1_audio_header.html" title="Common Header for all records." alt="" coords="5,5,111,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="75,44,111,105,106,106,72,49"/>
+<area shape="rect" id="Node000003" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="135,5,218,33"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="163,46,127,107,123,104,158,47"/>
+</map>

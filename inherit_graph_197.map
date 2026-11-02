@@ -1,0 +1,7 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$classaudio__tools_1_1_m4_a_common_demuxer.html" title="Abstract base class for M4A/MP4 demuxers. Provides shared functionality for both file&#45;based and strea..." alt="" coords="5,32,174,60"/>
+<area shape="rect" id="Node000001" href="$classaudio__tools_1_1_m4_a_audio_demuxer.html" title="A simple M4A audio data demuxer which is providing AAC, MP3 and ALAC frames." alt="" coords="233,5,380,33"/>
+<area shape="poly" id="edge845_Node000000_Node000001" title=" " alt="" coords="189,31,235,28,230,29,190,36"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_m4_a_audio_file_demuxer.html" title="Demuxer for M4A/MP4 files to extract audio data using an Arduino File. This class locates the mdat an..." alt="" coords="222,57,391,85"/>
+<area shape="poly" id="edge846_Node000000_Node000002" title=" " alt="" coords="189,55,224,61,218,61,189,60"/>
+</map>

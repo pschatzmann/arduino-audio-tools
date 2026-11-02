@@ -1,0 +1,11 @@
+<map id="USBAudioHostEvents" name="USBAudioHostEvents">
+<area shape="rect" id="Node000001" title="Upcalls from a USB host backend into the stack independent UAC host class logic (USBAudioHostBase)...." alt="" coords="97,5,256,33"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_u_s_b_audio_host_base.html" title="USB Audio Class (UAC1 and UAC2) host: reads PCM audio from an attached USB microphone and/or writes P..." alt="" coords="103,81,250,109"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="177,46,179,81,174,80,175,51"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_u_s_b_audio_host_e_s_p32.html" title="USB Audio host for ESP32&#45;S2/S3/P4 using the ESP&#45;IDF usb_host library: reads audio from an attached US..." alt="" coords="5,157,161,184"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="146,120,101,158,98,154,150,117"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_u_s_b_audio_host_tiny_u_s_b.html" title="USB Audio host for the Adafruit TinyUSB host stack: reads audio from an attached USB microphone and/o..." alt="" coords="184,157,355,184"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="205,116,256,156,250,157,204,121"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_u_s_b_audio_host_tiny_u_s_b_free_r_t_o_s.html" title="Variant of USBAudioHostTinyUSB for FreeRTOS (e.g. RP2040 + FreeRTOS, or ESP32 with the Adafruit TinyU..." alt="" coords="154,232,386,260"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="272,198,272,233,267,230,268,202"/>
+</map>

@@ -1,0 +1,15 @@
+<map id="ParabolicInterpolator" name="ParabolicInterpolator">
+<area shape="rect" id="Node000001" title="Parabolic interpolation using y[0]..y[3]." alt="" coords="66,384,222,412"/>
+<area shape="rect" id="Node000002" href="$structaudio__tools_1_1_base_interpolator.html" title="Base class for resampling algorithms using a buffer of float values." alt="" coords="79,307,208,335"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="146,349,146,385,141,383,142,352"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_single_buffer.html" title=" " alt="" coords="64,207,223,234"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="145,248,146,307,141,306,142,252"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="5,106,157,134"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="90,145,132,205,126,207,89,150"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="105,143,144,206,139,207,104,149"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="187,5,266,33"/>
+<area shape="poly" id="edge5_Node000003_Node000005" title=" " alt="" coords="217,46,151,207,147,205,213,50"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="302,106,423,134"/>
+<area shape="poly" id="edge7_Node000006_Node000005" title=" " alt="" coords="256,39,347,105,342,106,256,45"/>
+<area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="318,142,174,208,171,204,321,138"/>
+</map>

@@ -1,0 +1,14 @@
+<map id="AudioSourceIdxSDFAT&lt; AudioFs, AudioFile &gt;" name="AudioSourceIdxSDFAT&lt; AudioFs, AudioFile &gt;">
+<area shape="rect" id="Node000001" title="ESP32 AudioSource for AudioPlayer using an SD card as data source. An index file is used to speed up ..." alt="" coords="5,349,177,394"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players." alt="" coords="18,249,121,276"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="77,290,89,349,84,348,73,293"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_s_d_index.html" title=" " alt="" coords="145,249,349,276"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="218,286,124,351,121,346,213,285"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_list.html" title=" " alt="" coords="191,148,303,176"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="249,189,249,249,245,247,245,194"/>
+<area shape="rect" id="Node000005" href="$structaudio__tools_1_1audio__tools_1_1_list_1_1_node.html" title=" " alt="" coords="142,15,197,43"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="186,54,242,147,237,148,184,59"/>
+<area shape="poly" id="edge5_Node000005_Node000005" title=" " alt="" coords="213,15,221,20,224,29,222,37,215,42,199,44,196,40,213,37,217,34,219,29,217,24,214,20"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="283,15,363,43"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="309,55,257,149,252,146,306,59"/>
+</map>

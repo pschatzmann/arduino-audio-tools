@@ -1,0 +1,43 @@
+<map id="MozziStream" name="MozziStream">
+<area shape="rect" id="Node000001" title="Stream that provides audio information that was generated using the Mozzi API using the updateControl..." alt="" coords="511,548,618,576"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="" coords="512,447,617,475"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="566,489,566,549,562,546,562,492"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer,size_t size) and readBytes(uint8..." alt="" coords="265,347,365,374"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="332,382,361,403,393,421,453,441,514,454,509,455,452,446,391,426,358,408,332,387"/>
+<area shape="poly" id="edge18_Node000002_Node000003" title=" " alt="" coords="351,381,383,402,417,421,465,437,514,451,508,451,464,443,415,426,381,407,351,386"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="141,215,209,243"/>
+<area shape="poly" id="edge26_Node000001_Node000004" title=" " alt="" coords="186,255,215,312,254,373,285,405,319,435,393,484,466,521,528,548,523,547,464,526,391,489,316,439,281,409,250,376,210,315,185,260"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="194,251,298,345,292,347,193,257"/>
+<area shape="poly" id="edge6_Node000003_Node000004" title=" " alt="" coords="207,250,309,345,304,347,206,255"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="5,106,57,134"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="54,141,153,213,149,216,54,147"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="67,140,166,213,161,216,68,145"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_ring_buffer.html" title=" " alt="" coords="233,215,397,243"/>
+<area shape="poly" id="edge25_Node000001_Node000006" title=" " alt="" coords="353,249,384,273,424,325,448,370,469,417,501,474,556,548,551,547,497,476,464,420,443,372,419,328,380,277,353,254"/>
+<area shape="poly" id="edge7_Node000003_Node000006" title=" " alt="" coords="316,256,318,347,312,345,314,261"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="81,106,248,134"/>
+<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="188,141,293,213,288,216,189,146"/>
+<area shape="poly" id="edge9_Node000006_Node000007" title=" " alt="" coords="202,140,305,214,300,215,202,145"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="422,5,501,33"/>
+<area shape="poly" id="edge10_Node000006_Node000008" title=" " alt="" coords="405,37,381,49,354,64,330,83,311,107,301,135,301,164,313,215,307,214,296,165,296,134,306,105,326,80,351,60,379,44,409,34"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="393,106,530,134"/>
+<area shape="poly" id="edge12_Node000009_Node000008" title=" " alt="" coords="463,46,464,106,459,105,461,51"/>
+<area shape="rect" id="Node000012" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="439,207,690,251"/>
+<area shape="poly" id="edge17_Node000012_Node000008" title=" " alt="" coords="516,31,535,41,549,55,568,93,575,135,575,175,571,208,566,205,569,174,569,136,562,95,545,59,531,45,516,36"/>
+<area shape="poly" id="edge11_Node000006_Node000009" title=" " alt="" coords="430,145,335,217,331,212,434,141"/>
+<area shape="rect" id="Node000010" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="683,106,816,134"/>
+<area shape="poly" id="edge13_Node000002_Node000010" title=" " alt="" coords="737,146,696,252,666,315,631,376,599,417,571,449,568,445,594,413,626,373,661,313,691,250,733,149"/>
+<area shape="poly" id="edge19_Node000002_Node000010" title=" " alt="" coords="750,147,739,195,718,253,690,316,655,376,622,417,588,449,585,445,618,413,650,373,685,313,713,251,734,193,747,151"/>
+<area shape="poly" id="edge16_Node000012_Node000010" title=" " alt="" coords="692,141,658,160,622,184,590,208,587,204,619,179,655,155,697,138"/>
+<area shape="rect" id="Node000011" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="501,347,628,374"/>
+<area shape="poly" id="edge14_Node000002_Node000011" title=" " alt="" coords="558,387,560,448,556,445,554,391"/>
+<area shape="poly" id="edge20_Node000002_Node000011" title=" " alt="" coords="574,387,573,448,568,445,571,391"/>
+<area shape="poly" id="edge15_Node000011_Node000012" title=" " alt="" coords="566,265,567,347,562,345,563,269"/>
+<area shape="rect" id="Node000013" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="797,347,881,374"/>
+<area shape="poly" id="edge21_Node000002_Node000013" title=" " alt="" coords="812,383,793,400,781,414,767,426,730,440,699,444,668,445,629,450,618,452,617,447,628,445,668,440,699,439,729,435,764,421,777,410,789,396,807,385"/>
+<area shape="rect" id="Node000015" href="$structaudio__tools_1_1_mozzi_config.html" title=" " alt="" coords="641,447,741,475"/>
+<area shape="poly" id="edge24_Node000015_Node000013" title=" " alt="" coords="843,388,841,409,831,425,798,438,742,452,741,447,796,433,828,421,836,407,839,392"/>
+<area shape="rect" id="Node000014" href="$classaudio__tools_1_1audio__tools_1_1_volume_support.html" title="Supports the setting and getting of the volume." alt="" coords="766,447,886,475"/>
+<area shape="poly" id="edge22_Node000001_Node000014" title=" " alt="" coords="784,481,677,527,608,550,607,545,675,521,779,482"/>
+<area shape="poly" id="edge23_Node000001_Node000015" title=" " alt="" coords="665,484,582,550,580,545,660,485"/>
+</map>

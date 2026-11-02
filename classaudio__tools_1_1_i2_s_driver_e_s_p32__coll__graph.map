@@ -1,0 +1,9 @@
+<map id="I2SDriverESP32" name="I2SDriverESP32">
+<area shape="rect" id="Node000001" title="Basic I2S API &#45; for the ESP32. If we receive 1 channel, we expand the result to 2 channels." alt="" coords="47,183,168,211"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_i2_s_driver_base.html" title=" " alt="" coords="5,82,119,110"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="76,122,104,182,99,183,73,126"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_i2_s_config_e_s_p32.html" title="Configuration for ESP32 legacy i2s." alt="" coords="142,82,264,110"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="183,121,122,184,119,180,177,122"/>
+<area shape="rect" id="Node000004" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="162,5,245,33"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="205,46,206,83,201,81,202,51"/>
+</map>

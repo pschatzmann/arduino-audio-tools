@@ -1,0 +1,15 @@
+<map id="SynchronizedNBufferRTOST&lt; T &gt;" name="SynchronizedNBufferRTOST&lt; T &gt;">
+<area shape="rect" id="Node000001" title="NBuffer which uses FreeRTOS queues to manage the available and filled buffers, making it safe for cro..." alt="" coords="766,149,1003,177"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_n_buffer.html" title=" " alt="" coords="448,85,556,113"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="572,108,800,148,795,149,572,113"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="51,5,182,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="196,30,288,40,385,59,452,84,447,85,384,64,287,46,197,35"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="197,10,288,17,385,35,445,57,491,85,486,85,442,62,384,40,288,22,198,15"/>
+<area shape="poly" id="edge4_Node000002_Node000003" title=" " alt="" coords="146,40,195,74,223,89,252,100,303,110,355,113,450,108,445,109,355,118,302,115,251,105,221,94,192,78,146,46"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_queue_from_vector.html" title=" " alt="" coords="5,147,228,209"/>
+<area shape="poly" id="edge5_Node000002_Node000004" title=" " alt="" coords="243,189,314,187,384,173,413,161,441,145,483,115,488,113,444,149,416,166,385,178,314,192,243,194"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_queue_r_t_o_s.html" title=" " alt="" coords="409,214,596,259"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="611,214,741,189,810,178,816,177,743,194,612,219"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="77,233,156,261"/>
+<area shape="poly" id="edge7_Node000005_Node000006" title=" " alt="" coords="172,243,408,236,408,242,172,248"/>
+</map>

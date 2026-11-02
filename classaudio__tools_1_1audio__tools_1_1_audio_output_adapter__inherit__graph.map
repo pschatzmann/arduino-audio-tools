@@ -1,0 +1,26 @@
+<map id="AudioOutputAdapter" name="AudioOutputAdapter">
+<area shape="rect" id="Node000001" title="Base class for Output Adpapters." alt="" coords="337,156,490,184"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_adapter_audio_stream_to_audio_output.html" title="Wrapper which converts a AudioStream to a AudioOutput." alt="" coords="538,5,746,50"/>
+<area shape="poly" id="edge8_Node000001_Node000006" title=" " alt="" coords="436,143,480,101,537,60,565,49,560,52,540,65,484,105,439,147"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_adapter_print_to_audio_output.html" title="Wrapper which converts a Print to a AudioOutput." alt="" coords="543,74,741,102"/>
+<area shape="poly" id="edge9_Node000001_Node000007" title=" " alt="" coords="456,147,537,112,581,101,576,103,539,117,458,152"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_audio_writer_to_audio_output.html" title="Adapter class which lets an AudioWriter behave like a Print." alt="" coords="545,126,739,154"/>
+<area shape="poly" id="edge10_Node000001_Node000008" title=" " alt="" coords="505,155,548,152,542,153,506,161"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1audio__tools_1_1_adapter_audio_stream_to_audio_output.html" title="Wrapper which converts a AudioStream to a AudioOutput." alt="" coords="538,177,746,222"/>
+<area shape="poly" id="edge11_Node000001_Node000009" title=" " alt="" coords="506,179,540,186,535,187,506,185"/>
+<area shape="rect" id="Node000010" href="$classaudio__tools_1_1audio__tools_1_1_adapter_print_to_audio_output.html" title="Wrapper which converts a Print to a AudioOutput." alt="" coords="543,246,741,274"/>
+<area shape="poly" id="edge12_Node000001_Node000010" title=" " alt="" coords="452,190,494,212,539,232,575,245,570,245,537,237,491,216,451,195"/>
+<area shape="rect" id="Node000011" href="$classaudio__tools_1_1audio__tools_1_1_audio_writer_to_audio_output.html" title="Adapter class which lets an AudioWriter behave like a Print." alt="" coords="545,298,739,326"/>
+<area shape="poly" id="edge13_Node000001_Node000011" title=" " alt="" coords="437,194,482,240,510,263,540,283,570,298,565,297,537,287,506,267,478,244,435,199"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_audio_output.html" title="Abstract Audio Ouptut class." alt="" coords="187,156,289,184"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="304,168,339,170,334,171,305,173"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="46,104,98,132"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="111,136,188,161,184,164,112,141"/>
+<area shape="poly" id="edge5_Node000002_Node000003" title=" " alt="" coords="113,120,214,154,210,157,113,126"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="5,156,139,184"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="154,177,189,178,184,180,155,182"/>
+<area shape="poly" id="edge6_Node000002_Node000004" title=" " alt="" coords="154,159,189,161,184,163,155,164"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="8,208,136,236"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="149,204,214,183,210,186,152,209"/>
+<area shape="poly" id="edge7_Node000002_Node000005" title=" " alt="" coords="110,200,188,176,184,180,113,205"/>
+</map>

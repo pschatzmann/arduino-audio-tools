@@ -1,0 +1,24 @@
+<map id="QueueStream&lt; T &gt;" name="QueueStream&lt; T &gt;">
+<area shape="rect" id="Node000001" title="Stream class which stores the data in a temporary queue buffer. The queue can be consumed e...." alt="" coords="5,430,154,458"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer,size_t size) and readBytes(uint8..." alt="" coords="29,330,130,357"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="74,371,76,430,71,429,69,374"/>
+<area shape="poly" id="edge12_Node000001_Node000002" title=" " alt="" coords="90,371,88,430,83,429,85,374"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="45,207,114,234"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="72,247,73,291,76,329,71,329,68,292,71,252"/>
+<area shape="poly" id="edge5_Node000002_Node000003" title=" " alt="" coords="88,247,91,292,88,330,83,328,86,291,86,252"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="54,106,105,134"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="72,146,76,206,70,206,71,151"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="88,146,89,206,83,206,87,151"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_ring_buffer.html" title=" " alt="" coords="137,207,302,234"/>
+<area shape="poly" id="edge6_Node000002_Node000005" title=" " alt="" coords="192,247,97,331,93,327,194,242"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="132,106,299,134"/>
+<area shape="poly" id="edge7_Node000005_Node000006" title=" " alt="" coords="209,146,215,207,210,205,207,151"/>
+<area shape="poly" id="edge8_Node000005_Node000006" title=" " alt="" coords="226,146,228,207,223,205,224,151"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="329,5,408,33"/>
+<area shape="poly" id="edge9_Node000005_Node000007" title=" " alt="" coords="360,45,341,91,314,135,275,177,239,208,235,204,272,173,309,132,336,88,357,50"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="444,106,582,134"/>
+<area shape="poly" id="edge11_Node000008_Node000007" title=" " alt="" coords="400,39,496,105,491,106,400,44"/>
+<area shape="poly" id="edge10_Node000005_Node000008" title=" " alt="" coords="469,142,367,185,282,208,280,204,365,180,474,139"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="154,330,285,357"/>
+<area shape="poly" id="edge13_Node000001_Node000009" title=" " alt="" coords="191,368,100,432,97,427,186,365"/>
+</map>

@@ -1,0 +1,17 @@
+<map id="SquareWaveGenerator&lt; T &gt;" name="SquareWaveGenerator&lt; T &gt;">
+<area shape="rect" id="Node000001" title="Generates a square wave sound. Uses the same 32 bit phase accumulator as SawToothGenerator/FastIntSin..." alt="" coords="5,384,211,412"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_sound_generator.html" title=" " alt="" coords="7,307,209,335"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="110,349,110,385,106,383,106,352"/>
+<area shape="rect" id="Node000003" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="34,207,118,234"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="86,246,106,307,101,307,84,251"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_ring_buffer.html" title=" " alt="" coords="142,207,306,234"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="195,246,125,309,122,305,199,243"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="52,106,220,134"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="151,143,208,205,203,207,150,149"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="165,142,221,205,216,207,164,147"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="250,5,329,33"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="282,46,231,207,226,205,278,50"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="365,106,502,134"/>
+<area shape="poly" id="edge8_Node000007_Node000006" title=" " alt="" coords="321,39,417,105,411,106,320,44"/>
+<area shape="poly" id="edge7_Node000004_Node000007" title=" " alt="" coords="390,142,253,208,251,204,394,139"/>
+</map>

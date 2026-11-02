@@ -1,0 +1,10 @@
+<map id="MuxerVideoSink" name="MuxerVideoSink">
+<area shape="rect" id="Node000001" title="Print sink that writes each frame it receives to a Muxer&#39;s video track via addVideoFrame(),..." alt="" coords="5,207,132,234"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="30,5,81,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="60,48,70,206,65,206,55,49"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_muxer.html" title="Common interface for muxers (MuxerAVI, MuxerMP4) that combine an already&#45;encoded video track (and opt..." alt="" coords="84,106,146,134"/>
+<area shape="poly" id="edge4_Node000003_Node000002" title=" " alt="" coords="68,45,90,81,107,105,102,106,85,83,68,50"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="105,147,77,207,73,205,100,148"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory...." alt="" coords="113,5,216,33"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="160,46,148,83,130,107,126,104,143,81,157,50"/>
+</map>

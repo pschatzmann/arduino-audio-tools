@@ -1,0 +1,14 @@
+<map id="VFS_LittleFS" name="VFS_LittleFS">
+<area shape="rect" id="Node000001" title="ESP32 Virtual File System for the LittleFS. The default mount point is &quot;/littlefs&quot; DRAFT implementati..." alt="" coords="5,384,106,412"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_v_f_s.html" title="Base class which uses c++ file functions. It is also used as base class for an ESP32 Virtual File Sys..." alt="" coords="33,307,78,335"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="57,349,58,385,53,383,54,352"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_str.html" title="Str which keeps the data on the heap. We grow the allocated memory only if the copy source is not fit..." alt="" coords="36,207,75,234"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="57,248,58,307,53,306,54,252"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_str_view.html" title="A simple wrapper to provide string functions on existing allocated char*. If the underlying char* is ..." alt="" coords="20,106,91,134"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="48,146,52,206,46,206,47,151"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="64,146,65,206,59,206,63,151"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="115,106,236,134"/>
+<area shape="poly" id="edge5_Node000003_Node000005" title=" " alt="" coords="147,146,74,208,70,204,150,141"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="136,5,215,33"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="176,46,178,106,173,105,175,51"/>
+</map>

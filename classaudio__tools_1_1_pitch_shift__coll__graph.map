@@ -1,0 +1,13 @@
+<map id="PitchShift" name="PitchShift">
+<area shape="rect" id="Node000001" title="Shifts the pitch by the indicated step size: e.g. 2 doubles the pitch." alt="" coords="62,324,145,352"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects." alt="" coords="5,215,101,243"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="68,255,100,323,95,324,64,259"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_variable_speed_ring_buffer.html" title=" " alt="" coords="124,207,307,251"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="185,262,119,326,116,322,180,262"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="77,106,245,134"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="176,145,207,206,202,206,174,150"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="268,106,406,134"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="313,143,242,208,239,204,309,146"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="297,5,377,33"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="338,46,339,106,335,104,336,51"/>
+</map>

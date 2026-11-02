@@ -1,0 +1,21 @@
+<map id="StdioStream" name="StdioStream">
+<area shape="rect" id="Node000001" title="Direct binary Audio Output to stdout. On linux you can hear the audio e.g. with ./generator | aplay &#45;..." alt="" coords="5,407,107,434"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer,size_t size) and readBytes(uint8..." alt="" coords="6,330,106,357"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="58,371,59,407,53,406,54,375"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="22,207,90,234"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="49,247,50,291,53,329,47,329,44,292,48,252"/>
+<area shape="poly" id="edge5_Node000002_Node000003" title=" " alt="" coords="64,247,68,292,64,330,59,328,62,291,63,252"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="30,106,82,134"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="48,146,52,206,47,206,48,151"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="65,146,65,206,60,206,64,151"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_ring_buffer.html" title=" " alt="" coords="114,207,278,234"/>
+<area shape="poly" id="edge6_Node000002_Node000005" title=" " alt="" coords="170,247,73,331,69,327,170,242"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="108,106,276,134"/>
+<area shape="poly" id="edge7_Node000005_Node000006" title=" " alt="" coords="186,146,192,207,186,206,184,151"/>
+<area shape="poly" id="edge8_Node000005_Node000006" title=" " alt="" coords="202,146,204,207,199,205,200,151"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="306,5,385,33"/>
+<area shape="poly" id="edge9_Node000005_Node000007" title=" " alt="" coords="336,45,318,91,290,135,252,177,215,208,212,204,248,173,286,132,313,88,333,50"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="421,106,558,134"/>
+<area shape="poly" id="edge11_Node000008_Node000007" title=" " alt="" coords="377,39,473,105,467,106,376,44"/>
+<area shape="poly" id="edge10_Node000005_Node000008" title=" " alt="" coords="446,142,344,185,259,208,257,204,342,180,450,139"/>
+</map>

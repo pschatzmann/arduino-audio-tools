@@ -1,0 +1,26 @@
+<map id="BLESerialServerBase" name="BLESerialServerBase">
+<area shape="rect" id="Node000001" title="Generic BLE serial server logic which is independent of the BLE API. In BLE terminology the server is..." alt="" coords="129,384,285,411"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1_b_l_e_serial_server_arduino_b_l_e.html" title="A BLE server that implements a serial protocol, so that it can be used to send and receive audio...." alt="" coords="5,459,204,487"/>
+<area shape="poly" id="edge13_Node000001_Node000009" title=" " alt="" coords="179,420,124,461,121,457,174,421"/>
+<area shape="rect" id="Node000010" href="$classaudio__tools_1_1_b_l_e_serial_server_e_s_p32.html" title="A BLE server that implements a serial protocol, so that it can be used to send and receive audio...." alt="" coords="228,459,392,487"/>
+<area shape="poly" id="edge14_Node000001_Node000010" title=" " alt="" coords="239,418,294,459,289,459,237,423"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_b_l_e_serial_stream.html" title="Common functionality of the BLE serial server and client: data is exchanged via two characteristics l..." alt="" coords="142,308,272,336"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="209,349,210,384,205,382,206,354"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="" coords="154,232,260,260"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="208,273,210,308,205,307,206,278"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer,size_t size) and readBytes(uint8..." alt="" coords="16,157,116,184"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="97,190,177,231,173,233,98,195"/>
+<area shape="poly" id="edge10_Node000003_Node000004" title=" " alt="" coords="112,189,192,231,187,233,112,194"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="32,81,100,109"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="57,121,61,156,56,156,57,127"/>
+<area shape="poly" id="edge7_Node000004_Node000005" title=" " alt="" coords="75,121,76,157,70,156,74,127"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="40,5,92,33"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="57,46,61,81,56,80,57,51"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="75,46,76,81,70,80,74,51"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="140,157,274,184"/>
+<area shape="poly" id="edge8_Node000003_Node000007" title=" " alt="" coords="199,197,203,233,198,231,198,202"/>
+<area shape="poly" id="edge11_Node000003_Node000007" title=" " alt="" coords="217,197,217,233,212,231,215,202"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="298,157,426,184"/>
+<area shape="poly" id="edge9_Node000003_Node000008" title=" " alt="" coords="311,193,229,234,226,230,315,189"/>
+<area shape="poly" id="edge12_Node000003_Node000008" title=" " alt="" coords="326,193,243,234,240,230,330,190"/>
+</map>

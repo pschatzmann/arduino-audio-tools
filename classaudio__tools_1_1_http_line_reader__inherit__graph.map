@@ -1,0 +1,5 @@
+<map id="HttpLineReader" name="HttpLineReader">
+<area shape="rect" id="Node000001" title="We read a single line. A terminating 0 is added to the string to make it compliant for c string funct..." alt="" coords="12,5,135,33"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_http_chunk_reader.html" title="Http might reply with chunks. So we need to dechunk the data. see https://en.wikipedia...." alt="" coords="5,81,142,109"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="75,47,76,81,71,80,72,51"/>
+</map>

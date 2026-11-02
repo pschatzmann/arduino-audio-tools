@@ -91,35 +91,111 @@ $(function() {
 <div class="dynheader">
 Inheritance diagram for ReformatBaseStream:</div>
 <div class="dyncontent">
- <div class="center">
-  <img src="classaudio__tools_1_1audio__tools_1_1_reformat_base_stream.png" usemap="#ReformatBaseStream_map" alt=""/>
-  <map id="ReformatBaseStream_map" name="ReformatBaseStream_map">
-<area href="classaudio__tools_1_1audio__tools_1_1_modifying_stream.html" title="Abstract class: Objects can be put into a pipleline." alt="ModifyingStream" shape="rect" coords="298,392,586,416"/>
-<area href="classaudio__tools_1_1audio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="AudioStream" shape="rect" coords="0,336,288,360"/>
-<area href="classaudio__tools_1_1audio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="AudioStream" shape="rect" coords="596,336,884,360"/>
-<area href="classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="AudioInfoSource" shape="rect" coords="894,280,1182,304"/>
-<area href="classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="AudioInfoSupport" shape="rect" coords="894,224,1182,248"/>
-<area href="classaudio__tools_1_1audio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer,size_t size) and readBytes(uint8..." alt="BaseStream" shape="rect" coords="894,168,1182,192"/>
-<area href="classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="AudioInfoSource" shape="rect" coords="894,112,1182,136"/>
-<area href="classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="AudioInfoSupport" shape="rect" coords="894,56,1182,80"/>
-<area href="classaudio__tools_1_1audio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer,size_t size) and readBytes(uint8..." alt="BaseStream" shape="rect" coords="894,0,1182,24"/>
-<area href="classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="AudioInfoSource" shape="rect" coords="298,280,586,304"/>
-<area href="classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="AudioInfoSupport" shape="rect" coords="298,224,586,248"/>
-<area href="classaudio__tools_1_1audio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer,size_t size) and readBytes(uint8..." alt="BaseStream" shape="rect" coords="298,168,586,192"/>
-<area href="classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="AudioInfoSource" shape="rect" coords="298,112,586,136"/>
-<area href="classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="AudioInfoSupport" shape="rect" coords="298,56,586,80"/>
-<area href="classaudio__tools_1_1audio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer,size_t size) and readBytes(uint8..." alt="BaseStream" shape="rect" coords="298,0,586,24"/>
-<area href="classaudio__tools_1_1_channel_format_converter_stream.html" title="Channel converter which does not use a template." alt="ChannelFormatConverterStream" shape="rect" coords="596,504,884,528"/>
-<area href="classaudio__tools_1_1_channel_format_converter_stream_t.html" title="Converter for reducing or increasing the number of Channels." alt="ChannelFormatConverterStreamT&lt; T &gt;" shape="rect" coords="596,560,884,584"/>
-<area href="classaudio__tools_1_1_encoded_audio_stream.html" title="A more natural Stream class to process encoded data (aac, wav, mp3...) which also supports the decodi..." alt="EncodedAudioStream" shape="rect" coords="596,616,884,640"/>
-<area href="classaudio__tools_1_1_format_converter_stream.html" title="Converter which converts bits_per_sample, channels and the sample_rate. The conversion is supported b..." alt="FormatConverterStream" shape="rect" coords="596,672,884,696"/>
-<area href="classaudio__tools_1_1_number_format_converter_stream.html" title="Converter which converts between bits_per_sample and 16 bits. The templated NumberFormatConverterStre..." alt="NumberFormatConverterStream" shape="rect" coords="596,728,884,752"/>
-<area href="classaudio__tools_1_1_number_format_converter_stream_t.html" title="A more generic templated Converter which converts from a source type to a target type: You can use e...." alt="NumberFormatConverterStreamT&lt; TFrom, TTo &gt;" shape="rect" coords="596,784,884,808"/>
-<area href="classaudio__tools_1_1_resample_stream.html" title="Dynamic Resampling. We can use a variable factor to speed up or slow down the playback." alt="ResampleStream" shape="rect" coords="596,840,884,864"/>
-<area href="classaudio__tools_1_1_resample_stream_t.html" title="A Stream implementation for resamping using a specified interpolation algorithm." alt="ResampleStreamT&lt; TInterpolator &gt;" shape="rect" coords="596,896,884,920"/>
-<area href="classaudio__tools_1_1audio__tools_1_1_encoded_audio_stream.html" title="A more natural Stream class to process encoded data (aac, wav, mp3...) which also supports the decodi..." alt="EncodedAudioStream" shape="rect" coords="596,952,884,976"/>
-  </map>
-</div></div>
+<div class="center"><img src="classaudio__tools_1_1audio__tools_1_1_reformat_base_stream__inherit__graph.png" border="0" usemap="#a_reformat_base_stream_inherit__map" loading="lazy" alt="Inheritance graph"/></div>
+<map name="a_reformat_base_stream_inherit__map" id="a_reformat_base_stream_inherit__map">
+<area shape="rect" title="Base class for chained converting streams." alt="" coords="736,229,897,257"/>
+<area shape="rect" href="classaudio__tools_1_1_channel_format_converter_stream.html" title="Channel converter which does not use a template." alt="" coords="957,5,1189,33"/>
+<area shape="poly" title=" " alt="" coords="826,213,842,174,867,128,901,81,944,42,963,35,968,32,947,47,905,85,872,130,847,177,830,216"/>
+<area shape="rect" href="classaudio__tools_1_1_channel_format_converter_stream_t.html" title="Converter for reducing or increasing the number of Channels." alt="" coords="957,57,1189,102"/>
+<area shape="poly" title=" " alt="" coords="836,214,881,162,911,135,944,112,967,103,972,101,947,116,914,139,885,166,839,219"/>
+<area shape="rect" href="classaudio__tools_1_1_encoded_audio_stream.html" title="A more natural Stream class to process encoded data (aac, wav, mp3...) which also supports the decodi..." alt="" coords="993,125,1153,153"/>
+<area shape="poly" title=" " alt="" coords="848,218,892,189,944,163,995,151,990,152,946,168,895,194,850,223"/>
+<area shape="rect" href="classaudio__tools_1_1_format_converter_stream.html" title="Converter which converts bits_per_sample, channels and the sample_rate. The conversion is supported b..." alt="" coords="984,177,1162,205"/>
+<area shape="poly" title=" " alt="" coords="903,223,1004,205,998,206,904,228"/>
+<area shape="rect" href="classaudio__tools_1_1_number_format_converter_stream.html" title="Converter which converts between bits_per_sample and 16 bits. The templated NumberFormatConverterStre..." alt="" coords="958,229,1188,257"/>
+<area shape="poly" title=" " alt="" coords="913,241,960,243,955,244,914,246"/>
+<area shape="rect" href="classaudio__tools_1_1_number_format_converter_stream_t.html" title="A more generic templated Converter which converts from a source type to a target type: You can use e...." alt="" coords="958,281,1188,326"/>
+<area shape="poly" title=" " alt="" coords="893,258,977,280,972,280,893,264"/>
+<area shape="rect" href="classaudio__tools_1_1_resample_stream.html" title="Dynamic Resampling. We can use a variable factor to speed up or slow down the playback." alt="" coords="1006,349,1140,377"/>
+<area shape="poly" title=" " alt="" coords="844,265,890,302,946,335,976,346,1008,356,1003,355,974,351,944,340,887,306,843,270"/>
+<area shape="rect" href="classaudio__tools_1_1_resample_stream_t.html" title="A Stream implementation for resamping using a specified interpolation algorithm." alt="" coords="945,401,1201,429"/>
+<area shape="poly" title=" " alt="" coords="835,268,881,329,912,360,947,386,975,401,970,400,944,391,908,364,877,333,833,273"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_encoded_audio_stream.html" title="A more natural Stream class to process encoded data (aac, wav, mp3...) which also supports the decodi..." alt="" coords="993,453,1153,481"/>
+<area shape="poly" title=" " alt="" coords="829,269,847,309,872,355,905,401,947,438,969,450,995,461,990,460,967,455,944,443,901,404,868,358,842,312,827,274"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_modifying_stream.html" title="Abstract class: Objects can be put into a pipleline." alt="" coords="556,229,688,257"/>
+<area shape="poly" title=" " alt="" coords="703,241,738,243,733,244,704,246"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="" coords="402,229,508,257"/>
+<area shape="poly" title=" " alt="" coords="523,249,558,251,552,253,524,255"/>
+<area shape="poly" title=" " alt="" coords="523,232,558,234,552,235,524,237"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer,size_t size) and readBytes(uint8..." alt="" coords="238,177,338,205"/>
+<area shape="poly" title=" " alt="" coords="328,209,404,235,399,236,328,214"/>
+<area shape="poly" title=" " alt="" coords="353,200,432,228,427,229,353,205"/>
+<area shape="rect" href="classaudio__tools_1_1_stream.html" title=" " alt="" coords="105,177,173,205"/>
+<area shape="poly" title=" " alt="" coords="187,197,239,198,235,201,189,202"/>
+<area shape="poly" title=" " alt="" coords="187,180,239,181,235,184,189,185"/>
+<area shape="rect" href="classaudio__tools_1_1_print.html" title=" " alt="" coords="5,177,57,205"/>
+<area shape="poly" title=" " alt="" coords="71,198,106,198,102,201,74,202"/>
+<area shape="poly" title=" " alt="" coords="71,180,106,181,102,184,74,185"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="221,229,354,257"/>
+<area shape="poly" title=" " alt="" coords="369,250,405,251,399,252,370,255"/>
+<area shape="poly" title=" " alt="" coords="369,232,405,234,399,236,370,237"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="224,281,351,309"/>
+<area shape="poly" title=" " alt="" coords="365,277,431,257,426,259,367,282"/>
+<area shape="poly" title=" " alt="" coords="327,273,404,250,400,252,329,278"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for ReformatBaseStream:</div>
+<div class="dyncontent">
+<div class="center"><img src="classaudio__tools_1_1audio__tools_1_1_reformat_base_stream__coll__graph.png" border="0" usemap="#a_reformat_base_stream_coll__map" loading="lazy" alt="Collaboration graph"/></div>
+<map name="a_reformat_base_stream_coll__map" id="a_reformat_base_stream_coll__map">
+<area shape="rect" title="Base class for chained converting streams." alt="" coords="2376,122,2537,150"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_modifying_stream.html" title="Abstract class: Objects can be put into a pipleline." alt="" coords="1486,544,1618,572"/>
+<area shape="poly" title=" " alt="" coords="1634,565,1719,569,1820,567,1927,552,1979,539,2030,521,2104,483,2174,435,2239,381,2297,325,2390,219,2443,151,2448,148,2394,223,2301,328,2243,385,2177,439,2107,488,2032,526,1981,544,1928,558,1820,572,1719,575,1634,570"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_reformat_base_stream.html" title="Base class for chained converting streams." alt="" coords="1758,191,1920,219"/>
+<area shape="poly" title=" " alt="" coords="1562,528,1592,456,1614,414,1640,374,1684,324,1733,280,1814,220,1819,218,1736,284,1688,328,1644,377,1618,416,1596,458,1565,532"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="" coords="1156,547,1261,575"/>
+<area shape="poly" title=" " alt="" coords="1276,565,1488,566,1483,566,1277,570"/>
+<area shape="poly" title=" " alt="" coords="1276,550,1488,551,1483,552,1277,556"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer,size_t size) and readBytes(uint8..." alt="" coords="910,360,1010,388"/>
+<area shape="poly" title=" " alt="" coords="986,396,1084,473,1183,547,1178,546,1081,477,985,401"/>
+<area shape="poly" title=" " alt="" coords="1001,395,1107,473,1197,547,1191,546,1103,477,1000,400"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_queue_stream.html" title=" " alt="" coords="1116,379,1301,407"/>
+<area shape="poly" title=" " alt="" coords="1025,385,1118,394,1113,395,1026,390"/>
+<area shape="poly" title=" " alt="" coords="1025,369,1131,378,1125,379,1026,374"/>
+<area shape="rect" href="classaudio__tools_1_1_stream.html" title=" " alt="" coords="596,186,664,214"/>
+<area shape="poly" title=" " alt="" coords="679,189,845,163,1093,130,1386,102,1538,94,1687,90,2168,90,2228,93,2289,100,2397,121,2391,121,2288,105,2228,98,2168,96,1687,96,1538,99,1386,107,1093,135,845,168,681,194"/>
+<area shape="poly" title=" " alt="" coords="663,219,791,291,923,360,918,360,788,295,663,225"/>
+<area shape="poly" title=" " alt="" coords="679,216,819,288,943,360,938,360,817,293,678,221"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_transformation_reader.html" title=" " alt="" coords="2055,230,2278,292"/>
+<area shape="poly" title=" " alt="" coords="679,204,980,237,1184,252,1392,258,1840,258,2057,261,2052,261,1840,264,1392,264,1184,257,979,242,680,209"/>
+<area shape="poly" title=" " alt="" coords="679,197,1759,202,1757,207,679,203"/>
+<area shape="rect" href="classaudio__tools_1_1_print.html" title=" " alt="" coords="271,112,322,140"/>
+<area shape="poly" title=" " alt="" coords="334,105,391,81,463,56,545,36,629,28,2168,28,2207,30,2247,38,2323,62,2387,92,2436,122,2430,121,2385,97,2321,67,2246,43,2207,36,2168,33,629,33,546,41,465,61,393,86,338,110"/>
+<area shape="poly" title=" " alt="" coords="336,139,468,170,598,197,593,199,467,176,338,144"/>
+<area shape="poly" title=" " alt="" coords="337,126,469,152,598,186,593,188,468,158,338,132"/>
+<area shape="poly" title=" " alt="" coords="336,116,466,95,547,87,629,84,1071,84,1174,87,1279,96,1482,124,1657,158,1785,190,1780,191,1656,164,1481,129,1278,101,1174,92,1071,89,629,89,547,92,467,101,338,121"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_ring_buffer.html" title=" " alt="" coords="548,503,712,531"/>
+<area shape="poly" title=" " alt="" coords="661,491,714,456,778,421,846,397,912,383,907,385,847,402,780,426,717,460,663,496"/>
+<area shape="poly" title=" " alt="" coords="728,509,959,502,1840,502,1891,496,1939,479,1984,453,2026,421,2063,387,2095,352,2142,294,2147,291,2099,355,2067,391,2029,425,1987,457,1942,483,1892,501,1840,508,959,508,728,514"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="213,496,380,524"/>
+<area shape="poly" title=" " alt="" coords="395,518,550,522,545,524,395,523"/>
+<area shape="poly" title=" " alt="" coords="395,501,550,507,545,508,395,507"/>
+<area shape="poly" title=" " alt="" coords="370,487,378,482,386,473,389,463,393,453,403,444,423,437,441,437,481,444,591,448,677,454,763,457,872,451,1020,430,1149,407,1144,408,1021,436,873,457,763,462,677,460,591,453,481,449,441,443,424,442,405,449,397,456,394,465,390,475,382,486,373,492"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="5,559,85,587"/>
+<area shape="poly" title=" " alt="" coords="100,571,228,568,380,558,475,545,564,531,559,532,475,550,380,563,228,573,101,576"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="228,444,365,472"/>
+<area shape="poly" title=" " alt="" coords="82,549,142,516,212,483,248,471,244,474,214,487,145,520,85,553"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="505,668,755,713"/>
+<area shape="poly" title=" " alt="" coords="73,595,135,642,173,665,213,682,287,699,363,707,437,708,502,707,507,707,437,714,362,713,286,705,212,687,171,670,132,647,72,600"/>
+<area shape="poly" title=" " alt="" coords="380,470,550,502,545,504,380,476"/>
+<area shape="poly" title=" " alt="" coords="352,437,403,421,587,373,732,342,879,326,1068,321,1840,321,1896,318,1952,311,2055,293,2060,292,1953,317,1897,324,1840,326,1068,326,879,331,733,347,588,378,405,426,354,442"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="230,620,363,648"/>
+<area shape="poly" title=" " alt="" coords="378,634,664,619,1023,590,1163,576,1168,575,1024,596,664,624,379,639"/>
+<area shape="poly" title=" " alt="" coords="378,619,1023,566,1158,557,1153,557,1024,572,379,625"/>
+<area shape="poly" title=" " alt="" coords="343,652,405,671,507,688,502,688,403,677,343,657"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="896,667,1024,695"/>
+<area shape="poly" title=" " alt="" coords="1038,676,1091,657,1123,638,1154,616,1196,577,1201,574,1157,620,1126,643,1093,662,1039,681"/>
+<area shape="poly" title=" " alt="" coords="1009,660,1049,649,1090,633,1139,604,1179,576,1184,574,1142,608,1093,638,1051,654,1010,665"/>
+<area shape="poly" title=" " alt="" coords="771,684,899,683,893,683,771,689"/>
+<area shape="rect" href="structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="918,542,1002,570"/>
+<area shape="poly" title=" " alt="" coords="1017,554,1158,560,1153,560,1017,560"/>
+<area shape="poly" title=" " alt="" coords="2253,221,2420,151,2425,149,2255,226"/>
+<area shape="poly" title=" " alt="" coords="2037,240,1920,221,1920,216,2042,239"/>
+<area shape="poly" title=" " alt="" coords="1316,400,1461,407,1641,404,1738,397,1837,385,1935,366,2030,340,2080,318,2122,293,2127,291,2082,322,2032,345,1936,371,1838,390,1739,402,1641,410,1460,412,1316,406"/>
+<area shape="poly" title=" " alt="" coords="1916,186,1973,181,2031,188,2078,205,2121,230,2116,229,2076,210,2030,193,1973,187,1917,191"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>

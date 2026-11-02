@@ -1,0 +1,20 @@
+<map id="GeneratorFromArray&lt; T &gt;" name="GeneratorFromArray&lt; T &gt;">
+<area shape="rect" id="Node000001" title="We generate the samples from an array which is provided in the constructor." alt="" coords="222,387,414,415"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_sound_generator.html" title=" " alt="" coords="120,310,322,338"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="251,345,304,387,299,387,249,350"/>
+<area shape="rect" id="Node000003" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="31,209,115,237"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="106,243,204,308,199,311,105,248"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_ring_buffer.html" title=" " alt="" coords="139,209,303,237"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="223,251,223,310,219,308,219,255"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="5,106,173,134"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="111,141,200,208,195,210,111,147"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="125,140,212,208,208,210,125,145"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="343,5,422,33"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="326,39,278,66,254,85,235,107,224,133,220,161,221,210,216,208,214,161,219,132,231,105,251,81,275,62,330,36"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="318,106,455,134"/>
+<area shape="poly" id="edge8_Node000007_Node000006" title=" " alt="" coords="384,46,386,82,388,107,383,105,381,82,382,51"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="404,158,542,185"/>
+<area shape="poly" id="edge10_Node000008_Node000006" title=" " alt="" coords="436,32,453,42,466,55,478,82,482,110,478,159,474,156,477,110,473,83,461,59,450,46,437,38"/>
+<area shape="poly" id="edge7_Node000004_Node000007" title=" " alt="" coords="344,143,317,160,240,211,237,207,315,155,348,140"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="458,198,329,389,325,385,453,199"/>
+</map>

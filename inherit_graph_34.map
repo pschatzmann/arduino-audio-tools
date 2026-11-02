@@ -1,0 +1,11 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$structaudio__tools_1_1_audio_header.html" title="Common Header for all records." alt="" coords="5,84,111,112"/>
+<area shape="rect" id="Node000001" href="$structaudio__tools_1_1_audio_confirm_data_to_receive.html" title="Protocol Record for Request." alt="" coords="159,5,365,33"/>
+<area shape="poly" id="edge620_Node000000_Node000001" title=" " alt="" coords="95,74,158,43,198,32,194,35,160,48,98,78"/>
+<area shape="rect" id="Node000002" href="$structaudio__tools_1_1_audio_data_begin.html" title="Protocal Record To Start." alt="" coords="199,57,325,85"/>
+<area shape="poly" id="edge621_Node000000_Node000002" title=" " alt="" coords="125,86,200,78,196,81,127,92"/>
+<area shape="rect" id="Node000003" href="$structaudio__tools_1_1_audio_data_end.html" title="Protocol Record for End." alt="" coords="205,109,318,137"/>
+<area shape="poly" id="edge622_Node000000_Node000003" title=" " alt="" coords="126,104,207,115,202,117,126,109"/>
+<area shape="rect" id="Node000004" href="$structaudio__tools_1_1_audio_send_data.html" title="Protocol Record for Data." alt="" coords="201,161,322,189"/>
+<area shape="poly" id="edge623_Node000000_Node000004" title=" " alt="" coords="97,117,160,146,203,162,198,162,158,151,96,122"/>
+</map>

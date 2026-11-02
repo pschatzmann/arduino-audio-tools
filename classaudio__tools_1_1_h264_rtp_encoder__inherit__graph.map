@@ -1,0 +1,20 @@
+<map id="H264RtpEncoder" name="H264RtpEncoder">
+<area shape="rect" id="Node000001" title="H.264 RTP Encoder &#45; Packetizes Annex&#45;B H.264 access units per RFC 6184 for RTSP video streaming." alt="" coords="222,308,351,336"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_r_t_s_p_video_encoder.html" title="Common base for RTP video payloaders (JPEGRtpEncoder, H264RtpEncoder, ...): an AudioEncoder that acce..." alt="" coords="129,232,271,260"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="228,268,274,308,269,307,226,273"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_audio_encoder.html" title="Encoding of PCM data." alt="" coords="78,157,188,184"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="156,193,191,232,186,232,155,199"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="" coords="23,81,121,109"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="85,119,118,156,113,157,85,124"/>
+<area shape="poly" id="edge7_Node000003_Node000004" title=" " alt="" coords="101,117,132,156,127,157,100,123"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="5,5,139,33"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="64,46,68,81,62,80,63,51"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="81,46,82,81,76,80,80,51"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_mime_source.html" title="Abstract interface for classes that can provide MIME type information." alt="" coords="145,81,247,109"/>
+<area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="165,122,139,158,135,155,169,118"/>
+<area shape="poly" id="edge8_Node000003_Node000006" title=" " alt="" coords="181,123,154,158,149,154,185,119"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_i_media_source.html" title="Media Source Interface &#45; Contract for Media Data Providers." alt="" coords="212,157,321,184"/>
+<area shape="poly" id="edge9_Node000002_Node000007" title=" " alt="" coords="247,194,214,234,210,230,242,197"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_r_t_s_p_fragment_queue.html" title="Self&#45;delimited fragment queue shared by packetized RTP video encoders (JPEGRtpEncoder,..." alt="" coords="295,232,452,260"/>
+<area shape="poly" id="edge10_Node000001_Node000008" title=" " alt="" coords="349,269,303,310,301,305,344,271"/>
+</map>

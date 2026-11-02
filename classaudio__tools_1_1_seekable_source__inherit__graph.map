@@ -1,0 +1,9 @@
+<map id="SeekableSource" name="SeekableSource">
+<area shape="rect" id="Node000001" title="Minimal seek+read interface a SourceSeekSampleTableStore needs from &quot;the original MP4 source&quot; &#45; kept ..." alt="" coords="93,5,217,33"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_file_seekable_source.html" title="Adapts a single concrete file/stream (Arduino&#39;s File, or anything else exposing position(),..." alt="" coords="5,81,153,126"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="131,47,101,82,97,79,134,42"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_spool_storage.html" title="Minimal seek+read+write interface a SpoolFileSampleTableStore needs from its scratch file &#45; SeekableS..." alt="" coords="177,90,285,117"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="178,42,222,89,216,89,177,47"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_file_spool_storage.html" title="Adapts any concrete file/stream type to SpoolStorage &#45; same role as FileSeekableSource,..." alt="" coords="135,174,327,201"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="233,131,233,175,229,172,229,135"/>
+</map>

@@ -1,0 +1,18 @@
+<map id="VFS_Multi" name="VFS_Multi">
+<area shape="rect" id="Node000001" title="Define multipe VFS with their mount point." alt="" coords="122,526,207,553"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_v_f_s.html" title="Base class which uses c++ file functions. It is also used as base class for an ESP32 Virtual File Sys..." alt="" coords="163,307,208,335"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="179,348,179,360,171,408,167,526,161,524,166,408,174,358,177,353"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="180,408,332,453"/>
+<area shape="poly" id="edge8_Node000007_Node000002" title=" " alt="" coords="182,348,185,367,190,383,213,407,208,408,186,385,180,368,180,353"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_str.html" title="Str which keeps the data on the heap. We grow the allocated memory only if the copy source is not fit..." alt="" coords="166,207,205,234"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="186,248,188,307,183,306,185,252"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_str_view.html" title="A simple wrapper to provide string functions on existing allocated char*. If the underlying char* is ..." alt="" coords="150,106,221,134"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="178,146,182,206,176,206,177,151"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="194,146,194,207,189,205,193,151"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="5,106,126,134"/>
+<area shape="poly" id="edge5_Node000003_Node000005" title=" " alt="" coords="88,142,133,181,168,206,163,208,130,185,89,147"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="122,5,201,33"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="137,47,81,107,76,104,139,42"/>
+<area shape="poly" id="edge9_Node000007_Node000006" title=" " alt="" coords="202,39,224,54,243,72,256,93,261,118,261,323,260,408,255,406,256,322,256,119,251,95,238,75,221,58,203,44"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="230,464,177,527,174,523,225,465"/>
+</map>

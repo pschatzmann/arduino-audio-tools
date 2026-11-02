@@ -1,0 +1,21 @@
+<map id="PWMDriverAVR" name="PWMDriverAVR">
+<area shape="rect" id="Node000001" title="Experimental: Audio output to PWM pins for the AVR. The AVR supports only up to 2 channels." alt="" coords="236,284,356,311"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_p_w_m_driver_base.html" title="Base Class for all PWM drivers." alt="" coords="233,207,360,234"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="298,248,298,285,294,282,294,252"/>
+<area shape="rect" id="Node000003" href="$structaudio__tools_1_1_p_w_m_config_a_v_r.html" title="Configuration data for PWM audio output." alt="" coords="129,106,250,134"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="201,145,213,164,227,181,264,206,258,206,223,185,209,167,200,150"/>
+<area shape="rect" id="Node000004" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="5,5,89,33"/>
+<area shape="poly" id="edge5_Node000002_Node000004" title=" " alt="" coords="35,50,28,91,30,113,39,132,57,153,79,170,129,195,183,209,235,217,230,219,182,214,127,200,76,174,53,157,34,135,25,114,23,90,35,45"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="78,39,173,104,168,107,78,44"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="135,5,244,33"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="191,46,192,106,187,105,189,51"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="274,106,441,134"/>
+<area shape="poly" id="edge6_Node000002_Node000006" title=" " alt="" coords="344,145,306,208,303,204,340,148"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_decimate.html" title="Provides a reduced sampling rate by taking a sample at every factor location (ingoring factor&#45;1 sampl..." alt="" coords="465,106,549,134"/>
+<area shape="poly" id="edge7_Node000002_Node000007" title=" " alt="" coords="472,140,387,185,331,209,329,204,385,180,467,142"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_base_converter.html" title="Abstract Base class for Converters A converter is processing the data in the indicated array." alt="" coords="448,5,566,33"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="500,46,503,107,498,104,497,50"/>
+<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="517,46,516,107,511,104,514,50"/>
+<area shape="rect" id="Node000009" href="$structaudio__tools_1_1audio__tools_1_1_decimate_1_1_decimate_state.html" title=" " alt="" coords="589,5,708,33"/>
+<area shape="poly" id="edge10_Node000007_Node000009" title=" " alt="" coords="620,41,527,108,525,103,615,43"/>
+</map>

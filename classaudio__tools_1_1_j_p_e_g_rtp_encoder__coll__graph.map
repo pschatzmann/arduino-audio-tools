@@ -1,0 +1,35 @@
+<map id="JPEGRtpEncoder" name="JPEGRtpEncoder">
+<area shape="rect" id="Node000001" title="JPEG RTP Encoder &#45; Fragments JPEG frames per RFC 2435 for RTSP video streaming." alt="" coords="481,404,607,432"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_r_t_s_p_video_encoder.html" title="Common base for RTP video payloaders (JPEGRtpEncoder, H264RtpEncoder, ...): an AudioEncoder that acce..." alt="" coords="193,294,335,321"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="290,328,325,355,365,378,424,397,483,410,478,410,422,402,363,382,322,359,288,334"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_audio_encoder.html" title="Encoding of PCM data." alt="" coords="130,183,240,211"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="205,221,257,293,252,293,203,226"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="" coords="23,82,121,110"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="91,118,166,181,161,183,91,123"/>
+<area shape="poly" id="edge7_Node000003_Node000004" title=" " alt="" coords="105,117,179,181,174,183,105,122"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="5,5,139,33"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="63,46,68,82,62,82,63,51"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="81,46,82,82,76,82,80,51"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_mime_source.html" title="Abstract interface for classes that can provide MIME type information." alt="" coords="145,82,247,110"/>
+<area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="186,123,183,183,178,182,184,128"/>
+<area shape="poly" id="edge8_Node000003_Node000006" title=" " alt="" coords="202,123,196,183,191,182,200,128"/>
+<area shape="rect" id="Node000007" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="273,82,356,110"/>
+<area shape="poly" id="edge9_Node000003_Node000007" title=" " alt="" coords="277,120,258,136,201,184,197,181,255,132,281,117"/>
+<area shape="rect" id="Node000012" href="$classaudio__tools_1_1audio__tools_1_1_r_t_s_p_format.html" title="Audio Format Definition &#45; Base class for RTSP audio formats." alt="" coords="397,183,496,211"/>
+<area shape="poly" id="edge15_Node000012_Node000007" title=" " alt="" coords="344,117,432,182,426,183,344,122"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_i_media_source.html" title="Media Source Interface &#45; Contract for Media Data Providers." alt="" coords="264,183,373,211"/>
+<area shape="poly" id="edge10_Node000002_Node000008" title=" " alt="" coords="307,223,273,295,268,292,303,226"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1_r_t_s_p_fragment_queue.html" title="Self&#45;delimited fragment queue shared by packetized RTP video encoders (JPEGRtpEncoder,..." alt="" coords="639,294,796,321"/>
+<area shape="poly" id="edge11_Node000001_Node000009" title=" " alt="" coords="703,333,682,360,656,382,631,396,604,406,602,401,628,391,653,378,678,356,698,335"/>
+<area shape="rect" id="Node000010" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="730,183,867,211"/>
+<area shape="poly" id="edge19_Node000001_Node000010" title=" " alt="" coords="821,221,828,234,830,262,824,293,810,332,789,353,765,370,712,395,657,409,607,417,607,411,656,404,710,390,763,365,786,349,806,330,818,292,824,261,823,235,819,226"/>
+<area shape="poly" id="edge12_Node000009_Node000010" title=" " alt="" coords="772,220,759,236,739,267,725,295,721,291,735,264,755,233,768,222"/>
+<area shape="rect" id="Node000011" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="759,82,838,110"/>
+<area shape="poly" id="edge13_Node000010_Node000011" title=" " alt="" coords="800,124,801,184,796,181,797,128"/>
+<area shape="poly" id="edge14_Node000001_Node000012" title=" " alt="" coords="426,221,409,248,396,275,390,303,391,317,397,330,416,355,442,374,470,390,499,404,494,403,467,395,439,379,413,358,392,332,386,318,384,303,391,273,405,245,422,224"/>
+<area shape="rect" id="Node000014" href="$classaudio__tools_1_1audio__tools_1_1_r_t_s_p_format_m_j_p_e_g.html" title="MJPEG (Motion JPEG) format for RTSP video streaming." alt="" coords="473,294,615,321"/>
+<area shape="poly" id="edge18_Node000014_Node000012" title=" " alt="" coords="469,220,535,294,530,293,467,224"/>
+<area shape="rect" id="Node000013" href="$structaudio__tools_1_1audio__tools_1_1_r_t_s_p_video_info.html" title="Video Information Structure." alt="" coords="389,82,504,110"/>
+<area shape="poly" id="edge16_Node000012_Node000013" title=" " alt="" coords="448,123,449,184,444,181,445,128"/>
+<area shape="poly" id="edge17_Node000001_Node000014" title=" " alt="" coords="546,334,546,405,542,402,542,338"/>
+</map>

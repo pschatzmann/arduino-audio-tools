@@ -1,0 +1,11 @@
+<map id="R2RConfig" name="R2RConfig">
+<area shape="rect" id="Node000001" title="R2R configuration." alt="" coords="155,229,243,257"/>
+<area shape="rect" id="Node000002" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="5,106,89,134"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="76,141,185,227,180,230,74,146"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="113,106,285,134"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="201,148,201,229,197,227,197,151"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="159,5,239,33"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="200,46,202,106,196,105,198,51"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_r2_r_driver_base.html" title="R2R driver base class." alt="" coords="309,106,428,134"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="357,146,336,179,307,207,276,224,244,235,243,230,274,219,304,203,332,176,352,149"/>
+</map>

@@ -1,0 +1,21 @@
+<map id="NullStream" name="NullStream">
+<area shape="rect" id="Node000001" title="The Arduino Stream which provides silence and simulates a null device when used as audio target or au..." alt="" coords="8,407,103,434"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer,size_t size) and readBytes(uint8..." alt="" coords="5,330,106,357"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="57,371,58,407,53,406,54,375"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="21,207,90,234"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="48,247,49,291,52,329,47,329,44,292,47,252"/>
+<area shape="poly" id="edge5_Node000002_Node000003" title=" " alt="" coords="64,247,67,292,64,330,59,328,62,291,63,252"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="30,106,81,134"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="48,146,52,206,46,206,47,151"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="64,146,65,206,59,206,63,151"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_ring_buffer.html" title=" " alt="" coords="113,207,278,234"/>
+<area shape="poly" id="edge6_Node000002_Node000005" title=" " alt="" coords="169,247,73,331,69,327,169,242"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="108,106,275,134"/>
+<area shape="poly" id="edge7_Node000005_Node000006" title=" " alt="" coords="185,146,191,207,186,206,183,151"/>
+<area shape="poly" id="edge8_Node000005_Node000006" title=" " alt="" coords="202,146,204,207,199,205,200,151"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="305,5,384,33"/>
+<area shape="poly" id="edge9_Node000005_Node000007" title=" " alt="" coords="336,45,317,91,290,135,251,177,215,208,211,204,248,173,285,132,312,88,333,50"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="420,106,558,134"/>
+<area shape="poly" id="edge11_Node000008_Node000007" title=" " alt="" coords="376,39,472,105,467,106,376,44"/>
+<area shape="poly" id="edge10_Node000005_Node000008" title=" " alt="" coords="445,142,343,185,258,208,256,204,341,180,450,139"/>
+</map>

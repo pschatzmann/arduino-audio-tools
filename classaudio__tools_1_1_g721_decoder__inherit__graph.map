@@ -1,0 +1,16 @@
+<map id="G721Decoder" name="G721Decoder">
+<area shape="rect" id="Node000001" title="32Kbps G721 Decoder based on https://github.com/pschatzmann/codec&#45;g7xx" alt="" coords="85,308,195,336"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_g7xx_decoder.html" title="g723_24, g721, g723_40 Decoder based on https://github.com/pschatzmann/codec&#45;g7xx" alt="" coords="85,232,195,260"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="142,274,142,309,138,306,138,278"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_audio_decoder.html" title="Decoding of encoded audio into PCM data." alt="" coords="84,157,196,184"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="141,198,143,233,137,231,139,202"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="" coords="23,81,121,109"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="87,118,123,155,118,157,87,124"/>
+<area shape="poly" id="edge7_Node000003_Node000004" title=" " alt="" coords="102,117,138,156,132,157,102,122"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="5,5,139,33"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="64,46,68,81,62,80,63,51"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="81,46,82,81,76,80,80,51"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="146,81,273,109"/>
+<area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="177,122,147,158,143,154,180,118"/>
+<area shape="poly" id="edge8_Node000003_Node000006" title=" " alt="" coords="192,123,161,158,157,154,196,119"/>
+</map>

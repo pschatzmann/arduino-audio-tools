@@ -1,0 +1,9 @@
+<map id="ADSRGain" name="ADSRGain">
+<area shape="rect" id="Node000001" title="ADSR Envelope: Attack, Decay, Sustain and Release. Attack is the time taken for initial run&#45;up oeffec..." alt="" coords="45,183,133,211"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects." alt="" coords="5,82,101,110"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="65,123,87,182,82,183,61,126"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_a_d_s_r.html" title="Generates ADSR values between 0.0 and 1.0." alt="" coords="124,82,182,110"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="139,122,100,184,96,181,134,123"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_abstract_parameter.html" title="Base class for all parameters." alt="" coords="82,5,224,33"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="154,46,156,83,150,81,152,51"/>
+</map>

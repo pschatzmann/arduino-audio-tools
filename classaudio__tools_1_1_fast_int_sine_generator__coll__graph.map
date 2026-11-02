@@ -1,0 +1,17 @@
+<map id="FastIntSineGenerator&lt; T &gt;" name="FastIntSineGenerator&lt; T &gt;">
+<area shape="rect" id="Node000001" title="Sine wave generator that does not use any floating point operations in the readSample() hot path: it ..." alt="" coords="8,384,204,412"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_sound_generator.html" title=" " alt="" coords="5,307,207,335"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="108,349,108,385,104,383,104,352"/>
+<area shape="rect" id="Node000003" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="32,207,116,234"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="84,246,104,307,99,307,82,251"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_ring_buffer.html" title=" " alt="" coords="140,207,304,234"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="193,246,123,309,120,305,197,243"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="50,106,218,134"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="149,143,206,205,201,207,148,149"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="163,142,219,205,214,207,162,147"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="248,5,327,33"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="280,46,229,207,224,205,276,50"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="363,106,500,134"/>
+<area shape="poly" id="edge8_Node000007_Node000006" title=" " alt="" coords="319,39,415,105,409,106,318,44"/>
+<area shape="poly" id="edge7_Node000004_Node000007" title=" " alt="" coords="388,142,251,208,249,204,392,139"/>
+</map>

@@ -1,0 +1,35 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="5,377,136,405"/>
+<area shape="rect" id="Node000001" href="$classaudio__tools_1_1audio__tools_1_1_n_buffer.html" title=" " alt="" coords="222,35,330,62"/>
+<area shape="poly" id="edge680_Node000000_Node000001" title=" " alt="" coords="71,361,79,301,97,224,111,183,130,143,153,106,182,73,200,61,224,53,220,57,203,65,185,77,157,109,134,146,116,185,102,225,84,302,76,362"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_ring_buffer.html" title=" " alt="" coords="213,87,340,114"/>
+<area shape="poly" id="edge683_Node000000_Node000004" title=" " alt="" coords="73,361,84,310,104,247,136,182,157,152,182,125,214,109,211,113,185,129,161,155,140,184,109,249,89,312,79,362"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_single_buffer.html" title=" " alt="" coords="207,139,346,166"/>
+<area shape="poly" id="edge684_Node000000_Node000005" title=" " alt="" coords="77,361,90,320,112,270,142,220,182,177,208,164,205,168,185,181,146,223,116,273,95,322,82,363"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_buffer_blocking.html" title="Buffer implementation which provides the same blocking, thread&#45;safe semantics as BufferRTOS (ESP32/ST..." alt="" coords="199,191,354,218"/>
+<area shape="poly" id="edge685_Node000000_Node000006" title=" " alt="" coords="82,362,120,295,148,259,182,229,208,217,205,221,185,233,152,263,125,298,87,364"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_buffer_r_p2040_t.html" title="Buffer implementation which is based on a RP2040 queue. This class is intended to be used to exchange..." alt="" coords="199,243,354,270"/>
+<area shape="poly" id="edge686_Node000000_Node000007" title=" " alt="" coords="90,364,130,321,155,300,182,281,213,269,209,273,185,285,158,304,134,325,94,367"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_buffer_r_t_o_s.html" title="Buffer implementation which is using a FreeRTOS StreamBuffer. The default allocator uses psram is ava..." alt="" coords="210,295,342,322"/>
+<area shape="poly" id="edge687_Node000000_Node000008" title=" " alt="" coords="109,368,183,333,221,321,218,325,185,338,112,372"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1_buffer_zephyr.html" title="Buffer implementation using Zephyr semaphores + mutex as a bounded ring buffer." alt="" coords="204,347,348,374"/>
+<area shape="poly" id="edge688_Node000000_Node000009" title=" " alt="" coords="150,377,206,369,202,373,153,381"/>
+<area shape="rect" id="Node000010" href="$classaudio__tools_1_1_dynamic_multi_buffer.html" title="Auto&#45;expanding buffer composed of multiple buffer instances." alt="" coords="201,398,352,443"/>
+<area shape="poly" id="edge689_Node000000_Node000010" title=" " alt="" coords="150,400,202,408,198,411,152,405"/>
+<area shape="rect" id="Node000011" href="$classaudio__tools_1_1_n_buffer_file.html" title="A File backed buffer which uses the provided files for buffering with the indicated max size...." alt="" coords="195,467,358,494"/>
+<area shape="poly" id="edge690_Node000000_Node000011" title=" " alt="" coords="105,411,144,433,185,453,217,465,212,467,183,458,141,437,106,416"/>
+<area shape="rect" id="Node000012" href="$classaudio__tools_1_1_redis_buffer.html" title="Buffer implementation that stores and retrieves data from a Redis server using the Arduino Client." alt="" coords="209,519,344,546"/>
+<area shape="poly" id="edge691_Node000000_Node000012" title=" " alt="" coords="91,415,132,461,158,484,185,504,212,517,207,519,182,508,154,488,129,465,91,420"/>
+<area shape="rect" id="Node000013" href="$classaudio__tools_1_1_ring_buffer_file.html" title="An File backed Ring Buffer that we can use to receive streaming audio. We expect an open file as para..." alt="" coords="186,571,367,598"/>
+<area shape="poly" id="edge692_Node000000_Node000013" title=" " alt="" coords="84,417,123,487,151,524,185,556,209,570,204,571,182,560,147,528,119,490,83,422"/>
+<area shape="rect" id="Node000014" href="$classaudio__tools_1_1_synchronized_buffer.html" title="Wrapper class that can turn any Buffer into a thread save implementation." alt="" coords="184,623,369,650"/>
+<area shape="poly" id="edge693_Node000000_Node000014" title=" " alt="" coords="79,417,94,461,115,512,145,564,164,587,185,608,206,622,201,622,182,612,160,591,141,567,111,515,89,463,79,423"/>
+<area shape="rect" id="Node000015" href="$classaudio__tools_1_1audio__tools_1_1_n_buffer_file.html" title="A File backed buffer which uses the provided files for buffering with the indicated max size...." alt="" coords="195,675,358,702"/>
+<area shape="poly" id="edge694_Node000000_Node000015" title=" " alt="" coords="76,418,88,472,108,536,139,603,160,633,185,660,205,674,200,674,182,664,156,637,135,606,103,538,83,473,75,423"/>
+<area shape="rect" id="Node000016" href="$classaudio__tools_1_1audio__tools_1_1_ring_buffer_file.html" title="An File backed Ring Buffer that we can use to receive streaming audio. We expect an open file as para..." alt="" coords="186,727,367,754"/>
+<area shape="poly" id="edge695_Node000000_Node000016" title=" " alt="" coords="74,418,83,481,101,560,115,601,134,641,157,679,185,712,204,726,199,726,182,716,153,682,129,644,110,603,96,561,78,482,73,423"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_synchronized_n_buffer_r_t_o_s_t.html" title="NBuffer which uses FreeRTOS queues to manage the available and filled buffers, making it safe for cro..." alt="" coords="417,5,654,33"/>
+<area shape="poly" id="edge681_Node000001_Node000002" title=" " alt="" coords="345,38,419,31,415,34,347,43"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_synchronized_n_buffer_zephyr_t.html" title="NBuffer using Zephyr queues for available and filled buffers." alt="" coords="434,57,637,102"/>
+<area shape="poly" id="edge682_Node000001_Node000003" title=" " alt="" coords="345,54,436,66,431,69,347,59"/>
+</map>

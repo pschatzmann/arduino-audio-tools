@@ -1,0 +1,21 @@
+<map id="CodecChain" name="CodecChain">
+<area shape="rect" id="Node000001" title="CodecChain &#45; allows to chain multiple decoders and encoders together." alt="" coords="137,232,235,260"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_audio_decoder.html" title="Decoding of encoded audio into PCM data." alt="" coords="198,157,310,184"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="234,195,199,234,196,230,229,197"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="" coords="131,81,230,109"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="197,118,236,156,231,156,196,123"/>
+<area shape="poly" id="edge6_Node000002_Node000003" title=" " alt="" coords="213,117,251,156,245,156,211,122"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_audio_encoder.html" title="Encoding of PCM data." alt="" coords="63,157,173,184"/>
+<area shape="poly" id="edge9_Node000006_Node000003" title=" " alt="" coords="154,118,124,158,120,154,150,122"/>
+<area shape="poly" id="edge11_Node000006_Node000003" title=" " alt="" coords="169,120,138,158,134,154,165,123"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="114,5,247,33"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="173,46,176,81,171,80,171,51"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="190,46,190,81,185,80,188,51"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="254,81,382,109"/>
+<area shape="poly" id="edge5_Node000002_Node000005" title=" " alt="" coords="291,118,260,158,256,154,286,121"/>
+<area shape="poly" id="edge7_Node000002_Node000005" title=" " alt="" coords="307,120,274,158,271,154,302,123"/>
+<area shape="poly" id="edge8_Node000001_Node000006" title=" " alt="" coords="141,194,176,232,171,232,139,198"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_mime_source.html" title="Abstract interface for classes that can provide MIME type information." alt="" coords="5,81,108,109"/>
+<area shape="poly" id="edge10_Node000006_Node000007" title=" " alt="" coords="70,119,102,156,97,157,69,124"/>
+<area shape="poly" id="edge12_Node000006_Node000007" title=" " alt="" coords="86,117,117,156,111,157,84,123"/>
+</map>

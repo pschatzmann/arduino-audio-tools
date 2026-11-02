@@ -93,40 +93,94 @@ $(function() {
 <div class="dynheader">
 Inheritance diagram for USBAudioStreamBase:</div>
 <div class="dyncontent">
- <div class="center">
-  <img src="classaudio__tools_1_1_u_s_b_audio_stream_base.png" usemap="#USBAudioStreamBase_map" alt=""/>
-  <map id="USBAudioStreamBase_map" name="USBAudioStreamBase_map">
-<area href="classaudio__tools_1_1audio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="AudioStream" shape="rect" coords="908,224,1125,248"/>
-<area href="classaudio__tools_1_1audio__tools_1_1_volume_support.html" title="Supports the setting and getting of the volume." alt="VolumeSupport" shape="rect" coords="1135,224,1352,248"/>
-<area href="classaudio__tools_1_1audio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer,size_t size) and readBytes(uint8..." alt="BaseStream" shape="rect" coords="227,168,444,192"/>
-<area href="classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="AudioInfoSupport" shape="rect" coords="454,168,671,192"/>
-<area href="classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="AudioInfoSource" shape="rect" coords="681,168,898,192"/>
-<area href="classaudio__tools_1_1audio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer,size_t size) and readBytes(uint8..." alt="BaseStream" shape="rect" coords="1135,168,1352,192"/>
-<area href="classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="AudioInfoSupport" shape="rect" coords="1362,168,1579,192"/>
-<area href="classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="AudioInfoSource" shape="rect" coords="1589,168,1806,192"/>
-<area href="classaudio__tools_1_1_stream.html" alt="Stream" shape="rect" coords="0,112,217,136"/>
-<area href="classaudio__tools_1_1_stream.html" alt="Stream" shape="rect" coords="454,112,671,136"/>
-<area href="classaudio__tools_1_1_stream.html" alt="Stream" shape="rect" coords="908,112,1125,136"/>
-<area href="classaudio__tools_1_1_stream.html" alt="Stream" shape="rect" coords="1362,112,1579,136"/>
-<area href="classaudio__tools_1_1_print.html" alt="Print" shape="rect" coords="1589,56,1806,80"/>
-<area href="classaudio__tools_1_1_print.html" alt="Print" shape="rect" coords="1589,0,1806,24"/>
-<area href="classaudio__tools_1_1_print.html" alt="Print" shape="rect" coords="1135,56,1352,80"/>
-<area href="classaudio__tools_1_1_print.html" alt="Print" shape="rect" coords="1135,0,1352,24"/>
-<area href="classaudio__tools_1_1_print.html" alt="Print" shape="rect" coords="681,56,898,80"/>
-<area href="classaudio__tools_1_1_print.html" alt="Print" shape="rect" coords="681,0,898,24"/>
-<area href="classaudio__tools_1_1_print.html" alt="Print" shape="rect" coords="227,56,444,80"/>
-<area href="classaudio__tools_1_1_print.html" alt="Print" shape="rect" coords="227,0,444,24"/>
-<area href="classaudio__tools_1_1_u_s_b_audio_device_base.html" title="USB Audio Device class for audio streaming over USB." alt="USBAudioDeviceBase" shape="rect" coords="737,336,954,360"/>
-<area href="classaudio__tools_1_1_u_s_b_audio_host_base.html" title="USB Audio Class (UAC1 and UAC2) host: reads PCM audio from an attached USB microphone and/or writes P..." alt="USBAudioHostBase" shape="rect" coords="1305,336,1522,360"/>
-<area href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html" title="USBAudioDeviceBase subclass for ESP32-S2/S3 using the arduino-esp32 stack." alt="USBAudioDeviceESP32" shape="rect" coords="510,392,727,416"/>
-<area href="classaudio__tools_1_1_u_s_b_audio_device_renesas.html" title="USBAudioDeviceBase subclass for the Arduino UNO R4 / Nano R4 (Renesas RA4M1, arduino:renesas_uno core..." alt="USBAudioDeviceRenesas" shape="rect" coords="737,392,954,416"/>
-<area href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html" title="USBAudioDeviceBase subclass for RP2040 / Adafruit TinyUSB." alt="USBAudioDeviceTinyUSB" shape="rect" coords="964,392,1181,416"/>
-<area href="classaudio__tools_1_1_u_s_b_audio_host_e_s_p32.html" title="USB Audio host for ESP32-S2/S3/P4 using the ESP-IDF usb_host library: reads audio from an attached US..." alt="USBAudioHostESP32" shape="rect" coords="1191,392,1408,416"/>
-<area href="classaudio__tools_1_1_u_s_b_audio_host_tiny_u_s_b.html" title="USB Audio host for the Adafruit TinyUSB host stack: reads audio from an attached USB microphone and/o..." alt="USBAudioHostTinyUSB" shape="rect" coords="1418,392,1635,416"/>
-<area href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b_free_r_t_o_s.html" title="Variant of USBAudioDeviceTinyUSB for RP2040 + FreeRTOS." alt="USBAudioDeviceTinyUSBFreeRTOS" shape="rect" coords="964,448,1181,472"/>
-<area href="classaudio__tools_1_1_u_s_b_audio_host_tiny_u_s_b_free_r_t_o_s.html" title="Variant of USBAudioHostTinyUSB for FreeRTOS (e.g. RP2040 + FreeRTOS, or ESP32 with the Adafruit TinyU..." alt="USBAudioHostTinyUSBFreeRTOS" shape="rect" coords="1418,448,1635,472"/>
-  </map>
-</div></div>
+<div class="center"><img src="classaudio__tools_1_1_u_s_b_audio_stream_base__inherit__graph.png" border="0" usemap="#a_u_s_b_audio_stream_base_inherit__map" loading="lazy" alt="Inheritance graph"/></div>
+<map name="a_u_s_b_audio_stream_base_inherit__map" id="a_u_s_b_audio_stream_base_inherit__map">
+<area shape="rect" title="Role&#45;independent front end shared by USB Audio devices (USBAudioDeviceBase, aliased as USBAudioStream..." alt="" coords="571,136,735,164"/>
+<area shape="rect" href="classaudio__tools_1_1_u_s_b_audio_device_base.html" title="USB Audio Device class for audio streaming over USB." alt="" coords="783,84,945,112"/>
+<area shape="poly" title=" " alt="" coords="726,129,802,113,807,112,727,134"/>
+<area shape="rect" href="classaudio__tools_1_1_u_s_b_audio_host_base.html" title="USB Audio Class (UAC1 and UAC2) host: reads PCM audio from an attached USB microphone and/or writes P..." alt="" coords="790,161,938,189"/>
+<area shape="poly" title=" " alt="" coords="750,159,793,166,787,166,750,164"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="" coords="410,109,515,137"/>
+<area shape="poly" title=" " alt="" coords="531,130,573,138,568,138,531,135"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer,size_t size) and readBytes(uint8..." alt="" coords="238,57,338,85"/>
+<area shape="poly" title=" " alt="" coords="329,88,412,115,407,116,329,94"/>
+<area shape="poly" title=" " alt="" coords="353,79,438,108,433,109,353,84"/>
+<area shape="rect" href="classaudio__tools_1_1_stream.html" title=" " alt="" coords="105,57,173,85"/>
+<area shape="poly" title=" " alt="" coords="188,77,240,79,235,81,189,82"/>
+<area shape="poly" title=" " alt="" coords="188,60,240,61,235,64,189,65"/>
+<area shape="rect" href="classaudio__tools_1_1_print.html" title=" " alt="" coords="5,57,57,85"/>
+<area shape="poly" title=" " alt="" coords="71,78,106,78,102,81,74,82"/>
+<area shape="poly" title=" " alt="" coords="71,60,106,61,102,64,74,65"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="221,109,354,137"/>
+<area shape="poly" title=" " alt="" coords="369,130,412,131,407,132,370,135"/>
+<area shape="poly" title=" " alt="" coords="369,112,412,114,407,115,370,117"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="224,161,351,189"/>
+<area shape="poly" title=" " alt="" coords="365,158,433,138,438,137,367,163"/>
+<area shape="poly" title=" " alt="" coords="328,153,407,131,412,130,330,158"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_volume_support.html" title="Supports the setting and getting of the volume." alt="" coords="402,161,523,189"/>
+<area shape="poly" title=" " alt="" coords="538,162,573,160,568,161,539,168"/>
+<area shape="rect" href="classaudio__tools_1_1_u_s_b_audio_device_e_s_p32.html" title="USBAudioDeviceBase subclass for ESP32&#45;S2/S3 using the arduino&#45;esp32 stack." alt="" coords="1001,5,1171,33"/>
+<area shape="poly" title=" " alt="" coords="912,75,992,43,1029,34,1034,33,994,48,913,80"/>
+<area shape="rect" href="classaudio__tools_1_1_u_s_b_audio_device_renesas.html" title="USBAudioDeviceBase subclass for the Arduino UNO R4 / Nano R4 (Renesas RA4M1, arduino:renesas_uno core..." alt="" coords="993,57,1179,85"/>
+<area shape="poly" title=" " alt="" coords="960,84,995,82,990,83,961,89"/>
+<area shape="rect" href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b.html" title="USBAudioDeviceBase subclass for RP2040 / Adafruit TinyUSB." alt="" coords="993,109,1179,137"/>
+<area shape="poly" title=" " alt="" coords="961,106,995,113,990,113,961,112"/>
+<area shape="rect" href="classaudio__tools_1_1_u_s_b_audio_device_tiny_u_s_b_free_r_t_o_s.html" title="Variant of USBAudioDeviceTinyUSB for RP2040 + FreeRTOS." alt="" coords="1227,109,1474,137"/>
+<area shape="poly" title=" " alt="" coords="1194,121,1229,123,1223,123,1194,126"/>
+<area shape="rect" href="classaudio__tools_1_1_u_s_b_audio_host_e_s_p32.html" title="USB Audio host for ESP32&#45;S2/S3/P4 using the ESP&#45;IDF usb_host library: reads audio from an attached US..." alt="" coords="1008,161,1164,189"/>
+<area shape="poly" title=" " alt="" coords="953,173,1011,175,1005,175,953,178"/>
+<area shape="rect" href="classaudio__tools_1_1_u_s_b_audio_host_tiny_u_s_b.html" title="USB Audio host for the Adafruit TinyUSB host stack: reads audio from an attached USB microphone and/o..." alt="" coords="1001,213,1171,241"/>
+<area shape="poly" title=" " alt="" coords="941,190,1026,213,1021,212,941,196"/>
+<area shape="rect" href="classaudio__tools_1_1_u_s_b_audio_host_tiny_u_s_b_free_r_t_o_s.html" title="Variant of USBAudioHostTinyUSB for FreeRTOS (e.g. RP2040 + FreeRTOS, or ESP32 with the Adafruit TinyU..." alt="" coords="1234,213,1466,241"/>
+<area shape="poly" title=" " alt="" coords="1187,225,1237,227,1231,227,1187,230"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for USBAudioStreamBase:</div>
+<div class="dyncontent">
+<div class="center"><img src="classaudio__tools_1_1_u_s_b_audio_stream_base__coll__graph.png" border="0" usemap="#a_u_s_b_audio_stream_base_coll__map" loading="lazy" alt="Collaboration graph"/></div>
+<map name="a_u_s_b_audio_stream_base_coll__map" id="a_u_s_b_audio_stream_base_coll__map">
+<area shape="rect" title="Role&#45;independent front end shared by USB Audio devices (USBAudioDeviceBase, aliased as USBAudioStream..." alt="" coords="1333,392,1497,420"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="" coords="1115,316,1220,344"/>
+<area shape="poly" title=" " alt="" coords="1231,346,1370,392,1365,391,1230,351"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer,size_t size) and readBytes(uint8..." alt="" coords="910,112,1010,140"/>
+<area shape="poly" title=" " alt="" coords="982,148,1065,235,1149,316,1144,315,1062,238,980,153"/>
+<area shape="poly" title=" " alt="" coords="993,148,1083,234,1159,316,1154,315,1079,238,992,153"/>
+<area shape="rect" href="classaudio__tools_1_1_stream.html" title=" " alt="" coords="596,13,664,41"/>
+<area shape="poly" title=" " alt="" coords="680,37,771,53,823,66,873,82,927,111,921,111,871,87,822,71,770,59,680,43"/>
+<area shape="poly" title=" " alt="" coords="679,19,771,30,823,42,873,58,919,82,953,112,948,111,916,87,871,63,822,47,770,35,680,25"/>
+<area shape="rect" href="classaudio__tools_1_1_print.html" title=" " alt="" coords="271,5,322,33"/>
+<area shape="poly" title=" " alt="" coords="337,24,468,30,598,31,593,33,468,35,338,29"/>
+<area shape="poly" title=" " alt="" coords="337,11,469,12,598,20,593,22,468,17,339,17"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_ring_buffer.html" title=" " alt="" coords="548,112,712,140"/>
+<area shape="poly" title=" " alt="" coords="728,123,912,125,907,127,728,128"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="213,57,380,85"/>
+<area shape="poly" title=" " alt="" coords="360,86,550,119,545,122,361,91"/>
+<area shape="poly" title=" " alt="" coords="395,76,583,110,579,113,396,82"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="5,181,85,209"/>
+<area shape="poly" title=" " alt="" coords="81,172,108,162,226,138,346,125,456,120,550,121,545,123,456,125,346,130,227,143,109,167,85,176"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="228,181,365,209"/>
+<area shape="poly" title=" " alt="" coords="99,193,229,193,226,197,101,198"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="505,265,755,310"/>
+<area shape="poly" title=" " alt="" coords="98,211,154,228,213,243,364,266,507,280,502,282,363,271,212,248,153,233,100,217"/>
+<area shape="poly" title=" " alt="" coords="380,189,480,175,541,157,598,139,593,141,543,163,482,180,381,194"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="230,345,363,373"/>
+<area shape="poly" title=" " alt="" coords="378,359,758,350,1117,336,1112,337,758,355,379,365"/>
+<area shape="poly" title=" " alt="" coords="378,348,758,332,1117,327,1112,327,758,337,379,354"/>
+<area shape="poly" title=" " alt="" coords="367,338,403,330,512,309,507,311,405,335,369,344"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="896,283,1024,310"/>
+<area shape="poly" title=" " alt="" coords="1019,311,1117,329,1112,329,1019,317"/>
+<area shape="poly" title=" " alt="" coords="1039,298,1126,315,1121,315,1039,303"/>
+<area shape="poly" title=" " alt="" coords="771,288,899,294,893,295,771,294"/>
+<area shape="rect" href="structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="918,427,1002,454"/>
+<area shape="poly" title=" " alt="" coords="1016,435,1049,427,1079,413,1087,405,1091,398,1103,379,1144,345,1149,343,1107,382,1096,400,1091,409,1082,417,1051,432,1017,440"/>
+<area shape="rect" href="structaudio__tools_1_1_u_s_b_audio_config.html" title="Configuration for USB Audio (inherits sample_rate / channels / bits_per_sample from AudioInfo)." alt="" coords="1105,392,1231,420"/>
+<area shape="poly" title=" " alt="" coords="1017,443,1049,443,1080,439,1131,421,1136,420,1081,444,1049,448,1017,449"/>
+<area shape="rect" href="classaudio__tools_1_1audio__tools_1_1_volume_support.html" title="Supports the setting and getting of the volume." alt="" coords="1108,444,1228,472"/>
+<area shape="poly" title=" " alt="" coords="1243,439,1343,421,1348,420,1244,445"/>
+<area shape="poly" title=" " alt="" coords="1247,403,1335,406,1330,406,1247,408"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>

@@ -1,0 +1,7 @@
+<map id="CameraFrameSource" name="CameraFrameSource">
+<area shape="rect" id="Node000001" title="VideoFrameSource that pulls frames from the ESP32 camera (esp_camera.h, the Arduino&#45;ESP32 &quot;esp32&#45;came..." alt="" coords="66,106,224,134"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_video_frame_source.html" title="Pull&#45;based provider of one already&#45;encoded video/image frame at a time &#45; e.g. wraps a camera capture ..." alt="" coords="5,5,149,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="96,44,139,105,133,106,93,48"/>
+<area shape="rect" id="Node000003" href="$structaudio__tools_1_1_video_info.html" title="Basic video information (width/height/codec/frame size), analogous to AudioInfo &#45; common to both Demu..." alt="" coords="173,5,256,33"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="199,45,156,107,152,103,194,47"/>
+</map>

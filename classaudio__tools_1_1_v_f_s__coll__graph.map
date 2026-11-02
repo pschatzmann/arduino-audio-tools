@@ -1,0 +1,12 @@
+<map id="VFS" name="VFS">
+<area shape="rect" id="Node000001" title="Base class which uses c++ file functions. It is also used as base class for an ESP32 Virtual File Sys..." alt="" coords="18,307,64,335"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_str.html" title="Str which keeps the data on the heap. We grow the allocated memory only if the copy source is not fit..." alt="" coords="21,207,61,234"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="43,249,44,307,38,306,39,251"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_str_view.html" title="A simple wrapper to provide string functions on existing allocated char*. If the underlying char* is ..." alt="" coords="5,106,77,134"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="33,146,37,206,32,206,32,151"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="50,146,50,206,45,206,48,151"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="101,106,221,134"/>
+<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="133,146,59,208,55,204,135,141"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="121,5,201,33"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="162,46,164,106,158,105,160,51"/>
+</map>

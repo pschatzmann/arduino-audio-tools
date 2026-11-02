@@ -1,0 +1,26 @@
+<map id="USBAudioDeviceESP32" name="USBAudioDeviceESP32">
+<area shape="rect" id="Node000001" title="USBAudioDeviceBase subclass for ESP32&#45;S2/S3 using the arduino&#45;esp32 stack." alt="" coords="180,459,350,487"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_u_s_b_audio_device_base.html" title="USB Audio Device class for audio streaming over USB." alt="" coords="184,384,346,411"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="267,425,267,460,263,457,263,429"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_u_s_b_audio_stream_base.html" title="Role&#45;independent front end shared by USB Audio devices (USBAudioDeviceBase, aliased as USBAudioStream..." alt="" coords="183,308,347,336"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="266,349,267,385,262,382,263,354"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="" coords="144,232,250,260"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="220,269,255,307,250,308,219,274"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer,size_t size) and readBytes(uint8..." alt="" coords="5,157,106,184"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="87,190,167,231,162,233,87,195"/>
+<area shape="poly" id="edge11_Node000004_Node000005" title=" " alt="" coords="101,189,181,231,177,233,102,194"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="21,81,90,109"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="47,121,51,156,46,156,47,127"/>
+<area shape="poly" id="edge8_Node000005_Node000006" title=" " alt="" coords="65,121,65,157,60,156,64,127"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="30,5,81,33"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="47,46,51,81,46,81,47,51"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="65,46,65,81,60,80,64,51"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="130,157,264,184"/>
+<area shape="poly" id="edge9_Node000004_Node000008" title=" " alt="" coords="189,197,192,233,187,231,187,202"/>
+<area shape="poly" id="edge12_Node000004_Node000008" title=" " alt="" coords="207,197,206,233,201,231,205,202"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="288,157,415,184"/>
+<area shape="poly" id="edge10_Node000004_Node000009" title=" " alt="" coords="301,193,219,234,216,230,305,189"/>
+<area shape="poly" id="edge13_Node000004_Node000009" title=" " alt="" coords="315,194,233,234,230,230,319,190"/>
+<area shape="rect" id="Node000010" href="$classaudio__tools_1_1audio__tools_1_1_volume_support.html" title="Supports the setting and getting of the volume." alt="" coords="274,232,394,260"/>
+<area shape="poly" id="edge14_Node000003_Node000010" title=" " alt="" coords="313,270,279,310,275,306,309,273"/>
+</map>

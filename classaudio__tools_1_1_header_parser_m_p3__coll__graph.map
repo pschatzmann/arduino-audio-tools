@@ -1,0 +1,17 @@
+<map id="HeaderParserMP3" name="HeaderParserMP3">
+<area shape="rect" id="Node000001" title="MP3 header parser that processes MP3 data incrementally and extracts complete MP3 frames...." alt="" coords="96,307,232,335"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,207,115,234"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="77,245,107,281,141,306,136,307,104,285,75,250"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="138,207,190,234"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="166,248,166,308,162,306,162,252"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_single_buffer.html" title=" " alt="" coords="214,207,389,234"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="281,244,236,286,195,309,193,304,233,281,276,246"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="130,106,297,134"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="228,143,286,206,281,206,227,148"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="243,142,299,206,293,206,241,147"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="327,5,406,33"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="360,47,308,208,303,205,355,50"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="442,106,579,134"/>
+<area shape="poly" id="edge8_Node000007_Node000006" title=" " alt="" coords="398,39,494,105,489,106,398,44"/>
+<area shape="poly" id="edge7_Node000004_Node000007" title=" " alt="" coords="472,140,330,209,328,204,467,142"/>
+</map>

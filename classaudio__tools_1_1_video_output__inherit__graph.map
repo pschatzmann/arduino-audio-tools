@@ -1,0 +1,39 @@
+<map id="VideoOutput" name="VideoOutput">
+<area shape="rect" id="Node000001" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory...." alt="" coords="5,265,108,293"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_muxer.html" title="Common interface for muxers (MuxerAVI, MuxerMP4) that combine an already&#45;encoded video track (and opt..." alt="" coords="195,83,256,110"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="66,250,100,186,124,151,154,121,173,109,196,102,193,105,176,114,157,125,128,155,104,189,71,252"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_output_f_p_s_meter.html" title="Wraps a VideoOutput (typically a codec decoder, e.g. H264Decoder/ MJPEGDecoder/MPGDecoder or a MultiV..." alt="" coords="162,135,290,162"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="75,252,109,212,154,173,180,161,177,165,157,177,113,215,79,255"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_output_open_c_v.html" title="Display a video frame with OpenCV, to be used on the desktop &#45; VideoFormat::MJPEG (the default) expec..." alt="" coords="167,187,284,214"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="94,255,155,225,187,213,183,217,157,230,98,259"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1_output_t_f_t__e_s_p_i.html" title="Bridges VideoDecoder&#39;s write() calls to the TFT &#45; VideoDecoder always hands over one complete frame p..." alt="" coords="164,239,288,266"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="122,266,166,260,162,264,124,271"/>
+<area shape="rect" id="Node000010" href="$classaudio__tools_1_1_output_tiny_g_p_u.html" title="Bridges VideoDecoder&#39;s write() calls to a TinyGPU DisplayDriver (e.g. ILI9341Driver,..." alt="" coords="165,291,286,318"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="122,287,167,294,163,297,124,292"/>
+<area shape="rect" id="Node000011" href="$classaudio__tools_1_1_paced_video_output.html" title="Buffers a small, configurable amount of video (see setQueueBytes()) and renders it frame by frame fro..." alt="" coords="156,343,296,370"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="97,298,157,327,188,341,183,343,155,332,97,303"/>
+<area shape="rect" id="Node000012" href="$classaudio__tools_1_1_video_decoder.html" title="Common interface for video decoders (e.g. H264Decoder, H264DecoderESP32S3 &#45; CodecH264...." alt="" coords="170,395,282,422"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="77,303,113,342,157,380,181,393,176,395,154,384,110,346,77,308"/>
+<area shape="rect" id="Node000019" href="$classaudio__tools_1_1_video_frame_meter.html" title="Transparent write() wrapper that measures throughput/turnaround while forwarding every call unchanged..." alt="" coords="157,447,294,474"/>
+<area shape="poly" id="edge18_Node000001_Node000019" title=" " alt="" coords="70,305,104,369,128,403,157,432,178,446,173,446,154,436,124,406,100,372,68,310"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_muxer_a_v_i.html" title="Configuration for the (single) video track written by MuxerAVI." alt="" coords="386,5,468,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="269,74,343,43,387,30,383,33,345,48,272,79"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_muxer_m_p4.html" title="Video track configuration for MuxerMP4 &#45; update before calling begin()." alt="" coords="382,57,471,85"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="271,88,384,75,379,78,273,93"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_muxer_m_p_g.html" title="MPEG&#45;1 System (Program) Stream Encoder, as defined by ISO/IEC 11172&#45;1: muxes an already&#45;encoded MPEG&#45;..." alt="" coords="381,109,472,137"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="271,100,383,116,378,119,272,105"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_muxer_m_t_s.html" title="ISO/IEC 13818&#45;1 MPEG Transport Stream Encoder: packetizes an already&#45;encoded video elementary stream ..." alt="" coords="382,161,471,189"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="270,110,297,121,345,146,384,162,379,163,343,151,295,126,271,115"/>
+<area shape="rect" id="Node000013" href="$classaudio__tools_1_1_h264_decoder.html" title="H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput..." alt="" coords="372,275,481,302"/>
+<area shape="poly" id="edge12_Node000012_Node000013" title=" " alt="" coords="287,385,294,380,309,363,317,346,326,329,342,312,374,298,369,301,346,316,330,332,322,349,314,366,298,384,290,389"/>
+<area shape="rect" id="Node000014" href="$classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html" title="H.264 video decoder for ESP32&#45;S3: wraps esp_h264::H264Decoder (https://github.com/pschatzmann/ESP32S3..." alt="" coords="344,326,509,371"/>
+<area shape="poly" id="edge13_Node000012_Node000014" title=" " alt="" coords="288,387,352,370,347,372,290,392"/>
+<area shape="rect" id="Node000015" href="$classaudio__tools_1_1_m_j_p_e_g_decoder.html" title="Motion&#45;JPEG video decoder: wraps TinyJPEGDecoder (https://github.com/pschatzmann/TinyJPEG,..." alt="" coords="368,395,485,422"/>
+<area shape="poly" id="edge14_Node000012_Node000015" title=" " alt="" coords="297,406,370,408,365,409,297,411"/>
+<area shape="rect" id="Node000016" href="$classaudio__tools_1_1_m_p_g_decoder.html" title="MPEG&#45;1 (part 2) video decoder wrapper around TinyMPGDecoder." alt="" coords="374,447,479,474"/>
+<area shape="poly" id="edge15_Node000012_Node000016" title=" " alt="" coords="297,424,376,447,371,447,297,430"/>
+<area shape="rect" id="Node000017" href="$classaudio__tools_1_1_multi_video_decoder.html" title="Manages multiple VideoDecoders with automatic format detection &#45; the video&#45;side counterpart of MultiD..." alt="" coords="354,499,499,526"/>
+<area shape="poly" id="edge16_Node000012_Node000017" title=" " alt="" coords="287,427,298,433,313,446,322,459,331,472,345,484,372,498,366,498,343,488,327,475,318,462,309,450,294,437,286,432"/>
+<area shape="rect" id="Node000018" href="$classaudio__tools_1_1_multi_video_decoder_full.html" title="MultiVideoDecoder pre&#45;registered with every video codec this library ships a portable (no hardware&#45;sp..." alt="" coords="557,499,726,526"/>
+<area shape="poly" id="edge17_Node000017_Node000018" title=" " alt="" coords="515,510,559,512,554,513,515,515"/>
+</map>

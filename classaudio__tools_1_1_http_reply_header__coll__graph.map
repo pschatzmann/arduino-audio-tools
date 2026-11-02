@@ -1,0 +1,23 @@
+<map id="HttpReplyHeader" name="HttpReplyHeader">
+<area shape="rect" id="Node000001" title="Reading and Writing of Http Replys." alt="" coords="166,488,300,516"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_http_header.html" title="In a http request and reply we need to process header information. With this API we can define and qu..." alt="" coords="185,411,281,439"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="235,452,235,489,231,486,231,456"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_str.html" title="Str which keeps the data on the heap. We grow the allocated memory only if the copy source is not fit..." alt="" coords="27,266,66,293"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="43,306,47,349,54,368,65,385,83,396,114,405,187,418,182,421,112,410,81,401,61,389,49,371,42,350,42,312"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_str_view.html" title="A simple wrapper to provide string functions on existing allocated char*. If the underlying char* is ..." alt="" coords="5,156,77,184"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="35,197,42,265,37,265,34,202"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="51,197,55,265,49,265,50,202"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="101,156,221,184"/>
+<area shape="poly" id="edge12_Node000002_Node000005" title=" " alt="" coords="166,197,187,293,209,359,230,411,225,410,204,361,182,294,164,202"/>
+<area shape="poly" id="edge5_Node000003_Node000005" title=" " alt="" coords="127,195,101,219,58,267,54,264,97,215,130,191"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="177,15,257,43"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="181,55,165,78,159,98,157,119,161,157,155,156,152,119,153,97,160,75,183,50"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_list.html" title=" " alt="" coords="245,148,394,193"/>
+<area shape="poly" id="edge10_Node000007_Node000006" title=" " alt="" coords="231,54,245,75,256,100,270,122,294,147,288,148,266,126,251,102,240,78,231,59"/>
+<area shape="poly" id="edge7_Node000002_Node000007" title=" " alt="" coords="310,206,240,412,235,409,305,208"/>
+<area shape="rect" id="Node000008" href="$structaudio__tools_1_1audio__tools_1_1_list_1_1_node.html" title=" " alt="" coords="355,15,410,43"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="378,55,369,91,355,125,340,149,336,146,351,123,364,89,375,60"/>
+<area shape="poly" id="edge9_Node000008_Node000008" title=" " alt="" coords="425,15,434,20,437,29,434,37,428,42,412,45,409,40,426,37,430,34,431,29,430,24,426,20"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1_http_line_reader.html" title="We read a single line. A terminating 0 is added to the string to make it compliant for c string funct..." alt="" coords="364,266,486,293"/>
+<area shape="poly" id="edge11_Node000002_Node000009" title=" " alt="" coords="408,304,370,348,321,389,274,413,272,408,318,385,366,345,403,307"/>
+</map>

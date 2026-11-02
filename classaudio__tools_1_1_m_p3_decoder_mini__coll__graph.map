@@ -1,0 +1,30 @@
+<map id="MP3DecoderMini" name="MP3DecoderMini">
+<area shape="rect" id="Node000001" title="MP3 Decoder using https://github.com/pschatzmann/codec&#45;minimp3. This decoder does not provide any goo..." alt="" coords="373,407,504,434"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_audio_decoder.html" title="Decoding of encoded audio into PCM data." alt="" coords="220,330,332,357"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="319,362,413,406,408,406,318,367"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="" coords="23,175,121,202"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="73,215,85,235,99,252,129,277,163,298,230,328,225,330,160,302,126,281,95,256,81,238,73,220"/>
+<area shape="poly" id="edge9_Node000002_Node000003" title=" " alt="" coords="94,213,123,252,153,277,186,298,249,328,244,330,183,302,150,281,119,256,94,219"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="5,5,139,33"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="65,46,66,115,70,174,64,174,60,115,65,51"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="79,46,84,115,80,175,74,174,78,115,79,51"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="147,106,397,151"/>
+<area shape="poly" id="edge7_Node000006_Node000004" title=" " alt="" coords="110,38,234,104,229,107,110,43"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="228,226,356,254"/>
+<area shape="poly" id="edge5_Node000002_Node000005" title=" " alt="" coords="281,267,274,331,269,328,278,271"/>
+<area shape="poly" id="edge10_Node000002_Node000005" title=" " alt="" coords="298,268,287,331,282,328,294,271"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="264,164,265,184,268,201,282,226,277,225,263,203,260,185,262,169"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="430,5,509,33"/>
+<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="413,36,361,59,326,83,296,108,292,104,323,78,359,55,417,33"/>
+<area shape="rect" id="Node000010" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="517,278,654,306"/>
+<area shape="poly" id="edge15_Node000010_Node000007" title=" " alt="" coords="523,31,542,41,557,55,574,84,585,114,596,179,595,237,590,279,586,276,590,237,590,179,580,116,569,86,553,59,539,46,524,37"/>
+<area shape="rect" id="Node000011" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="371,175,568,202"/>
+<area shape="poly" id="edge17_Node000011_Node000007" title=" " alt="" coords="471,47,472,175,467,173,468,51"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="380,226,431,254"/>
+<area shape="poly" id="edge13_Node000001_Node000008" title=" " alt="" coords="411,267,427,357,438,408,433,405,422,358,408,271"/>
+<area shape="poly" id="edge11_Node000002_Node000008" title=" " alt="" coords="368,257,335,280,308,306,287,331,284,327,304,302,332,276,363,260"/>
+<area shape="rect" id="Node000009" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="121,226,204,254"/>
+<area shape="poly" id="edge12_Node000002_Node000009" title=" " alt="" coords="190,262,264,328,259,330,188,267"/>
+<area shape="poly" id="edge14_Node000001_Node000010" title=" " alt="" coords="565,316,492,385,459,409,457,404,489,381,560,317"/>
+<area shape="poly" id="edge16_Node000001_Node000011" title=" " alt="" coords="470,216,456,358,444,408,441,404,451,357,466,220"/>
+</map>

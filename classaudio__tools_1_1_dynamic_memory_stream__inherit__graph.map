@@ -1,0 +1,11 @@
+<map id="DynamicMemoryStream" name="DynamicMemoryStream">
+<area shape="rect" id="Node000001" title="MemoryStream which is written and read using the internal RAM. For each write the data is allocated o..." alt="" coords="5,232,186,260"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer,size_t size) and readBytes(uint8..." alt="" coords="45,157,146,184"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="97,198,98,233,93,231,94,202"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="61,81,130,109"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="88,122,91,157,86,156,86,127"/>
+<area shape="poly" id="edge5_Node000002_Node000003" title=" " alt="" coords="106,122,105,157,100,155,103,126"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="70,5,121,33"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="87,46,91,81,86,80,86,51"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="105,46,105,81,100,80,103,51"/>
+</map>

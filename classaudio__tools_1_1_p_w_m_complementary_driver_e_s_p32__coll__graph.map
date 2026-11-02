@@ -1,0 +1,35 @@
+<map id="PWMComplementaryDriverESP32" name="PWMComplementaryDriverESP32">
+<area shape="rect" id="Node000001" title="Audio output to PWM pins for the ESP32. The ESP32 supports up to 16 channels." alt="" coords="860,269,1100,296"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_p_w_m_driver_base.html" title="Base Class for all PWM drivers." alt="" coords="620,129,747,156"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="729,161,951,268,946,268,728,166"/>
+<area shape="rect" id="Node000003" href="$structaudio__tools_1_1_p_w_m_config_a_v_r.html" title="Configuration data for PWM audio output." alt="" coords="316,75,437,103"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="452,95,574,113,631,128,626,128,574,118,453,100"/>
+<area shape="rect" id="Node000004" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="48,27,131,55"/>
+<area shape="poly" id="edge5_Node000002_Node000004" title=" " alt="" coords="145,33,231,28,340,29,458,41,518,53,575,69,602,81,628,96,669,128,663,128,625,100,600,86,573,74,516,58,457,46,339,34,231,33,148,38"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="146,48,317,77,313,81,147,53"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="35,93,144,120"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="159,106,268,102,318,98,313,101,269,107,161,110"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="293,129,460,156"/>
+<area shape="poly" id="edge6_Node000002_Node000006" title=" " alt="" coords="475,140,623,141,618,143,476,145"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_decimate.html" title="Provides a reduced sampling rate by taking a sample at every factor location (ingoring factor&#45;1 sampl..." alt="" coords="334,185,418,212"/>
+<area shape="poly" id="edge7_Node000002_Node000007" title=" " alt="" coords="433,191,501,182,573,170,639,156,634,158,575,175,502,188,435,196"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_base_converter.html" title="Abstract Base class for Converters A converter is processing the data in the indicated array." alt="" coords="31,185,148,212"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="163,204,336,203,332,207,164,209"/>
+<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="163,188,336,190,332,194,164,193"/>
+<area shape="rect" id="Node000009" href="$structaudio__tools_1_1audio__tools_1_1_decimate_1_1_decimate_state.html" title=" " alt="" coords="30,242,149,270"/>
+<area shape="poly" id="edge10_Node000007_Node000009" title=" " alt="" coords="163,244,268,226,336,210,332,213,269,231,165,249"/>
+<area shape="rect" id="Node000010" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="598,260,769,305"/>
+<area shape="poly" id="edge11_Node000001_Node000010" title=" " alt="" coords="785,280,863,282,857,283,785,285"/>
+<area shape="rect" id="Node000011" href="$structaudio__tools_1_1_pin_info_e_s_p32_compl.html" title="Mapping information for one complementary PWM audio channel." alt="" coords="302,241,450,268"/>
+<area shape="poly" id="edge12_Node000010_Node000011" title=" " alt="" coords="466,260,600,274,595,275,466,265"/>
+<area shape="rect" id="Node000012" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="337,297,416,324"/>
+<area shape="poly" id="edge13_Node000010_Node000012" title=" " alt="" coords="431,307,574,299,600,298,595,300,574,305,432,313"/>
+<area shape="rect" id="Node000013" href="$classaudio__tools_1_1audio__tools_1_1_audio_timer.html" title="Common Interface definition for AudioTimer." alt="" coords="636,359,732,387"/>
+<area shape="poly" id="edge14_Node000001_Node000013" title=" " alt="" coords="745,352,929,297,934,296,747,357"/>
+<area shape="rect" id="Node000014" href="$classaudio__tools_1_1audio__tools_1_1_audio_timer_driver_a_v_r.html" title="Repeating Timer functions for repeated execution: Plaease use the typedef AudioTimer." alt="" coords="295,421,458,448"/>
+<area shape="poly" id="edge15_Node000013_Node000014" title=" " alt="" coords="473,429,523,423,573,414,615,401,651,388,656,387,617,406,575,419,524,429,473,434"/>
+<area shape="rect" id="Node000015" href="$classaudio__tools_1_1audio__tools_1_1_audio_timer_driver_base.html" title=" " alt="" coords="5,421,174,448"/>
+<area shape="poly" id="edge18_Node000013_Node000015" title=" " alt="" coords="147,413,197,401,320,385,443,375,638,372,633,373,443,381,321,390,198,406,148,418"/>
+<area shape="poly" id="edge16_Node000014_Node000015" title=" " alt="" coords="189,440,297,443,292,443,189,446"/>
+<area shape="poly" id="edge17_Node000014_Node000015" title=" " alt="" coords="189,423,297,426,292,427,189,428"/>
+</map>

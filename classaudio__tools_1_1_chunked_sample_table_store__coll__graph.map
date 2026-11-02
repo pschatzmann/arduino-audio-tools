@@ -1,0 +1,9 @@
+<map id="ChunkedSampleTableStore&lt; T, ChunkSize &gt;" name="ChunkedSampleTableStore&lt; T, ChunkSize &gt;">
+<area shape="rect" id="Node000001" title="RAM&#45;backed like RamSampleTableStore, but grows by allocating additional fixed&#45;size chunks instead of ..." alt="" coords="18,207,212,251"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_sample_table_store.html" title="Sequential&#45;access storage for one MP4 sample table (e.g. stsz sample sizes, stco chunk offsets,..." alt="" coords="5,106,182,134"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="101,147,113,206,108,206,97,151"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="206,106,317,134"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="234,143,146,208,143,204,229,143"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="222,5,301,33"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="263,46,264,106,259,104,260,51"/>
+</map>

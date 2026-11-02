@@ -1,0 +1,19 @@
+<map id="RedisBuffer&lt; T &gt;" name="RedisBuffer&lt; T &gt;">
+<area shape="rect" id="Node000001" title="Buffer implementation that stores and retrieves data from a Redis server using the Arduino Client." alt="" coords="110,306,244,334"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="5,82,136,110"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="74,123,84,166,98,210,132,264,167,306,162,306,128,267,93,212,79,167,73,128"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_single_buffer.html" title=" " alt="" coords="108,183,246,211"/>
+<area shape="poly" id="edge8_Node000006_Node000002" title=" " alt="" coords="89,119,159,181,154,183,88,124"/>
+<area shape="poly" id="edge9_Node000006_Node000002" title=" " alt="" coords="103,117,172,181,167,183,102,122"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_client.html" title=" " alt="" coords="272,183,331,211"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="293,223,277,256,254,284,235,298,215,308,213,303,233,293,250,280,272,253,288,226"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="267,82,335,110"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="295,123,297,183,292,181,291,127"/>
+<area shape="poly" id="edge6_Node000003_Node000004" title=" " alt="" coords="311,123,310,184,305,181,308,127"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="276,5,327,33"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="294,46,297,83,292,81,291,51"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="311,46,311,83,306,81,309,51"/>
+<area shape="poly" id="edge7_Node000001_Node000006" title=" " alt="" coords="179,225,180,306,175,304,175,228"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="160,82,240,110"/>
+<area shape="poly" id="edge10_Node000006_Node000007" title=" " alt="" coords="195,123,183,184,178,181,192,127"/>
+</map>

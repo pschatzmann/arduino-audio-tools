@@ -1,0 +1,25 @@
+<map id="AnalogDriverMBED" name="AnalogDriverMBED">
+<area shape="rect" id="Node000001" title="Please use AnalogAudioStream: A ADC and DAC API for the Arduino Giga." alt="" coords="275,307,420,335"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_analog_driver_base.html" title=" " alt="" coords="5,207,144,234"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="126,237,313,305,310,309,125,243"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_ring_buffer.html" title=" " alt="" coords="168,207,336,234"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="276,243,338,307,332,306,274,248"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="9,106,180,134"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="122,140,227,205,222,207,121,145"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="135,139,240,205,235,207,134,144"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="210,5,289,33"/>
+<area shape="poly" id="edge5_Node000003_Node000005" title=" " alt="" coords="246,46,243,89,242,134,252,207,247,206,237,134,238,88,243,50"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="324,106,465,134"/>
+<area shape="poly" id="edge7_Node000006_Node000005" title=" " alt="" coords="281,39,378,105,372,106,280,44"/>
+<area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="366,141,272,208,270,204,361,144"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_analog_config_e_s_p32.html" title="ESP32 specific configuration for i2s input via adc. The default input pin is GPIO34...." alt="" coords="372,207,519,234"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="429,246,396,285,367,309,365,304,393,281,424,248"/>
+<area shape="rect" id="Node000008" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="489,106,572,134"/>
+<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="512,144,458,208,455,204,507,147"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1audio__tools_1_1_converter_auto_center.html" title="Makes sure that the avg of the signal is set to 0." alt="" coords="549,207,707,234"/>
+<area shape="poly" id="edge10_Node000001_Node000009" title=" " alt="" coords="580,239,455,286,387,309,386,304,454,281,575,240"/>
+<area shape="rect" id="Node000010" href="$classaudio__tools_1_1audio__tools_1_1_base_converter.html" title="Abstract Base class for Converters A converter is processing the data in the indicated array." alt="" coords="596,106,713,134"/>
+<area shape="poly" id="edge11_Node000009_Node000010" title=" " alt="" coords="641,146,627,208,623,204,637,150"/>
+<area shape="poly" id="edge12_Node000009_Node000010" title=" " alt="" coords="657,147,640,208,636,204,653,150"/>
+<area shape="poly" id="edge13_Node000009_Node000010" title=" " alt="" coords="660,147,657,184,642,208,639,204,652,182,656,151"/>
+</map>

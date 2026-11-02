@@ -1,0 +1,32 @@
+<map id="AudioFFTBase" name="AudioFFTBase">
+<area shape="rect" id="Node000001" title="Executes FFT using audio data privded by write() and/or an inverse FFT where the samples are made ava..." alt="" coords="556,136,669,164"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_audio_cmsis_f_f_t.html" title="AudioFFT for ARM processors that provided Cmsis DSP." alt="" coords="747,5,868,33"/>
+<area shape="poly" id="edge12_Node000001_Node000008" title=" " alt="" coords="632,121,668,82,716,44,744,34,749,32,718,48,671,85,635,126"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1_audio_e_s_p32_f_f_t.html" title="AudioFFT using https://github.com/pschatzmann/esp32&#45;fft." alt="" coords="747,57,868,85"/>
+<area shape="poly" id="edge13_Node000001_Node000009" title=" " alt="" coords="651,126,716,95,750,86,755,85,718,100,653,131"/>
+<area shape="rect" id="Node000010" href="$classaudio__tools_1_1_audio_espressif_f_f_t.html" title="AudioFFT using FFTReal. The only specific functionality is the access to the dataArray." alt="" coords="738,109,878,137"/>
+<area shape="poly" id="edge14_Node000001_Node000010" title=" " alt="" coords="684,137,740,132,734,133,685,143"/>
+<area shape="rect" id="Node000011" href="$classaudio__tools_1_1_audio_fixed_f_f_t.html" title="AudioFFT using the fixedpoint&#45;fft library. CalcT selects the calculation type (default int16_t,..." alt="" coords="717,161,898,189"/>
+<area shape="poly" id="edge15_Node000001_Node000011" title=" " alt="" coords="684,156,719,163,714,163,684,162"/>
+<area shape="rect" id="Node000012" href="$classaudio__tools_1_1_audio_kiss_f_f_t.html" title="AudioFFT using FFTReal. The only specific functionality is the access to the dataArray." alt="" coords="754,213,862,241"/>
+<area shape="poly" id="edge16_Node000001_Node000012" title=" " alt="" coords="654,169,718,198,756,213,750,213,716,203,653,174"/>
+<area shape="rect" id="Node000013" href="$classaudio__tools_1_1_audio_real_f_f_t.html" title="AudioFFT using RealFFT." alt="" coords="752,265,863,293"/>
+<area shape="poly" id="edge17_Node000001_Node000013" title=" " alt="" coords="634,173,671,213,718,250,755,268,749,267,716,255,668,217,632,178"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="" coords="402,136,508,164"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="523,147,558,149,553,150,524,152"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer,size_t size) and readBytes(uint8..." alt="" coords="238,84,338,112"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="328,115,405,141,399,142,328,121"/>
+<area shape="poly" id="edge9_Node000002_Node000003" title=" " alt="" coords="353,107,432,135,426,136,353,112"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="105,84,173,112"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="188,104,240,105,235,108,189,109"/>
+<area shape="poly" id="edge6_Node000003_Node000004" title=" " alt="" coords="187,87,240,88,235,91,189,92"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="5,84,57,112"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="71,104,106,105,102,108,74,109"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="71,87,106,88,102,91,74,91"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="221,136,354,164"/>
+<area shape="poly" id="edge7_Node000002_Node000006" title=" " alt="" coords="369,156,405,158,399,159,370,161"/>
+<area shape="poly" id="edge10_Node000002_Node000006" title=" " alt="" coords="369,138,405,141,399,142,370,143"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="224,188,351,216"/>
+<area shape="poly" id="edge8_Node000002_Node000007" title=" " alt="" coords="365,184,426,165,431,163,367,189"/>
+<area shape="poly" id="edge11_Node000002_Node000007" title=" " alt="" coords="327,179,404,157,399,159,329,184"/>
+</map>

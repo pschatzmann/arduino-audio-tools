@@ -1,0 +1,26 @@
+<map id="HttpChunkReader" name="HttpChunkReader">
+<area shape="rect" id="Node000001" title="Http might reply with chunks. So we need to dechunk the data. see https://en.wikipedia...." alt="" coords="14,589,151,616"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_http_line_reader.html" title="We read a single line. A terminating 0 is added to the string to make it compliant for c string funct..." alt="" coords="5,266,128,293"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="71,308,85,588,79,588,65,309"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_http_header.html" title="In a http request and reply we need to process header information. With this API we can define and qu..." alt="" coords="138,411,235,439"/>
+<area shape="poly" id="edge13_Node000004_Node000002" title=" " alt="" coords="76,305,98,346,126,385,160,410,155,411,123,389,93,349,76,311"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_http_reply_header.html" title="Reading and Writing of Http Replys." alt="" coords="109,488,242,516"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="156,527,97,590,93,586,151,527"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="184,452,180,489,175,487,181,456"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_str.html" title="Str which keeps the data on the heap. We grow the allocated memory only if the copy source is not fit..." alt="" coords="158,266,197,293"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="180,307,188,411,183,410,178,311"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_str_view.html" title="A simple wrapper to provide string functions on existing allocated char*. If the underlying char* is ..." alt="" coords="131,156,202,184"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="162,197,172,265,167,265,161,202"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="178,197,185,265,179,265,177,202"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="226,156,347,184"/>
+<area shape="poly" id="edge14_Node000004_Node000007" title=" " alt="" coords="294,196,302,239,304,288,297,341,288,366,275,389,258,405,237,416,234,411,255,401,271,385,284,363,292,339,299,288,297,239,292,201"/>
+<area shape="poly" id="edge7_Node000005_Node000007" title=" " alt="" coords="252,195,226,219,204,243,188,266,183,264,200,240,222,215,255,191"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="303,15,382,43"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="306,55,290,78,284,98,282,119,286,157,281,156,277,119,279,97,285,75,309,50"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1audio__tools_1_1_list.html" title=" " alt="" coords="370,148,520,193"/>
+<area shape="poly" id="edge12_Node000009_Node000008" title=" " alt="" coords="357,54,370,75,382,100,395,122,419,147,414,148,391,126,377,102,365,78,357,59"/>
+<area shape="poly" id="edge9_Node000004_Node000009" title=" " alt="" coords="436,205,420,251,397,295,358,349,337,368,306,389,272,406,236,417,234,412,270,401,304,385,334,364,354,345,392,292,415,249,433,210"/>
+<area shape="rect" id="Node000010" href="$structaudio__tools_1_1audio__tools_1_1_list_1_1_node.html" title=" " alt="" coords="480,15,536,43"/>
+<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="503,56,495,91,481,125,465,149,461,146,476,123,490,89,500,60"/>
+<area shape="poly" id="edge11_Node000010_Node000010" title=" " alt="" coords="551,15,559,20,562,29,560,37,554,42,537,45,535,40,551,37,555,34,557,29,555,24,551,20"/>
+</map>

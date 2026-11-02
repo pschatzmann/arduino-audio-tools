@@ -1,0 +1,9 @@
+<map id="OutputTFT_eSPI" name="OutputTFT_eSPI">
+<area shape="rect" id="Node000001" title="Bridges VideoDecoder&#39;s write() calls to the TFT &#45; VideoDecoder always hands over one complete frame p..." alt="" coords="134,106,257,134"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory...." alt="" coords="5,5,108,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="88,40,179,104,174,107,86,45"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_video_info_source.html" title="Provider of VideoInfo (width/height/fps/format) for whoever needs to size buffers/panel setup against..." alt="" coords="132,5,259,33"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="197,47,198,107,193,104,193,50"/>
+<area shape="rect" id="Node000004" href="$structaudio__tools_1_1_video_info.html" title="Basic video information (width/height/codec/frame size), analogous to AudioInfo &#45; common to both Demu..." alt="" coords="283,5,366,33"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="300,42,250,84,216,108,214,103,247,80,295,44"/>
+</map>

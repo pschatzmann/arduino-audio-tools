@@ -1,0 +1,48 @@
+<map id="AbstractURLStream" name="AbstractURLStream">
+<area shape="rect" id="Node000001" title="Abstract Base class for all URLStream implementations." alt="" coords="556,343,704,370"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1_h_l_s_stream_t.html" title=" " alt="" coords="752,5,996,33"/>
+<area shape="poly" id="edge13_Node000001_Node000009" title=" " alt="" coords="631,325,640,267,660,190,676,150,696,111,720,75,750,44,773,32,769,35,754,48,724,78,700,114,681,152,665,192,645,268,636,328"/>
+<area shape="rect" id="Node000010" href="$classaudio__tools_1_1_i_c_y_stream_t.html" title=" " alt="" coords="774,57,974,85"/>
+<area shape="poly" id="edge14_Node000001_Node000010" title=" " alt="" coords="634,325,646,276,668,213,702,150,724,121,750,96,776,83,771,86,754,100,728,124,706,153,673,215,651,277,638,329"/>
+<area shape="rect" id="Node000011" href="$classaudio__tools_1_1_i_c_y_stream_t.html" title=" " alt="" coords="754,109,994,137"/>
+<area shape="poly" id="edge15_Node000001_Node000011" title=" " alt="" coords="637,326,652,286,675,237,708,188,728,165,750,146,773,136,769,139,754,151,732,169,712,191,680,239,657,288,641,330"/>
+<area shape="rect" id="Node000012" href="$classaudio__tools_1_1_u_r_l_stream_buffered_t.html" title=" " alt="" coords="796,161,953,206"/>
+<area shape="poly" id="edge16_Node000001_Node000012" title=" " alt="" coords="646,327,688,271,718,241,751,216,798,197,793,200,753,220,721,245,693,274,650,331"/>
+<area shape="rect" id="Node000013" href="$classaudio__tools_1_1_u_r_l_stream_buffered_t.html" title=" " alt="" coords="792,230,956,275"/>
+<area shape="poly" id="edge17_Node000001_Node000013" title=" " alt="" coords="664,332,705,307,751,285,794,272,790,274,753,290,707,312,667,336"/>
+<area shape="rect" id="Node000014" href="$classaudio__tools_1_1_u_r_l_stream_buffered_t.html" title=" " alt="" coords="794,300,954,344"/>
+<area shape="poly" id="edge18_Node000001_Node000014" title=" " alt="" coords="719,341,797,332,791,334,720,346"/>
+<area shape="rect" id="Node000015" href="$classaudio__tools_1_1_u_r_l_stream_buffered_t.html" title=" " alt="" coords="796,369,953,414"/>
+<area shape="poly" id="edge19_Node000001_Node000015" title=" " alt="" coords="719,367,798,380,792,380,720,372"/>
+<area shape="rect" id="Node000017" href="$classaudio__tools_1_1_h_l_s_stream_t.html" title="HTTP Live Streaming using HLS: The resulting .ts data is provided via readBytes() that dynamically re..." alt="" coords="772,437,976,465"/>
+<area shape="poly" id="edge21_Node000001_Node000017" title=" " alt="" coords="665,377,706,401,753,423,790,437,785,437,751,428,704,406,664,382"/>
+<area shape="rect" id="Node000018" href="$classaudio__tools_1_1_i_c_y_stream_t.html" title="Icecast/Shoutcast audio stream that separates ICY metadata from audio bytes." alt="" coords="806,489,942,517"/>
+<area shape="poly" id="edge22_Node000001_Node000018" title=" " alt="" coords="651,380,695,429,723,454,753,474,779,485,809,496,804,495,778,490,751,479,720,458,691,433,649,385"/>
+<area shape="rect" id="Node000019" href="$classaudio__tools_1_1_u_r_l_stream.html" title="Represents the content of a URL as Stream. We use the WiFi.h API. If you run into performance issues,..." alt="" coords="827,541,921,569"/>
+<area shape="poly" id="edge23_Node000001_Node000019" title=" " alt="" coords="644,382,662,417,686,456,717,494,753,526,789,543,829,553,824,553,788,548,751,531,713,498,682,459,657,419,642,387"/>
+<area shape="rect" id="Node000020" href="$classaudio__tools_1_1_u_r_l_stream_buffered_t.html" title="URLStream implementation for the ESP32 based on a separate FreeRTOS task: the." alt="" coords="776,593,972,621"/>
+<area shape="poly" id="edge24_Node000001_Node000020" title=" " alt="" coords="639,383,655,428,678,481,710,534,731,558,754,578,779,595,774,594,750,583,727,562,706,537,673,483,650,430,637,387"/>
+<area shape="rect" id="Node000021" href="$classaudio__tools_1_1_u_r_l_stream_e_s_p32.html" title="URLStream using the ESP32 IDF API." alt="" coords="807,645,941,673"/>
+<area shape="poly" id="edge25_Node000001_Node000021" title=" " alt="" coords="637,383,649,438,670,505,685,540,704,573,727,604,754,630,779,645,809,656,804,655,777,650,750,635,723,607,700,576,681,542,665,507,644,440,634,388"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="" coords="402,316,508,344"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="523,338,558,345,553,346,524,343"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer,size_t size) and readBytes(uint8..." alt="" coords="238,264,338,292"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="328,295,404,321,399,323,328,301"/>
+<area shape="poly" id="edge9_Node000002_Node000003" title=" " alt="" coords="353,287,432,315,427,316,353,292"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="105,264,173,292"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="187,284,239,285,235,288,190,289"/>
+<area shape="poly" id="edge6_Node000003_Node000004" title=" " alt="" coords="187,267,239,268,235,271,190,272"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="5,264,57,292"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="71,284,106,284,102,288,74,289"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="71,267,106,268,102,271,74,271"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="221,316,354,344"/>
+<area shape="poly" id="edge7_Node000002_Node000006" title=" " alt="" coords="369,336,404,337,400,339,370,341"/>
+<area shape="poly" id="edge10_Node000002_Node000006" title=" " alt="" coords="369,318,404,320,400,322,370,323"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="224,368,351,396"/>
+<area shape="poly" id="edge8_Node000002_Node000007" title=" " alt="" coords="365,364,431,343,427,346,367,369"/>
+<area shape="poly" id="edge11_Node000002_Node000007" title=" " alt="" coords="327,359,404,336,400,339,329,364"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_mime_source.html" title="Abstract interface for classes that can provide MIME type information." alt="" coords="404,368,506,396"/>
+<area shape="poly" id="edge12_Node000001_Node000008" title=" " alt="" coords="521,370,558,366,553,368,523,375"/>
+<area shape="rect" id="Node000016" href="$classaudio__tools_1_1_i_c_y_stream_buffered.html" title="Buffered ICYStream with metadata callback support." alt="" coords="1044,377,1189,405"/>
+<area shape="poly" id="edge20_Node000015_Node000016" title=" " alt="" coords="968,389,1046,391,1041,392,969,394"/>
+</map>

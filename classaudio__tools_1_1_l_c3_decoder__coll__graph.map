@@ -1,0 +1,30 @@
+<map id="LC3Decoder" name="LC3Decoder">
+<area shape="rect" id="Node000001" title="Decoder for LC3. Depends on https://github.com/pschatzmann/codec&#45;lc3." alt="" coords="386,426,486,454"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_audio_decoder.html" title="Decoding of encoded audio into PCM data." alt="" coords="205,340,318,367"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="303,372,412,426,406,426,302,377"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="" coords="23,175,121,202"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="73,215,86,235,99,252,129,279,163,303,227,338,222,340,160,307,126,283,95,256,81,238,74,220"/>
+<area shape="poly" id="edge9_Node000002_Node000003" title=" " alt="" coords="94,213,123,252,153,279,186,303,244,338,239,340,183,307,150,283,119,256,94,218"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="5,5,139,33"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="65,46,66,115,70,174,64,174,60,115,65,51"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="79,46,84,115,80,174,74,174,78,115,79,51"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="167,106,417,151"/>
+<area shape="poly" id="edge7_Node000006_Node000004" title=" " alt="" coords="112,38,249,104,245,107,113,43"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="228,226,356,254"/>
+<area shape="poly" id="edge5_Node000002_Node000005" title=" " alt="" coords="279,267,261,340,257,338,275,270"/>
+<area shape="poly" id="edge10_Node000002_Node000005" title=" " alt="" coords="294,268,273,340,269,337,290,272"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="293,164,295,227,289,225,291,168"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="442,5,521,33"/>
+<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="424,36,373,59,341,82,314,107,310,104,337,78,371,55,429,33"/>
+<area shape="rect" id="Node000010" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="583,278,721,306"/>
+<area shape="poly" id="edge15_Node000010_Node000007" title=" " alt="" coords="535,33,554,43,569,55,590,82,608,113,633,177,647,236,653,279,649,276,642,237,628,178,603,115,586,85,565,59,551,47,536,38"/>
+<area shape="rect" id="Node000011" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="409,175,554,202"/>
+<area shape="poly" id="edge17_Node000011_Node000007" title=" " alt="" coords="483,47,484,175,479,173,480,51"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="380,226,431,254"/>
+<area shape="poly" id="edge13_Node000001_Node000008" title=" " alt="" coords="405,267,406,320,412,376,421,403,431,427,427,425,416,405,407,378,400,320,402,271"/>
+<area shape="poly" id="edge11_Node000002_Node000008" title=" " alt="" coords="363,257,321,280,291,310,271,341,267,337,287,307,317,276,368,255"/>
+<area shape="rect" id="Node000009" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="121,226,204,254"/>
+<area shape="poly" id="edge12_Node000002_Node000009" title=" " alt="" coords="185,263,252,338,247,339,184,268"/>
+<area shape="poly" id="edge14_Node000001_Node000010" title=" " alt="" coords="626,315,501,405,461,428,459,423,499,400,620,316"/>
+<area shape="poly" id="edge16_Node000001_Node000011" title=" " alt="" coords="481,215,476,303,465,378,445,428,441,424,460,376,470,303,478,219"/>
+</map>

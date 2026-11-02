@@ -1,0 +1,21 @@
+<map id="AudioSourceIdxSDMMC" name="AudioSourceIdxSDMMC">
+<area shape="rect" id="Node000001" title="ESP32 AudioSource for AudioPlayer using an SD card as data source. An index file is used to speed up ..." alt="" coords="135,366,308,394"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players." alt="" coords="5,257,108,285"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="90,291,204,364,199,367,89,296"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_s_d_index.html" title=" " alt="" coords="132,249,312,293"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="224,307,224,367,219,365,220,311"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_list.html" title=" " alt="" coords="166,148,278,176"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="223,189,224,249,219,247,220,194"/>
+<area shape="rect" id="Node000005" href="$structaudio__tools_1_1audio__tools_1_1_list_1_1_node.html" title=" " alt="" coords="65,15,120,43"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="116,51,211,147,207,149,116,57"/>
+<area shape="poly" id="edge5_Node000005_Node000005" title=" " alt="" coords="135,15,144,20,147,29,145,37,138,42,122,44,119,40,136,37,140,34,142,29,140,24,137,20"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="206,15,286,43"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="242,56,227,149,222,147,239,60"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_zephyr_file.html" title="Arduino File API for Zephyr." alt="" coords="337,257,427,285"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="352,294,243,368,240,363,347,294"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="348,148,416,176"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="384,189,384,258,379,255,380,193"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="356,15,408,43"/>
+<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="376,56,376,106,379,149,374,147,370,106,373,61"/>
+<area shape="poly" id="edge10_Node000008_Node000009" title=" " alt="" coords="391,56,393,106,390,149,385,146,388,106,388,61"/>
+</map>

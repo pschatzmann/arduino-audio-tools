@@ -1,0 +1,9 @@
+<map id="FFTEqualizerConfig" name="FFTEqualizerConfig">
+<area shape="rect" id="Node000001" title="Equalizer FFT Effect Configuration." alt="" coords="38,183,184,211"/>
+<area shape="rect" id="Node000002" href="$structaudio__tools_1_1_f_f_t_effect_config.html" title="Common configuration for FFT effects." alt="" coords="50,106,172,134"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="113,147,113,184,109,182,109,151"/>
+<area shape="rect" id="Node000003" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="5,5,89,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="64,43,105,105,100,106,63,48"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_window_function.html" title="FFT Window Function." alt="" coords="112,5,240,33"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="161,44,122,107,118,104,158,48"/>
+</map>

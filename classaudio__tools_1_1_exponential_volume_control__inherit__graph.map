@@ -1,0 +1,5 @@
+<map id="ExponentialVolumeControl" name="ExponentialVolumeControl">
+<area shape="rect" id="Node000001" title="Simple exponentional volume control using the formula pow(2.0, input) &#45; 1.0;." alt="" coords="5,81,200,109"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_volume_control.html" title="Abstract class for handling of the linear input volume to determine the multiplication factor which s..." alt="" coords="44,5,161,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="104,47,105,82,100,80,101,51"/>
+</map>

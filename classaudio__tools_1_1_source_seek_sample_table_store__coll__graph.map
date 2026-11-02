@@ -1,0 +1,7 @@
+<map id="SourceSeekSampleTableStore&lt; T &gt;" name="SourceSeekSampleTableStore&lt; T &gt;">
+<area shape="rect" id="Node000001" title="Discards every value right after appending it, keeping only the file offset of the first entry &#45; get(..." alt="" coords="54,106,306,134"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_sample_table_store.html" title="Sequential&#45;access storage for one MP4 sample table (e.g. stsz sample sizes, stco chunk offsets,..." alt="" coords="5,5,182,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="116,42,171,105,166,106,114,47"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_seekable_source.html" title="Minimal seek+read interface a SourceSeekSampleTableStore needs from &quot;the original MP4 source&quot; &#45; kept ..." alt="" coords="206,5,330,33"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="249,44,194,107,190,103,244,46"/>
+</map>

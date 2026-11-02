@@ -1,0 +1,33 @@
+<map id="SPIAudioMaster" name="SPIAudioMaster">
+<area shape="rect" id="Node000001" title="SPI master endpoint for remote audio sink configuration and PCM data transfer." alt="" coords="1175,193,1298,221"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_audio_output.html" title="Abstract Audio Ouptut class." alt="" coords="946,128,1049,156"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1064,157,1186,193,1180,193,1063,162"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="720,5,771,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="787,30,839,42,893,62,940,93,977,128,972,127,936,98,890,67,837,47,787,36"/>
+<area shape="poly" id="edge8_Node000002_Node000003" title=" " alt="" coords="786,11,838,19,892,38,924,58,952,81,992,128,987,127,948,85,921,62,890,43,837,24,787,16"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="5,68,139,96"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="153,83,294,83,478,87,684,98,789,108,892,122,949,136,943,137,891,127,789,113,684,104,478,92,294,89,155,88"/>
+<area shape="poly" id="edge9_Node000002_Node000004" title=" " alt="" coords="153,69,294,64,478,64,684,74,789,84,892,98,941,109,982,128,977,127,939,114,891,103,789,90,684,80,478,69,294,69,155,74"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="267,132,517,176"/>
+<area shape="poly" id="edge6_Node000006_Node000004" title=" " alt="" coords="102,103,132,121,164,135,214,147,268,155,264,157,213,152,162,140,129,126,103,108"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="682,131,809,158"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="825,149,948,149,943,150,825,155"/>
+<area shape="poly" id="edge10_Node000002_Node000005" title=" " alt="" coords="825,133,948,135,943,135,825,138"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="532,147,684,145,679,147,533,153"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="32,225,112,253"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="126,222,306,174,304,179,127,227"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1audio__tools_1_1_single_buffer.html" title=" " alt="" coords="658,233,833,261"/>
+<area shape="poly" id="edge15_Node000009_Node000007" title=" " alt="" coords="128,237,658,244,657,249,128,242"/>
+<area shape="rect" id="Node000011" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="323,287,460,314"/>
+<area shape="poly" id="edge17_Node000011_Node000007" title=" " alt="" coords="110,258,163,280,245,295,325,301,320,302,245,300,162,285,110,264"/>
+<area shape="rect" id="Node000008" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="704,285,787,313"/>
+<area shape="poly" id="edge11_Node000002_Node000008" title=" " alt="" coords="802,283,832,270,877,242,919,210,980,157,985,155,923,215,880,247,835,275,803,288"/>
+<area shape="rect" id="Node000012" href="$structaudio__tools_1_1_s_p_i_audio_master_config.html" title="Configuration for SPIAudioMaster." alt="" coords="915,232,1080,260"/>
+<area shape="poly" id="edge19_Node000012_Node000008" title=" " alt="" coords="803,292,891,278,956,261,961,260,892,283,803,297"/>
+<area shape="poly" id="edge12_Node000002_Node000009" title=" " alt="" coords="794,224,959,157,965,156,796,229"/>
+<area shape="rect" id="Node000010" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="308,339,476,366"/>
+<area shape="poly" id="edge13_Node000009_Node000010" title=" " alt="" coords="491,355,563,341,599,328,632,312,644,298,656,284,687,269,715,262,720,261,689,274,660,288,648,302,636,316,601,333,564,346,492,360"/>
+<area shape="poly" id="edge14_Node000009_Node000010" title=" " alt="" coords="489,333,562,317,599,304,632,288,644,274,656,260,656,263,661,261,660,264,648,278,636,292,601,309,564,322,490,338"/>
+<area shape="poly" id="edge16_Node000009_Node000011" title=" " alt="" coords="475,298,553,293,633,280,657,271,693,262,698,261,659,276,635,285,553,298,476,303"/>
+<area shape="poly" id="edge18_Node000001_Node000012" title=" " alt="" coords="1095,227,1171,218,1177,217,1096,233"/>
+</map>

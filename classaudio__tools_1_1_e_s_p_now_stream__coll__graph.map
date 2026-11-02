@@ -1,0 +1,27 @@
+<map id="ESPNowStream" name="ESPNowStream">
+<area shape="rect" id="Node000001" title="ESPNow as Arduino Stream. When use_send_ack is true we prevent any buffer overflows by blocking write..." alt="" coords="201,430,322,458"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer,size_t size) and readBytes(uint8..." alt="" coords="29,330,129,357"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="117,362,240,428,235,431,116,368"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="8,207,76,234"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="43,247,57,291,72,329,66,329,52,292,42,252"/>
+<area shape="poly" id="edge5_Node000002_Node000003" title=" " alt="" coords="58,246,75,290,83,329,78,329,69,292,57,251"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="5,106,57,134"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="26,147,37,206,31,206,26,152"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="42,146,49,206,44,206,42,151"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_ring_buffer.html" title=" " alt="" coords="192,207,356,234"/>
+<area shape="poly" id="edge6_Node000002_Node000005" title=" " alt="" coords="240,245,102,331,99,327,240,240"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="201,106,368,134"/>
+<area shape="poly" id="edge7_Node000005_Node000006" title=" " alt="" coords="274,146,271,207,266,205,272,151"/>
+<area shape="poly" id="edge8_Node000005_Node000006" title=" " alt="" coords="291,147,284,207,279,205,288,152"/>
+<area shape="rect" id="Node000010" href="$classaudio__tools_1_1_buffer_r_t_o_s.html" title=" " alt="" coords="380,207,549,234"/>
+<area shape="poly" id="edge14_Node000010_Node000006" title=" " alt="" coords="322,139,443,205,438,207,321,144"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="421,5,500,33"/>
+<area shape="poly" id="edge9_Node000005_Node000007" title=" " alt="" coords="403,27,329,39,242,55,165,78,137,92,118,108,111,123,112,138,121,151,137,164,179,187,227,205,223,207,177,192,134,169,117,155,107,140,106,122,114,104,134,88,163,73,241,50,328,34,408,25"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="392,106,529,134"/>
+<area shape="poly" id="edge11_Node000008_Node000007" title=" " alt="" coords="462,46,463,106,458,104,459,51"/>
+<area shape="poly" id="edge15_Node000010_Node000007" title=" " alt="" coords="515,30,534,41,548,56,557,77,557,99,551,121,540,142,510,180,481,209,478,204,506,177,535,139,546,119,552,98,551,78,543,58,530,45,515,36"/>
+<area shape="poly" id="edge10_Node000005_Node000008" title=" " alt="" coords="420,143,300,208,297,204,424,139"/>
+<area shape="rect" id="Node000009" href="$structaudio__tools_1_1_e_s_p_now_stream_config.html" title="Configuration for ESP&#45;NOW protocolö.W." alt="" coords="180,330,343,357"/>
+<area shape="poly" id="edge12_Node000001_Node000009" title=" " alt="" coords="264,371,264,431,259,428,260,375"/>
+<area shape="poly" id="edge13_Node000001_Node000010" title=" " alt="" coords="448,245,408,301,357,359,279,432,276,428,353,355,403,297,444,248"/>
+</map>

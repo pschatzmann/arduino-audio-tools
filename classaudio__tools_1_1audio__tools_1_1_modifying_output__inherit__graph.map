@@ -1,0 +1,23 @@
+<map id="ModifyingOutput" name="ModifyingOutput">
+<area shape="rect" id="Node000001" title="Abstract class: Objects can be put into a pipleline." alt="" coords="247,157,377,184"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_encoded_audio_output.html" title="A more natural Print class to process encoded data (aac, wav, mp3...). Just define the output and the..." alt="" coords="5,232,163,260"/>
+<area shape="poly" id="edge9_Node000001_Node000006" title=" " alt="" coords="258,192,126,234,124,229,255,187"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_multi_output.html" title="Replicates the output to multiple destinations." alt="" coords="187,232,285,260"/>
+<area shape="poly" id="edge10_Node000001_Node000007" title=" " alt="" coords="290,194,251,234,248,230,285,196"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_encoded_audio_output.html" title="A more natural Print class to process encoded data (aac, wav, mp3...). Just define the output and the..." alt="" coords="309,232,467,260"/>
+<area shape="poly" id="edge11_Node000001_Node000008" title=" " alt="" coords="337,193,377,232,372,231,335,198"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1audio__tools_1_1_multi_output.html" title="Replicates the output to multiple destinations." alt="" coords="491,232,589,260"/>
+<area shape="poly" id="edge12_Node000001_Node000009" title=" " alt="" coords="368,187,502,232,497,232,367,192"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_audio_output.html" title="Abstract Audio Ouptut class." alt="" coords="261,81,363,109"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="305,122,307,158,303,155,302,126"/>
+<area shape="poly" id="edge8_Node000001_Node000002" title=" " alt="" coords="322,122,321,158,317,155,319,126"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="170,5,222,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="222,39,287,80,282,81,222,45"/>
+<area shape="poly" id="edge5_Node000002_Node000003" title=" " alt="" coords="235,37,301,80,296,81,235,43"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="245,5,379,33"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="305,46,307,82,302,79,302,51"/>
+<area shape="poly" id="edge6_Node000002_Node000004" title=" " alt="" coords="322,46,321,82,317,79,319,51"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="403,5,530,33"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="416,41,334,83,331,78,420,38"/>
+<area shape="poly" id="edge7_Node000002_Node000005" title=" " alt="" coords="430,42,348,83,345,78,435,39"/>
+</map>

@@ -1,0 +1,25 @@
+<map id="CodecFactory::EncoderFactoryLine" name="CodecFactory::EncoderFactoryLine">
+<area shape="rect" id="Node000001" title=" " alt="" coords="39,307,280,335"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_str.html" title="Str which keeps the data on the heap. We grow the allocated memory only if the copy source is not fit..." alt="" coords="73,207,113,234"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="112,245,153,306,148,307,109,249"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_str_view.html" title="A simple wrapper to provide string functions on existing allocated char*. If the underlying char* is ..." alt="" coords="5,106,77,134"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="48,146,82,205,77,207,47,151"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="63,144,95,206,90,207,62,149"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="101,106,221,134"/>
+<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="145,144,104,208,100,204,142,149"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="121,5,201,33"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="162,46,164,106,158,105,160,51"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_audio_encoder.html" title="Encoding of PCM data." alt="" coords="300,207,411,234"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="319,242,187,309,185,304,314,241"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="" coords="245,106,344,134"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="304,145,344,206,338,206,302,150"/>
+<area shape="poly" id="edge11_Node000006_Node000007" title=" " alt="" coords="319,144,356,206,351,206,317,148"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="228,5,361,33"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="287,46,290,106,285,105,285,50"/>
+<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="304,46,303,106,298,104,301,50"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1audio__tools_1_1_mime_source.html" title="Abstract interface for classes that can provide MIME type information." alt="" coords="367,106,470,134"/>
+<area shape="poly" id="edge10_Node000006_Node000009" title=" " alt="" coords="397,144,360,208,356,204,392,147"/>
+<area shape="poly" id="edge12_Node000006_Node000009" title=" " alt="" coords="412,146,372,208,369,204,407,149"/>
+<area shape="rect" id="Node000010" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="494,106,577,134"/>
+<area shape="poly" id="edge13_Node000006_Node000010" title=" " alt="" coords="501,140,381,209,379,204,496,142"/>
+</map>

@@ -1,0 +1,12 @@
+<map id="USBAudioHostBackendTinyUSB" name="USBAudioHostBackendTinyUSB">
+<area shape="rect" id="Node000001" title="USBAudioHostBackend for the TinyUSB host stack provided by the Adafruit TinyUSB Library (RP2040/RP235..." alt="" coords="52,207,278,234"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_u_s_b_audio_host_backend.html" title="Abstract seam for every raw USB host stack call the UAC host class logic (USBAudioHostBase) needs...." alt="" coords="5,5,176,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="66,47,54,65,42,87,37,110,42,133,60,156,82,176,132,205,127,207,79,180,56,160,37,135,32,110,37,86,50,63,68,42"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_u_s_b_audio_host_backend_tiny_u_s_b.html" title="USBAudioHostBackend for the TinyUSB host stack provided by the Adafruit TinyUSB Library (RP2040/RP235..." alt="" coords="52,106,278,134"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="110,43,158,105,153,106,109,48"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="167,148,168,207,163,205,163,151"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="294,111,304,120,296,127,279,131,278,125,294,122,299,120,293,117"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_u_s_b_audio_host_events.html" title="Upcalls from a USB host backend into the stack independent UAC host class logic (USBAudioHostBase)...." alt="" coords="278,5,437,33"/>
+<area shape="poly" id="edge6_Node000001_Node000004" title=" " alt="" coords="379,42,394,64,405,87,409,112,401,135,376,162,346,183,312,198,278,209,277,203,311,193,343,178,373,158,396,132,403,111,400,89,390,66,377,47"/>
+<area shape="poly" id="edge5_Node000003_Node000004" title=" " alt="" coords="316,42,192,108,189,103,320,39"/>
+</map>

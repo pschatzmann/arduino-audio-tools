@@ -1,0 +1,26 @@
+<map id="FileLoop" name="FileLoop">
+<area shape="rect" id="Node000001" title="A simple class which implements a automatic looping file. The file needs to be of the class File from..." alt="" coords="73,507,148,535"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_file_loop_t.html" title=" " alt="" coords="42,430,179,458"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="112,472,113,508,108,506,109,475"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer,size_t size) and readBytes(uint8..." alt="" coords="120,330,221,357"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="164,370,149,408,128,432,124,428,144,405,161,374"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="74,207,142,234"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="115,246,160,329,155,329,114,251"/>
+<area shape="poly" id="edge6_Node000003_Node000004" title=" " alt="" coords="129,245,155,289,172,329,167,329,150,292,128,250"/>
+<area shape="rect" id="Node000010" href="$classaudio__tools_1_1_zephyr_file.html" title="Arduino File API for Zephyr." alt="" coords="5,330,96,357"/>
+<area shape="poly" id="edge14_Node000010_Node000004" title=" " alt="" coords="94,251,59,330,54,328,96,246"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="82,106,134,134"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="100,146,104,206,99,206,99,151"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="117,146,117,206,112,206,115,151"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_ring_buffer.html" title=" " alt="" coords="166,207,330,234"/>
+<area shape="poly" id="edge7_Node000003_Node000006" title=" " alt="" coords="233,245,181,331,177,327,230,250"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="160,106,328,134"/>
+<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="238,146,244,207,238,206,236,151"/>
+<area shape="poly" id="edge9_Node000006_Node000007" title=" " alt="" coords="254,146,256,207,251,205,252,151"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="358,5,437,33"/>
+<area shape="poly" id="edge10_Node000006_Node000008" title=" " alt="" coords="388,45,369,91,342,135,304,177,267,208,263,204,300,173,338,132,365,88,385,50"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="472,106,610,134"/>
+<area shape="poly" id="edge12_Node000009_Node000008" title=" " alt="" coords="429,39,524,105,519,106,428,44"/>
+<area shape="poly" id="edge11_Node000006_Node000009" title=" " alt="" coords="498,142,395,185,311,208,308,204,394,180,502,139"/>
+<area shape="poly" id="edge13_Node000002_Node000010" title=" " alt="" coords="51,370,56,389,62,405,73,418,88,429,82,431,70,422,58,408,51,391,50,376"/>
+</map>

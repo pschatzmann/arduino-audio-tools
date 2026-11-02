@@ -1,0 +1,9 @@
+<map id="R2RDriver" name="R2RDriver">
+<area shape="rect" id="Node000001" title="R2R driver which uses the Arduino API to setup and write to the digital pins." alt="" coords="75,229,162,257"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_r2_r_driver_base.html" title="R2R driver base class." alt="" coords="5,106,125,134"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="79,146,115,228,110,229,75,150"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="148,106,320,134"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="214,145,133,230,129,226,209,145"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="195,5,274,33"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="236,46,237,106,232,104,233,51"/>
+</map>

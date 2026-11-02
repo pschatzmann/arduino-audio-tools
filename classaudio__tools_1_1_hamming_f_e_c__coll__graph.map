@@ -1,0 +1,29 @@
+<map id="HammingFEC&lt; bytecount, block_t &gt;" name="HammingFEC&lt; bytecount, block_t &gt;">
+<area shape="rect" id="Node000001" title="Hamming forware error correction. Inspired by https://github.com/nasserkessas/hamming&#45;codes." alt="" coords="60,426,255,471"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer,size_t size) and readBytes(uint8..." alt="" coords="180,340,280,367"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="213,378,176,428,172,424,208,381"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="53,207,121,234"/>
+<area shape="poly" id="edge17_Node000001_Node000003" title=" " alt="" coords="85,247,86,310,91,343,100,376,116,402,136,426,130,426,111,405,96,378,86,345,81,310,83,252"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="107,243,212,338,207,340,105,248"/>
+<area shape="poly" id="edge5_Node000002_Node000003" title=" " alt="" coords="119,242,224,338,219,340,118,247"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="5,106,57,134"/>
+<area shape="poly" id="edge18_Node000001_Node000004" title=" " alt="" coords="24,152,17,221,18,264,27,305,46,342,71,374,100,402,128,426,123,426,96,406,67,378,41,345,22,307,13,264,12,221,24,146"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="38,145,76,205,71,207,38,150"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="53,144,88,205,83,207,53,149"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_ring_buffer.html" title=" " alt="" coords="149,207,313,234"/>
+<area shape="poly" id="edge6_Node000002_Node000005" title=" " alt="" coords="232,248,232,340,227,338,229,252"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="201,106,368,134"/>
+<area shape="poly" id="edge7_Node000005_Node000006" title=" " alt="" coords="258,144,252,159,230,208,226,205,247,156,255,148"/>
+<area shape="poly" id="edge8_Node000005_Node000006" title=" " alt="" coords="281,145,276,159,248,208,244,205,271,156,278,150"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1audio__tools_1_1_single_buffer.html" title=" " alt="" coords="337,207,512,234"/>
+<area shape="poly" id="edge13_Node000009_Node000006" title=" " alt="" coords="328,138,361,156,387,180,410,206,404,206,383,184,357,160,329,143"/>
+<area shape="poly" id="edge14_Node000009_Node000006" title=" " alt="" coords="351,137,385,156,411,180,427,207,422,206,406,184,381,160,352,143"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="421,5,500,33"/>
+<area shape="poly" id="edge9_Node000005_Node000007" title=" " alt="" coords="403,28,329,39,242,55,165,78,137,92,118,108,112,121,113,135,120,148,132,162,165,185,202,205,197,207,162,190,128,166,115,152,107,136,107,120,114,104,134,88,163,73,241,50,328,34,408,25"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="392,106,529,134"/>
+<area shape="poly" id="edge11_Node000008_Node000007" title=" " alt="" coords="462,46,463,106,458,104,459,51"/>
+<area shape="poly" id="edge15_Node000009_Node000007" title=" " alt="" coords="515,30,534,41,548,56,551,70,551,93,544,135,528,160,507,181,459,209,457,204,503,176,524,157,539,133,546,93,546,71,543,58,530,45,515,36"/>
+<area shape="poly" id="edge10_Node000005_Node000008" title=" " alt="" coords="402,140,356,160,256,208,253,204,354,155,407,138"/>
+<area shape="poly" id="edge16_Node000009_Node000008" title=" " alt="" coords="452,146,431,208,427,204,449,150"/>
+<area shape="poly" id="edge12_Node000001_Node000009" title=" " alt="" coords="409,246,361,312,329,347,294,379,253,407,211,428,209,423,250,402,291,375,325,343,357,309,405,249"/>
+</map>

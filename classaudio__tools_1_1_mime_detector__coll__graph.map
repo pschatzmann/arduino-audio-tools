@@ -1,0 +1,11 @@
+<map id="MimeDetector" name="MimeDetector">
+<area shape="rect" id="Node000001" title="Logic to detemine the mime type from the content. By default the following mime types are supported (..." alt="" coords="21,224,135,251"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_mime_source.html" title="Abstract interface for classes that can provide MIME type information." alt="" coords="5,114,108,142"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="64,156,78,223,73,223,60,159"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="132,106,317,151"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="185,161,97,225,94,221,180,159"/>
+<area shape="rect" id="Node000004" href="$structaudio__tools_1_1_mime_detector_1_1_check.html" title=" " alt="" coords="146,5,207,33"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="179,46,190,81,206,106,200,106,185,83,177,51"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="232,5,311,33"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="261,45,236,107,232,104,258,49"/>
+</map>

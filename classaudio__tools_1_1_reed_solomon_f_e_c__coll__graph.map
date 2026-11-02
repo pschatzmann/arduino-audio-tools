@@ -1,0 +1,25 @@
+<map id="ReedSolomonFEC&lt; bytecount, additional_bytes &gt;" name="ReedSolomonFEC&lt; bytecount, additional_bytes &gt;">
+<area shape="rect" id="Node000001" title="Forward error correction using Reed&#45;Solomon: write is encoding and readBytes does the decoding." alt="" coords="30,447,250,492"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer,size_t size) and readBytes(uint8..." alt="" coords="162,338,262,366"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="199,378,156,449,152,445,194,380"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="37,207,105,234"/>
+<area shape="poly" id="edge13_Node000001_Node000003" title=" " alt="" coords="69,247,72,308,75,341,83,373,102,413,125,447,119,447,97,415,78,375,70,342,66,308,68,253"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="90,243,194,336,190,339,89,248"/>
+<area shape="poly" id="edge5_Node000002_Node000003" title=" " alt="" coords="103,241,206,336,201,339,102,247"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="45,106,97,134"/>
+<area shape="poly" id="edge14_Node000001_Node000004" title=" " alt="" coords="52,149,36,179,19,219,9,262,9,284,12,305,26,342,41,368,87,421,114,447,108,447,84,425,37,371,21,344,7,306,3,284,3,261,13,217,31,177,53,144"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="63,146,67,206,62,206,62,151"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="80,146,80,206,75,206,79,151"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_ring_buffer.html" title=" " alt="" coords="130,207,294,234"/>
+<area shape="poly" id="edge6_Node000002_Node000005" title=" " alt="" coords="214,248,215,338,210,337,211,252"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="125,106,292,134"/>
+<area shape="poly" id="edge7_Node000005_Node000006" title=" " alt="" coords="202,146,208,207,203,206,200,151"/>
+<area shape="poly" id="edge8_Node000005_Node000006" title=" " alt="" coords="219,146,221,207,215,205,217,151"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="322,5,401,33"/>
+<area shape="poly" id="edge9_Node000005_Node000007" title=" " alt="" coords="353,45,334,91,306,135,268,177,231,208,228,204,264,173,302,132,329,88,350,50"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="437,106,574,134"/>
+<area shape="poly" id="edge11_Node000008_Node000007" title=" " alt="" coords="393,39,489,105,484,106,393,44"/>
+<area shape="poly" id="edge10_Node000005_Node000008" title=" " alt="" coords="462,142,360,185,275,208,273,204,358,180,466,139"/>
+<area shape="rect" id="Node000009" href="$class_r_s_1_1_reed_solomon.html" title=" " alt="" coords="287,330,482,374"/>
+<area shape="poly" id="edge12_Node000001_Node000009" title=" " alt="" coords="328,381,187,449,185,444,322,381"/>
+</map>

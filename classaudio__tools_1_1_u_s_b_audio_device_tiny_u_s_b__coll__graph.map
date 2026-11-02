@@ -1,0 +1,60 @@
+<map id="USBAudioDeviceTinyUSB" name="USBAudioDeviceTinyUSB">
+<area shape="rect" id="Node000001" title="USBAudioDeviceBase subclass for RP2040 / Adafruit TinyUSB." alt="" coords="2050,368,2235,396"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_u_s_b_audio_device_base.html" title="USB Audio Device class for audio streaming over USB." alt="" coords="1718,115,1880,142"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1833,149,2125,368,2119,367,1831,154"/>
+<area shape="poly" id="edge30_Node000002_Node000002" title=" " alt="" coords="1768,97,1779,91,1799,88,1818,90,1830,96,1833,106,1828,116,1825,112,1828,105,1826,100,1816,95,1799,93,1781,96,1770,102"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_u_s_b_audio_stream_base.html" title="Role&#45;independent front end shared by USB Audio devices (USBAudioDeviceBase, aliased as USBAudioStream..." alt="" coords="1373,143,1537,170"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="1552,146,1720,135,1715,135,1553,151"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="" coords="1115,141,1220,169"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="1235,153,1375,156,1370,156,1236,158"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer,size_t size) and readBytes(uint8..." alt="" coords="910,233,1010,261"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="1024,227,1104,191,1152,170,1157,169,1106,196,1025,232"/>
+<area shape="poly" id="edge20_Node000004_Node000005" title=" " alt="" coords="989,222,1104,167,1112,166,1117,165,1106,172,991,227"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="596,400,664,428"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="679,415,717,407,754,394,814,362,870,325,916,289,946,263,951,260,919,293,873,329,817,367,756,399,718,412,680,420"/>
+<area shape="poly" id="edge8_Node000005_Node000006" title=" " alt="" coords="679,393,716,383,754,370,806,344,854,313,930,263,935,261,857,318,808,348,756,375,718,389,680,399"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="271,403,322,430"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="337,420,468,421,598,420,593,420,468,427,338,425"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="337,407,468,403,598,408,593,409,468,409,338,413"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_ring_buffer.html" title=" " alt="" coords="548,233,712,261"/>
+<area shape="poly" id="edge9_Node000005_Node000008" title=" " alt="" coords="728,245,912,247,907,248,728,250"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="213,323,380,350"/>
+<area shape="poly" id="edge10_Node000008_Node000009" title=" " alt="" coords="394,316,599,261,594,263,396,321"/>
+<area shape="poly" id="edge11_Node000008_Node000009" title=" " alt="" coords="344,315,550,260,545,262,345,320"/>
+<area shape="rect" id="Node000022" href="$classaudio__tools_1_1audio__tools_1_1_ring_buffer_s_p_s_c.html" title=" " alt="" coords="532,345,729,373"/>
+<area shape="poly" id="edge35_Node000022_Node000009" title=" " alt="" coords="395,349,534,360,529,361,395,354"/>
+<area shape="poly" id="edge36_Node000022_Node000009" title=" " alt="" coords="395,332,539,344,534,345,395,338"/>
+<area shape="rect" id="Node000010" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="5,187,85,214"/>
+<area shape="poly" id="edge12_Node000008_Node000010" title=" " alt="" coords="99,199,270,205,481,221,552,232,547,233,481,226,270,210,100,204"/>
+<area shape="rect" id="Node000011" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="228,248,365,276"/>
+<area shape="poly" id="edge14_Node000011_Node000010" title=" " alt="" coords="73,222,110,242,169,256,230,262,225,265,168,261,108,247,74,227"/>
+<area shape="rect" id="Node000014" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="505,61,755,106"/>
+<area shape="poly" id="edge19_Node000014_Node000010" title=" " alt="" coords="79,176,140,142,212,110,286,90,362,79,436,74,507,74,502,77,437,79,363,84,287,96,214,115,142,146,83,180"/>
+<area shape="poly" id="edge13_Node000008_Node000011" title=" " alt="" coords="380,256,550,250,545,252,381,261"/>
+<area shape="rect" id="Node000012" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="230,124,363,152"/>
+<area shape="poly" id="edge15_Node000004_Node000012" title=" " alt="" coords="378,142,758,153,1117,158,1112,160,758,159,379,148"/>
+<area shape="poly" id="edge21_Node000004_Node000012" title=" " alt="" coords="378,131,758,135,1117,149,1112,150,758,141,379,137"/>
+<area shape="poly" id="edge18_Node000014_Node000012" title=" " alt="" coords="377,122,507,102,502,105,379,127"/>
+<area shape="rect" id="Node000013" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="896,79,1024,106"/>
+<area shape="poly" id="edge16_Node000004_Node000013" title=" " alt="" coords="995,110,1081,138,1117,151,1112,151,1080,143,995,115"/>
+<area shape="poly" id="edge22_Node000004_Node000013" title=" " alt="" coords="1038,101,1081,114,1152,141,1147,141,1080,119,1038,107"/>
+<area shape="poly" id="edge17_Node000013_Node000014" title=" " alt="" coords="771,85,899,90,893,91,771,90"/>
+<area shape="rect" id="Node000015" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="918,5,1002,33"/>
+<area shape="poly" id="edge23_Node000004_Node000015" title=" " alt="" coords="999,39,1082,90,1150,141,1145,140,1079,95,999,44"/>
+<area shape="rect" id="Node000017" href="$structaudio__tools_1_1_u_s_b_audio_config.html" title="Configuration for USB Audio (inherits sample_rate / channels / bits_per_sample from AudioInfo)." alt="" coords="1105,28,1231,56"/>
+<area shape="poly" id="edge26_Node000017_Node000015" title=" " alt="" coords="1016,10,1081,13,1131,27,1126,28,1080,18,1017,16"/>
+<area shape="rect" id="Node000016" href="$classaudio__tools_1_1audio__tools_1_1_volume_support.html" title="Supports the setting and getting of the volume." alt="" coords="1108,193,1228,221"/>
+<area shape="poly" id="edge24_Node000003_Node000016" title=" " alt="" coords="1243,191,1375,170,1370,172,1244,197"/>
+<area shape="poly" id="edge27_Node000002_Node000017" title=" " alt="" coords="1246,35,1335,33,1444,36,1562,48,1678,71,1730,90,1775,114,1770,114,1728,95,1677,76,1561,53,1444,42,1335,38,1247,40"/>
+<area shape="poly" id="edge25_Node000003_Node000017" title=" " alt="" coords="1197,63,1225,84,1256,102,1315,124,1375,142,1370,142,1313,129,1254,107,1223,88,1196,69"/>
+<area shape="rect" id="Node000018" href="$classaudio__tools_1_1_u_s_b_audio2_descriptor_builder.html" title="USB Audio Class 2.0 descriptor generator." alt="" coords="1352,75,1558,102"/>
+<area shape="poly" id="edge29_Node000018_Node000017" title=" " alt="" coords="1239,57,1255,60,1354,77,1349,78,1255,65,1239,62"/>
+<area shape="poly" id="edge28_Node000002_Node000018" title=" " alt="" coords="1574,100,1720,119,1715,119,1574,105"/>
+<area shape="rect" id="Node000019" title=" " alt="" coords="1708,393,1890,421"/>
+<area shape="poly" id="edge31_Node000001_Node000019" title=" " alt="" coords="1906,397,2047,389,2052,388,1906,402"/>
+<area shape="rect" id="Node000020" href="$classaudio__tools_1_1_u_s_b_audio_backend_tiny_u_s_b.html" title="USBAudioBackend implementation wrapping the real TinyUSB device stack. Injected by the ESP32,..." alt="" coords="1701,445,1897,473"/>
+<area shape="poly" id="edge32_Node000001_Node000020" title=" " alt="" coords="1912,447,1968,438,2025,426,2070,411,2108,397,2113,396,2072,416,2026,431,1969,443,1912,452"/>
+<area shape="rect" id="Node000021" href="$classaudio__tools_1_1_u_s_b_audio_backend.html" title="Abstract seam for every raw USB&#45;stack call the UAC2 driver (USBAudioDeviceBase) needs...." alt="" coords="1385,445,1525,473"/>
+<area shape="poly" id="edge33_Node000020_Node000021" title=" " alt="" coords="1541,457,1704,459,1698,459,1541,462"/>
+<area shape="poly" id="edge34_Node000001_Node000022" title=" " alt="" coords="744,355,959,354,1800,354,1931,359,2052,371,2047,371,1931,364,1800,359,959,359,745,360"/>
+</map>

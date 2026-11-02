@@ -1,0 +1,21 @@
+<map id="SynchronizedStream" name="SynchronizedStream">
+<area shape="rect" id="Node000001" title="Wrapper class that can turn any Stream into a thread save implementation. This is done by adding a Mu..." alt="" coords="27,330,182,357"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="5,207,74,234"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="29,247,26,278,27,292,32,304,44,317,61,328,56,330,41,321,28,307,22,293,21,278,28,252"/>
+<area shape="poly" id="edge4_Node000001_Node000002" title=" " alt="" coords="39,248,44,278,54,304,65,317,80,329,75,330,62,321,50,307,39,279,37,253"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="14,106,65,134"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="32,146,36,206,30,206,31,151"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="48,146,49,206,43,206,47,151"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_mutex_base.html" title="Empty Mutex implementation which does nothing." alt="" coords="108,207,203,234"/>
+<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="150,247,129,307,115,331,111,327,124,305,145,250"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_single_buffer.html" title=" " alt="" coords="226,207,402,234"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="294,244,258,279,215,308,158,332,156,327,213,303,255,274,289,247"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="108,106,275,134"/>
+<area shape="poly" id="edge7_Node000005_Node000006" title=" " alt="" coords="213,141,294,205,289,207,212,146"/>
+<area shape="poly" id="edge8_Node000005_Node000006" title=" " alt="" coords="227,140,307,205,301,207,225,145"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="305,5,384,33"/>
+<area shape="poly" id="edge9_Node000005_Node000007" title=" " alt="" coords="343,47,319,207,314,205,338,50"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="420,106,558,134"/>
+<area shape="poly" id="edge11_Node000008_Node000007" title=" " alt="" coords="376,39,472,105,467,106,376,44"/>
+<area shape="poly" id="edge10_Node000005_Node000008" title=" " alt="" coords="455,140,339,208,336,204,450,143"/>
+</map>

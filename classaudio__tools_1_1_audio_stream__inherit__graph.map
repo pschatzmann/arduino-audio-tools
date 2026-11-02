@@ -1,0 +1,15 @@
+<map id="AudioStream" name="AudioStream">
+<area shape="rect" id="Node000001" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="" coords="144,232,250,260"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer,size_t size) and readBytes(uint8..." alt="" coords="5,157,106,184"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="95,189,174,231,169,233,93,194"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="21,81,90,109"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="47,122,51,156,46,156,46,127"/>
+<area shape="poly" id="edge5_Node000002_Node000003" title=" " alt="" coords="65,122,65,157,60,156,63,127"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="30,5,81,33"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="47,46,51,81,46,80,46,51"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="65,46,65,81,60,80,64,51"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="130,157,264,184"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="199,198,199,233,195,230,195,202"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="288,157,415,184"/>
+<area shape="poly" id="edge7_Node000001_Node000006" title=" " alt="" coords="313,191,225,234,223,229,307,192"/>
+</map>

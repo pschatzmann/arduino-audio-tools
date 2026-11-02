@@ -1,0 +1,14 @@
+<map id="Codecs" name="Codecs">
+<area shape="rect" id="Node000001" title="Audio Coder and Decoder." alt="" coords="204,2348,272,2376"/>
+<area shape="rect" id="Node000003" href="$group__decoder.html" title="Audio Decoder." alt="" coords="573,1211,649,1239"/>
+<area shape="rect" id="Node000004" href="$group__encoder.html" title="Audio Encoder." alt="" coords="574,1647,648,1675"/>
+<area shape="rect" id="Node000005" href="$group__h264.html" title="H.264 encoding/decoding using https://github.com/pschatzmann/TinyH264." alt="" coords="583,2279,639,2307"/>
+<area shape="rect" id="Node000006" href="$group__h264esp32p4.html" title="H.264 hardware encoding on ESP32&#45;P4 using https://github.com/pschatzmann/codec&#45;h264&#45;ESP32P4 (esp_h264..." alt="" coords="555,2331,667,2359"/>
+<area shape="rect" id="Node000007" href="$group__h264esp32s3.html" title="H.264 encoding/decoding on ESP32&#45;S3 using https://github.com/pschatzmann/ESP32S3&#45;h264 (esp_h264,..." alt="" coords="555,2383,667,2411"/>
+<area shape="rect" id="Node000012" href="$group__metadata.html" title="Audio Metadata (Title, Author...)." alt="" coords="569,2444,653,2472"/>
+<area shape="rect" id="Node000008" href="$group__mjpeg.html" title="Motion&#45;JPEG decoding and encoding using https://github.com/pschatzmann/TinyJPEG." alt="" coords="579,2496,643,2524"/>
+<area shape="rect" id="Node000009" href="$group__mpg.html" title="MPEG&#45;1 part 2 (video) encoding/decoding using https://github.com/pschatzmann/TinyMPG." alt="" coords="585,2548,637,2576"/>
+<area shape="rect" id="Node000011" href="$group__rtsp.html" title="Real Time Streaming Protocol (RTSP)." alt="" coords="584,2600,638,2628"/>
+<area shape="rect" id="Node000010" href="$group__video.html" title="Video playback." alt="" coords="582,2835,640,2863"/>
+<area shape="rect" id="Node000002" href="$group__main.html" title="A powerful audio library (not only) for Arduino." alt="" coords="5,2348,155,2376"/>
+</map>

@@ -1,0 +1,15 @@
+<map id="IMediaSource" name="IMediaSource">
+<area shape="rect" id="Node000001" title="Media Source Interface &#45; Contract for Media Data Providers." alt="" coords="325,5,434,33"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_r_t_s_p_media_callback_source.html" title="Callback&#45;based RTSP Media Source." alt="" coords="5,81,199,109"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="314,40,152,83,151,78,316,35"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_r_t_s_p_media_source.html" title="Unified RTSP Media Source &#45; Works with both Stream and AudioStream." alt="" coords="223,81,360,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="354,42,308,83,306,78,350,44"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_r_t_s_p_media_source_m_t_s.html" title="IMediaSource for an MPEG transport stream, e.g. live video and audio muxed by MuxerMTS: the muxer wri..." alt="" coords="385,81,550,109"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="407,41,454,81,449,80,406,46"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_r_t_s_p_video_encoder.html" title="Common base for RTP video payloaders (JPEGRtpEncoder, H264RtpEncoder, ...): an AudioEncoder that acce..." alt="" coords="574,81,716,109"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="442,35,600,80,595,81,441,40"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_h264_rtp_encoder.html" title="H.264 RTP Encoder &#45; Packetizes Annex&#45;B H.264 access units per RFC 6184 for RTSP video streaming." alt="" coords="504,157,633,184"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="623,119,583,159,581,154,618,121"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_j_p_e_g_rtp_encoder.html" title="JPEG RTP Encoder &#45; Fragments JPEG frames per RFC 2435 for RTSP video streaming." alt="" coords="658,157,783,184"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="670,117,710,157,705,155,668,122"/>
+</map>

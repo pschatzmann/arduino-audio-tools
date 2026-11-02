@@ -1,0 +1,5 @@
+<map id="USBAudioBackendTinyUSB" name="USBAudioBackendTinyUSB">
+<area shape="rect" id="Node000001" title="USBAudioBackend implementation wrapping the real TinyUSB device stack. Injected by the ESP32,..." alt="" coords="5,81,201,109"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_u_s_b_audio_backend.html" title="Abstract seam for every raw USB&#45;stack call the UAC2 driver (USBAudioDeviceBase) needs...." alt="" coords="33,5,173,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="105,47,105,82,101,80,101,51"/>
+</map>

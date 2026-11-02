@@ -1,0 +1,29 @@
+<map id="NBufferFile&lt; File, T &gt;" name="NBufferFile&lt; File, T &gt;">
+<area shape="rect" id="Node000001" title="A File backed buffer which uses the provided files for buffering with the indicated max size...." alt="" coords="212,428,374,456"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="5,274,136,302"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="98,310,155,354,223,402,267,428,262,427,220,406,152,359,97,315"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_queue.html" title=" " alt="" coords="159,266,312,310"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="230,324,229,365,232,384,239,403,250,415,264,428,259,427,246,419,235,405,227,386,224,365,226,328"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_list.html" title=" " alt="" coords="39,148,182,193"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="146,201,215,264,210,266,145,206"/>
+<area shape="rect" id="Node000005" href="$structaudio__tools_1_1audio__tools_1_1_list_1_1_node.html" title=" " alt="" coords="64,15,120,43"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="90,56,92,90,96,123,103,147,98,148,91,125,87,90,90,61"/>
+<area shape="poly" id="edge5_Node000005_Node000005" title=" " alt="" coords="134,15,143,20,146,29,144,37,138,42,122,44,118,40,135,37,139,34,141,29,139,24,136,20"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="216,15,296,43"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="211,52,176,79,146,114,124,149,119,146,142,111,173,75,214,48"/>
+<area shape="rect" id="Node000012" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="206,156,327,184"/>
+<area shape="poly" id="edge15_Node000012_Node000006" title=" " alt="" coords="259,56,268,157,263,156,257,61"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_zephyr_file.html" title="Arduino File API for Zephyr." alt="" coords="444,274,534,302"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="492,316,486,363,476,386,462,406,447,415,427,422,375,433,374,428,425,417,445,410,458,402,472,383,481,362,488,319"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="455,156,523,184"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="491,197,492,275,487,272,487,202"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="464,15,515,43"/>
+<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="483,56,483,110,486,157,481,155,478,110,480,60"/>
+<area shape="poly" id="edge10_Node000008_Node000009" title=" " alt="" coords="498,56,501,110,497,157,492,155,495,110,495,60"/>
+<area shape="rect" id="Node000010" href="$classaudio__tools_1_1audio__tools_1_1_str.html" title="Str which keeps the data on the heap. We grow the allocated memory only if the copy source is not fit..." alt="" coords="347,274,386,302"/>
+<area shape="poly" id="edge11_Node000001_Node000010" title=" " alt="" coords="359,315,324,405,306,430,303,425,319,403,354,318"/>
+<area shape="rect" id="Node000011" href="$classaudio__tools_1_1audio__tools_1_1_str_view.html" title="A simple wrapper to provide string functions on existing allocated char*. If the underlying char* is ..." alt="" coords="351,156,422,184"/>
+<area shape="poly" id="edge12_Node000010_Node000011" title=" " alt="" coords="376,197,369,239,365,275,360,272,363,238,372,201"/>
+<area shape="poly" id="edge13_Node000010_Node000011" title=" " alt="" coords="391,197,386,239,377,275,373,272,381,238,388,202"/>
+<area shape="poly" id="edge14_Node000010_Node000012" title=" " alt="" coords="285,194,322,240,355,274,350,274,318,243,284,199"/>
+</map>

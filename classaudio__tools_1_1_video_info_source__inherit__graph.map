@@ -1,0 +1,29 @@
+<map id="VideoInfoSource" name="VideoInfoSource">
+<area shape="rect" id="Node000001" title="Provider of VideoInfo (width/height/fps/format) for whoever needs to size buffers/panel setup against..." alt="" coords="5,252,133,280"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_demuxer.html" title="Common interface for demuxers (DemuxerAVI, DemuxerMP4) that split a container&#39;s video and (optional) ..." alt="" coords="223,109,304,137"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="87,238,126,192,152,168,179,148,225,130,221,134,182,152,155,172,130,196,91,241"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1_h264_decoder.html" title="H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput..." alt="" coords="209,161,318,189"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="102,241,180,198,211,188,207,191,182,203,105,246"/>
+<area shape="rect" id="Node000010" href="$classaudio__tools_1_1_h264_decoder_e_s_p32_s3.html" title="H.264 video decoder for ESP32&#45;S3: wraps esp_h264::H264Decoder (https://github.com/pschatzmann/ESP32S3..." alt="" coords="181,213,346,258"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="147,251,183,247,178,250,149,256"/>
+<area shape="rect" id="Node000011" href="$classaudio__tools_1_1_m_j_p_e_g_decoder.html" title="Motion&#45;JPEG video decoder: wraps TinyJPEGDecoder (https://github.com/pschatzmann/TinyJPEG,..." alt="" coords="205,281,322,309"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="148,275,207,285,202,287,148,280"/>
+<area shape="rect" id="Node000012" href="$classaudio__tools_1_1_m_p_g_decoder.html" title="MPEG&#45;1 (part 2) video decoder wrapper around TinyMPGDecoder." alt="" coords="211,333,316,361"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="110,285,182,318,217,332,212,333,180,323,110,290"/>
+<area shape="rect" id="Node000013" href="$classaudio__tools_1_1_multi_video_decoder.html" title="Manages multiple VideoDecoders with automatic format detection &#45; the video&#45;side counterpart of MultiD..." alt="" coords="191,385,336,413"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="92,289,132,331,182,370,209,385,204,385,179,375,128,335,90,294"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_demuxer_a_v_i.html" title="AVI Container Decoder which can be fed with small chunks of data. The minimum length must be bigger t..." alt="" coords="428,5,529,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="296,98,341,70,393,43,429,32,425,35,395,48,344,75,300,102"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_demuxer_m_p4.html" title="DemuxerMP4 extracts both the audio and (H.264) video track from a general, interleaved MP4/ISO&#45;BMFF s..." alt="" coords="424,57,532,85"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="318,107,426,83,421,86,320,112"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_demuxer_m_p_g.html" title="MPEG&#45;1 System (Program) Stream Demuxer, as defined by ISO/IEC 11172&#45;1: splits the pack_header/system_..." alt="" coords="423,109,533,137"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="319,121,425,122,420,124,320,126"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_demuxer_m_t_s.html" title="ISO/IEC 13818&#45;1 MPEG Transport Stream Demuxer: parses the fixed 188&#45;byte TS packet framing,..." alt="" coords="424,161,532,189"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="318,134,426,161,421,163,319,139"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_multi_video_demuxer.html" title="Manages multiple Demuxers with automatic container&#45;format detection &#45; the container&#45;side counterpart ..." alt="" coords="403,213,553,241"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="318,134,347,148,363,161,372,174,381,186,395,198,422,213,416,213,393,203,377,190,368,177,359,164,345,152,319,139"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_multi_video_demuxer_full.html" title="MultiVideoDemuxer pre&#45;registered with every container format this library ships a demuxer for: Demuxe..." alt="" coords="610,213,784,241"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="569,225,613,227,607,228,569,230"/>
+<area shape="rect" id="Node000014" href="$classaudio__tools_1_1_multi_video_decoder_full.html" title="MultiVideoDecoder pre&#45;registered with every video codec this library ships a portable (no hardware&#45;sp..." alt="" coords="394,385,562,413"/>
+<area shape="poly" id="edge13_Node000013_Node000014" title=" " alt="" coords="352,397,396,399,391,399,352,402"/>
+</map>

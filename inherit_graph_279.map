@@ -1,0 +1,51 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$classaudio__tools_1_1audio__tools_1_1_r_t_s_p_format.html" title="Audio Format Definition &#45; Base class for RTSP audio formats." alt="" coords="5,604,105,632"/>
+<area shape="rect" id="Node000001" href="$classaudio__tools_1_1_r_t_s_p_format_a_a_c.html" title="AAC format for RTSP https://en.wikipedia.org/wiki/RTP_payload_formats See RFC 3640 for details." alt="" coords="223,5,349,33"/>
+<area shape="poly" id="edge872_Node000000_Node000001" title=" " alt="" coords="54,588,60,470,75,306,87,224,103,148,124,86,137,62,151,44,166,32,184,23,224,15,220,19,186,28,169,36,155,48,141,65,129,88,109,150,92,224,80,307,65,470,60,588"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_r_t_s_p_format_a_d_p_c_m.html" title="RTSP/RTP formatter for mono IMA ADPCM (DVI4)." alt="" coords="153,57,419,85"/>
+<area shape="poly" id="edge873_Node000000_Node000002" title=" " alt="" coords="55,589,62,480,78,332,91,258,107,190,126,134,151,96,170,83,167,88,155,100,131,136,112,191,96,259,83,333,67,481,60,589"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_r_t_s_p_format_abt_x.html" title="abtX format for RTSP https://en.wikipedia.org/wiki/RTP_payload_formats" alt="" coords="221,109,351,137"/>
+<area shape="poly" id="edge874_Node000000_Node000003" title=" " alt="" coords="56,589,64,490,82,358,94,291,110,231,128,182,151,148,166,136,183,128,222,120,218,124,185,133,169,141,155,152,133,184,115,233,100,292,87,359,70,490,61,589"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_r_t_s_p_format_g711.html" title="G711 μ&#45;Law format for RTSP https://en.wikipedia.org/wiki/RTP_payload_formats Packet intervall: 20,..." alt="" coords="219,161,352,189"/>
+<area shape="poly" id="edge875_Node000000_Node000004" title=" " alt="" coords="56,588,67,500,85,383,113,272,131,229,151,200,182,180,220,172,217,176,184,185,155,204,135,232,118,274,91,384,72,500,62,589"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_r_t_s_p_format_g_s_m.html" title="GSM format for RTSP https://en.wikipedia.org/wiki/RTP_payload_formats." alt="" coords="221,213,350,241"/>
+<area shape="poly" id="edge876_Node000000_Node000005" title=" " alt="" coords="57,589,69,510,89,409,116,314,133,277,151,252,183,232,222,224,219,228,185,237,154,256,137,280,121,316,94,410,75,511,63,589"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_r_t_s_p_format_h264.html" title="H.264 (AVC) format for RTSP video streaming, per RFC 6184." alt="" coords="219,265,352,293"/>
+<area shape="poly" id="edge877_Node000000_Node000006" title=" " alt="" coords="53,588,57,528,71,451,83,411,100,372,123,335,151,304,183,285,220,277,217,281,185,290,154,308,127,339,105,374,88,413,76,452,63,529,59,588"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_r_t_s_p_format_m_j_p_e_g.html" title="MJPEG (Motion JPEG) format for RTSP video streaming." alt="" coords="215,317,356,345"/>
+<area shape="poly" id="edge878_Node000000_Node000007" title=" " alt="" coords="56,588,63,538,78,475,107,410,127,381,151,356,181,338,216,330,213,334,183,343,154,360,131,384,111,413,84,476,68,539,61,589"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_r_t_s_p_format_m_p3.html" title="MP3 format for RTSP https://en.wikipedia.org/wiki/RTP_payload_formats." alt="" coords="222,369,350,397"/>
+<area shape="poly" id="edge879_Node000000_Node000008" title=" " alt="" coords="59,588,69,547,86,498,113,449,131,427,151,408,185,390,224,382,220,386,187,395,154,412,135,431,118,452,91,500,74,549,64,589"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1_r_t_s_p_format_m_t_s.html" title="MPEG&#45;2 Transport Stream (MP2T) format for RTSP streaming of a pre&#45;muxed audio+video container,..." alt="" coords="222,421,350,449"/>
+<area shape="poly" id="edge880_Node000000_Node000009" title=" " alt="" coords="63,589,76,558,95,523,120,488,151,460,185,443,224,436,220,439,187,448,154,464,124,492,100,525,81,560,68,590"/>
+<area shape="rect" id="Node000010" href="$classaudio__tools_1_1_r_t_s_p_format_opus.html" title="Opus format for RTSP https://en.wikipedia.org/wiki/RTP_payload_formats." alt="" coords="220,473,352,501"/>
+<area shape="poly" id="edge881_Node000000_Node000010" title=" " alt="" coords="71,590,105,549,127,528,151,511,184,498,221,490,217,494,186,503,154,516,130,532,109,552,76,592"/>
+<area shape="rect" id="Node000011" href="$classaudio__tools_1_1_r_t_s_p_format_p_c_m.html" title="Linear PCM Format for RTSP Streaming." alt="" coords="222,525,350,553"/>
+<area shape="poly" id="edge882_Node000000_Node000011" title=" " alt="" coords="89,594,152,563,223,546,219,550,154,568,93,598"/>
+<area shape="rect" id="Node000012" href="$classaudio__tools_1_1_r_t_s_p_format_p_c_m8.html" title="L8 format for RTSP https://en.wikipedia.org/wiki/RTP_payload_formats." alt="" coords="218,577,354,605"/>
+<area shape="poly" id="edge883_Node000000_Node000012" title=" " alt="" coords="119,608,219,597,215,601,122,613"/>
+<area shape="rect" id="Node000013" href="$classaudio__tools_1_1audio__tools_1_1_r_t_s_p_format_a_a_c.html" title="AAC format for RTSP https://en.wikipedia.org/wiki/RTP_payload_formats See RFC 3640 for details." alt="" coords="223,629,349,657"/>
+<area shape="poly" id="edge884_Node000000_Node000013" title=" " alt="" coords="119,623,224,634,220,638,122,627"/>
+<area shape="rect" id="Node000014" href="$classaudio__tools_1_1audio__tools_1_1_r_t_s_p_format_a_d_p_c_m.html" title="RTSP/RTP formatter for mono IMA ADPCM (DVI4)." alt="" coords="153,681,419,709"/>
+<area shape="poly" id="edge885_Node000000_Node000014" title=" " alt="" coords="91,637,154,666,198,679,193,682,152,671,93,642"/>
+<area shape="rect" id="Node000015" href="$classaudio__tools_1_1audio__tools_1_1_r_t_s_p_format_abt_x.html" title="abtX format for RTSP https://en.wikipedia.org/wiki/RTP_payload_formats" alt="" coords="221,733,351,761"/>
+<area shape="poly" id="edge886_Node000000_Node000015" title=" " alt="" coords="73,642,109,683,130,702,154,718,186,732,222,741,218,744,185,737,151,723,127,706,105,686,74,647"/>
+<area shape="rect" id="Node000016" href="$classaudio__tools_1_1audio__tools_1_1_r_t_s_p_format_g711.html" title="G711 μ&#45;Law format for RTSP https://en.wikipedia.org/wiki/RTP_payload_formats Packet intervall: 20,..." alt="" coords="219,785,352,813"/>
+<area shape="poly" id="edge887_Node000000_Node000016" title=" " alt="" coords="66,644,81,676,100,710,124,743,154,770,185,786,221,795,216,798,184,791,151,775,120,746,95,713,77,678,66,649"/>
+<area shape="rect" id="Node000017" href="$classaudio__tools_1_1audio__tools_1_1_r_t_s_p_format_g_s_m.html" title="GSM format for RTSP https://en.wikipedia.org/wiki/RTP_payload_formats." alt="" coords="221,837,350,865"/>
+<area shape="poly" id="edge888_Node000000_Node000017" title=" " alt="" coords="61,644,74,686,91,735,118,783,135,804,154,822,186,839,223,849,218,851,184,844,151,827,131,808,113,786,87,737,69,688,61,649"/>
+<area shape="rect" id="Node000018" href="$classaudio__tools_1_1audio__tools_1_1_r_t_s_p_format_h264.html" title="H.264 (AVC) format for RTSP video streaming, per RFC 6184." alt="" coords="219,889,352,917"/>
+<area shape="poly" id="edge889_Node000000_Node000018" title=" " alt="" coords="58,645,68,697,84,759,112,822,131,850,154,874,185,892,221,901,216,904,183,897,151,879,127,853,107,824,79,761,63,698,58,650"/>
+<area shape="rect" id="Node000019" href="$classaudio__tools_1_1audio__tools_1_1_r_t_s_p_format_m_j_p_e_g.html" title="MJPEG (Motion JPEG) format for RTSP video streaming." alt="" coords="215,941,356,969"/>
+<area shape="poly" id="edge890_Node000000_Node000019" title=" " alt="" coords="56,645,63,707,76,783,89,822,105,861,127,896,154,926,183,944,217,954,212,956,181,948,151,931,123,899,101,863,84,824,71,784,58,707,56,650"/>
+<area shape="rect" id="Node000020" href="$classaudio__tools_1_1audio__tools_1_1_r_t_s_p_format_m_p3.html" title="MP3 format for RTSP https://en.wikipedia.org/wiki/RTP_payload_formats." alt="" coords="222,993,350,1021"/>
+<area shape="poly" id="edge891_Node000000_Node000020" title=" " alt="" coords="60,645,75,725,95,825,121,919,137,955,155,979,169,989,186,997,224,1007,219,1009,184,1002,166,994,151,982,133,957,116,921,89,826,70,726,60,650"/>
+<area shape="rect" id="Node000021" href="$classaudio__tools_1_1audio__tools_1_1_r_t_s_p_format_m_t_s.html" title="MPEG&#45;2 Transport Stream (MP2T) format for RTSP streaming of a pre&#45;muxed audio+video container,..." alt="" coords="222,1045,350,1073"/>
+<area shape="poly" id="edge892_Node000000_Node000021" title=" " alt="" coords="59,644,72,735,91,851,118,960,135,1003,155,1031,169,1042,186,1050,224,1059,219,1061,184,1055,166,1046,151,1034,131,1005,113,962,85,852,67,736,59,649"/>
+<area shape="rect" id="Node000022" href="$classaudio__tools_1_1audio__tools_1_1_r_t_s_p_format_opus.html" title="Opus format for RTSP https://en.wikipedia.org/wiki/RTP_payload_formats." alt="" coords="220,1097,352,1125"/>
+<area shape="poly" id="edge893_Node000000_Node000022" title=" " alt="" coords="58,644,70,745,87,876,100,942,115,1002,133,1050,155,1083,168,1093,184,1101,222,1112,217,1113,183,1106,166,1098,151,1086,129,1053,110,1004,94,943,82,877,64,745,58,649"/>
+<area shape="rect" id="Node000023" href="$classaudio__tools_1_1audio__tools_1_1_r_t_s_p_format_p_c_m.html" title="Linear PCM Format for RTSP Streaming." alt="" coords="222,1149,350,1177"/>
+<area shape="poly" id="edge894_Node000000_Node000023" title=" " alt="" coords="58,644,67,755,84,902,96,976,112,1043,131,1098,155,1135,169,1146,185,1154,224,1164,219,1165,184,1159,166,1150,151,1138,126,1100,107,1045,91,977,78,902,62,755,57,649"/>
+<area shape="rect" id="Node000024" href="$classaudio__tools_1_1audio__tools_1_1_r_t_s_p_format_p_c_m8.html" title="L8 format for RTSP https://en.wikipedia.org/wiki/RTP_payload_formats." alt="" coords="218,1201,354,1229"/>
+<area shape="poly" id="edge895_Node000000_Node000024" title=" " alt="" coords="57,645,65,765,80,928,93,1010,109,1085,129,1146,141,1169,155,1187,168,1197,183,1205,220,1216,214,1216,181,1210,165,1202,151,1190,137,1172,124,1148,104,1086,87,1011,75,929,60,766,57,650"/>
+</map>

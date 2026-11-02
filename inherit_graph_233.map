@@ -1,0 +1,23 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$classaudio__tools_1_1_mutex_base.html" title="Empty Mutex implementation which does nothing." alt="" coords="5,240,100,268"/>
+<area shape="rect" id="Node000001" href="$classaudio__tools_1_1_mutex_r_p2040.html" title="Mutex API for non IRQ mutual exclusion between cores. Mutexes are application level locks usually use..." alt="" coords="180,5,291,33"/>
+<area shape="poly" id="edge850_Node000000_Node000001" title=" " alt="" coords="56,224,67,184,84,135,110,86,146,44,181,26,178,31,149,48,114,89,89,138,72,186,62,225"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_mutex_r_t_o_s.html" title="Mutex implemntation using FreeRTOS." alt="" coords="187,57,284,85"/>
+<area shape="poly" id="edge851_Node000000_Node000002" title=" " alt="" coords="61,224,92,160,116,125,146,96,165,84,189,77,185,81,167,89,149,100,120,129,97,162,66,226"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_mutex_recursive_r_p2040.html" title="Recursive Mutex implementation using the RP2040 Pico SDK: the owning core/task can lock it multiple t..." alt="" coords="148,109,323,137"/>
+<area shape="poly" id="edge852_Node000000_Node000003" title=" " alt="" coords="69,226,102,185,146,148,174,136,171,140,149,152,106,189,74,228"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_mutex_recursive_r_t_o_s.html" title="Recursive Mutex implemntation using FreeRTOS." alt="" coords="155,161,316,189"/>
+<area shape="poly" id="edge853_Node000000_Node000004" title=" " alt="" coords="88,230,147,199,183,188,179,191,149,204,91,234"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_mutex_recursive_zephyr.html" title="Recursive Mutex implementation using Zephyr kernel mutex." alt="" coords="149,213,322,241"/>
+<area shape="poly" id="edge854_Node000000_Node000005" title=" " alt="" coords="114,242,151,238,147,242,117,247"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_mutex_zephyr.html" title="Mutex implementation using Zephyr kernel mutex." alt="" coords="181,265,290,293"/>
+<area shape="poly" id="edge855_Node000000_Node000006" title=" " alt="" coords="114,260,183,270,179,273,116,265"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_no_interrupt_handler.html" title="Disable, enable interrupts (only on the actual core)." alt="" coords="162,317,308,345"/>
+<area shape="poly" id="edge856_Node000000_Node000007" title=" " alt="" coords="90,273,149,302,184,316,179,318,147,307,91,279"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_spin_lock.html" title="Busy&#45;wait lock based on std::atomic &#45; available on all platforms that support &lt;atomic&gt;." alt="" coords="196,369,275,397"/>
+<area shape="poly" id="edge857_Node000000_Node000008" title=" " alt="" coords="72,278,106,318,149,354,172,366,198,375,193,376,170,371,146,359,102,322,72,283"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1_std_mutex.html" title="Mutex implemntation based on std::mutex." alt="" coords="194,421,277,449"/>
+<area shape="poly" id="edge858_Node000000_Node000009" title=" " alt="" coords="64,280,97,345,121,378,149,406,171,419,196,429,191,429,169,424,146,411,117,381,93,347,63,285"/>
+<area shape="rect" id="Node000010" href="$classaudio__tools_1_1_std_recursive_mutex.html" title="Mutex implemntation based on std::mutex." alt="" coords="162,473,309,501"/>
+<area shape="poly" id="edge859_Node000000_Node000010" title=" " alt="" coords="60,281,72,322,89,370,115,418,149,458,169,473,164,473,146,463,110,421,84,372,67,324,59,286"/>
+</map>

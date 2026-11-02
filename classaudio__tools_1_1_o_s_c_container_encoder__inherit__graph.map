@@ -1,0 +1,14 @@
+<map id="OSCContainerEncoder" name="OSCContainerEncoder">
+<area shape="rect" id="Node000001" title="Wraps the encoded data into OSC info and data segments so that the receiver can recover the audio con..." alt="" coords="52,232,215,260"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_audio_encoder.html" title="Encoding of PCM data." alt="" coords="78,157,188,184"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="135,198,136,233,131,231,131,202"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="" coords="23,81,121,109"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="85,119,118,156,113,157,84,124"/>
+<area shape="poly" id="edge6_Node000002_Node000003" title=" " alt="" coords="101,117,132,156,127,157,100,123"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="5,5,139,33"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="64,46,68,81,62,80,63,51"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="81,46,82,81,76,80,80,51"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_mime_source.html" title="Abstract interface for classes that can provide MIME type information." alt="" coords="145,81,247,109"/>
+<area shape="poly" id="edge5_Node000002_Node000005" title=" " alt="" coords="169,118,139,158,135,154,165,122"/>
+<area shape="poly" id="edge7_Node000002_Node000005" title=" " alt="" coords="185,120,153,158,150,154,181,123"/>
+</map>

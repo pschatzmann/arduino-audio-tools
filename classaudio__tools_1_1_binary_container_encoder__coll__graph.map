@@ -1,0 +1,38 @@
+<map id="BinaryContainerEncoder" name="BinaryContainerEncoder">
+<area shape="rect" id="Node000001" title="Wraps the encoded data into Config, Data, and Meta segments so that we can recover the audio configur..." alt="" coords="788,316,966,344"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_audio_encoder.html" title="Encoding of PCM data." alt="" coords="493,63,604,90"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="618,82,693,101,731,118,765,140,787,160,807,183,838,232,860,279,873,317,869,315,855,281,834,235,802,186,783,163,762,144,729,123,692,106,619,87"/>
+<area shape="poly" id="edge21_Node000001_Node000002" title=" " alt="" coords="582,97,765,234,862,316,856,315,762,239,581,102"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="" coords="202,5,301,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="308,35,495,72,491,75,309,40"/>
+<area shape="poly" id="edge6_Node000002_Node000003" title=" " alt="" coords="316,21,509,61,504,64,317,27"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="5,5,139,33"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="153,26,204,26,200,29,156,30"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="153,8,204,9,200,13,156,12"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_mime_source.html" title="Abstract interface for classes that can provide MIME type information." alt="" coords="200,63,303,90"/>
+<area shape="poly" id="edge5_Node000002_Node000005" title=" " alt="" coords="318,82,495,82,491,85,319,87"/>
+<area shape="poly" id="edge7_Node000002_Node000005" title=" " alt="" coords="318,66,495,68,491,71,319,71"/>
+<area shape="rect" id="Node000006" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="210,148,293,176"/>
+<area shape="poly" id="edge8_Node000002_Node000006" title=" " alt="" coords="307,143,499,89,495,93,310,148"/>
+<area shape="rect" id="Node000007" href="$structaudio__tools_1_1_simple_container_config.html" title=" " alt="" coords="463,232,634,260"/>
+<area shape="poly" id="edge11_Node000007_Node000006" title=" " alt="" coords="308,176,340,186,496,230,491,233,339,191,309,182"/>
+<area shape="poly" id="edge9_Node000001_Node000007" title=" " alt="" coords="649,256,707,266,764,281,808,296,849,316,844,315,806,301,763,286,706,272,649,261"/>
+<area shape="rect" id="Node000008" href="$structaudio__tools_1_1_common_header.html" title=" " alt="" coords="188,344,315,372"/>
+<area shape="poly" id="edge10_Node000007_Node000008" title=" " alt="" coords="275,331,304,307,338,286,400,264,465,253,460,255,402,269,340,291,307,312,278,336"/>
+<area shape="rect" id="Node000009" href="$structaudio__tools_1_1_simple_container_data_header.html" title=" " alt="" coords="445,288,652,316"/>
+<area shape="poly" id="edge13_Node000009_Node000008" title=" " alt="" coords="308,337,339,329,447,312,442,314,340,334,310,341"/>
+<area shape="rect" id="Node000010" href="$structaudio__tools_1_1_simple_container_meta_data_header.html" title=" " alt="" coords="428,340,669,368"/>
+<area shape="poly" id="edge15_Node000010_Node000008" title=" " alt="" coords="331,354,404,354,431,355,425,356,404,359,332,360"/>
+<area shape="rect" id="Node000011" href="$structaudio__tools_1_1_simple_container_video_config.html" title=" " alt="" coords="445,460,652,488"/>
+<area shape="poly" id="edge17_Node000011_Node000008" title=" " alt="" coords="277,380,306,405,341,427,392,447,447,462,442,462,390,452,338,432,303,410,276,385"/>
+<area shape="rect" id="Node000013" href="$structaudio__tools_1_1_simple_container_video_data_header.html" title=" " alt="" coords="450,392,647,436"/>
+<area shape="poly" id="edge20_Node000013_Node000008" title=" " alt="" coords="305,374,340,384,452,404,447,406,339,389,305,380"/>
+<area shape="poly" id="edge12_Node000001_Node000009" title=" " alt="" coords="667,309,790,322,785,323,668,315"/>
+<area shape="poly" id="edge14_Node000001_Node000010" title=" " alt="" coords="684,358,763,354,828,344,823,345,764,359,684,363"/>
+<area shape="poly" id="edge16_Node000001_Node000011" title=" " alt="" coords="667,463,716,452,762,434,794,414,822,389,863,346,867,343,826,392,797,418,765,439,717,457,668,468"/>
+<area shape="rect" id="Node000012" href="$structaudio__tools_1_1_video_info.html" title="Basic video information (width/height/codec/frame size), analogous to AudioInfo &#45; common to both Demu..." alt="" coords="210,512,293,540"/>
+<area shape="poly" id="edge18_Node000011_Node000012" title=" " alt="" coords="309,532,356,533,380,529,403,522,415,511,427,498,455,489,460,488,430,503,418,515,406,526,382,534,357,538,309,538"/>
+<area shape="poly" id="edge19_Node000001_Node000013" title=" " alt="" coords="662,407,713,400,763,388,813,367,853,345,858,343,815,371,765,393,714,406,663,413"/>
+<area shape="rect" id="Node000014" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="523,512,574,540"/>
+<area shape="poly" id="edge22_Node000001_Node000014" title=" " alt="" coords="589,525,628,524,673,519,719,507,762,487,801,454,831,414,854,374,868,346,872,343,858,377,836,417,805,458,765,492,721,512,674,524,629,530,590,531"/>
+</map>

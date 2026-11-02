@@ -1,0 +1,15 @@
+<map id="OutputTinyGPU" name="OutputTinyGPU">
+<area shape="rect" id="Node000001" title="Bridges VideoDecoder&#39;s write() calls to a TinyGPU DisplayDriver (e.g. ILI9341Driver,..." alt="" coords="264,251,385,279"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory...." alt="" coords="5,106,108,134"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="85,141,143,183,214,225,277,251,272,251,211,230,140,188,84,146"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_video_info_source.html" title="Provider of VideoInfo (width/height/fps/format) for whoever needs to size buffers/panel setup against..." alt="" coords="132,106,259,134"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="211,144,239,185,273,225,305,251,299,250,269,229,234,188,209,149"/>
+<area shape="rect" id="Node000004" href="$structaudio__tools_1_1_video_info.html" title="Basic video information (width/height/codec/frame size), analogous to AudioInfo &#45; common to both Demu..." alt="" coords="283,106,366,134"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="327,148,327,252,322,249,322,151"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="390,106,534,134"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="445,145,412,187,372,229,343,253,341,249,368,225,408,183,440,147"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="422,5,502,33"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="463,47,464,107,459,104,460,51"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="558,106,667,134"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="609,147,593,191,580,212,562,230,531,243,486,253,386,263,385,258,485,247,529,238,559,225,575,209,588,189,604,150"/>
+</map>

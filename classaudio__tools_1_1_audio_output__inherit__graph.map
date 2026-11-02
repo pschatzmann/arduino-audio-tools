@@ -1,0 +1,11 @@
+<map id="AudioOutput" name="AudioOutput">
+<area shape="rect" id="Node000001" title="Abstract Audio Ouptut class." alt="" coords="96,81,198,109"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_audio_output_with_callback.html" title="ESP8266Audio AudioOutput class which stores the data in a temporary buffer. The buffer can be consume..." alt="" coords="53,157,241,184"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="149,123,149,158,145,155,145,126"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="5,5,57,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="65,39,129,79,124,82,64,44"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="80,5,214,33"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="148,47,150,81,144,80,146,51"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="238,5,365,33"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="258,41,176,83,173,78,262,39"/>
+</map>

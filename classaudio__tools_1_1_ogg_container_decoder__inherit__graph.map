@@ -1,0 +1,21 @@
+<map id="OggContainerDecoder" name="OggContainerDecoder">
+<area shape="rect" id="Node000001" title="Decoder for Ogg Container. Decodes a packet from an Ogg container. The Ogg begin segment contains the..." alt="" coords="74,308,238,336"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_ogg_vorbis_decoder.html" title="Ogg Vorbis Decoder." alt="" coords="5,384,147,411"/>
+<area shape="poly" id="edge10_Node000001_Node000007" title=" " alt="" coords="133,346,92,385,89,381,128,347"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_opus_ogg_decoder.html" title="Opus Decoder which uses the Ogg Container. See https://datatracker.ietf.org/doc/html/rfc7845...." alt="" coords="170,384,304,411"/>
+<area shape="poly" id="edge11_Node000001_Node000008" title=" " alt="" coords="183,344,226,383,220,383,181,349"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_container_decoder.html" title="Parent class for all container formats." alt="" coords="87,232,225,260"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="157,274,158,309,154,307,155,278"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_audio_decoder.html" title="Decoding of encoded audio into PCM data." alt="" coords="100,157,212,184"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="148,197,152,233,146,231,146,202"/>
+<area shape="poly" id="edge9_Node000002_Node000003" title=" " alt="" coords="166,197,166,233,161,231,164,202"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="" coords="39,81,137,109"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="102,118,139,155,134,157,103,124"/>
+<area shape="poly" id="edge7_Node000003_Node000004" title=" " alt="" coords="118,117,154,156,148,157,118,122"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="21,5,155,33"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="79,46,84,81,78,80,79,51"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="97,46,98,81,92,80,96,51"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="162,81,289,109"/>
+<area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="193,122,163,158,159,155,196,117"/>
+<area shape="poly" id="edge8_Node000003_Node000006" title=" " alt="" coords="209,123,177,158,173,154,212,119"/>
+</map>

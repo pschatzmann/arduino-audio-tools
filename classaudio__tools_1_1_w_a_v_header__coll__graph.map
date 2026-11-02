@@ -1,0 +1,17 @@
+<map id="WAVHeader" name="WAVHeader">
+<area shape="rect" id="Node000001" title="Parser for Wav header data for details see https://de.wikipedia.org/wiki/RIFF_WAVE." alt="" coords="96,307,194,335"/>
+<area shape="rect" id="Node000002" href="$structaudio__tools_1_1_w_a_v_audio_info.html" title="Sound information which is available in the WAV header." alt="" coords="5,207,117,234"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="79,244,109,282,133,307,128,307,105,285,77,249"/>
+<area shape="rect" id="Node000003" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="19,106,103,134"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="62,147,64,206,58,206,60,152"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_single_buffer.html" title=" " alt="" coords="141,207,317,234"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="215,246,187,285,162,309,159,304,183,282,210,249"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="136,106,303,134"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="216,147,224,207,219,205,213,152"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="232,147,237,207,232,205,229,151"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="333,5,413,33"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="364,46,345,91,318,135,281,177,246,209,243,204,277,173,314,132,340,88,360,50"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="448,106,586,134"/>
+<area shape="poly" id="edge8_Node000007_Node000006" title=" " alt="" coords="405,39,500,105,495,106,404,44"/>
+<area shape="poly" id="edge7_Node000004_Node000007" title=" " alt="" coords="473,141,371,185,289,209,287,204,369,180,478,139"/>
+</map>

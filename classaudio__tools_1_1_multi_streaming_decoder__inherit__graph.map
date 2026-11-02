@@ -1,0 +1,9 @@
+<map id="MultiStreamingDecoder" name="MultiStreamingDecoder">
+<area shape="rect" id="Node000001" title="Manage multiple StreamingDecoders with automatic format detection." alt="" coords="59,157,234,184"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_streaming_decoder.html" title="A Streaming Decoder where we provide both the input and output as streams." alt="" coords="75,81,218,109"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="148,123,149,158,144,155,144,126"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="5,5,133,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="94,41,135,80,130,81,93,47"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="157,5,290,33"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="201,42,162,83,158,79,197,45"/>
+</map>

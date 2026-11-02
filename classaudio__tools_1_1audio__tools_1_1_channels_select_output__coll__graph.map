@@ -1,0 +1,41 @@
+<map id="ChannelsSelectOutput" name="ChannelsSelectOutput">
+<area shape="rect" id="Node000001" title="Flexible functionality to extract one or more channels from a multichannel signal...." alt="" coords="1691,310,1857,338"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_audio_output.html" title="Abstract Audio Ouptut class." alt="" coords="1029,406,1132,434"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1147,408,1688,335,1694,335,1147,413"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="772,348,824,376"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="839,377,956,402,1031,420,1026,420,955,408,839,382"/>
+<area shape="poly" id="edge8_Node000002_Node000003" title=" " alt="" coords="840,358,956,378,1058,405,1052,405,955,384,839,363"/>
+<area shape="rect" id="Node000013" href="$structaudio__tools_1_1audio__tools_1_1_channels_select_output_1_1_channel_selection_output_def.html" title=" " alt="" coords="980,168,1181,196"/>
+<area shape="poly" id="edge20_Node000013_Node000003" title=" " alt="" coords="838,350,895,332,954,302,989,276,1020,247,1066,198,1070,195,1024,251,992,280,957,307,897,337,839,355"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="5,436,139,464"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="154,456,475,461,679,458,885,449,967,442,1036,434,1041,434,968,447,886,454,679,463,475,466,155,461"/>
+<area shape="poly" id="edge9_Node000002_Node000004" title=" " alt="" coords="154,442,475,438,679,434,886,425,1031,416,1026,417,886,430,679,439,475,443,155,447"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="267,383,517,427"/>
+<area shape="poly" id="edge6_Node000006_Node000004" title=" " alt="" coords="154,436,269,421,264,424,155,441"/>
+<area shape="poly" id="edge21_Node000013_Node000004" title=" " alt="" coords="83,421,113,370,135,345,161,324,233,289,297,271,356,265,414,266,536,277,606,277,686,269,841,236,1022,196,1017,198,842,241,687,274,606,282,535,282,414,272,357,270,298,276,235,294,164,329,138,348,117,373,87,424"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="734,400,862,428"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="877,421,1031,426,1026,426,877,427"/>
+<area shape="poly" id="edge10_Node000002_Node000005" title=" " alt="" coords="877,405,1031,411,1026,412,877,410"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="532,406,737,412,732,413,533,411"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="32,123,112,151"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="84,163,117,226,138,259,165,288,201,318,242,343,324,381,319,383,240,347,198,322,161,292,134,262,112,228,84,168"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1audio__tools_1_1_single_buffer.html" title=" " alt="" coords="710,171,886,199"/>
+<area shape="poly" id="edge15_Node000009_Node000007" title=" " alt="" coords="105,157,179,198,222,217,267,231,334,243,403,247,471,246,538,239,658,219,752,199,747,200,659,224,539,245,471,251,402,252,333,248,266,237,220,222,176,203,106,162"/>
+<area shape="rect" id="Node000011" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="323,118,460,146"/>
+<area shape="poly" id="edge17_Node000011_Node000007" title=" " alt="" coords="126,134,243,133,325,132,321,135,243,138,128,139"/>
+<area shape="rect" id="Node000012" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="1281,152,1549,213"/>
+<area shape="poly" id="edge25_Node000012_Node000007" title=" " alt="" coords="96,111,126,86,162,65,223,42,273,31,325,28,390,28,1082,28,1125,31,1168,40,1210,54,1250,71,1321,111,1377,151,1372,151,1318,115,1248,76,1208,59,1167,45,1124,36,1082,33,391,33,325,33,274,36,224,47,164,70,129,90,100,114"/>
+<area shape="rect" id="Node000014" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="541,67,686,95"/>
+<area shape="poly" id="edge24_Node000014_Node000007" title=" " alt="" coords="125,117,162,108,264,93,367,84,543,79,538,82,368,90,265,98,163,113,128,121"/>
+<area shape="rect" id="Node000008" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="756,526,840,554"/>
+<area shape="poly" id="edge11_Node000002_Node000008" title=" " alt="" coords="855,544,905,542,955,530,991,510,1022,483,1066,435,1071,433,1026,487,994,514,957,535,906,548,856,549"/>
+<area shape="poly" id="edge12_Node000002_Node000009" title=" " alt="" coords="842,204,899,236,957,278,993,310,1025,346,1071,406,1066,404,1021,349,989,314,954,282,896,241,842,209"/>
+<area shape="poly" id="edge22_Node000013_Node000009" title=" " alt="" coords="901,181,982,183,977,184,902,187"/>
+<area shape="rect" id="Node000010" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="308,170,476,198"/>
+<area shape="poly" id="edge13_Node000009_Node000010" title=" " alt="" coords="491,189,712,191,708,193,492,194"/>
+<area shape="poly" id="edge14_Node000009_Node000010" title=" " alt="" coords="491,174,712,176,708,178,492,179"/>
+<area shape="poly" id="edge16_Node000009_Node000011" title=" " alt="" coords="476,133,577,142,687,156,746,170,741,171,686,161,577,147,477,139"/>
+<area shape="poly" id="edge18_Node000001_Node000012" title=" " alt="" coords="1510,217,1739,309,1734,309,1509,222"/>
+<area shape="poly" id="edge19_Node000012_Node000013" title=" " alt="" coords="1196,180,1283,182,1278,183,1197,185"/>
+<area shape="poly" id="edge23_Node000013_Node000014" title=" " alt="" coords="700,96,956,150,1022,168,1017,168,955,156,700,101"/>
+</map>

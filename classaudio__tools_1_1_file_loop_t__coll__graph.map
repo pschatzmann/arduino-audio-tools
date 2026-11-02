@@ -1,0 +1,21 @@
+<map id="FileLoopT&lt; FileType &gt;" name="FileLoopT&lt; FileType &gt;">
+<area shape="rect" id="Node000001" title="A simple class which implements a automatic looping file. In order to support different file implemen..." alt="" coords="5,407,172,434"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer,size_t size) and readBytes(uint8..." alt="" coords="38,330,139,357"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="90,371,91,407,86,405,87,375"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="54,207,123,234"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="82,247,82,291,85,329,80,329,77,292,80,252"/>
+<area shape="poly" id="edge5_Node000002_Node000003" title=" " alt="" coords="97,247,100,292,97,330,92,328,95,291,95,252"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="63,106,114,134"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="81,146,85,206,79,206,80,151"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="97,146,98,206,92,206,96,151"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_ring_buffer.html" title=" " alt="" coords="146,207,311,234"/>
+<area shape="poly" id="edge6_Node000002_Node000005" title=" " alt="" coords="201,247,106,331,102,327,203,242"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="141,106,308,134"/>
+<area shape="poly" id="edge7_Node000005_Node000006" title=" " alt="" coords="219,146,224,207,219,205,216,151"/>
+<area shape="poly" id="edge8_Node000005_Node000006" title=" " alt="" coords="235,146,237,207,232,205,233,151"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="338,5,418,33"/>
+<area shape="poly" id="edge9_Node000005_Node000007" title=" " alt="" coords="369,45,350,91,323,135,284,177,248,208,244,204,281,173,318,132,345,88,366,50"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="453,106,590,134"/>
+<area shape="poly" id="edge11_Node000008_Node000007" title=" " alt="" coords="409,39,505,105,500,106,409,44"/>
+<area shape="poly" id="edge10_Node000005_Node000008" title=" " alt="" coords="478,142,376,185,291,208,289,204,374,180,483,139"/>
+</map>

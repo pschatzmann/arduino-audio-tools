@@ -1,0 +1,12 @@
+<map id="FileEntry" name="FileEntry">
+<area shape="rect" id="Node000001" title="File entry to minimize RAM usage by using path index and name." alt="" coords="5,307,84,335"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_str.html" title="Str which keeps the data on the heap. We grow the allocated memory only if the copy source is not fit..." alt="" coords="25,207,64,234"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="47,249,47,307,42,306,42,251"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_str_view.html" title="A simple wrapper to provide string functions on existing allocated char*. If the underlying char* is ..." alt="" coords="9,106,80,134"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="37,146,41,206,35,206,36,151"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="53,146,54,206,48,206,52,151"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="104,106,225,134"/>
+<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="137,146,62,208,59,204,138,141"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="125,5,204,33"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="165,46,167,106,162,105,164,51"/>
+</map>

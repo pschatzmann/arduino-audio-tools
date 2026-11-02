@@ -1,0 +1,26 @@
+<map id="G711Decoder" name="G711Decoder">
+<area shape="rect" id="Node000001" title="64 kbit/s g711 ULOW Decoder based on https://github.com/pschatzmann/codec&#45;g7xx Supported decoder para..." alt="" coords="346,481,456,509"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_g7xx_decoder.html" title="g723_24, g721, g723_40 Decoder based on https://github.com/pschatzmann/codec&#45;g7xx" alt="" coords="346,404,456,432"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="403,445,403,482,399,479,399,449"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_audio_decoder.html" title="Decoding of encoded audio into PCM data." alt="" coords="249,327,361,355"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="334,362,387,404,382,404,333,367"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="" coords="256,175,354,202"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="299,215,299,275,302,327,297,325,294,275,297,220"/>
+<area shape="poly" id="edge10_Node000003_Node000004" title=" " alt="" coords="314,215,317,275,313,328,308,325,311,275,311,220"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="238,5,372,33"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="299,46,299,115,303,175,297,173,294,115,297,51"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="313,46,317,115,313,175,308,173,311,115,311,51"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="5,106,256,151"/>
+<area shape="poly" id="edge8_Node000007_Node000005" title=" " alt="" coords="254,42,224,59,193,84,162,107,158,104,190,80,221,55,258,38"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="128,226,256,254"/>
+<area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="211,262,286,326,281,327,210,267"/>
+<area shape="poly" id="edge11_Node000003_Node000006" title=" " alt="" coords="226,261,299,326,294,327,224,266"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="137,163,153,201,175,225,170,226,149,204,136,169"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="71,5,150,33"/>
+<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="109,46,114,81,122,105,117,106,109,83,109,51"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="468,226,519,254"/>
+<area shape="poly" id="edge14_Node000002_Node000009" title=" " alt="" coords="491,267,482,304,448,362,414,406,411,401,444,359,477,302,488,271"/>
+<area shape="poly" id="edge12_Node000003_Node000009" title=" " alt="" coords="457,260,428,280,397,305,346,329,344,324,394,301,425,276,452,263"/>
+<area shape="rect" id="Node000010" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="354,226,438,254"/>
+<area shape="poly" id="edge13_Node000003_Node000010" title=" " alt="" coords="376,264,319,328,316,324,372,267"/>
+</map>

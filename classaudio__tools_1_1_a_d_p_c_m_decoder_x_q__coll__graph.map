@@ -1,0 +1,30 @@
+<map id="ADPCMDecoderXQ" name="ADPCMDecoderXQ">
+<area shape="rect" id="Node000001" title="Decoder for ADPCM&#45;XQ. Depends on https://github.com/pschatzmann/codec&#45;adpcm&#45;xq." alt="" coords="365,407,507,434"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_audio_decoder.html" title="Decoding of encoded audio into PCM data." alt="" coords="205,330,318,357"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="307,361,408,406,403,406,306,367"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="" coords="23,175,121,202"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="73,214,85,235,99,252,127,276,159,297,221,328,216,330,156,302,124,281,95,256,81,238,73,220"/>
+<area shape="poly" id="edge9_Node000002_Node000003" title=" " alt="" coords="94,213,123,252,151,276,182,297,240,329,235,330,179,302,148,281,119,256,94,219"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="5,5,139,33"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="65,46,66,115,70,174,64,174,60,115,65,51"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="79,46,84,115,80,175,74,174,78,115,79,51"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="167,106,417,151"/>
+<area shape="poly" id="edge7_Node000006_Node000004" title=" " alt="" coords="112,37,249,104,245,107,113,43"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="228,226,356,254"/>
+<area shape="poly" id="edge5_Node000002_Node000005" title=" " alt="" coords="278,266,261,331,257,328,274,270"/>
+<area shape="poly" id="edge10_Node000002_Node000005" title=" " alt="" coords="294,268,274,331,269,328,290,271"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="293,164,294,227,290,225,291,168"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="442,5,521,33"/>
+<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="424,36,373,59,341,82,314,107,310,104,337,78,371,55,429,33"/>
+<area shape="rect" id="Node000010" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="582,278,719,306"/>
+<area shape="poly" id="edge14_Node000010_Node000007" title=" " alt="" coords="535,33,554,43,569,55,590,82,608,113,633,177,646,236,652,279,647,276,641,237,627,178,603,115,586,85,565,59,551,47,536,38"/>
+<area shape="rect" id="Node000011" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="413,175,550,202"/>
+<area shape="poly" id="edge16_Node000011_Node000007" title=" " alt="" coords="483,47,484,175,479,173,480,51"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="380,226,431,254"/>
+<area shape="poly" id="edge17_Node000001_Node000008" title=" " alt="" coords="405,268,406,311,412,357,421,383,431,408,427,405,416,385,407,358,401,312,402,272"/>
+<area shape="poly" id="edge11_Node000002_Node000008" title=" " alt="" coords="363,258,320,280,293,306,272,331,269,327,289,302,318,276,368,255"/>
+<area shape="rect" id="Node000009" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="121,226,204,254"/>
+<area shape="poly" id="edge12_Node000002_Node000009" title=" " alt="" coords="187,263,251,329,246,330,185,268"/>
+<area shape="poly" id="edge13_Node000001_Node000010" title=" " alt="" coords="619,313,501,385,460,409,458,404,499,380,613,315"/>
+<area shape="poly" id="edge15_Node000001_Node000011" title=" " alt="" coords="483,216,479,283,465,358,445,408,441,404,460,357,473,282,479,220"/>
+</map>

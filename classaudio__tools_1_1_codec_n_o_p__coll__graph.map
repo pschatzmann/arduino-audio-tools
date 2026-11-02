@@ -1,0 +1,31 @@
+<map id="CodecNOP" name="CodecNOP">
+<area shape="rect" id="Node000001" title="Dummy no implmentation Codec. This is used so that we can initialize some pointers to decoders and en..." alt="" coords="296,401,385,429"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_audio_decoder.html" title="Decoding of encoded audio into PCM data." alt="" coords="196,324,308,352"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="280,360,328,401,323,401,278,365"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="" coords="340,224,439,251"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="367,262,351,285,333,302,311,316,288,326,286,321,308,311,329,298,347,281,362,265"/>
+<area shape="poly" id="edge9_Node000002_Node000003" title=" " alt="" coords="387,264,374,285,357,302,334,316,310,326,308,322,332,311,353,298,370,282,383,267"/>
+<area shape="rect" id="Node000010" href="$classaudio__tools_1_1audio__tools_1_1_audio_encoder.html" title="Encoding of PCM data." alt="" coords="376,324,486,352"/>
+<area shape="poly" id="edge14_Node000010_Node000003" title=" " alt="" coords="394,264,422,324,417,323,392,268"/>
+<area shape="poly" id="edge16_Node000010_Node000003" title=" " alt="" coords="410,262,434,325,429,323,407,267"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="323,5,456,33"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="385,46,383,140,388,224,383,222,378,141,382,51"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="397,46,401,141,397,224,392,222,396,140,395,51"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="90,106,340,151"/>
+<area shape="poly" id="edge7_Node000006_Node000004" title=" " alt="" coords="338,41,308,59,278,84,246,108,243,104,275,80,306,55,343,38"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="189,224,316,251"/>
+<area shape="poly" id="edge5_Node000002_Node000005" title=" " alt="" coords="246,264,248,325,244,323,242,269"/>
+<area shape="poly" id="edge10_Node000002_Node000005" title=" " alt="" coords="262,264,261,325,256,323,259,268"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="229,163,250,224,245,223,227,168"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="155,5,235,33"/>
+<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="194,46,199,81,207,106,202,105,194,83,193,51"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="5,224,57,251"/>
+<area shape="poly" id="edge11_Node000002_Node000008" title=" " alt="" coords="56,259,84,280,115,298,156,314,198,326,193,328,154,319,113,303,81,284,56,264"/>
+<area shape="rect" id="Node000009" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="81,224,165,251"/>
+<area shape="poly" id="edge12_Node000002_Node000009" title=" " alt="" coords="153,258,238,323,232,325,151,263"/>
+<area shape="poly" id="edge18_Node000010_Node000009" title=" " alt="" coords="179,253,242,273,394,323,389,325,241,278,179,259"/>
+<area shape="poly" id="edge13_Node000001_Node000010" title=" " alt="" coords="406,361,357,403,355,399,401,363"/>
+<area shape="rect" id="Node000011" href="$classaudio__tools_1_1audio__tools_1_1_mime_source.html" title="Abstract interface for classes that can provide MIME type information." alt="" coords="462,224,565,251"/>
+<area shape="poly" id="edge15_Node000010_Node000011" title=" " alt="" coords="488,261,437,326,434,322,484,264"/>
+<area shape="poly" id="edge17_Node000010_Node000011" title=" " alt="" coords="503,263,450,326,447,322,498,265"/>
+</map>

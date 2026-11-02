@@ -1,0 +1,16 @@
+<map id="H264Decoder" name="H264Decoder">
+<area shape="rect" id="Node000001" title="H.264 video decoder: wraps TinyH264Decoder (https://github.com/pschatzmann/TinyH264) as a VideoOutput..." alt="" coords="262,207,371,234"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_video_decoder.html" title="Common interface for video decoders (e.g. H264Decoder, H264DecoderESP32S3 &#45; CodecH264...." alt="" coords="116,106,229,134"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="205,140,300,206,295,207,203,145"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_video_output.html" title="Abstract class for video playback. This class is used to assemble a complete video frame in memory...." alt="" coords="5,5,108,33"/>
+<area shape="poly" id="edge5_Node000001_Node000003" title=" " alt="" coords="35,48,25,67,15,89,12,112,20,132,35,145,58,158,122,180,195,197,264,211,259,212,194,202,120,185,56,163,32,150,15,135,7,112,10,88,20,65,36,43"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="84,40,159,104,155,106,83,46"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_video_info_source.html" title="Provider of VideoInfo (width/height/fps/format) for whoever needs to size buffers/panel setup against..." alt="" coords="253,106,380,134"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="318,148,319,207,314,205,315,151"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="404,106,456,134"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="406,143,333,208,330,204,401,145"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="480,106,617,134"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="517,142,438,185,368,209,367,204,435,180,512,143"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="509,5,588,33"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="550,47,551,107,546,104,547,51"/>
+</map>

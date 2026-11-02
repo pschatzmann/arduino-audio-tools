@@ -1,0 +1,44 @@
+<map id="AnalogAudioStream" name="AnalogAudioStream">
+<area shape="rect" id="Node000001" title="ESP32: A very fast ADC and DAC using the ESP32 I2S interface. For all other architectures we support ..." alt="" coords="1417,471,1567,498"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1audio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="" coords="1141,315,1246,342"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1240,347,1394,425,1470,471,1465,470,1392,430,1238,352"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1audio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer,size_t size) and readBytes(uint8..." alt="" coords="915,112,1016,140"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="989,148,1081,234,1173,314,1168,314,1077,238,988,153"/>
+<area shape="poly" id="edge18_Node000002_Node000003" title=" " alt="" coords="1001,147,1100,233,1184,315,1179,314,1096,237,1000,152"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_stream.html" title=" " alt="" coords="596,13,664,41"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="679,38,771,54,823,66,873,82,930,111,925,112,871,87,821,71,770,59,680,43"/>
+<area shape="poly" id="edge6_Node000003_Node000004" title=" " alt="" coords="679,20,771,31,823,42,873,58,921,82,957,111,952,111,918,87,871,63,821,47,770,36,680,25"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_print.html" title=" " alt="" coords="271,5,322,33"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="337,24,468,30,598,31,593,33,468,35,338,29"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="337,12,469,12,598,19,593,22,468,17,339,16"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1audio__tools_1_1_ring_buffer.html" title=" " alt="" coords="548,112,712,140"/>
+<area shape="poly" id="edge7_Node000003_Node000006" title=" " alt="" coords="728,123,918,125,913,127,729,128"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1audio__tools_1_1_base_buffer.html" title=" " alt="" coords="213,57,380,85"/>
+<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="360,86,550,119,545,122,361,91"/>
+<area shape="poly" id="edge9_Node000006_Node000007" title=" " alt="" coords="395,76,583,110,579,113,396,82"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1audio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="5,181,85,209"/>
+<area shape="poly" id="edge10_Node000006_Node000008" title=" " alt="" coords="81,172,108,162,226,138,346,125,456,120,550,121,545,124,456,125,346,130,227,143,109,167,85,176"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="228,181,365,209"/>
+<area shape="poly" id="edge12_Node000009_Node000008" title=" " alt="" coords="99,193,229,193,226,197,101,198"/>
+<area shape="rect" id="Node000012" href="$classaudio__tools_1_1audio__tools_1_1_vector.html" title=" " alt="" coords="505,265,755,310"/>
+<area shape="poly" id="edge17_Node000012_Node000008" title=" " alt="" coords="98,211,154,228,213,243,364,266,507,280,502,282,363,271,212,248,153,233,100,216"/>
+<area shape="poly" id="edge11_Node000006_Node000009" title=" " alt="" coords="379,189,480,175,541,157,598,139,593,141,543,163,482,180,381,194"/>
+<area shape="rect" id="Node000010" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="230,345,363,373"/>
+<area shape="poly" id="edge13_Node000002_Node000010" title=" " alt="" coords="378,359,772,349,1144,334,1138,335,772,355,379,364"/>
+<area shape="poly" id="edge19_Node000002_Node000010" title=" " alt="" coords="378,348,772,331,1144,325,1138,327,772,337,379,354"/>
+<area shape="poly" id="edge16_Node000012_Node000010" title=" " alt="" coords="367,339,403,330,512,309,507,311,405,335,369,343"/>
+<area shape="rect" id="Node000011" href="$classaudio__tools_1_1audio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="902,283,1029,310"/>
+<area shape="poly" id="edge14_Node000002_Node000011" title=" " alt="" coords="1030,311,1143,329,1138,329,1030,316"/>
+<area shape="poly" id="edge20_Node000002_Node000011" title=" " alt="" coords="1045,296,1147,314,1141,314,1045,302"/>
+<area shape="poly" id="edge15_Node000011_Node000012" title=" " alt="" coords="771,288,904,294,899,295,771,294"/>
+<area shape="rect" id="Node000013" href="$structaudio__tools_1_1audio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S." alt="" coords="924,440,1007,468"/>
+<area shape="poly" id="edge21_Node000002_Node000013" title=" " alt="" coords="1021,439,1056,428,1090,413,1140,377,1177,344,1182,342,1144,381,1093,417,1058,433,1022,444"/>
+<area shape="rect" id="Node000016" href="$classaudio__tools_1_1_analog_config_e_s_p32.html" title="ESP32 specific configuration for i2s input via adc. The default input pin is GPIO34...." alt="" coords="1120,429,1268,457"/>
+<area shape="poly" id="edge26_Node000016_Node000013" title=" " alt="" coords="1023,449,1122,446,1117,447,1023,454"/>
+<area shape="rect" id="Node000014" href="$classaudio__tools_1_1_analog_driver_arduino.html" title="Please use the AnalogAudioStream: Reading Analog Data using a timer and the Arduino analogRead() meth..." alt="" coords="1116,553,1272,581"/>
+<area shape="poly" id="edge22_Node000001_Node000014" title=" " alt="" coords="1288,566,1340,560,1392,547,1438,523,1472,500,1477,498,1440,528,1394,552,1341,565,1288,571"/>
+<area shape="rect" id="Node000015" href="$classaudio__tools_1_1_analog_driver_base.html" title=" " alt="" coords="896,499,1035,526"/>
+<area shape="poly" id="edge24_Node000001_Node000015" title=" " alt="" coords="1050,505,1419,488,1414,489,1050,511"/>
+<area shape="poly" id="edge23_Node000014_Node000015" title=" " alt="" coords="1041,528,1135,553,1130,552,1041,533"/>
+<area shape="poly" id="edge25_Node000001_Node000016" title=" " alt="" coords="1283,453,1419,474,1414,474,1282,458"/>
+</map>
