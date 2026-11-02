@@ -5,13 +5,34 @@ on:
     branches:
       - main
 
+env:
+  DOXYGEN_VERSION: 1.9.8
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: DenverCoder1/doxygen-github-pages-action@v1.2.0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          folder: docs/html
-          branch: doxygen
+      - uses: actions/checkout@v4
 
+      - name: Install Graphviz
+        run: sudo apt-get update && sudo apt-get install -y graphviz
+
+      - name: Install Doxygen ${{ env.DOXYGEN_VERSION }}
+        run: |
+          V=${DOXYGEN_VERSION}
+          curl -fsSL "https://github.com/doxygen/doxygen/releases/download/Release_${V//./_}/doxygen-${V}.linux.bin.tar.gz" | tar xz
+          sudo install -m 755 "doxygen-${V}/bin/doxygen" /usr/local/bin/doxygen
+          doxygen --version
+
+      - name: Generate Doxygen Documentation
+        run: doxygen Doxyfile
+
+      - name: Create .nojekyll
+        run: touch docs/html/.nojekyll
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: doxygen
+          folder: docs/html
