@@ -124,26 +124,33 @@ class MiniAudioStream : public AudioStream {
       config_ma = ma_device_config_init(ma_device_type_loopback);
 
     config_ma.pUserData = this;
-    config_ma.playback.channels = config.channels;
     config_ma.sampleRate = config.sample_rate;
     config_ma.dataCallback = data_callback;
+    ma_format format;
     switch (config.bits_per_sample) {
       case 8:
-        config_ma.playback.format = ma_format_u8;
+        format = ma_format_u8;
         break;
       case 16:
-        config_ma.playback.format = ma_format_s16;
+        format = ma_format_s16;
         break;
       case 24:
-        config_ma.playback.format = ma_format_s24;
+        format = ma_format_s24;
         break;
       case 32:
-        config_ma.playback.format = ma_format_s32;
+        format = ma_format_s32;
         break;
       default:
         LOGE("Invalid format");
         return false;
     }
+    // set both sides: otherwise a capture (or duplex/loopback) device uses
+    // the native format of the device, while data_callback() interprets the
+    // data in the requested format
+    config_ma.playback.format = format;
+    config_ma.playback.channels = config.channels;
+    config_ma.capture.format = format;
+    config_ma.capture.channels = config.channels;
 
     if (ma_device_init(NULL, &config_ma, &device_ma) != MA_SUCCESS) {
       // Failed to initialize the device.
