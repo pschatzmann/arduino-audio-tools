@@ -85,18 +85,18 @@ Collaboration diagram for Codecs:</div>
 <div class="dyncontent">
 <div class="center"><img src="group__codecs.png" border="0" usemap="#agroup____codecs" alt=""/></div>
 <map name="agroup____codecs" id="agroup____codecs">
-<area shape="rect" title="Audio Coder and Decoder" alt="" coords="204,2315,272,2343"/>
-<area shape="rect" href="group__decoder.html" title="Audio Decoder." alt="" coords="573,1178,649,1205"/>
-<area shape="rect" href="group__encoder.html" title="Audio Encoder." alt="" coords="574,1614,648,1641"/>
-<area shape="rect" href="group__h264.html" title="H.264 encoding/decoding using https://github.com/pschatzmann/TinyH264." alt="" coords="583,2246,639,2273"/>
-<area shape="rect" href="group__h264esp32p4.html" title="H.264 hardware encoding on ESP32&#45;P4 using https://github.com/pschatzmann/codec&#45;h264&#45;ESP32P4 (esp_h264..." alt="" coords="555,2298,667,2325"/>
-<area shape="rect" href="group__h264esp32s3.html" title="H.264 encoding/decoding on ESP32&#45;S3 using https://github.com/pschatzmann/ESP32S3&#45;h264 (esp_h264,..." alt="" coords="555,2350,667,2377"/>
-<area shape="rect" href="group__metadata.html" title="Audio Metadata (Title, Author...)" alt="" coords="569,2411,653,2439"/>
-<area shape="rect" href="group__mjpeg.html" title="Motion&#45;JPEG decoding and encoding using https://github.com/pschatzmann/TinyJPEG." alt="" coords="579,2463,643,2491"/>
-<area shape="rect" href="group__mpg.html" title="MPEG&#45;1 part 2 (video) encoding/decoding using https://github.com/pschatzmann/TinyMPG." alt="" coords="585,2515,637,2543"/>
-<area shape="rect" href="group__rtsp.html" title="Real Time Streaming Protocol (RTSP)" alt="" coords="584,2567,638,2595"/>
-<area shape="rect" href="group__video.html" title="Video playback." alt="" coords="582,2802,640,2829"/>
-<area shape="rect" href="group__main.html" title="A powerful audio library (not only) for Arduino." alt="" coords="5,2315,155,2343"/>
+<area shape="rect" title="Audio Coder and Decoder" alt="" coords="204,2366,272,2393"/>
+<area shape="rect" href="group__decoder.html" title="Audio Decoder." alt="" coords="573,1228,649,1256"/>
+<area shape="rect" href="group__encoder.html" title="Audio Encoder." alt="" coords="574,1664,648,1692"/>
+<area shape="rect" href="group__h264.html" title="H.264 encoding/decoding using https://github.com/pschatzmann/TinyH264." alt="" coords="583,2296,639,2324"/>
+<area shape="rect" href="group__h264esp32p4.html" title="H.264 hardware encoding on ESP32&#45;P4 using https://github.com/pschatzmann/codec&#45;h264&#45;ESP32P4 (esp_h264..." alt="" coords="555,2348,667,2376"/>
+<area shape="rect" href="group__h264esp32s3.html" title="H.264 encoding/decoding on ESP32&#45;S3 using https://github.com/pschatzmann/ESP32S3&#45;h264 (esp_h264,..." alt="" coords="555,2400,667,2428"/>
+<area shape="rect" href="group__metadata.html" title="Audio Metadata (Title, Author...)" alt="" coords="569,2462,653,2489"/>
+<area shape="rect" href="group__mjpeg.html" title="Motion&#45;JPEG decoding and encoding using https://github.com/pschatzmann/TinyJPEG." alt="" coords="579,2514,643,2541"/>
+<area shape="rect" href="group__mpg.html" title="MPEG&#45;1 part 2 (video) encoding/decoding using https://github.com/pschatzmann/TinyMPG." alt="" coords="585,2566,637,2593"/>
+<area shape="rect" href="group__rtsp.html" title="Real Time Streaming Protocol (RTSP)" alt="" coords="584,2618,638,2645"/>
+<area shape="rect" href="group__video.html" title="Video playback." alt="" coords="582,2852,640,2880"/>
+<area shape="rect" href="group__main.html" title="A powerful audio library (not only) for Arduino." alt="" coords="5,2366,155,2393"/>
 </map>
 </div>
 <table class="memberdecls">
@@ -214,6 +214,15 @@ code"): identifies the codec (PCM, AAC, ALAC, ...) - <a class="el" href="group__
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_codec_n_o_p.html">CodecNOP</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dummy no implmentation Codec. This is used so that we can initialize some pointers to decoders and encoders to make sure that they do not point to null.  <a href="classaudio__tools_1_1_codec_n_o_p.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_container_a_t_r_a_c.html">ContainerATRAC</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Common functionality of the ATRAC container decoders: a streaming header parser which does not need to buffer more than the header fields that are needed to set up the <a class="el" href="classaudio__tools_1_1_decoder_a_t_r_a_c.html" title="ATRAC decoder (ATRAC1, ATRAC3, ATRAC3+ and ATRAC9) which converts the raw ATRAC frames into 16 bit PC...">DecoderATRAC</a>.  <a href="classaudio__tools_1_1_container_a_t_r_a_c.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_container_a_t_r_a_c_a_e_a.html">ContainerATRACAEA</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decodes ATRAC1 audio of a Sony MiniDisc .aea file: a 2048 byte header (magic, title, number of channels) is followed by the frames of 212 bytes per channel. The sample rate is 44100.  <a href="classaudio__tools_1_1_container_a_t_r_a_c_a_e_a.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_container_a_t_r_a_c_o_m_a.html">ContainerATRACOMA</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decodes ATRAC3 and ATRAC3+ audio in a Sony OpenMG audio container (.oma, .aa3, .at3): the file starts with an <a class="el" href="structaudio__tools_1_1_i_d3v2.html">ID3v2</a> like tag ('ea3' or 'ID3') which is followed by a 96 byte 'EA3' header with the codec parameters. Encrypted files are not supported.  <a href="classaudio__tools_1_1_container_a_t_r_a_c_o_m_a.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_container_decoder.html">ContainerDecoder</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parent class for all container formats.  <a href="classaudio__tools_1_1_container_decoder.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -231,6 +240,9 @@ code"): identifies the codec (PCM, AAC, ALAC, ...) - <a class="el" href="group__
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_decoder_a_l_a_c.html">DecoderALAC</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">ALAC (Apple Lossless Audio Codec) decoder. This class depends on <a href="https://github.com/pschatzmann/codec-alac">https://github.com/pschatzmann/codec-alac</a>. This implementaion is based on <a href="https://github.com/macosforge/alac">https://github.com/macosforge/alac</a>.  <a href="classaudio__tools_1_1_decoder_a_l_a_c.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_decoder_a_t_r_a_c.html">DecoderATRAC</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">ATRAC decoder (ATRAC1, ATRAC3, ATRAC3+ and ATRAC9) which converts the raw ATRAC frames into 16 bit PCM data. This class depends on <a href="https://github.com/pschatzmann/codec-atrac">https://github.com/pschatzmann/codec-atrac</a> which is based on the ATRAC decoders of FFmpeg.  <a href="classaudio__tools_1_1_decoder_a_t_r_a_c.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_decoder_base64.html">DecoderBase64</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_decoder_base64.html" title="DecoderBase64 - Converts a Base64 encoded Stream into the original data stream. Decoding only gives a...">DecoderBase64</a> - Converts a Base64 encoded <a class="el" href="class_stream.html">Stream</a> into the original data stream. Decoding only gives a valid result if we start at a limit of 4 bytes. We therefore use by default a newline to determine a valid start boundary.  <a href="classaudio__tools_1_1_decoder_base64.html#details">More...</a><br /></td></tr>

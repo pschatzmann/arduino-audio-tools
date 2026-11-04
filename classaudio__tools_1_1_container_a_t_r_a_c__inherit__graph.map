@@ -1,0 +1,17 @@
+<map id="ContainerATRAC" name="ContainerATRAC">
+<area shape="rect" id="Node000001" title="Common functionality of the ATRAC container decoders: a streaming header parser which does not need t..." alt="" coords="108,308,235,336"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_container_a_t_r_a_c_a_e_a.html" title="Decodes ATRAC1 audio of a Sony MiniDisc .aea file: a 2048 byte header (magic, title,..." alt="" coords="5,384,159,411"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="146,345,99,385,96,381,141,346"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_container_a_t_r_a_c_o_m_a.html" title="Decodes ATRAC3 and ATRAC3+ audio in a Sony OpenMG audio container (.oma, .aa3, .at3): the file starts..." alt="" coords="183,384,341,411"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="200,343,249,383,243,383,199,348"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_container_decoder.html" title="Parent class for all container formats." alt="" coords="102,232,240,260"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="173,274,174,309,169,307,170,278"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_audio_decoder.html" title="Decoding of encoded audio into PCM data." alt="" coords="115,157,228,184"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="172,198,174,233,169,231,170,203"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="" coords="54,81,152,109"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="126,118,162,156,157,157,126,123"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="37,5,170,33"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="104,46,106,81,101,80,103,51"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="177,81,304,109"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="216,122,186,158,182,155,219,118"/>
+</map>

@@ -1,0 +1,15 @@
+<map id="ContainerATRACAEA" name="ContainerATRACAEA">
+<area shape="rect" id="Node000001" title="Decodes ATRAC1 audio of a Sony MiniDisc .aea file: a 2048 byte header (magic, title,..." alt="" coords="63,384,217,411"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_container_a_t_r_a_c.html" title="Common functionality of the ATRAC container decoders: a streaming header parser which does not need t..." alt="" coords="76,308,204,336"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="142,350,142,384,138,382,138,353"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_container_decoder.html" title="Parent class for all container formats." alt="" coords="71,232,209,260"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="141,274,143,308,137,307,139,278"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_audio_decoder.html" title="Decoding of encoded audio into PCM data." alt="" coords="84,157,196,184"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="141,198,143,233,137,231,139,203"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="" coords="23,81,121,109"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="94,118,131,155,125,157,95,123"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="5,5,139,33"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="72,46,75,81,69,80,72,51"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="146,81,273,109"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="185,122,154,158,150,155,188,118"/>
+</map>

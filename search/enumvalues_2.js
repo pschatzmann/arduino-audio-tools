@@ -12,12 +12,14 @@ var searchData=
   ['clockrangeheadertx_9',['ClockRangeHeaderTx',['../classaudio__tools_1_1_u_s_b_audio_host_base.html#a7551b44b443633567069e7f1de6fac65ac7ea1c839c24edfeb12d1ab015c1f0b7',1,'audio_tools::USBAudioHostBase']]],
   ['clockrangerx_10',['ClockRangeRx',['../classaudio__tools_1_1_u_s_b_audio_host_base.html#a7551b44b443633567069e7f1de6fac65a1f953ff8e25ec748d3ead9cfa2b58032',1,'audio_tools::USBAudioHostBase']]],
   ['clockrangetx_11',['ClockRangeTx',['../classaudio__tools_1_1_u_s_b_audio_host_base.html#a7551b44b443633567069e7f1de6fac65a788355d4421394b4f4c6590f7ab85178',1,'audio_tools::USBAudioHostBase']]],
-  ['connect_12',['CONNECT',['../_http_types_8h.html#a3a8d8d5989e593d770a33e5cb6c1ae84a20391dd2915a0e64343d24c2f2e40b95',1,'HttpTypes.h']]],
-  ['contains_13',['Contains',['../namespaceaudio__tools.html#adf56341f15593a1c3b9b29e001d1c33dab270372be5b4433b4736daaf25e1c74e',1,'audio_tools']]],
-  ['control_14',['Control',['../namespaceaudio__tools.html#ad59662b67f00f243b5c98f035ba093e4aa1595abbb4c3a326636dd178757cd6c1',1,'audio_tools']]],
-  ['corrupted_15',['Corrupted',['../group__metadata.html#gga6760f423085f8a63374b1e2db102a6d1ab2b390c60b7f14f1a639328b24388b26',1,'audio_tools']]],
-  ['crforframe_16',['CRforFrame',['../namespaceaudio__tools.html#ab0f1efd62d502b5ca0387fbcb43268e2aa960dd4dda0bcd3f10adbeaa391ed1a0',1,'audio_tools']]],
-  ['crforwrite_17',['CRforWrite',['../namespaceaudio__tools.html#ab0f1efd62d502b5ca0387fbcb43268e2a3b4163445c16d1bfb5e32cd873720a0d',1,'audio_tools']]],
-  ['cs_18',['CS',['../group__tools.html#gga9715fceb4c700e7e4a610400464e9396a78bcece98b40c207eb8988c589694e33',1,'audio_tools::MusicalNotes']]],
-  ['cs_5fimaadpcm_19',['CS_IMAADPCM',['../group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1a99dc2e097178e77c49281293b4f30279',1,'audio_tools']]]
+  ['codecatrac3_12',['CodecATRAC3',['../classaudio__tools_1_1_container_a_t_r_a_c_o_m_a.html#aadd38e2a993d4d56a805db508d22436fa470af7608f1cd0a440683ab3b0c5ab82',1,'audio_tools::ContainerATRACOMA']]],
+  ['codecatrac3plus_13',['CodecATRAC3Plus',['../classaudio__tools_1_1_container_a_t_r_a_c_o_m_a.html#aadd38e2a993d4d56a805db508d22436fa8d6fdc9b5c50418353b43bd45c0d14bc',1,'audio_tools::ContainerATRACOMA']]],
+  ['connect_14',['CONNECT',['../_http_types_8h.html#a3a8d8d5989e593d770a33e5cb6c1ae84a20391dd2915a0e64343d24c2f2e40b95',1,'HttpTypes.h']]],
+  ['contains_15',['Contains',['../namespaceaudio__tools.html#adf56341f15593a1c3b9b29e001d1c33dab270372be5b4433b4736daaf25e1c74e',1,'audio_tools']]],
+  ['control_16',['Control',['../namespaceaudio__tools.html#ad59662b67f00f243b5c98f035ba093e4aa1595abbb4c3a326636dd178757cd6c1',1,'audio_tools']]],
+  ['corrupted_17',['Corrupted',['../group__metadata.html#gga6760f423085f8a63374b1e2db102a6d1ab2b390c60b7f14f1a639328b24388b26',1,'audio_tools']]],
+  ['crforframe_18',['CRforFrame',['../namespaceaudio__tools.html#ab0f1efd62d502b5ca0387fbcb43268e2aa960dd4dda0bcd3f10adbeaa391ed1a0',1,'audio_tools']]],
+  ['crforwrite_19',['CRforWrite',['../namespaceaudio__tools.html#ab0f1efd62d502b5ca0387fbcb43268e2a3b4163445c16d1bfb5e32cd873720a0d',1,'audio_tools']]],
+  ['cs_20',['CS',['../group__tools.html#gga9715fceb4c700e7e4a610400464e9396a78bcece98b40c207eb8988c589694e33',1,'audio_tools::MusicalNotes']]],
+  ['cs_5fimaadpcm_21',['CS_IMAADPCM',['../group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1a99dc2e097178e77c49281293b4f30279',1,'audio_tools']]]
 ];

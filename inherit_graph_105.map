@@ -1,15 +1,15 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
 <area shape="rect" id="Node000000" href="$classaudio__tools_1_1_f_f_t_driver.html" title="Abstract Class which defines the basic FFT functionality." alt="" coords="5,140,90,168"/>
 <area shape="rect" id="Node000001" href="$classaudio__tools_1_1_f_f_t_driver_cmsis_f_f_t.html" title="Driver for Cmsis&#45;FFT see https://arm&#45;software.github.io/CMSIS_5/DSP." alt="" coords="147,5,294,33"/>
-<area shape="poly" id="edge629_Node000000_Node000001" title=" " alt="" coords="63,125,94,83,114,62,136,44,163,32,159,36,139,48,117,66,98,87,67,128"/>
+<area shape="poly" id="edge633_Node000000_Node000001" title=" " alt="" coords="63,125,94,83,114,62,136,44,163,32,159,36,139,48,117,66,98,87,67,128"/>
 <area shape="rect" id="Node000002" href="$classaudio__tools_1_1_f_f_t_driver_e_s_p32_f_f_t.html" title="Driver for ESP32&#45;FFT https://github.com/pschatzmann/esp32&#45;fft" alt="" coords="147,57,294,85"/>
-<area shape="poly" id="edge630_Node000000_Node000002" title=" " alt="" coords="79,129,137,95,171,84,167,87,139,100,82,133"/>
+<area shape="poly" id="edge634_Node000000_Node000002" title=" " alt="" coords="79,129,137,95,171,84,167,87,139,100,82,133"/>
 <area shape="rect" id="Node000003" href="$classaudio__tools_1_1_f_f_t_driver_espressif_f_f_t.html" title="fft Driver for espressif dsp library: https://espressif&#45;docs.readthedocs&#45;hosted.com/projects/esp&#45;dsp/..." alt="" coords="138,109,304,137"/>
-<area shape="poly" id="edge631_Node000000_Node000003" title=" " alt="" coords="104,141,141,136,137,139,106,146"/>
+<area shape="poly" id="edge635_Node000000_Node000003" title=" " alt="" coords="104,141,141,136,137,139,106,146"/>
 <area shape="rect" id="Node000004" href="$classaudio__tools_1_1_f_f_t_driver_fixed_f_f_t.html" title="Driver for the fixedpoint&#45;fft library (https://github.com/pschatzmann/fixedpoint&#45;fft)...." alt="" coords="145,161,297,206"/>
-<area shape="poly" id="edge632_Node000000_Node000004" title=" " alt="" coords="104,161,147,169,142,172,106,166"/>
+<area shape="poly" id="edge636_Node000000_Node000004" title=" " alt="" coords="104,161,147,169,142,172,106,166"/>
 <area shape="rect" id="Node000005" href="$classaudio__tools_1_1_f_f_t_driver_kiss_f_f_t.html" title="Driver for RealFFT." alt="" coords="154,229,288,257"/>
-<area shape="poly" id="edge633_Node000000_Node000005" title=" " alt="" coords="77,175,107,196,139,215,167,228,162,229,136,220,104,201,76,180"/>
+<area shape="poly" id="edge637_Node000000_Node000005" title=" " alt="" coords="77,175,107,196,139,215,167,228,162,229,136,220,104,201,76,180"/>
 <area shape="rect" id="Node000006" href="$classaudio__tools_1_1_f_f_t_driver_real_f_f_t.html" title="Driver for RealFFT." alt="" coords="153,281,289,309"/>
-<area shape="poly" id="edge634_Node000000_Node000006" title=" " alt="" coords="65,179,96,224,116,247,139,266,163,281,158,281,136,271,113,251,92,228,63,184"/>
+<area shape="poly" id="edge638_Node000000_Node000006" title=" " alt="" coords="65,179,96,224,116,247,139,266,163,281,158,281,136,271,113,251,92,228,63,184"/>
 </map>

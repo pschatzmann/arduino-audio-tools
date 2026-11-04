@@ -1,41 +1,41 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
 <area shape="rect" id="Node000000" href="$classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players." alt="" coords="29,445,131,473"/>
 <area shape="rect" id="Node000001" href="$classaudio__tools_1_1_audio_source_array.html" title="Audio Data Source managing a static array of file names (const char*). Designed for PROGMEM storage o..." alt="" coords="204,5,424,33"/>
-<area shape="poly" id="edge516_Node000000_Node000001" title=" " alt="" coords="78,429,81,352,97,249,113,193,134,139,163,88,201,44,221,31,219,36,204,48,168,91,139,141,118,195,103,250,87,353,83,430"/>
+<area shape="poly" id="edge520_Node000000_Node000001" title=" " alt="" coords="78,429,81,352,97,249,113,193,134,139,163,88,201,44,221,31,219,36,204,48,168,91,139,141,118,195,103,250,87,353,83,430"/>
 <area shape="rect" id="Node000002" href="$classaudio__tools_1_1_audio_source_callback.html" title="Callback Audio Data Source which is used by the Audio Players." alt="" coords="235,57,394,85"/>
-<area shape="poly" id="edge517_Node000000_Node000002" title=" " alt="" coords="79,429,86,361,104,271,120,223,140,177,167,134,201,96,217,85,237,77,233,82,219,89,204,100,171,137,145,179,125,225,109,272,91,362,85,430"/>
+<area shape="poly" id="edge521_Node000000_Node000002" title=" " alt="" coords="79,429,86,361,104,271,120,223,140,177,167,134,201,96,217,85,237,77,233,82,219,89,204,100,171,137,145,179,125,225,109,272,91,362,85,430"/>
 <area shape="rect" id="Node000003" href="$classaudio__tools_1_1_audio_source_f_t_p.html" title="An AudioSource that uses the https://github.com/pschatzmann/TinyFTPClient library to retrieve files f..." alt="" coords="203,109,426,137"/>
-<area shape="poly" id="edge518_Node000000_Node000003" title=" " alt="" coords="81,429,91,370,111,294,127,254,147,215,171,179,201,148,223,135,220,140,204,152,175,182,151,218,132,256,116,296,96,371,87,430"/>
+<area shape="poly" id="edge522_Node000000_Node000003" title=" " alt="" coords="81,429,91,370,111,294,127,254,147,215,171,179,201,148,223,135,220,140,204,152,175,182,151,218,132,256,116,296,96,371,87,430"/>
 <area shape="rect" id="Node000004" href="$classaudio__tools_1_1_audio_source_idx_s_d.html" title="ESP32 AudioSource for AudioPlayer using an SD card as data source. An index file is used to speed up ..." alt="" coords="244,161,384,189"/>
-<area shape="poly" id="edge519_Node000000_Node000004" title=" " alt="" coords="84,429,96,379,118,316,153,252,175,223,201,198,221,186,246,179,242,183,223,191,204,203,179,227,157,255,123,318,101,380,89,430"/>
+<area shape="poly" id="edge523_Node000000_Node000004" title=" " alt="" coords="84,429,96,379,118,316,153,252,175,223,201,198,221,186,246,179,242,183,223,191,204,203,179,227,157,255,123,318,101,380,89,430"/>
 <area shape="rect" id="Node000005" href="$classaudio__tools_1_1_audio_source_idx_s_d_f_a_t.html" title="ESP32 AudioSource for AudioPlayer using an SD card as data source. An index file is used to speed up ..." alt="" coords="229,213,400,258"/>
-<area shape="poly" id="edge520_Node000000_Node000005" title=" " alt="" coords="90,430,106,393,130,350,162,306,201,268,230,253,226,257,204,272,166,309,135,352,111,396,95,432"/>
+<area shape="poly" id="edge524_Node000000_Node000005" title=" " alt="" coords="90,430,106,393,130,350,162,306,201,268,230,253,226,257,204,272,166,309,135,352,111,396,95,432"/>
 <area shape="rect" id="Node000006" href="$classaudio__tools_1_1_audio_source_idx_s_d_m_m_c.html" title="ESP32 AudioSource for AudioPlayer using an SD card as data source. An index file is used to speed up ..." alt="" coords="228,281,401,309"/>
-<area shape="poly" id="edge521_Node000000_Node000006" title=" " alt="" coords="95,431,139,374,168,344,201,320,231,307,228,312,204,324,171,348,143,377,100,433"/>
+<area shape="poly" id="edge525_Node000000_Node000006" title=" " alt="" coords="95,431,139,374,168,344,201,320,231,307,228,312,204,324,171,348,143,377,100,433"/>
 <area shape="rect" id="Node000007" href="$classaudio__tools_1_1_audio_source_little_f_s.html" title="ESP32 AudioSource for AudioPlayer using an the LittleFS file system." alt="" coords="239,333,390,361"/>
-<area shape="poly" id="edge522_Node000000_Node000007" title=" " alt="" coords="107,433,150,401,202,371,241,359,237,363,204,376,153,405,111,437"/>
+<area shape="poly" id="edge526_Node000000_Node000007" title=" " alt="" coords="107,433,150,401,202,371,241,359,237,363,204,376,153,405,111,437"/>
 <area shape="rect" id="Node000008" href="$classaudio__tools_1_1_audio_source_s_d.html" title="ESP32 AudioSource for AudioPlayer using an SD card as data source. This class is based on the Arduino..." alt="" coords="254,385,374,413"/>
-<area shape="poly" id="edge523_Node000000_Node000008" title=" " alt="" coords="142,438,202,422,256,410,252,414,203,427,146,443"/>
+<area shape="poly" id="edge527_Node000000_Node000008" title=" " alt="" coords="142,438,202,422,256,410,252,414,203,427,146,443"/>
 <area shape="rect" id="Node000009" href="$classaudio__tools_1_1_audio_source_s_d_f_a_t.html" title="AudioSource for AudioPlayer using an SD card as data source. This class is based on the Arduino SD im..." alt="" coords="208,437,421,482"/>
-<area shape="poly" id="edge524_Node000000_Node000009" title=" " alt="" coords="145,457,209,457,205,461,148,461"/>
+<area shape="poly" id="edge528_Node000000_Node000009" title=" " alt="" coords="145,457,209,457,205,461,148,461"/>
 <area shape="rect" id="Node000010" href="$classaudio__tools_1_1_audio_source_s_d_m_m_c.html" title="ESP32 AudioSource for AudioPlayer using an SD card as data source. This class is based on the Arduino..." alt="" coords="238,505,391,533"/>
-<area shape="poly" id="edge525_Node000000_Node000010" title=" " alt="" coords="143,475,203,491,250,503,245,506,202,496,145,480"/>
+<area shape="poly" id="edge529_Node000000_Node000010" title=" " alt="" coords="143,475,203,491,250,503,245,506,202,496,145,480"/>
 <area shape="rect" id="Node000011" href="$classaudio__tools_1_1_audio_source_s_m_b.html" title="An AudioSource that uses the SMBClient of the https://github.com/pschatzmann/TinySMB library to retri..." alt="" coords="249,557,380,585"/>
-<area shape="poly" id="edge526_Node000000_Node000011" title=" " alt="" coords="109,481,153,513,204,542,250,559,246,561,202,547,150,517,110,486"/>
+<area shape="poly" id="edge530_Node000000_Node000011" title=" " alt="" coords="109,481,153,513,204,542,250,559,246,561,202,547,150,517,110,486"/>
 <area shape="rect" id="Node000012" href="$classaudio__tools_1_1_audio_source_s_p_i_f_f_s.html" title="ESP32 AudioSource for AudioPlayer using an the SPIFFS file system." alt="" coords="242,609,387,637"/>
-<area shape="poly" id="edge527_Node000000_Node000012" title=" " alt="" coords="98,484,143,541,171,570,204,594,244,612,239,613,201,599,168,574,139,545,98,489"/>
+<area shape="poly" id="edge531_Node000000_Node000012" title=" " alt="" coords="98,484,143,541,171,570,204,594,244,612,239,613,201,599,168,574,139,545,98,489"/>
 <area shape="rect" id="Node000013" href="$classaudio__tools_1_1_audio_source_s_t_d.html" title="AudioSource using the standard C++ api." alt="" coords="250,661,378,689"/>
-<area shape="poly" id="edge528_Node000000_Node000013" title=" " alt="" coords="91,485,110,523,134,567,165,610,204,646,226,658,252,668,247,669,224,663,201,651,161,614,129,570,105,526,92,490"/>
+<area shape="poly" id="edge532_Node000000_Node000013" title=" " alt="" coords="91,485,110,523,134,567,165,610,204,646,226,658,252,668,247,669,224,663,201,651,161,614,129,570,105,526,92,490"/>
 <area shape="rect" id="Node000014" href="$classaudio__tools_1_1_audio_source_u_r_l.html" title="Audio Source which provides the data via the network from an URL." alt="" coords="250,713,378,741"/>
-<area shape="poly" id="edge529_Node000000_Node000014" title=" " alt="" coords="87,485,103,534,126,591,159,649,180,676,204,698,226,711,252,721,247,722,224,716,201,703,176,679,155,652,121,593,98,535,87,490"/>
+<area shape="poly" id="edge533_Node000000_Node000014" title=" " alt="" coords="87,485,103,534,126,591,159,649,180,676,204,698,226,711,252,721,247,722,224,716,201,703,176,679,155,652,121,593,98,535,87,490"/>
 <area shape="rect" id="Node000016" href="$classaudio__tools_1_1_audio_source_v_f_s.html" title="AudioSource using the standard C++ api. In order to make this work you need to configure and provide ..." alt="" coords="251,765,378,793"/>
-<area shape="poly" id="edge531_Node000000_Node000016" title=" " alt="" coords="85,486,98,544,119,615,134,652,153,688,176,722,204,750,227,764,254,774,248,775,224,769,201,755,172,725,148,691,129,655,114,617,92,545,84,491"/>
+<area shape="poly" id="edge535_Node000000_Node000016" title=" " alt="" coords="85,486,98,544,119,615,134,652,153,688,176,722,204,750,227,764,254,774,248,775,224,769,201,755,172,725,148,691,129,655,114,617,92,545,84,491"/>
 <area shape="rect" id="Node000017" href="$classaudio__tools_1_1_audio_source_vector.html" title="Flexible Audio Data Source using a Vector of (file) names with minimal RAM usage. Files are stored wi..." alt="" coords="237,869,392,914"/>
-<area shape="poly" id="edge532_Node000000_Node000017" title=" " alt="" coords="82,486,89,562,107,660,122,713,143,764,170,812,205,855,220,867,240,878,234,878,217,871,201,858,166,815,138,766,117,714,101,661,84,562,81,491"/>
+<area shape="poly" id="edge536_Node000000_Node000017" title=" " alt="" coords="82,486,89,562,107,660,122,713,143,764,170,812,205,855,220,867,240,878,234,878,217,871,201,858,166,815,138,766,117,714,101,661,84,562,81,491"/>
 <area shape="rect" id="Node000019" href="$classaudio__tools_1_1_audio_source_zephyr.html" title="AudioSource using Zephyr FS API (NO mounting, only uses mounted FS). Mount using the ZephyrSD class." alt="" coords="240,817,388,845"/>
-<area shape="poly" id="edge533_Node000000_Node000019" title=" " alt="" coords="83,486,93,554,111,639,127,684,147,727,173,768,204,802,221,814,242,824,237,824,219,819,201,807,168,771,142,730,122,686,106,640,87,555,82,491"/>
+<area shape="poly" id="edge537_Node000000_Node000019" title=" " alt="" coords="83,486,93,554,111,639,127,684,147,727,173,768,204,802,221,814,242,824,237,824,219,819,201,807,168,771,142,730,122,686,106,640,87,555,82,491"/>
 <area shape="rect" id="Node000015" href="$classaudio__tools_1_1_audio_source_dynamic_u_r_l.html" title="Audio Source which provides the data via the network from an URL. The URLs are stored in an Vector of..." alt="" coords="474,713,660,741"/>
-<area shape="poly" id="edge530_Node000014_Node000015" title=" " alt="" coords="394,725,476,726,471,728,394,730"/>
+<area shape="poly" id="edge534_Node000014_Node000015" title=" " alt="" coords="394,725,476,726,471,728,394,730"/>
 <area shape="rect" id="Node000018" href="$classaudio__tools_1_1_path_names_registry.html" title="Interface for classes that can collect file names." alt="" coords="5,877,155,905"/>
-<area shape="poly" id="edge534_Node000018_Node000017" title=" " alt="" coords="170,889,239,891,234,891,170,894"/>
+<area shape="poly" id="edge538_Node000018_Node000017" title=" " alt="" coords="170,889,239,891,234,891,170,894"/>
 </map>

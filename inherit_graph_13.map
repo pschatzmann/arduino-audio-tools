@@ -1,7 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
 <area shape="rect" id="Node000000" href="$classaudio__tools_1_1_allocator.html" title="Memory allocateator which uses malloc." alt="" coords="5,32,85,60"/>
 <area shape="rect" id="Node000001" href="$classaudio__tools_1_1_allocator_ext.html" title="Memory allocateator which uses ps_malloc (on the ESP32) and if this fails it resorts to malloc." alt="" coords="145,5,246,33"/>
-<area shape="poly" id="edge499_Node000000_Node000001" title=" " alt="" coords="99,34,147,27,142,29,101,39"/>
+<area shape="poly" id="edge503_Node000000_Node000001" title=" " alt="" coords="99,34,147,27,142,29,101,39"/>
 <area shape="rect" id="Node000002" href="$classaudio__tools_1_1_allocator_zephyr.html" title="Zephyr allocator using the kernel heap (k_malloc / k_free). This is the standard allocator for Zephyr..." alt="" coords="133,57,258,85"/>
-<area shape="poly" id="edge500_Node000000_Node000002" title=" " alt="" coords="100,52,135,60,129,61,100,58"/>
+<area shape="poly" id="edge504_Node000000_Node000002" title=" " alt="" coords="100,52,135,60,129,61,100,58"/>
 </map>

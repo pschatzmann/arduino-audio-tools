@@ -1,7 +1,9 @@
 <map id="AudioDecoderExt" name="AudioDecoderExt">
 <area shape="rect" id="Node000001" title="Extended AudioDecoder interface to support block size configuration." alt="" coords="73,232,207,260"/>
-<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_a_d_p_c_m_decoder.html" title="Decoder for ADPCM. Depends on https://github.com/pschatzmann/adpcm." alt="" coords="78,308,202,336"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="142,274,142,309,138,306,138,278"/>
+<area shape="rect" id="Node000006" href="$classaudio__tools_1_1_a_d_p_c_m_decoder.html" title="Decoder for ADPCM. Depends on https://github.com/pschatzmann/adpcm." alt="" coords="6,308,130,336"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="119,270,82,310,79,306,114,272"/>
+<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_decoder_a_t_r_a_c.html" title="ATRAC decoder (ATRAC1, ATRAC3, ATRAC3+ and ATRAC9) which converts the raw ATRAC frames into 16 bit PC..." alt="" coords="154,308,272,336"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="165,269,203,308,198,307,163,274"/>
 <area shape="rect" id="Node000002" href="$classaudio__tools_1_1_audio_decoder.html" title="Decoding of encoded audio into PCM data." alt="" coords="84,157,196,184"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="141,198,143,233,137,231,139,202"/>
 <area shape="rect" id="Node000003" href="$classaudio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="" coords="23,81,121,109"/>

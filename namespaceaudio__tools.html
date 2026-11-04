@@ -746,6 +746,15 @@ size_t size)</a> and <a class="el" href="classaudio__tools_1_1_base_stream.html#
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_config_equalizer3_bands.html">ConfigEqualizer3Bands</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configuration for 3 Band Equalizer.  <a href="structaudio__tools_1_1_config_equalizer3_bands.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_container_a_t_r_a_c.html">ContainerATRAC</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Common functionality of the ATRAC container decoders: a streaming header parser which does not need to buffer more than the header fields that are needed to set up the <a class="el" href="classaudio__tools_1_1_decoder_a_t_r_a_c.html" title="ATRAC decoder (ATRAC1, ATRAC3, ATRAC3+ and ATRAC9) which converts the raw ATRAC frames into 16 bit PC...">DecoderATRAC</a>.  <a href="classaudio__tools_1_1_container_a_t_r_a_c.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_container_a_t_r_a_c_a_e_a.html">ContainerATRACAEA</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decodes ATRAC1 audio of a Sony MiniDisc .aea file: a 2048 byte header (magic, title, number of channels) is followed by the frames of 212 bytes per channel. The sample rate is 44100.  <a href="classaudio__tools_1_1_container_a_t_r_a_c_a_e_a.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_container_a_t_r_a_c_o_m_a.html">ContainerATRACOMA</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decodes ATRAC3 and ATRAC3+ audio in a Sony OpenMG audio container (.oma, .aa3, .at3): the file starts with an <a class="el" href="structaudio__tools_1_1_i_d3v2.html">ID3v2</a> like tag ('ea3' or 'ID3') which is followed by a 96 byte 'EA3' header with the codec parameters. Encrypted files are not supported.  <a href="classaudio__tools_1_1_container_a_t_r_a_c_o_m_a.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_container_decoder.html">ContainerDecoder</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parent class for all container formats.  <a href="classaudio__tools_1_1_container_decoder.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -818,6 +827,9 @@ size_t size)</a> and <a class="el" href="classaudio__tools_1_1_base_stream.html#
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_decoder_a_l_a_c.html">DecoderALAC</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">ALAC (Apple Lossless Audio Codec) decoder. This class depends on <a href="https://github.com/pschatzmann/codec-alac">https://github.com/pschatzmann/codec-alac</a>. This implementaion is based on <a href="https://github.com/macosforge/alac">https://github.com/macosforge/alac</a>.  <a href="classaudio__tools_1_1_decoder_a_l_a_c.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_decoder_a_t_r_a_c.html">DecoderATRAC</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">ATRAC decoder (ATRAC1, ATRAC3, ATRAC3+ and ATRAC9) which converts the raw ATRAC frames into 16 bit PCM data. This class depends on <a href="https://github.com/pschatzmann/codec-atrac">https://github.com/pschatzmann/codec-atrac</a> which is based on the ATRAC decoders of FFmpeg.  <a href="classaudio__tools_1_1_decoder_a_t_r_a_c.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_decoder_base64.html">DecoderBase64</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_decoder_base64.html" title="DecoderBase64 - Converts a Base64 encoded Stream into the original data stream. Decoding only gives a...">DecoderBase64</a> - Converts a Base64 encoded <a class="el" href="class_stream.html">Stream</a> into the original data stream. Decoding only gives a valid result if we start at a limit of 4 bytes. We therefore use by default a newline to determine a valid start boundary.  <a href="classaudio__tools_1_1_decoder_base64.html#details">More...</a><br /></td></tr>
@@ -2924,6 +2936,11 @@ Enumerations</h2></td></tr>
 , <a class="el" href="group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1a039ea4e8bb04948343a7376e44df1c17">ALAC</a> = 0x6C61
 , <br />
 &#160;&#160;<a class="el" href="group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1a6409dac0c80c79ddf61858be7f2c699b">AAC</a> = 0xA106
+, <a class="el" href="group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1af89862e79c330f91fc2109386d40ff95">ATRAC3</a> = 0x0270
+, <a class="el" href="group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1af18247ed7621483f39dec10003f44420">EXTENSIBLE</a> = 0xFFFE
+, <a class="el" href="group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1aa3f338e7864a787946717fbb9ff00898">ATRAC3_PLUS</a> = 0xFF01
+, <br />
+&#160;&#160;<a class="el" href="group__video.html#gga4fcb46758e1356d5ff7c6523c52810c1a3c8198033b8ac085220e4f3ac9e16531">ATRAC9</a> = 0xFF02
 <br />
  }</td></tr>
 <tr class="memdesc:ga4fcb46758e1356d5ff7c6523c52810c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Audio format codes used by Microsoft e.g. in avi or wav files.  <a href="group__video.html#ga4fcb46758e1356d5ff7c6523c52810c1">More...</a><br /></td></tr>

@@ -82,14 +82,14 @@ Collaboration diagram for Decoder:</div>
 <div class="dyncontent">
 <div class="center"><img src="group__decoder.png" border="0" usemap="#agroup____decoder" alt=""/></div>
 <map name="agroup____decoder" id="agroup____decoder">
-<area shape="rect" href="group__codecs.html" title="Audio Coder and Decoder" alt="" coords="5,699,74,727"/>
-<area shape="rect" title="Audio Decoder." alt="" coords="357,699,432,727"/>
-<area shape="rect" href="group__encoder.html" title="Audio Encoder." alt="" coords="734,558,807,585"/>
-<area shape="rect" href="group__h264.html" title="H.264 encoding/decoding using https://github.com/pschatzmann/TinyH264." alt="" coords="743,610,798,637"/>
-<area shape="rect" href="group__h264esp32s3.html" title="H.264 encoding/decoding on ESP32&#45;S3 using https://github.com/pschatzmann/ESP32S3&#45;h264 (esp_h264,..." alt="" coords="715,671,826,699"/>
-<area shape="rect" href="group__mjpeg.html" title="Motion&#45;JPEG decoding and encoding using https://github.com/pschatzmann/TinyJPEG." alt="" coords="739,723,802,751"/>
-<area shape="rect" href="group__mpg.html" title="MPEG&#45;1 part 2 (video) encoding/decoding using https://github.com/pschatzmann/TinyMPG." alt="" coords="745,775,796,803"/>
-<area shape="rect" href="group__video.html" title="Video playback." alt="" coords="742,956,800,984"/>
+<area shape="rect" href="group__codecs.html" title="Audio Coder and Decoder" alt="" coords="5,724,74,752"/>
+<area shape="rect" title="Audio Decoder." alt="" coords="357,724,432,752"/>
+<area shape="rect" href="group__encoder.html" title="Audio Encoder." alt="" coords="734,583,807,611"/>
+<area shape="rect" href="group__h264.html" title="H.264 encoding/decoding using https://github.com/pschatzmann/TinyH264." alt="" coords="743,635,798,663"/>
+<area shape="rect" href="group__h264esp32s3.html" title="H.264 encoding/decoding on ESP32&#45;S3 using https://github.com/pschatzmann/ESP32S3&#45;h264 (esp_h264,..." alt="" coords="715,696,826,724"/>
+<area shape="rect" href="group__mjpeg.html" title="Motion&#45;JPEG decoding and encoding using https://github.com/pschatzmann/TinyJPEG." alt="" coords="739,748,802,776"/>
+<area shape="rect" href="group__mpg.html" title="MPEG&#45;1 part 2 (video) encoding/decoding using https://github.com/pschatzmann/TinyMPG." alt="" coords="745,800,796,828"/>
+<area shape="rect" href="group__video.html" title="Video playback." alt="" coords="742,982,800,1009"/>
 </map>
 </div>
 <table class="memberdecls">
@@ -146,11 +146,20 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_codec_factory.html">CodecFactory</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Factory for creating new decoders based on the mime type or id.  <a href="classaudio__tools_1_1_codec_factory.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_container_a_t_r_a_c_a_e_a.html">ContainerATRACAEA</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decodes ATRAC1 audio of a Sony MiniDisc .aea file: a 2048 byte header (magic, title, number of channels) is followed by the frames of 212 bytes per channel. The sample rate is 44100.  <a href="classaudio__tools_1_1_container_a_t_r_a_c_a_e_a.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_container_a_t_r_a_c_o_m_a.html">ContainerATRACOMA</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decodes ATRAC3 and ATRAC3+ audio in a Sony OpenMG audio container (.oma, .aa3, .at3): the file starts with an <a class="el" href="structaudio__tools_1_1_i_d3v2.html">ID3v2</a> like tag ('ea3' or 'ID3') which is followed by a 96 byte 'EA3' header with the codec parameters. Encrypted files are not supported.  <a href="classaudio__tools_1_1_container_a_t_r_a_c_o_m_a.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_copy_decoder.html">CopyDecoder</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dummy Decoder which just copies the provided data to the output. You can define if it is PCM data.  <a href="classaudio__tools_1_1_copy_decoder.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_decoder_adapter.html">DecoderAdapter</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adapter class which allows the <a class="el" href="classaudio__tools_1_1_audio_decoder.html" title="Decoding of encoded audio into PCM data.">AudioDecoder</a> API on a <a class="el" href="classaudio__tools_1_1_streaming_decoder.html" title="A Streaming Decoder where we provide both the input and output as streams.">StreamingDecoder</a>.  <a href="classaudio__tools_1_1_decoder_adapter.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_decoder_a_t_r_a_c.html">DecoderATRAC</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">ATRAC decoder (ATRAC1, ATRAC3, ATRAC3+ and ATRAC9) which converts the raw ATRAC frames into 16 bit PCM data. This class depends on <a href="https://github.com/pschatzmann/codec-atrac">https://github.com/pschatzmann/codec-atrac</a> which is based on the ATRAC decoders of FFmpeg.  <a href="classaudio__tools_1_1_decoder_a_t_r_a_c.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_decoder_base64.html">DecoderBase64</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_decoder_base64.html" title="DecoderBase64 - Converts a Base64 encoded Stream into the original data stream. Decoding only gives a...">DecoderBase64</a> - Converts a Base64 encoded <a class="el" href="class_stream.html">Stream</a> into the original data stream. Decoding only gives a valid result if we start at a limit of 4 bytes. We therefore use by default a newline to determine a valid start boundary.  <a href="classaudio__tools_1_1_decoder_base64.html#details">More...</a><br /></td></tr>

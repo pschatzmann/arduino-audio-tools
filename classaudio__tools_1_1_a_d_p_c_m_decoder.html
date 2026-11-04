@@ -216,6 +216,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a76e1ee601feac4a8e4bb429f50200fe9" id="r_a76e1ee601feac4a8e4bb429f50200fe9"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder.html#a76e1ee601feac4a8e4bb429f50200fe9">setCodecConfig</a> (const <a class="el" href="classuint8__t.html">uint8_t</a> *data, <a class="el" href="classsize__t.html">size_t</a> len)</td></tr>
 <tr class="memdesc:a76e1ee601feac4a8e4bb429f50200fe9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Some decoders need e.g. a magic cookie to provide the relevant info for decoding.  <br /></td></tr>
 <tr class="separator:a76e1ee601feac4a8e4bb429f50200fe9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25159516f8d892397bb33c7212f7b066" id="r_a25159516f8d892397bb33c7212f7b066"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_decoder_ext.html#a25159516f8d892397bb33c7212f7b066">setExtraData</a> (const <a class="el" href="classuint8__t.html">uint8_t</a> *data, <a class="el" href="classsize__t.html">size_t</a> len)</td></tr>
+<tr class="separator:a25159516f8d892397bb33c7212f7b066"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74e5d7a5d12ed42dc49bacf884fa1209" id="r_a74e5d7a5d12ed42dc49bacf884fa1209"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_d_p_c_m_decoder.html#a74e5d7a5d12ed42dc49bacf884fa1209">setId</a> (AVCodecID <a class="el" href="classaudio__tools_1_1_audio_decoder.html#a7441ef0865bcb3db9b8064dd7375c1ea">id</a>)</td></tr>
 <tr class="separator:a74e5d7a5d12ed42dc49bacf884fa1209"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a909f118906f9cf7024baae224dcd90a7" id="r_a909f118906f9cf7024baae224dcd90a7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_info_source.html#a909f118906f9cf7024baae224dcd90a7">setNotifyActive</a> (<a class="el" href="classbool.html">bool</a> flag)</td></tr>
@@ -964,7 +966,46 @@ Protected Attributes</h2></td></tr>
 
 <p>Some decoders need e.g. a magic cookie to provide the relevant info for decoding. </p>
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_decoder_a_l_a_c.html#a1b21a37a1cef6954790de13b4c1005f3">DecoderALAC</a>, and <a class="el" href="classaudio__tools_1_1_multi_decoder.html#a1b21a37a1cef6954790de13b4c1005f3">MultiDecoder</a>.</p>
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_decoder_a_l_a_c.html#a1b21a37a1cef6954790de13b4c1005f3">DecoderALAC</a>, <a class="el" href="classaudio__tools_1_1_decoder_a_t_r_a_c.html#a1b21a37a1cef6954790de13b4c1005f3">DecoderATRAC</a>, and <a class="el" href="classaudio__tools_1_1_multi_decoder.html#a1b21a37a1cef6954790de13b4c1005f3">MultiDecoder</a>.</p>
+
+</div>
+</div>
+<a id="a25159516f8d892397bb33c7212f7b066" name="a25159516f8d892397bb33c7212f7b066"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25159516f8d892397bb33c7212f7b066">&#9670;&#160;</a></span>setExtraData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void setExtraData </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classuint8__t.html">uint8_t</a> *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classsize__t.html">size_t</a>&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Provides the codec specific data which follows the standard fields of the WAV 'fmt ' chunk (e.g. the ATRAC3 extradata). It is called by the <a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html" title="A simple WAVDecoder: We parse the header data on the first record to determine the format....">WAVDecoder</a> before <a class="el" href="classaudio__tools_1_1_a_d_p_c_m_decoder.html#acba365cc28eb702040c382646cfb0a7a">begin()</a>; the default implementation ignores it. </p>
+
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_decoder_a_t_r_a_c.html#aa3f70f889c6375924161a00f991cda96">DecoderATRAC</a>.</p>
 
 </div>
 </div>
@@ -1075,7 +1116,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Defines where the decoded result is written to. </p>
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_a_d_t_s_decoder.html#ae935c7a9492f2474a03a72c3ccad9364">ADTSDecoder</a>, <a class="el" href="classaudio__tools_1_1_codec_chain.html#ae935c7a9492f2474a03a72c3ccad9364">CodecChain</a>, <a class="el" href="classaudio__tools_1_1_m_t_s_decoder.html#ae935c7a9492f2474a03a72c3ccad9364">MTSDecoder</a>, <a class="el" href="classaudio__tools_1_1_m_t_s_decoder_t_s_demux.html#ae935c7a9492f2474a03a72c3ccad9364">MTSDecoderTSDemux</a>, and <a class="el" href="classaudio__tools_1_1_meta_data_filter_decoder.html#a11354524d70b0580e93601363fc3046e">MetaDataFilterDecoder</a>.</p>
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_container_a_t_r_a_c.html#acf58dd0aedd8748b499ca948bd2cdf5d">ContainerATRAC</a>, <a class="el" href="classaudio__tools_1_1_a_d_t_s_decoder.html#ae935c7a9492f2474a03a72c3ccad9364">ADTSDecoder</a>, <a class="el" href="classaudio__tools_1_1_codec_chain.html#ae935c7a9492f2474a03a72c3ccad9364">CodecChain</a>, <a class="el" href="classaudio__tools_1_1_m_t_s_decoder.html#ae935c7a9492f2474a03a72c3ccad9364">MTSDecoder</a>, <a class="el" href="classaudio__tools_1_1_m_t_s_decoder_t_s_demux.html#ae935c7a9492f2474a03a72c3ccad9364">MTSDecoderTSDemux</a>, and <a class="el" href="classaudio__tools_1_1_meta_data_filter_decoder.html#a11354524d70b0580e93601363fc3046e">MetaDataFilterDecoder</a>.</p>
 
 </div>
 </div>
@@ -1105,7 +1146,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Defines where the decoded result is written to. </p>
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_a_d_t_s_decoder.html#acb905986fc0710dbfd5cafdbad93fdac">ADTSDecoder</a>, <a class="el" href="classaudio__tools_1_1_codec_chain.html#acb905986fc0710dbfd5cafdbad93fdac">CodecChain</a>, <a class="el" href="classaudio__tools_1_1_m_t_s_decoder.html#acb905986fc0710dbfd5cafdbad93fdac">MTSDecoder</a>, <a class="el" href="classaudio__tools_1_1_m_t_s_decoder_t_s_demux.html#acb905986fc0710dbfd5cafdbad93fdac">MTSDecoderTSDemux</a>, and <a class="el" href="classaudio__tools_1_1_meta_data_filter_decoder.html#acb905986fc0710dbfd5cafdbad93fdac">MetaDataFilterDecoder</a>.</p>
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_container_a_t_r_a_c.html#a74fb348e7fbaed39364af8869fb05231">ContainerATRAC</a>, <a class="el" href="classaudio__tools_1_1_a_d_t_s_decoder.html#acb905986fc0710dbfd5cafdbad93fdac">ADTSDecoder</a>, <a class="el" href="classaudio__tools_1_1_codec_chain.html#acb905986fc0710dbfd5cafdbad93fdac">CodecChain</a>, <a class="el" href="classaudio__tools_1_1_m_t_s_decoder.html#acb905986fc0710dbfd5cafdbad93fdac">MTSDecoder</a>, <a class="el" href="classaudio__tools_1_1_m_t_s_decoder_t_s_demux.html#acb905986fc0710dbfd5cafdbad93fdac">MTSDecoderTSDemux</a>, and <a class="el" href="classaudio__tools_1_1_meta_data_filter_decoder.html#acb905986fc0710dbfd5cafdbad93fdac">MetaDataFilterDecoder</a>.</p>
 
 </div>
 </div>
