@@ -29,6 +29,8 @@
 #include "AudioTools/AudioCodecs/CodecAACFAAC.h"
 #include "AudioTools/AudioCodecs/CodecAACFAAD2.h"
 #include "AudioTools/AudioCodecs/CodecAPTX.h"
+#include "AudioTools/AudioCodecs/CodecATRAC.h"
+#include "AudioTools/AudioCodecs/ContainerATRAC.h"
 #include "AudioTools/AudioCodecs/CodecFloat.h"
 #include "AudioTools/AudioCodecs/CodecL16.h"
 #include "AudioTools/AudioCodecs/CodecWAV.h"

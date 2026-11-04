@@ -18,6 +18,8 @@
 /// values make the point at which data_length is reached more precise (see
 /// WAVEncoder::write()) at the cost of more, smaller writes to the encoder.
 #define WAV_ENCODER_COMPRESSED_CHUNK_SIZE 1024
+/// Maximum size of the codec specific data of the 'fmt ' chunk that we keep
+#define MAX_WAV_EXTRA_DATA_LEN 64
 
 namespace audio_tools {
 
@@ -123,6 +125,8 @@ class WAVHeader {
     headerInfo.byte_rate = read_int32();
     headerInfo.block_align = read_int16();
     headerInfo.bits_per_sample = read_int16();
+    extradata.clear();
+    if (fmt_length >= 18) parseFormatExtension(fmt_length);
     if (!setPos("data")) return false;
     headerInfo.data_length = read_int32();
     if (headerInfo.data_length == 0 || headerInfo.data_length >= 0x7fff0000) {
@@ -161,6 +165,12 @@ class WAVHeader {
 
   /// provides the info from the header
   WAVAudioInfo &audioInfo() { return headerInfo; }
+
+  /// Provides the codec specific data that follows the standard fields of
+  /// the 'fmt ' chunk (e.g. the ATRAC3 extradata). For
+  /// WAVE_FORMAT_EXTENSIBLE the 22 byte extension (valid bits, channel mask
+  /// and sub format GUID) is not included.
+  Vector<uint8_t> &extraData() { return extradata; }
 
   /// Sets the info in the header
   void setAudioInfo(WAVAudioInfo info) { headerInfo = info; }
@@ -212,6 +222,7 @@ class WAVHeader {
     empty.channels = 0;
     empty.bits_per_sample = 0;
     headerInfo = empty;
+    extradata.clear();
     buffer.setClearWithZero(true);
     buffer.reset();
   }
@@ -232,8 +243,41 @@ class WAVHeader {
 
  protected:
   WAVAudioInfo headerInfo;
+  Vector<uint8_t> extradata;
   SingleBuffer<uint8_t> buffer{MAX_WAV_HEADER_LEN};
   size_t data_pos = 0;
+
+  /// Reads cbSize and the extradata of the 'fmt ' chunk. For
+  /// WAVE_FORMAT_EXTENSIBLE the format is replaced by the one that is
+  /// identified by the sub format GUID (if we know it).
+  void parseFormatExtension(int fmt_length) {
+    int max_size = fmt_length - 18;
+    int size = read_int16();
+    if (size > max_size) size = max_size;
+    if (size > MAX_WAV_EXTRA_DATA_LEN) size = MAX_WAV_EXTRA_DATA_LEN;
+    if (headerInfo.format == AudioFormat::EXTENSIBLE && size >= 22) {
+      skip(6);  // valid bits per sample, channel mask
+      uint8_t guid[16];
+      for (int j = 0; j < 16; j++) guid[j] = getChar();
+      headerInfo.format = formatFromGuid(guid);
+      size -= 22;
+    }
+    extradata.resize(size);
+    for (int j = 0; j < size; j++) extradata[j] = getChar();
+  }
+
+  /// Maps the sub format GUID of WAVE_FORMAT_EXTENSIBLE to a format
+  static AudioFormat formatFromGuid(const uint8_t *guid) {
+    static const uint8_t atrac3plus[16] = {0xBF, 0xAA, 0x23, 0xE9, 0x58, 0xCB,
+                                           0x71, 0x44, 0xA1, 0x19, 0xFF, 0xFA,
+                                           0x01, 0xE4, 0xCE, 0x62};
+    static const uint8_t atrac9[16] = {0xD2, 0x42, 0xE1, 0x47, 0xBA, 0x36,
+                                       0x8D, 0x4D, 0x88, 0xFC, 0x61, 0x65,
+                                       0x4F, 0x8C, 0x83, 0x6C};
+    if (memcmp(guid, atrac3plus, 16) == 0) return AudioFormat::ATRAC3_PLUS;
+    if (memcmp(guid, atrac9, 16) == 0) return AudioFormat::ATRAC9;
+    return AudioFormat::EXTENSIBLE;
+  }
 
   bool setPos(const char *id) {
     int id_len = strlen(id);
@@ -888,6 +932,8 @@ class WAVDecoder : public AudioDecoder {
         // update blocksize before begin() is called in setupEncodedAudio()
         int block_size = header.audioInfo().block_align;
         p_decoder->setBlockSize(block_size);
+        p_decoder->setExtraData(header.extraData().data(),
+                                header.extraData().size());
         setupEncodedAudio();
       }
 
@@ -940,7 +986,7 @@ class WAVDecoder : public AudioDecoder {
       assert(p_print != nullptr);
       dec_out.setOutput(p_print);
       dec_out.setDecoder(p_decoder);
-      dec_out.begin(info);
+      dec_out.begin(audioInfo());
     }
   }
 

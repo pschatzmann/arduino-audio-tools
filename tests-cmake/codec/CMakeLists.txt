@@ -22,6 +22,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/aac-fdk-encode ${CMAKE_CURRENT_BINA
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/aac-helix ${CMAKE_CURRENT_BINARY_DIR}/aac-helix)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/adpcm ${CMAKE_CURRENT_BINARY_DIR}/adpcm)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/alac ${CMAKE_CURRENT_BINARY_DIR}/alac)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/atrac ${CMAKE_CURRENT_BINARY_DIR}/atrac)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/container-avi ${CMAKE_CURRENT_BINARY_DIR}/container-avi)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/container-binary ${CMAKE_CURRENT_BINARY_DIR}/container-binary)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/container-m4a ${CMAKE_CURRENT_BINARY_DIR}/container-m4a)

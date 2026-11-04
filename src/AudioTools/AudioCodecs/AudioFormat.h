@@ -292,6 +292,14 @@ enum class AudioFormat : uint16_t {
   // FRACE_TELECOM_G729 = 0xA123, /* France Telecom */
   // CODIAN = 0xA124, /* CODIAN */
   // FLAC = 0xF1AC, /* flac.sourceforge.net */
+  /// Sony ATRAC3 (the tag is called SONY_SCX in some lists)
+  ATRAC3 = 0x0270,
+  /// WAVE_FORMAT_EXTENSIBLE: the real format is defined by a sub format GUID
+  EXTENSIBLE = 0xFFFE,
+  /// Not registered WAV tags: used by WAVHeader to report the formats which
+  /// are identified by a WAVE_FORMAT_EXTENSIBLE sub format GUID
+  ATRAC3_PLUS = 0xFF01,
+  ATRAC9 = 0xFF02,
 };
 
 /// @brief Provides the mime type for a AudioFormat wav code, or nullptr if
