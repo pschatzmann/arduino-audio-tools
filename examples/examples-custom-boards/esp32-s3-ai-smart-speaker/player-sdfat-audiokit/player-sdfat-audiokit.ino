@@ -8,9 +8,10 @@
  * This makes sure that the SD is only active when it is actually used, so that
  * we can extend the battery life!
  * 
- * Please note that this examples also works w/o the custom functions (with the
- * default SD_CHIP_SELECT_MODE 0) since the board driver selects the SD card
- * (EXIO4 = LOW) when cfg.sd_active is true.
+ * IMPORTANT: sdCsWrite() is only called by SdFat if SD_CHIP_SELECT_MODE is 1
+ * or 2 in SdFatConfig.h. With 0 it is silently ignored. The SD card needs CS
+ * to toggle (HIGH during the 74 init clocks, LOW for CMD0), so a static LOW
+ * set by the board driver (cfg.sd_active = true) only works with some cards.
  * 
  * Dependencies:
  * - https://github.com/pschatzmann/arduino-audio-tools
