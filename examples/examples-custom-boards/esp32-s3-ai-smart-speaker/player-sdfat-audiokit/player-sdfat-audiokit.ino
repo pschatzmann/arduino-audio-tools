@@ -8,8 +8,9 @@
  * This makes sure that the SD is only active when it is actually used, so that
  * we can extend the battery life!
  * 
- * Please note that this examples also works w/o the custom functions since the 
- * AudioKit driver already configures the EXIO4 pin for SD use.
+ * Please note that this examples also works w/o the custom functions (with the
+ * default SD_CHIP_SELECT_MODE 0) since the board driver selects the SD card
+ * (EXIO4 = LOW) when cfg.sd_active is true.
  * 
  * Dependencies:
  * - https://github.com/pschatzmann/arduino-audio-tools
