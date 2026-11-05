@@ -18,7 +18,7 @@ var searchData=
   ['spiregaudioslave_2eh_15',['SPIRegAudioSlave.h',['../_s_p_i_reg_audio_slave_8h.html',1,'']]],
   ['stack_2eh_16',['Stack.h',['../_stack_8h.html',1,'']]],
   ['stdiostream_2eh_17',['StdioStream.h',['../_stdio_stream_8h.html',1,'']]],
-  ['stm32_2eh_18',['stm32.h',['../_platform_config_2stm32_8h.html',1,'(Global Namespace)'],['../_concurrency_2stm32_8h.html',1,'(Global Namespace)']]],
+  ['stm32_2eh_18',['stm32.h',['../_platform_config_2_s_t_m32_8h.html',1,'(Global Namespace)'],['../_concurrency_2_s_t_m32_8h.html',1,'(Global Namespace)']]],
   ['str_2eh_19',['Str.h',['../_str_8h.html',1,'']]],
   ['streamcopy_2eh_20',['StreamCopy.h',['../_stream_copy_8h.html',1,'']]],
   ['streamingdecoder_2eh_21',['StreamingDecoder.h',['../_streaming_decoder_8h.html',1,'']]],
