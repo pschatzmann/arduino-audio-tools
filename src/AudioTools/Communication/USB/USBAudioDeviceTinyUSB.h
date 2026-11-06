@@ -65,7 +65,8 @@ class USBAudioDeviceTinyUSB : public USBAudioDeviceBase,
       if (config_.enable_ep_in) {
         if (config_.ep_in < 0)
           config_.ep_in = TinyUSBDevice.allocEndpoint(TUSB_DIR_IN);
-      } else if (this->isFeedbackEpEnabled()) {
+      }
+      if (this->isFeedbackEpEnabled()) {
         if (config_.ep_fb < 0)
           config_.ep_fb = TinyUSBDevice.allocEndpoint(TUSB_DIR_IN);
       }
