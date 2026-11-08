@@ -29,7 +29,7 @@
  * - https://github.com/pschatzmann/arduino-audio-driver
  * - https://github.com/pschatzmann/TinyGPU
  * - https://github.com/pschatzmann/TinyMPG
- * - https://github.com/pschatzmann/TinyMP2
+ * - https://github.com/pschatzmann/codec-mp2
  *
  * @author Phil Schatzmann
  * @copyright GPLv3

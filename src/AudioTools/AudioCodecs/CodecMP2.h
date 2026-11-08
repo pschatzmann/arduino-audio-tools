@@ -13,7 +13,7 @@ namespace audio_tools {
  * boundaries: bytes are accumulated internally and decoded frame by frame;
  * any invalid/garbage bytes are skipped automatically (resync).
  *
- * Depends on https://github.com/pschatzmann/TinyMP2
+ * Depends on https://github.com/pschatzmann/codec-mp2
  *
  * @ingroup codecs
  * @ingroup decoder

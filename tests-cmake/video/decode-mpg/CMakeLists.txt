@@ -39,7 +39,7 @@ if(NOT tinympg_POPULATED)
 endif()
 
 # Build with TinyMP2 - the MPEG-1 Layer II decoder MP2Decoder (AudioTools/AudioCodecs/CodecMP2.h) wraps
-FetchContent_Declare(tinymp2 GIT_REPOSITORY "https://github.com/pschatzmann/TinyMP2.git" GIT_TAG main )
+FetchContent_Declare(tinymp2 GIT_REPOSITORY "https://github.com/pschatzmann/codec-mp2.git" GIT_TAG main )
 FetchContent_GetProperties(tinymp2)
 if(NOT tinymp2_POPULATED)
     FetchContent_Populate(tinymp2)

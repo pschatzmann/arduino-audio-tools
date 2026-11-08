@@ -38,7 +38,7 @@ namespace audio_tools {
  * - https://github.com/pschatzmann/TinyMPG
  * - https://github.com/pschatzmann/TinyJPEG
  * - https://github.com/pschatzmann/codec-helix
- * - https://github.com/pschatzmann/TinyMP2
+ * - https://github.com/pschatzmann/codec-mp2
  *
  * @ingroup player
  * @ingroup video
