@@ -141,7 +141,8 @@ class USBAudioDeviceESP32 : public USBAudioDeviceBase {
   void resolveEndpoints() {
     if (config_.enable_ep_in) {
       if (config_.ep_in < 0) config_.ep_in = allocInEndpoint();
-    } else if (isFeedbackEpEnabled()) {
+    }
+    if (isFeedbackEpEnabled()) {
       if (config_.ep_fb < 0) config_.ep_fb = allocInEndpoint();
     }
     if (config_.enable_ep_out) {
