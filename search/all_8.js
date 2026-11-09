@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['e_0',['e',['../structaudio__tools_1_1_echo_state.html#a72d969434f82c5acbf1435c7c2662242',1,'audio_tools::EchoState::e'],['../group__tools.html#gga9715fceb4c700e7e4a610400464e9396ab199e021998d49b1f09338d8b9b18ecb',1,'audio_tools::MusicalNotes::E'],['../structaudio__tools_1_1_echo_state.html#a556a9563ae7d5f0ab9d538d3c32e2d1e',1,'audio_tools::EchoState::E']]],
+  ['e_0',['e',['../group__tools.html#gga9715fceb4c700e7e4a610400464e9396ab199e021998d49b1f09338d8b9b18ecb',1,'audio_tools::MusicalNotes::E'],['../structaudio__tools_1_1_echo_state.html#a556a9563ae7d5f0ab9d538d3c32e2d1e',1,'audio_tools::EchoState::E'],['../structaudio__tools_1_1_echo_state.html#a72d969434f82c5acbf1435c7c2662242',1,'audio_tools::EchoState::e']]],
   ['ea3_1',['Ea3',['../classaudio__tools_1_1_container_a_t_r_a_c_o_m_a.html#a5d74787dedbc4e11c1ab15bf487e61f8acfd2b4f15e7fa875eb946dfbc091e6f2',1,'audio_tools::ContainerATRACOMA']]],
   ['ea3_5fheader_5fsize_2',['EA3_HEADER_SIZE',['../classaudio__tools_1_1_container_a_t_r_a_c_o_m_a.html#afaabc18b2f787008c4316e29ff3ab4df',1,'audio_tools::ContainerATRACOMA']]],
   ['echo_5ffft_3',['echo_fft',['../namespaceaudio__tools.html#aaa4323b8e1fe7e5e2c78d809e4e0b01a',1,'audio_tools']]],

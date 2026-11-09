@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['e_0',['e',['../structaudio__tools_1_1_echo_state.html#a72d969434f82c5acbf1435c7c2662242',1,'audio_tools::EchoState::e'],['../structaudio__tools_1_1_echo_state.html#a556a9563ae7d5f0ab9d538d3c32e2d1e',1,'audio_tools::EchoState::E']]],
+  ['e_0',['e',['../structaudio__tools_1_1_echo_state.html#a556a9563ae7d5f0ab9d538d3c32e2d1e',1,'audio_tools::EchoState::E'],['../structaudio__tools_1_1_echo_state.html#a72d969434f82c5acbf1435c7c2662242',1,'audio_tools::EchoState::e']]],
   ['ea3_5fheader_5fsize_1',['EA3_HEADER_SIZE',['../classaudio__tools_1_1_container_a_t_r_a_c_o_m_a.html#afaabc18b2f787008c4316e29ff3ab4df',1,'audio_tools::ContainerATRACOMA']]],
   ['effect_5fvalue_2',['effect_value',['../classaudio__tools_1_1_pitch_shift.html#aadbca1011884df66c3dcca2932eef2d8',1,'audio_tools::PitchShift']]],
   ['effectgain_3',['effectGain',['../classaudio__tools_1_1_simple_flanger.html#aefc0405dcc62ff631b2ca54f74da93a0',1,'audio_tools::SimpleFlanger']]],
