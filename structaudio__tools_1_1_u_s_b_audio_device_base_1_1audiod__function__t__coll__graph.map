@@ -1,33 +1,35 @@
 <map id="USBAudioDeviceBase::audiod_function_t" name="USBAudioDeviceBase::audiod_function_t">
-<area shape="rect" id="Node000001" title="Internal structure representing a USB audio function instance." alt="" coords="648,576,810,621"/>
-<area shape="rect" id="Node000002" href="$classuint8__t.html" title=" " alt="" coords="24,831,90,859"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="82,867,119,900,165,937,219,972,279,998,335,1016,382,1025,427,1021,479,998,532,961,578,914,617,861,649,804,675,749,695,698,721,623,724,619,700,699,680,751,654,807,621,863,582,917,535,965,481,1003,428,1026,381,1030,334,1021,277,1003,217,977,162,942,115,904,83,873"/>
-<area shape="rect" id="Node000012" href="$structaudio__tools_1_1_usb_endpoint_descriptor_view.html" title="Backend&#45;agnostic mirror of tusb_desc_endpoint_t (USB 2.0 spec Table 9&#45;13). wMaxPacketSize is kept in ..." alt="" coords="278,205,480,232"/>
-<area shape="poly" id="edge12_Node000012_Node000002" title=" " alt="" coords="67,816,145,609,251,318,256,296,258,278,263,261,276,243,297,231,294,235,280,247,267,263,263,279,261,297,256,319,150,611,72,818"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="20,161,94,188"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="107,154,213,125,279,113,349,106,422,106,495,116,563,138,596,154,626,175,649,204,668,249,685,304,699,365,718,486,728,576,723,575,713,487,694,366,680,305,663,250,644,207,622,179,593,159,561,143,494,121,422,111,350,111,279,118,214,130,111,158"/>
-<area shape="poly" id="edge14_Node000012_Node000003" title=" " alt="" coords="108,186,133,190,279,209,275,213,132,195,111,190"/>
-<area shape="rect" id="Node000004" href="$classbool.html" title=" " alt="" coords="354,257,404,284"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="418,268,533,274,588,283,610,290,626,299,655,329,679,364,697,403,710,443,725,518,730,577,725,575,720,519,705,444,692,405,674,367,651,332,622,303,608,295,587,289,533,280,421,273"/>
-<area shape="rect" id="Node000005" href="$classuint32__t.html" title=" " alt="" coords="342,429,416,456"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="431,446,539,462,590,473,625,485,653,505,678,528,716,576,711,576,675,532,650,509,623,490,588,478,538,467,433,451"/>
-<area shape="rect" id="Node000006" href="$classfloat.html" title=" " alt="" coords="354,481,404,508"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="419,495,515,509,570,521,625,537,662,554,697,575,691,576,660,559,623,542,569,526,514,514,420,500"/>
-<area shape="rect" id="Node000007" title=" " alt="" coords="313,533,445,560"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="460,554,624,577,650,583,645,584,624,582,461,559"/>
-<area shape="rect" id="Node000008" title=" " alt="" coords="296,585,462,612"/>
-<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="476,596,650,597,645,600,478,601"/>
-<area shape="rect" id="Node000009" title=" " alt="" coords="300,637,458,664"/>
-<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="472,639,624,618,650,615,645,618,624,623,474,644"/>
-<area shape="rect" id="Node000010" title=" " alt="" coords="298,689,460,716"/>
-<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="474,691,548,678,623,657,661,639,698,620,693,623,663,644,625,662,550,683,476,696"/>
-<area shape="rect" id="Node000011" title=" " alt="" coords="301,741,457,768"/>
-<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="472,750,548,737,587,725,623,709,651,690,675,666,712,623,716,619,679,670,654,694,625,714,589,730,549,742,474,755"/>
-<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="458,200,501,197,545,200,588,211,626,232,646,257,664,295,694,394,715,498,727,577,722,575,710,499,688,395,659,297,641,260,622,237,585,216,544,205,501,202,461,204"/>
-<area shape="rect" id="Node000013" title=" " alt="" coords="5,229,109,256"/>
-<area shape="poly" id="edge13_Node000012_Node000013" title=" " alt="" coords="122,243,187,242,253,238,311,231,307,235,254,243,187,247,126,247"/>
-<area shape="rect" id="Node000014" title=" " alt="" coords="310,1087,448,1115"/>
-<area shape="poly" id="edge15_Node000001_Node000014" title=" " alt="" coords="463,1109,557,1112,597,1108,622,1098,635,1084,648,1064,669,1011,686,944,699,870,717,725,725,623,728,619,722,725,705,871,691,945,674,1012,652,1066,640,1087,626,1102,598,1113,558,1118,463,1114"/>
-<area shape="rect" id="Node000015" title=" " alt="" coords="306,1139,452,1167"/>
-<area shape="poly" id="edge16_Node000001_Node000015" title=" " alt="" coords="453,1167,495,1172,541,1170,584,1159,604,1149,622,1136,636,1120,649,1099,670,1040,688,968,701,888,718,732,726,624,729,619,723,732,706,889,693,969,676,1042,653,1101,640,1123,626,1140,607,1154,586,1164,541,1175,495,1177,452,1173"/>
+<area shape="rect" id="Node000001" title="Internal structure representing a USB audio function instance." alt="" coords="648,602,810,647"/>
+<area shape="rect" id="Node000002" href="$classuint8__t.html" title=" " alt="" coords="24,868,90,896"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="80,904,116,940,163,981,218,1019,279,1048,335,1067,382,1076,404,1075,427,1071,479,1048,534,1009,581,958,620,902,653,842,678,783,698,728,721,649,725,645,703,730,683,785,657,844,625,905,585,962,537,1013,481,1053,428,1076,404,1080,381,1081,334,1072,277,1053,215,1024,159,985,113,944,81,910"/>
+<area shape="rect" id="Node000013" href="$structaudio__tools_1_1_usb_endpoint_descriptor_view.html" title="Backend&#45;agnostic mirror of tusb_desc_endpoint_t (USB 2.0 spec Table 9&#45;13). wMaxPacketSize is kept in ..." alt="" coords="278,205,480,233"/>
+<area shape="poly" id="edge13_Node000013_Node000002" title=" " alt="" coords="66,852,251,318,256,297,258,279,263,261,276,244,297,231,294,236,280,248,267,264,263,280,261,298,256,320,71,854"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="20,161,94,189"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="107,155,213,125,279,113,350,106,423,106,495,116,564,138,596,155,626,176,650,207,670,254,687,313,701,379,720,508,729,603,724,601,714,509,695,380,682,315,665,256,645,209,622,180,593,159,562,143,494,121,423,111,350,111,280,118,214,131,111,159"/>
+<area shape="poly" id="edge15_Node000013_Node000003" title=" " alt="" coords="108,186,133,191,279,210,275,213,132,196,111,191"/>
+<area shape="rect" id="Node000004" href="$classbool.html" title=" " alt="" coords="354,257,404,285"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="418,268,533,274,588,283,610,289,626,298,658,332,682,370,701,413,714,457,728,540,731,602,726,601,722,540,709,458,696,415,678,373,653,335,622,302,608,294,587,288,533,279,421,273"/>
+<area shape="rect" id="Node000005" href="$classuint32__t.html" title=" " alt="" coords="342,427,416,454"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="431,443,540,457,590,468,625,482,658,508,685,540,720,602,715,602,680,543,654,512,623,487,589,474,539,463,432,448"/>
+<area shape="rect" id="Node000006" href="$classint32__t.html" title=" " alt="" coords="346,479,412,506"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="426,492,521,503,574,516,625,535,672,566,710,601,704,602,669,570,623,540,573,521,520,509,428,497"/>
+<area shape="rect" id="Node000007" href="$classfloat.html" title=" " alt="" coords="354,531,404,558"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="419,546,514,559,625,582,677,601,672,602,623,587,513,564,420,551"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="313,583,445,610"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="460,600,650,617,645,619,461,605"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="296,635,462,662"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="476,649,549,648,624,643,650,641,645,643,624,648,549,653,478,654"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="300,687,458,714"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="472,695,547,687,623,671,690,646,685,649,625,676,548,692,475,700"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="298,739,460,766"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="474,749,549,739,587,729,623,715,648,700,671,682,707,649,711,646,674,686,651,705,625,720,589,734,550,744,476,754"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="301,791,457,818"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="472,806,549,797,587,785,623,768,655,742,682,709,702,675,717,649,720,645,707,678,686,712,659,746,625,773,589,790,550,802,474,811"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="457,200,500,197,544,200,587,211,626,233,647,260,666,301,682,351,696,407,716,519,728,603,723,601,711,520,690,409,677,353,661,303,642,263,622,237,585,216,544,205,500,202,460,205"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="5,229,109,257"/>
+<area shape="poly" id="edge14_Node000013_Node000014" title=" " alt="" coords="122,243,187,242,253,239,311,232,307,235,254,244,187,248,126,247"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="310,1137,448,1165"/>
+<area shape="poly" id="edge16_Node000001_Node000015" title=" " alt="" coords="463,1159,557,1162,597,1158,622,1148,636,1133,649,1112,670,1056,688,985,701,908,718,755,726,649,728,645,723,755,706,909,693,987,676,1057,653,1114,640,1136,626,1152,598,1163,558,1168,463,1164"/>
+<area shape="rect" id="Node000016" title=" " alt="" coords="306,1189,452,1217"/>
+<area shape="poly" id="edge17_Node000001_Node000016" title=" " alt="" coords="452,1217,495,1222,541,1220,584,1209,604,1199,622,1186,637,1169,650,1147,672,1085,690,1009,703,926,719,762,726,649,729,645,724,762,708,926,695,1010,677,1087,655,1149,641,1172,626,1190,607,1204,586,1214,541,1225,495,1227,452,1223"/>
 </map>
