@@ -1,19 +1,23 @@
 <map id="AudioBoardStream" name="AudioBoardStream">
-<area shape="rect" id="Node000001" title="New functionality which replaces the AudioKitStream that is based on the legacy AudioKit library...." alt="" coords="193,384,336,411"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_i2_s_codec_stream.html" title="I2S Stream which also sets up a codec chip and i2s." alt="" coords="201,308,329,336"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="267,350,267,385,263,382,263,353"/>
-<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="" coords="144,232,250,260"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="220,269,255,308,250,307,219,274"/>
-<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer, size_t size) and readBytes(uint..." alt="" coords="5,157,106,184"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="94,189,174,231,169,233,94,194"/>
-<area shape="rect" id="Node000005" href="$class_stream.html" title=" " alt="" coords="21,81,90,109"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="56,122,58,156,53,156,55,127"/>
-<area shape="rect" id="Node000006" href="$class_print.html" title=" " alt="" coords="30,5,81,33"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="56,46,58,81,53,80,55,51"/>
-<area shape="rect" id="Node000007" href="$classaudio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="130,157,264,184"/>
-<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="198,198,199,233,194,231,196,203"/>
-<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="288,157,415,184"/>
-<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="308,193,226,234,223,230,312,190"/>
-<area shape="rect" id="Node000009" href="$classaudio__tools_1_1_volume_support.html" title="Supports the setting and getting of the volume." alt="" coords="274,232,394,260"/>
-<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="314,270,279,310,276,305,309,273"/>
+<area shape="rect" id="Node000001" title="New functionality which replaces the AudioKitStream that is based on the legacy AudioKit library...." alt="" coords="252,459,395,487"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_i2_s_codec_stream.html" title="I2SCodecStream on the desktop: output to (and input from) the sound card with miniaudio." alt="" coords="259,384,388,411"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="325,425,326,460,321,457,322,429"/>
+<area shape="rect" id="Node000003" href="$classaudio__tools_1_1_mini_audio_stream.html" title="MiniAudio: https://miniaud.io/." alt="" coords="182,308,316,336"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="274,344,313,383,308,383,272,349"/>
+<area shape="rect" id="Node000004" href="$classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="" coords="144,232,250,260"/>
+<area shape="poly" id="edge10_Node000002_Node000004" title=" " alt="" coords="180,271,168,305,167,320,172,334,190,353,211,367,261,387,256,388,209,372,186,357,168,337,162,321,163,304,177,276"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="215,270,242,308,237,308,214,275"/>
+<area shape="rect" id="Node000005" href="$classaudio__tools_1_1_base_stream.html" title="Base class for all Streams. It relies on write(const uint8_t *buffer, size_t size) and readBytes(uint..." alt="" coords="5,157,106,184"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="94,189,174,231,169,233,94,194"/>
+<area shape="rect" id="Node000006" href="$class_stream.html" title=" " alt="" coords="21,81,90,109"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="56,122,58,156,53,156,55,127"/>
+<area shape="rect" id="Node000007" href="$class_print.html" title=" " alt="" coords="30,5,81,33"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="56,46,58,81,53,80,55,51"/>
+<area shape="rect" id="Node000008" href="$classaudio__tools_1_1_audio_info_support.html" title="Supports changes to the sampling rate, bits and channels." alt="" coords="130,157,264,184"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="198,198,199,233,194,231,196,203"/>
+<area shape="rect" id="Node000009" href="$classaudio__tools_1_1_audio_info_source.html" title="Supports the subscription to audio change notifications." alt="" coords="288,157,415,184"/>
+<area shape="poly" id="edge8_Node000004_Node000009" title=" " alt="" coords="308,193,226,234,223,230,312,190"/>
+<area shape="rect" id="Node000010" href="$classaudio__tools_1_1_volume_support.html" title="Supports the setting and getting of the volume." alt="" coords="339,308,460,336"/>
+<area shape="poly" id="edge9_Node000002_Node000010" title=" " alt="" coords="370,345,331,385,328,381,365,347"/>
+<area shape="poly" id="edge11_Node000002_Node000010" title=" " alt="" coords="385,346,345,385,343,381,381,349"/>
 </map>
