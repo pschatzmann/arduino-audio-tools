@@ -4032,7 +4032,7 @@ Variables</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Generic Implementation of sound input and output for desktop environments using portaudio. </p>
-<p>Desktop (Arduino-Emulator, IS_DESKTOP without I2S) version of the <a class="el" href="classaudio__tools_1_1_i2_s_codec_stream.html" title="I2SCodecStream on the desktop: output to (and input from) the sound card with miniaudio.">I2SCodecStream</a>: the same API, but the audio goes to the sound card of the computer (miniaudio), so that sketches for audio boards (e.g. an AudioBoard of the audio-driver library) also run on the desktop. The codec of the board is not used; the volume is applied to the samples.</p>
+<p>Desktop (Arduino-Emulator, IS_DESKTOP without I2S) version of the <a class="el" href="classaudio__tools_1_1_i2_s_codec_stream.html" title="I2SCodecStream on the desktop: output to (and input from) the sound card with miniaudio.">I2SCodecStream</a>: the same API, but the audio goes to the sound card of the computer (miniaudio), so that sketches for audio boards also run on the desktop. The audio-driver library is not needed: the board is accepted but not used, the volume is applied to the samples.</p>
 <p>Serial communication via BLE: BLESerialServer and BLESerialClient.</p>
 <p>On the ESP32 the BLE library of the Arduino core is used by default. On all other platforms (and on the ESP32 if BLE_SERIAL_USE_ARDUINOBLE is defined before including this header) the ArduinoBLE library is used. </p>
 </div><h2 class="groupheader">Typedef Documentation</h2>
