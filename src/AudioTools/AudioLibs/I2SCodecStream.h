@@ -1,6 +1,10 @@
 #pragma once
-#include "AudioBoard.h"  // install audio-driver library
 #include "AudioToolsConfig.h"
+#if defined(IS_DESKTOP) && !defined(USE_I2S)
+// Desktop: output to the sound card
+#include "AudioTools/AudioLibs/Emulation/I2SCodecStreamDesktop.h"
+#else
+#include "AudioBoard.h"  // install audio-driver library
 #include "AudioTools/CoreAudio/AudioI2S/I2SStream.h"
 
 
@@ -428,3 +432,5 @@ class I2SCodecStream : public AudioStream, public VolumeSupport {
 };
 
 }  // namespace audio_tools
+
+#endif  // IS_DESKTOP
