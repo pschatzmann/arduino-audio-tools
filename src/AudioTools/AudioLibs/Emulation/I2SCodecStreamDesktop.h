@@ -2,24 +2,19 @@
 /**
  * Desktop (Arduino-Emulator, IS_DESKTOP without I2S) version of the
  * I2SCodecStream: the same API, but the audio goes to the sound card of the
- * computer (miniaudio), so that sketches for audio boards (e.g. an
- * AudioBoard of the audio-driver library) also run on the desktop. The codec
- * of the board is not used; the volume is applied to the samples.
+ * computer (miniaudio), so that sketches for audio boards also run on the
+ * desktop. The audio-driver library is not needed: the board is accepted but
+ * not used, the volume is applied to the samples.
  */
-#include "AudioBoard.h"  // install audio-driver library
 #include "AudioTools/AudioLibs/MiniAudioStream.h"
 
 namespace audio_tools {
-
-using namespace audio_driver;
 
 /**
  * @brief Configuration for the desktop I2SCodecStream
  * @ingroup io
  */
 struct I2SCodecConfig : public MiniAudioConfig {
-  input_device_t input_device = ADC_INPUT_LINE1;
-  output_device_t output_device = DAC_OUTPUT_ALL;
   bool sd_active = true;
   bool sdmmc_active = false;
 };
@@ -34,9 +29,11 @@ struct I2SCodecConfig : public MiniAudioConfig {
 class I2SCodecStream : public MiniAudioStream, public VolumeSupport {
  public:
   I2SCodecStream() = default;
-  /// The board is ignored: the sound card is used
-  I2SCodecStream(AudioBoard &board) { setBoard(board); }
-  I2SCodecStream(AudioBoard *board) { setBoard(board); }
+  /// The board (e.g. an AudioBoard) is ignored: the sound card is used
+  template <class Board>
+  I2SCodecStream(Board &board) {}
+  template <class Board>
+  I2SCodecStream(Board *board) {}
 
   I2SCodecConfig defaultConfig(RxTxMode mode = TX_MODE) {
     I2SCodecConfig result;
@@ -74,13 +71,13 @@ class I2SCodecStream : public MiniAudioStream, public VolumeSupport {
   bool setPAPower(bool active) { return true; }
   bool setInputVolume(float vol) { return true; }
 
-  AudioBoard &board() { return *p_board; }
-  void setBoard(AudioBoard &board) { p_board = &board; }
-  void setBoard(AudioBoard *board) { p_board = board; }
-  bool hasBoard() { return p_board != nullptr; }
+  template <class Board>
+  void setBoard(Board &board) {}
+  template <class Board>
+  void setBoard(Board *board) {}
+  bool hasBoard() { return false; }
 
  protected:
-  AudioBoard *p_board = nullptr;
   bool is_muted = false;
   Vector<int16_t> buffer;
 };
