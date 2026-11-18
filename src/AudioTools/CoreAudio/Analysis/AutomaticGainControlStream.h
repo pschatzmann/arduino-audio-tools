@@ -84,7 +84,9 @@ template <>
 struct AGCPCMTraits<int32_t> {
   static constexpr float max_sample = 2147483648.0f;
   static constexpr float min_value = -2147483648.0f;
-  static constexpr float max_value = 2147483647.0f;
+  // 2147483647.0f would be 2^31, which does not fit into an int32_t: use the
+  // largest float below it
+  static constexpr float max_value = 2147483520.0f;
   static constexpr int fixed_shift = 16;
 };
 
