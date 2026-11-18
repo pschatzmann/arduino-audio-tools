@@ -327,6 +327,17 @@ class NumberConverter {
 #endif
   }
 
+  /// provides the biggest number for the indicated type as T: as a float,
+  /// the 32 bit limit rounds up to 2^31, which does not fit into an int32_t
+  template <typename T>
+  static T maxValueExactT() {
+#ifdef USE_TYPETRAITS
+    return std::numeric_limits<T>::max();
+#else
+    return maxValue(sizeof(T) * 8);
+#endif
+  }
+
   template <typename T>
   static float minValueT() {
 #ifdef USE_TYPETRAITS
@@ -343,8 +354,8 @@ class NumberConverter {
   template <typename T>
   static T clipT(float value) {
     float mv = maxValueT<T>();
-    if (value > mv) {
-      return mv;
+    if (value >= mv) {
+      return maxValueExactT<T>();
     } else if (value < -mv) {
       return -mv;
     }
@@ -354,8 +365,8 @@ class NumberConverter {
   /// clips a value
   inline static int32_t clip(float value, int bits) {
     float mv = maxValue(bits);
-    if (value > mv) {
-      return mv;
+    if (value >= mv) {
+      return maxValue(bits);
     } else if (value < -mv) {
       return -mv;
     }
@@ -371,7 +382,7 @@ class NumberConverter {
   /// Convert a float (with max 1.0) to an integer autio type
   template <typename T>
   static T fromFloatT(float value) {
-    return value * maxValueT<T>();
+    return clipT<T>(value * maxValueT<T>());
   }
 
   /// Convert an integer integer autio type to a float (with max 1.0)
@@ -393,11 +404,21 @@ class NumberConverter {
     float maxFrom = maxValueT<FromT>();
     float minFrom = minValueT<FromT>();
 
+    float result;
     if (maxTo - minTo > 1.0f || maxFrom - minFrom > 1.0f) {
-      return mapT<float>(value1, minFrom, maxFrom, minTo, maxTo);
+      result = mapT<float>(value1, minFrom, maxFrom, minTo, maxTo);
+    } else {
+      result = value1 * maxValueT<ToT>() / maxValueT<FromT>();
     }
-
-    return value1 * maxValueT<ToT>() / maxValueT<FromT>();
+    // maxTo is rounded up for 32 bit types, so the maximum would not fit
+    if (result >= maxTo) {
+      return maxValueExactT<ToT>();
+    }
+    // without type traits the minimum of FromT can map below the range of ToT
+    if (result < -maxTo - 1.0f) {
+      return -maxTo - 1.0f;
+    }
+    return result;
   }
 
   /// Convert an array of int types
