@@ -30,6 +30,8 @@ class FloatAudio {
   explicit inline operator int32_t() {
     // 1.0f * 2147483647.0f is 2^31, which does not fit into an int32_t
     if (value >= 1.0f) return 2147483647;
+    // -1.0f * 2147483647.0f is exactly INT32_MIN, anything below overflows
+    if (value <= -1.0f) return -2147483647 - 1;
     return value * 2147483647.0f;
   }
 

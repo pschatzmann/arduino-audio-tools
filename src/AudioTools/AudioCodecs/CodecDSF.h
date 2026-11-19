@@ -375,23 +375,28 @@ class DSFDecoder : public AudioDecoder {
   void writePCMSample(float filteredValue) {
     switch (meta.bits_per_sample) {
       case 8: {
-        int8_t buffer8 = static_cast<int8_t>(filteredValue * 127.0f);
+        int8_t buffer8 = NumberConverter::clipT<int8_t>(filteredValue * 127.0f);
         pcmBuffer.write(buffer8);
         break;
       }
       case 16: {
-        int16_t buffer16 = static_cast<int16_t>(filteredValue * 32767.0f);
+        int16_t buffer16 = NumberConverter::clipT<int16_t>(filteredValue * 32767.0f);
         pcmBuffer.writeArray((uint8_t*)&buffer16, sizeof(int16_t));
         break;
       }
       case 24: {
-        int24_t buffer24 = static_cast<int24_t>(filteredValue * 8388607.0f);
+        // clip to the int24 range (-8388608..8388607) before the cast
+        float scaled24 = filteredValue * 8388607.0f;
+        if (scaled24 > 8388607.0f) scaled24 = 8388607.0f;
+        if (scaled24 < -8388608.0f) scaled24 = -8388608.0f;
+        int24_t buffer24 = static_cast<int24_t>(scaled24);
         pcmBuffer.writeArray((uint8_t*)&buffer24, sizeof(int24_t));
         break;
       }
       case 32: {
         // 1.0f * 2147483647.0f is 2^31, which does not fit, so clip
-        int32_t buffer32 = NumberConverter::clipT<int32_t>(filteredValue * 2147483647.0f);
+        int32_t buffer32 =
+            NumberConverter::clipT<int32_t>(filteredValue * 2147483647.0f);
         pcmBuffer.writeArray((uint8_t*)&buffer32, sizeof(int32_t));
         break;
       }

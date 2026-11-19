@@ -414,7 +414,9 @@ class NumberConverter {
     if (result >= maxTo) {
       return maxValueExactT<ToT>();
     }
-    // without type traits the minimum of FromT can map below the range of ToT
+    // Clamp to the two's complement minimum of ToT (-maxTo - 1). Without type
+    // traits minValueT() is -maxTo, so the mapped minimum of FromT can land
+    // one step below it, which is still a valid ToT value.
     if (result < -maxTo - 1.0f) {
       return -maxTo - 1.0f;
     }
