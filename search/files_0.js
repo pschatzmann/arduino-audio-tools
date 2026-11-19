@@ -32,7 +32,7 @@ var searchData=
   ['audiocodecs_2eh_29',['AudioCodecs.h',['../_audio_codecs_8h.html',1,'']]],
   ['audiocodecsbase_2eh_30',['AudioCodecsBase.h',['../_audio_codecs_base_8h.html',1,'']]],
   ['audioeffect_2eh_31',['AudioEffect.h',['../_audio_effect_8h.html',1,'']]],
-  ['audioeffects_2eh_32',['audioeffects.h',['../_audio_effects_8h.html',1,'(Global Namespace)'],['../_audio_effects_2_audio_effects_8h.html',1,'(Global Namespace)']]],
+  ['audioeffects_2eh_32',['audioeffects.h',['../_audio_effects_2_audio_effects_8h.html',1,'(Global Namespace)'],['../_audio_effects_8h.html',1,'(Global Namespace)']]],
   ['audioeffectssuite_2eh_33',['AudioEffectsSuite.h',['../_audio_effects_suite_8h.html',1,'']]],
   ['audioencoded_2eh_34',['AudioEncoded.h',['../_audio_encoded_8h.html',1,'']]],
   ['audioencodedservert_2eh_35',['AudioEncodedServerT.h',['../_audio_encoded_server_t_8h.html',1,'']]],

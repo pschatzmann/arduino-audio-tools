@@ -266,6 +266,7 @@ Protected Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>DSF (DSD <a class="el" href="class_stream.html">Stream</a> File) format encoder. </p>
 <dl class="section author"><dt>Author</dt><dd>pschatzmann</dd></dl>
+<p>DSF (DSD <a class="el" href="class_stream.html">Stream</a> File) is a single-bit high-resolution audio format developed by Sony for individual tracks, often sourced from Super Audio CDs (SACDs) or hi-res music downloads. This encoder does the reverse of the <a class="el" href="classaudio__tools_1_1_d_s_f_decoder.html" title="Decodes DSF files containing DSD audio and converts to PCM.">DSFDecoder</a>: it turns PCM samples into a 1-bit DSD stream at a much higher rate (e.g. 2.8224 MHz for DSD64) and writes the DSF header chunks and the block-interleaved bitstream.</p>
 <p>Encodes PCM audio into DSD format and writes DSF files. Uses a 2nd order error-feedback delta-sigma modulator with linear interpolation between PCM samples. Output uses correct DSF block-level channel interleaving. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a8dea4ed2d67a7b1330a9b4138faab3d6" name="a8dea4ed2d67a7b1330a9b4138faab3d6"></a>

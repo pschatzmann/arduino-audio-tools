@@ -3384,7 +3384,7 @@ Enumerations</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a6619c72916cad1d8d09d4a897d9f61fb" id="r_a6619c72916cad1d8d09d4a897d9f61fb"><td class="memItemLeft" align="right" valign="top">struct&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a6619c72916cad1d8d09d4a897d9f61fb">__attribute__</a> ((packed)) DSDPrefix</td></tr>
-<tr class="memdesc:a6619c72916cad1d8d09d4a897d9f61fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">DSF file prefix containing file identification and basic information.  <br /></td></tr>
+<tr class="memdesc:a6619c72916cad1d8d09d4a897d9f61fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">DSF file prefix: the first chunk of every DSF file.  <br /></td></tr>
 <tr class="separator:a6619c72916cad1d8d09d4a897d9f61fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aac0a96771ba460561744e3987408ddf5" id="r_aac0a96771ba460561744e3987408ddf5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#aac0a96771ba460561744e3987408ddf5">a2dp_stream_sink_sound_data</a> (const <a class="el" href="classuint8__t.html">uint8_t</a> *data, <a class="el" href="classuint32__t.html">uint32_t</a> len)</td></tr>
 <tr class="separator:aac0a96771ba460561744e3987408ddf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -5812,11 +5812,14 @@ Norman Ritz </dd></dl>
       </table>
 </div><div class="memdoc">
 
-<p>DSF file prefix containing file identification and basic information. </p>
+<p>DSF file prefix: the first chunk of every DSF file. </p>
 <p>Simplified header w/o comments.</p>
 <p>Opus header.</p>
-<p>DSF data chunk header containing audio data size information.</p>
-<p>DSF format chunk containing audio format parameters. </p>
+<p>DSF "data" chunk header.</p>
+<p>DSF "fmt " chunk: describes the DSD audio stored in the file.</p>
+<p>A DSF file is a sequence of chunks: the "DSD " prefix, the "fmt " format chunk, the "data" chunk with the 1-bit audio, and optionally an <a class="el" href="structaudio__tools_1_1_i_d3v2.html">ID3v2</a> tag at the end. All integers are little-endian. This 28-byte chunk identifies the file as DSF and gives its total size and the offset of the metadata.</p>
+<p>Holds the channel count, the DSD sampling frequency (e.g. 2822400 for DSD64), the bits per sample (always 1 for DSD), the number of samples per channel, and the block size. DSF stores the audio in blocks of blockSizePerChannel bytes per channel, so this chunk tells the reader how to de-interleave them.</p>
+<p>Precedes the raw DSD bitstream. The audio is not stored sample by sample: it is written as blocks of blockSizePerChannel bytes per channel, one channel's block after another (ch0 block, ch1 block, then the next block of each channel). Each byte holds 8 one-bit DSD samples. chunkSize covers the audio data only, including the header. </p>
 
 </div>
 </div>

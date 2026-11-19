@@ -333,6 +333,7 @@ Protected Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Decodes DSF files containing DSD audio and converts to PCM. </p>
 <dl class="section author"><dt>Author</dt><dd>pschatzmann</dd></dl>
+<p>DSF (DSD <a class="el" href="class_stream.html">Stream</a> File) is a single-bit high-resolution audio format developed by Sony for individual tracks, often sourced from Super Audio CDs (SACDs) or hi-res music downloads. Its DSD audio is a 1-bit stream at 2.8224 MHz or higher, with the channels interleaved in blocks. A PCM stream (e.g. 44.1 kHz) cannot be read from DSD directly, so this decoder converts it: it counts the 1-bits in each group of DSD samples (bit-counting decimation), then removes the remaining high-frequency noise with low-pass filters. It can also pass the raw DSD bitstream through when is_raw is set.</p>
 <p>Uses per-channel buffers for correct block-level de-interleaving, bit-counting decimation, and cascaded Butterworth low-pass filters for anti-aliasing. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad7d79b3b64e3615db933b29110ef40f5" name="ad7d79b3b64e3615db933b29110ef40f5"></a>

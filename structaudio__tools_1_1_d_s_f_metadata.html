@@ -197,7 +197,8 @@ Public Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Metadata structure for DSF (DSD <a class="el" href="class_stream.html">Stream</a> File) format. </p>
-<dl class="section author"><dt>Author</dt><dd>pschatzmann </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>pschatzmann</dd></dl>
+<p>DSF (DSD <a class="el" href="class_stream.html">Stream</a> File) is a single-bit high-resolution audio format developed by Sony for individual tracks, often sourced from Super Audio CDs (SACDs) or hi-res music downloads. Instead of multi-bit PCM samples, DSD stores a stream of single bits at a very high rate: DSD64 is 2822400 Hz (64 x 44.1 kHz), DSD128 is twice that, and so on. This struct holds the DSD-specific parameters (rate, block size, filter settings) in addition to the usual <a class="el" href="structaudio__tools_1_1_audio_info.html" title="Basic Audio information which drives e.g. I2S.">AudioInfo</a> fields (sample rate, channels, bits per sample) of the PCM side of the conversion. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="adc89b25d4cad614ce31a17e547ba7362" name="adc89b25d4cad614ce31a17e547ba7362"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adc89b25d4cad614ce31a17e547ba7362">&#9670;&#160;</a></span>DSFMetadata() <span class="overload">[1/2]</span></h2>
