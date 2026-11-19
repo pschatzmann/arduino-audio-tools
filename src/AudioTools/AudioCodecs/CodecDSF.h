@@ -645,8 +645,9 @@ class DSFEncoder : public AudioEncoder {
     for (uint32_t i = 0; i < oversamplingRatio; i++) {
       // Linear interpolation between previous and current PCM sample
       float t = (float)i / oversamplingRatio;
+      // no level reduction: the decoder maps the bit density back to the same
+      // level, so a PCM full scale of 1.0 decodes to about 1.0
       float input = prevSample + t * (currentSample - prevSample);
-      input *= 0.5f;
 
       // 2nd order error-feedback delta-sigma: NTF = (1 - z^-1)^2
       float shaped = input + 2.0f * chState[ch].dsError1 - chState[ch].dsError2;
