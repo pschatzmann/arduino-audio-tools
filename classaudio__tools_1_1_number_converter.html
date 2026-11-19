@@ -112,6 +112,9 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:aa83040da5c51151a9bd3286ecfcfe413" id="r_aa83040da5c51151a9bd3286ecfcfe413"><td class="memItemLeft" align="right" valign="top">static int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_number_converter.html#aa83040da5c51151a9bd3286ecfcfe413">maxValue</a> (<a class="el" href="classint.html">int</a> value_bits_per_sample)</td></tr>
 <tr class="memdesc:aa83040da5c51151a9bd3286ecfcfe413"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the biggest number for the indicated number of bits  <br /></td></tr>
 <tr class="separator:aa83040da5c51151a9bd3286ecfcfe413"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac846e132d8423bbcc344d6fc1b0b7790" id="r_ac846e132d8423bbcc344d6fc1b0b7790"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ac846e132d8423bbcc344d6fc1b0b7790"><td class="memTemplItemLeft" align="right" valign="top">static T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_number_converter.html#ac846e132d8423bbcc344d6fc1b0b7790">maxValueExactT</a> ()</td></tr>
+<tr class="separator:ac846e132d8423bbcc344d6fc1b0b7790"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae90d74e600f6caf8215b52d047bf17b5" id="r_ae90d74e600f6caf8215b52d047bf17b5"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ae90d74e600f6caf8215b52d047bf17b5"><td class="memTemplItemLeft" align="right" valign="top">static <a class="el" href="classfloat.html">float</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_number_converter.html#ae90d74e600f6caf8215b52d047bf17b5">maxValueT</a> ()</td></tr>
 <tr class="memdesc:ae90d74e600f6caf8215b52d047bf17b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the biggest number for the indicated type  <br /></td></tr>
@@ -373,6 +376,34 @@ template&lt;typename T &gt; </div>
 </div><div class="memdoc">
 
 <p>provides the biggest number for the indicated number of bits </p>
+
+</div>
+</div>
+<a id="ac846e132d8423bbcc344d6fc1b0b7790" name="ac846e132d8423bbcc344d6fc1b0b7790"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac846e132d8423bbcc344d6fc1b0b7790">&#9670;&#160;</a></span>maxValueExactT()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static T maxValueExactT </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>provides the biggest number for the indicated type as T: as a float, the 32 bit limit rounds up to 2^31, which does not fit into an int32_t </p>
 
 </div>
 </div>
