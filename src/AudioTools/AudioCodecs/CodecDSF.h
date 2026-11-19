@@ -28,6 +28,15 @@ namespace audio_tools {
 /**
  * @brief Metadata structure for DSF (DSD Stream File) format
  * @author pschatzmann
+ *
+ * DSF (DSD Stream File) is a single-bit high-resolution audio format developed
+ * by Sony for individual tracks, often sourced from Super Audio CDs (SACDs) or
+ * hi-res music downloads. Instead of multi-bit PCM samples, DSD stores a
+ * stream of single bits at a very high rate: DSD64 is 2822400 Hz (64 x 44.1
+ * kHz), DSD128 is twice that, and so on. This struct holds the
+ * DSD-specific parameters (rate, block size, filter settings) in addition to
+ * the usual AudioInfo fields (sample rate, channels, bits per sample) of the
+ * PCM side of the conversion.
  */
 struct DSFMetadata : public AudioInfo {
   DSFMetadata() = default;
@@ -52,7 +61,14 @@ struct DSFMetadata : public AudioInfo {
   bool is_raw = false;
 };
 
-/// DSF file prefix containing file identification and basic information
+/**
+ * @brief DSF file prefix: the first chunk of every DSF file.
+ *
+ * A DSF file is a sequence of chunks: the "DSD " prefix, the "fmt " format
+ * chunk, the "data" chunk with the 1-bit audio, and optionally an ID3v2 tag
+ * at the end. All integers are little-endian. This 28-byte chunk identifies
+ * the file as DSF and gives its total size and the offset of the metadata.
+ */
 struct __attribute__((packed)) DSDPrefix {
   char id[4];               // "DSD "
   uint64_t chunkSize;       // 28
@@ -60,7 +76,15 @@ struct __attribute__((packed)) DSDPrefix {
   uint64_t metadataOffset;  // offset to "ID3 " chunk (0 if none)
 };
 
-/// DSF format chunk containing audio format parameters
+/**
+ * @brief DSF "fmt " chunk: describes the DSD audio stored in the file.
+ *
+ * Holds the channel count, the DSD sampling frequency (e.g. 2822400 for
+ * DSD64), the bits per sample (always 1 for DSD), the number of samples per
+ * channel, and the block size. DSF stores the audio in blocks of
+ * blockSizePerChannel bytes per channel, so this chunk tells the reader how
+ * to de-interleave them.
+ */
 struct __attribute__((packed)) DSFFormat {
   char id[4];                    // "fmt "
   uint64_t chunkSize;            // 52
@@ -75,7 +99,15 @@ struct __attribute__((packed)) DSFFormat {
   uint32_t reserved;             // 0
 };
 
-/// DSF data chunk header containing audio data size information
+/**
+ * @brief DSF "data" chunk header.
+ *
+ * Precedes the raw DSD bitstream. The audio is not stored sample by sample:
+ * it is written as blocks of blockSizePerChannel bytes per channel, one
+ * channel's block after another (ch0 block, ch1 block, then the next block
+ * of each channel). Each byte holds 8 one-bit DSD samples. chunkSize covers
+ * the audio data only, including the header.
+ */
 struct __attribute__((packed)) DSFDataHeader {
   char id[4];          // "data"
   uint64_t chunkSize;  // size of DSD data
@@ -85,6 +117,15 @@ struct __attribute__((packed)) DSFDataHeader {
  * @brief Decodes DSF files containing DSD audio and converts to PCM.
  * @ingroup codecs
  * @author pschatzmann
+ *
+ * DSF (DSD Stream File) is a single-bit high-resolution audio format developed
+ * by Sony for individual tracks, often sourced from Super Audio CDs (SACDs) or
+ * hi-res music downloads. Its DSD audio is a 1-bit stream at 2.8224 MHz or
+ * higher, with the channels interleaved in blocks. A PCM stream (e.g. 44.1
+ * kHz) cannot be read from DSD directly, so this decoder converts it: it
+ * counts the 1-bits in each group of DSD samples (bit-counting decimation),
+ * then removes the remaining high-frequency noise with low-pass filters. It
+ * can also pass the raw DSD bitstream through when is_raw is set.
  *
  * Uses per-channel buffers for correct block-level de-interleaving,
  * bit-counting decimation, and cascaded Butterworth low-pass filters for
@@ -463,6 +504,13 @@ class DSFDecoder : public AudioDecoder {
  * @brief DSF (DSD Stream File) format encoder
  * @ingroup codecs
  * @author pschatzmann
+ *
+ * DSF (DSD Stream File) is a single-bit high-resolution audio format developed
+ * by Sony for individual tracks, often sourced from Super Audio CDs (SACDs) or
+ * hi-res music downloads. This encoder does the reverse of the
+ * DSFDecoder: it turns PCM samples into a 1-bit DSD stream at a much higher
+ * rate (e.g. 2.8224 MHz for DSD64) and writes the DSF header chunks and the
+ * block-interleaved bitstream.
  *
  * Encodes PCM audio into DSD format and writes DSF files. Uses a 2nd order
  * error-feedback delta-sigma modulator with linear interpolation between PCM
