@@ -64,7 +64,8 @@ class int24_4bytes_t  {
     } else if (in<-INT24_MAX){
       value = -(INT24_MAX << 8);
     } else {
-      value = in << 8;
+      // shift as unsigned: left shift of a negative value is undefined
+      value = (int32_t)((uint32_t)in << 8);
     }
   }
 
