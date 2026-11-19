@@ -390,7 +390,8 @@ class DSFDecoder : public AudioDecoder {
         break;
       }
       case 32: {
-        int32_t buffer32 = static_cast<int32_t>(filteredValue * 2147483647.0f);
+        // 1.0f * 2147483647.0f is 2^31, which does not fit, so clip
+        int32_t buffer32 = NumberConverter::clipT<int32_t>(filteredValue * 2147483647.0f);
         pcmBuffer.writeArray((uint8_t*)&buffer32, sizeof(int32_t));
         break;
       }
