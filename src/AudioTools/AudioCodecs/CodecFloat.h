@@ -56,7 +56,7 @@ class DecoderFloat : public AudioDecoder {
             buffer.resize(samples);
             float* p_float = (float*) data;
             for (int j=0;j<samples;j++){
-                buffer[j] = p_float[j]*32767;
+                buffer[j] = NumberConverter::clipT<int16_t>(p_float[j]*32767.0f);
             }
             return p_print->write((uint8_t*)buffer.data(), samples*sizeof(int16_t)) * 2;
         }

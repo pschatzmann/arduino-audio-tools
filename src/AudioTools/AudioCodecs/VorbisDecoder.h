@@ -221,9 +221,8 @@ class VorbisDecoder : public AudioDecoder {
     for (int i = 0; i < samples; ++i) {
       for (int ch = 0; ch < channels; ++ch) {
         float val = pcm[ch][i];
-        int16_t sample = (int16_t)(val * 32767.0f);
-        if (sample > 32767) sample = 32767;
-        if (sample < -32768) sample = -32768;
+        // Clip before the cast: decoded samples can go past +-1.0
+        int16_t sample = NumberConverter::clipT<int16_t>(val * 32767.0f);
         pcmout_buffer.push_back(sample);
       }
     }
