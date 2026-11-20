@@ -222,7 +222,7 @@ class VorbisDecoder : public AudioDecoder {
       for (int ch = 0; ch < channels; ++ch) {
         float val = pcm[ch][i];
         // Clip before the cast: decoded samples can go past +-1.0
-        int16_t sample = NumberConverter::clipT<int16_t>(val * 32767.0f);
+        int16_t sample = NumberConverter::fromFloatT<int16_t>(val);
         pcmout_buffer.push_back(sample);
       }
     }

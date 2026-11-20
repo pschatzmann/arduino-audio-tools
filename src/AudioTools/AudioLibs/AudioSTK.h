@@ -156,7 +156,7 @@ class STKEffect : public AudioEffect {
   virtual effect_t process(effect_t in) {
     // just convert between int16 and float
     float value = static_cast<float>(in) / 32767.0;
-    return p_effect->tick(value) * 32767.0;
+    return NumberConverter::fromFloatT<effect_t>(static_cast<float>(p_effect->tick(value)));
   }
 
  protected:
@@ -179,7 +179,7 @@ class STKChorus : public AudioEffect, public stk::Chorus {
   virtual effect_t process(effect_t in) {
     // just convert between int16 and float
     float value = static_cast<float>(in) / 32767.0;
-    return stk::Chorus::tick(value) * 32767.0;
+    return NumberConverter::fromFloatT<effect_t>(static_cast<float>(stk::Chorus::tick(value)));
   }
 };
 
@@ -200,7 +200,7 @@ class STKEcho : public AudioEffect, public stk::Echo {
   virtual effect_t process(effect_t in) {
     // just convert between int16 and float
     float value = static_cast<float>(in) / 32767.0;
-    return stk::Echo::tick(value) * 32767.0;
+    return NumberConverter::fromFloatT<effect_t>(static_cast<float>(stk::Echo::tick(value)));
   }
 };
 
@@ -218,7 +218,7 @@ class STKFreeVerb : public AudioEffect, public stk::FreeVerb {
   virtual effect_t process(effect_t in) {
     // just convert between int16 and float
     float value = static_cast<float>(in) / 32767.0;
-    return stk::FreeVerb::tick(value) * 32767.0;
+    return NumberConverter::fromFloatT<effect_t>(static_cast<float>(stk::FreeVerb::tick(value)));
   }
 };
 
@@ -237,7 +237,7 @@ class STKChowningReverb : public AudioEffect, public stk::JCRev {
   virtual effect_t process(effect_t in) {
     // just convert between int16 and float
     float value = static_cast<float>(in) / 32767.0;
-    return stk::JCRev::tick(value) * 32767.0;
+    return NumberConverter::fromFloatT<effect_t>(static_cast<float>(stk::JCRev::tick(value)));
   }
 };
 
@@ -255,7 +255,7 @@ class STKNReverb : public AudioEffect, public stk::NRev {
   virtual effect_t process(effect_t in) {
     // just convert between int16 and float
     float value = static_cast<float>(in) / 32767.0;
-    return stk::NRev::tick(value) * 32767.0;
+    return NumberConverter::fromFloatT<effect_t>(static_cast<float>(stk::NRev::tick(value)));
   }
 };
 
@@ -273,7 +273,7 @@ class STKPerryReverb : public AudioEffect, public stk::PRCRev {
   virtual effect_t process(effect_t in) {
     // just convert between int16 and float
     float value = static_cast<float>(in) / 32767.0;
-    return stk::PRCRev::tick(value) * 32767.0;
+    return NumberConverter::fromFloatT<effect_t>(static_cast<float>(stk::PRCRev::tick(value)));
   }
 };
 
@@ -293,7 +293,7 @@ class STKLentPitShift : public AudioEffect, public stk::LentPitShift {
   virtual effect_t process(effect_t in) {
     // just convert between int16 and float
     float value = static_cast<float>(in) / 32767.0;
-    return stk::LentPitShift::tick(value) * 32767.0;
+    return NumberConverter::fromFloatT<effect_t>(static_cast<float>(stk::LentPitShift::tick(value)));
   }
 };
 
@@ -313,7 +313,7 @@ class STKPitShift : public AudioEffect, public stk::PitShift {
   virtual effect_t process(effect_t in) {
     // just convert between int16 and float
     float value = static_cast<float>(in) / 32767.0;
-    return stk::PitShift::tick(value) * 32767.0;
+    return NumberConverter::fromFloatT<effect_t>(static_cast<float>(stk::PitShift::tick(value)));
   }
 };
 

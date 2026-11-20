@@ -817,9 +817,7 @@ class WAVDecoder : public AudioDecoder {
       if (byte_buffer.isFull()) {
         float sample_f;
         memcpy(&sample_f, byte_buffer.data(), sizeof(sample_f));
-        if (sample_f > 1.0f) sample_f = 1.0f;
-        if (sample_f < -1.0f) sample_f = -1.0f;
-        buffer_float16.write((int16_t)(sample_f * 32767.0f));
+        buffer_float16.write(NumberConverter::fromFloatT<int16_t>(sample_f));
         if (buffer_float16.isFull()) {
           writeDataT<int16_t>(&out(), buffer_float16.data(),
                                buffer_float16.available());

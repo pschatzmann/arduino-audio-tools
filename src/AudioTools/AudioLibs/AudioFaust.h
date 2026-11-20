@@ -286,7 +286,13 @@ class FaustStream : public AudioStream {
     			if(sample < -1.0f){
                     sample = -1.0f;
                 }
-                dataT[(j*cfg.channels)+i] = sample * float_to_int_factor;
+                // the float factor of 32 bit rounds up to 2^31, so a full scale
+                // sample must not be converted directly
+                float scaled = sample * float_to_int_factor;
+                int64_t value = scaled >= float_to_int_factor
+                                    ? NumberConverter::maxValue(cfg.bits_per_sample)
+                                    : static_cast<int64_t>(scaled);
+                dataT[(j*cfg.channels)+i] = T(value);
             }
         }
     }

@@ -119,7 +119,7 @@ class PureDataStream : public AudioStream {
     // convert intput to int16
     if (buffer_read.size() > 0) {
       for (int j = 0; j < samples; j++) {
-        int16_t tmp16 = volume * out[j] * max_int;
+        int16_t tmp16 = NumberConverter::fromFloatT<int16_t>(volume * out[j]);
         size_t eff = buffer_read.writeArray((uint8_t *)&tmp16, sample_size);
         assert(eff == sample_size);
       }

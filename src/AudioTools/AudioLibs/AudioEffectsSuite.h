@@ -74,7 +74,7 @@ class EffectSuiteBase  : public AudioEffect {
    * @returns an audio sample as a int16_t with effect applied
    */
   virtual effect_t process(effect_t inputSample) override {
-    return this->active_flag ? (effect_t)(32767.0f * processFloat(static_cast<effectsuite_t>(inputSample)/32767.0f)) : inputSample;
+    return this->active_flag ? NumberConverter::fromFloatT<effect_t>(processFloat(static_cast<effectsuite_t>(inputSample)/32767.0f)) : inputSample;
   }
 
 };
@@ -797,7 +797,7 @@ public:
 
   /// see applyFilter
   virtual effect_t process(effect_t inputSample) override {
-    return this->active_flag ? (effect_t)(32767.0 * processFloat(static_cast<effectsuite_t>(inputSample)/32767.0)) : inputSample;
+    return this->active_flag ? NumberConverter::fromFloatT<effect_t>(processFloat(static_cast<effectsuite_t>(inputSample)/32767.0)) : inputSample;
   }
 
   /**
@@ -1364,7 +1364,7 @@ public:
   }
 
   effect_t process(effect_t inputSample) override {
-    return this->active_flag ? (effect_t)(32767.0 * processFloat(static_cast<effectsuite_t>(inputSample)/32767.0)) : inputSample;
+    return this->active_flag ? NumberConverter::fromFloatT<effect_t>(processFloat(static_cast<effectsuite_t>(inputSample)/32767.0)) : inputSample;
   }
 
   FilteredDelay *clone() override {
@@ -1483,7 +1483,7 @@ public:
   }
 
   effect_t process(effect_t inputSample) override {
-    return this->active_flag ? (effect_t)(32767.0 * processFloat(static_cast<effectsuite_t>(inputSample)/32767.0)) : inputSample;
+    return this->active_flag ? NumberConverter::fromFloatT<effect_t>(processFloat(static_cast<effectsuite_t>(inputSample)/32767.0)) : inputSample;
   }
 
   /**

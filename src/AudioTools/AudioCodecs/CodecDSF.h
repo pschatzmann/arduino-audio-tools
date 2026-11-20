@@ -416,12 +416,12 @@ class DSFDecoder : public AudioDecoder {
   void writePCMSample(float filteredValue) {
     switch (meta.bits_per_sample) {
       case 8: {
-        int8_t buffer8 = NumberConverter::clipT<int8_t>(filteredValue * 127.0f);
+        int8_t buffer8 = NumberConverter::fromFloatT<int8_t>(filteredValue);
         pcmBuffer.write(buffer8);
         break;
       }
       case 16: {
-        int16_t buffer16 = NumberConverter::clipT<int16_t>(filteredValue * 32767.0f);
+        int16_t buffer16 = NumberConverter::fromFloatT<int16_t>(filteredValue);
         pcmBuffer.writeArray((uint8_t*)&buffer16, sizeof(int16_t));
         break;
       }
@@ -437,7 +437,7 @@ class DSFDecoder : public AudioDecoder {
       case 32: {
         // 1.0f * 2147483647.0f is 2^31, which does not fit, so clip
         int32_t buffer32 =
-            NumberConverter::clipT<int32_t>(filteredValue * 2147483647.0f);
+            NumberConverter::fromFloatT<int32_t>(filteredValue);
         pcmBuffer.writeArray((uint8_t*)&buffer32, sizeof(int32_t));
         break;
       }
