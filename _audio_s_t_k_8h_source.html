@@ -226,7 +226,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00156" name="l00156"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_s_t_k_effect.html#ae60a58177e645e1f35bb5ffe394427a2">  156</a></span>  <span class="keyword">virtual</span> <a class="code hl_class" href="classint16__t.html">effect_t</a> <a class="code hl_function" href="classaudio__tools_1_1_s_t_k_effect.html#ae60a58177e645e1f35bb5ffe394427a2">process</a>(<a class="code hl_class" href="classint16__t.html">effect_t</a> in) {</div>
 <div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    <span class="comment">// just convert between int16 and float</span></div>
 <div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    <span class="keywordtype">float</span> value = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(in) / 32767.0;</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    <span class="keywordflow">return</span> <a class="code hl_variable" href="classaudio__tools_1_1_s_t_k_effect.html#a330bf47aa5a98148ef15b9859d34302f">p_effect</a>-&gt;tick(value) * 32767.0;</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    <span class="keywordflow">return</span> NumberConverter::fromFloatT&lt;effect_t&gt;(<span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(<a class="code hl_variable" href="classaudio__tools_1_1_s_t_k_effect.html#a330bf47aa5a98148ef15b9859d34302f">p_effect</a>-&gt;tick(value)));</div>
 <div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>  }</div>
 </div>
 <div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span> </div>
@@ -247,7 +247,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00179" name="l00179"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_s_t_k_chorus.html#ae60a58177e645e1f35bb5ffe394427a2">  179</a></span>  <span class="keyword">virtual</span> <a class="code hl_class" href="classint16__t.html">effect_t</a> <a class="code hl_function" href="classaudio__tools_1_1_s_t_k_chorus.html#ae60a58177e645e1f35bb5ffe394427a2">process</a>(<a class="code hl_class" href="classint16__t.html">effect_t</a> in) {</div>
 <div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    <span class="comment">// just convert between int16 and float</span></div>
 <div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>    <span class="keywordtype">float</span> value = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(in) / 32767.0;</div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    <span class="keywordflow">return</span> stk::Chorus::tick(value) * 32767.0;</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    <span class="keywordflow">return</span> NumberConverter::fromFloatT&lt;effect_t&gt;(<span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(stk::Chorus::tick(value)));</div>
 <div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>  }</div>
 </div>
 <div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>};</div>
@@ -268,7 +268,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00200" name="l00200"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_s_t_k_echo.html#ae60a58177e645e1f35bb5ffe394427a2">  200</a></span>  <span class="keyword">virtual</span> <a class="code hl_class" href="classint16__t.html">effect_t</a> <a class="code hl_function" href="classaudio__tools_1_1_s_t_k_echo.html#ae60a58177e645e1f35bb5ffe394427a2">process</a>(<a class="code hl_class" href="classint16__t.html">effect_t</a> in) {</div>
 <div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    <span class="comment">// just convert between int16 and float</span></div>
 <div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    <span class="keywordtype">float</span> value = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(in) / 32767.0;</div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    <span class="keywordflow">return</span> stk::Echo::tick(value) * 32767.0;</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    <span class="keywordflow">return</span> NumberConverter::fromFloatT&lt;effect_t&gt;(<span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(stk::Echo::tick(value)));</div>
 <div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>  }</div>
 </div>
 <div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>};</div>
@@ -284,7 +284,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00218" name="l00218"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_s_t_k_free_verb.html#ae60a58177e645e1f35bb5ffe394427a2">  218</a></span>  <span class="keyword">virtual</span> <a class="code hl_class" href="classint16__t.html">effect_t</a> <a class="code hl_function" href="classaudio__tools_1_1_s_t_k_free_verb.html#ae60a58177e645e1f35bb5ffe394427a2">process</a>(<a class="code hl_class" href="classint16__t.html">effect_t</a> in) {</div>
 <div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    <span class="comment">// just convert between int16 and float</span></div>
 <div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    <span class="keywordtype">float</span> value = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(in) / 32767.0;</div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    <span class="keywordflow">return</span> stk::FreeVerb::tick(value) * 32767.0;</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    <span class="keywordflow">return</span> NumberConverter::fromFloatT&lt;effect_t&gt;(<span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(stk::FreeVerb::tick(value)));</div>
 <div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>  }</div>
 </div>
 <div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>};</div>
@@ -301,7 +301,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00237" name="l00237"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_s_t_k_chowning_reverb.html#ae60a58177e645e1f35bb5ffe394427a2">  237</a></span>  <span class="keyword">virtual</span> <a class="code hl_class" href="classint16__t.html">effect_t</a> <a class="code hl_function" href="classaudio__tools_1_1_s_t_k_chowning_reverb.html#ae60a58177e645e1f35bb5ffe394427a2">process</a>(<a class="code hl_class" href="classint16__t.html">effect_t</a> in) {</div>
 <div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>    <span class="comment">// just convert between int16 and float</span></div>
 <div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>    <span class="keywordtype">float</span> value = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(in) / 32767.0;</div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>    <span class="keywordflow">return</span> stk::JCRev::tick(value) * 32767.0;</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>    <span class="keywordflow">return</span> NumberConverter::fromFloatT&lt;effect_t&gt;(<span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(stk::JCRev::tick(value)));</div>
 <div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>  }</div>
 </div>
 <div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>};</div>
@@ -317,7 +317,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00255" name="l00255"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_s_t_k_n_reverb.html#ae60a58177e645e1f35bb5ffe394427a2">  255</a></span>  <span class="keyword">virtual</span> <a class="code hl_class" href="classint16__t.html">effect_t</a> <a class="code hl_function" href="classaudio__tools_1_1_s_t_k_n_reverb.html#ae60a58177e645e1f35bb5ffe394427a2">process</a>(<a class="code hl_class" href="classint16__t.html">effect_t</a> in) {</div>
 <div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>    <span class="comment">// just convert between int16 and float</span></div>
 <div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>    <span class="keywordtype">float</span> value = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(in) / 32767.0;</div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>    <span class="keywordflow">return</span> stk::NRev::tick(value) * 32767.0;</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>    <span class="keywordflow">return</span> NumberConverter::fromFloatT&lt;effect_t&gt;(<span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(stk::NRev::tick(value)));</div>
 <div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>  }</div>
 </div>
 <div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>};</div>
@@ -333,7 +333,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00273" name="l00273"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_s_t_k_perry_reverb.html#ae60a58177e645e1f35bb5ffe394427a2">  273</a></span>  <span class="keyword">virtual</span> <a class="code hl_class" href="classint16__t.html">effect_t</a> <a class="code hl_function" href="classaudio__tools_1_1_s_t_k_perry_reverb.html#ae60a58177e645e1f35bb5ffe394427a2">process</a>(<a class="code hl_class" href="classint16__t.html">effect_t</a> in) {</div>
 <div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>    <span class="comment">// just convert between int16 and float</span></div>
 <div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>    <span class="keywordtype">float</span> value = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(in) / 32767.0;</div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>    <span class="keywordflow">return</span> stk::PRCRev::tick(value) * 32767.0;</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>    <span class="keywordflow">return</span> NumberConverter::fromFloatT&lt;effect_t&gt;(<span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(stk::PRCRev::tick(value)));</div>
 <div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>  }</div>
 </div>
 <div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>};</div>
@@ -353,7 +353,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00293" name="l00293"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_s_t_k_lent_pit_shift.html#ae60a58177e645e1f35bb5ffe394427a2">  293</a></span>  <span class="keyword">virtual</span> <a class="code hl_class" href="classint16__t.html">effect_t</a> <a class="code hl_function" href="classaudio__tools_1_1_s_t_k_lent_pit_shift.html#ae60a58177e645e1f35bb5ffe394427a2">process</a>(<a class="code hl_class" href="classint16__t.html">effect_t</a> in) {</div>
 <div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>    <span class="comment">// just convert between int16 and float</span></div>
 <div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>    <span class="keywordtype">float</span> value = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(in) / 32767.0;</div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>    <span class="keywordflow">return</span> stk::LentPitShift::tick(value) * 32767.0;</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>    <span class="keywordflow">return</span> NumberConverter::fromFloatT&lt;effect_t&gt;(<span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(stk::LentPitShift::tick(value)));</div>
 <div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>  }</div>
 </div>
 <div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>};</div>
@@ -370,7 +370,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00313" name="l00313"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_s_t_k_pit_shift.html#ae60a58177e645e1f35bb5ffe394427a2">  313</a></span>  <span class="keyword">virtual</span> <a class="code hl_class" href="classint16__t.html">effect_t</a> <a class="code hl_function" href="classaudio__tools_1_1_s_t_k_pit_shift.html#ae60a58177e645e1f35bb5ffe394427a2">process</a>(<a class="code hl_class" href="classint16__t.html">effect_t</a> in) {</div>
 <div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>    <span class="comment">// just convert between int16 and float</span></div>
 <div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>    <span class="keywordtype">float</span> value = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(in) / 32767.0;</div>
-<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>    <span class="keywordflow">return</span> stk::PitShift::tick(value) * 32767.0;</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>    <span class="keywordflow">return</span> NumberConverter::fromFloatT&lt;effect_t&gt;(<span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(stk::PitShift::tick(value)));</div>
 <div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>  }</div>
 </div>
 <div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>};</div>
