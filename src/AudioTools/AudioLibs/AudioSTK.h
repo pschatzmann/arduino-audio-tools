@@ -66,7 +66,7 @@ class STKGenerator : public SoundGenerator<T> {
   T readSample() {
     T result = 0;
     if (p_instrument != nullptr) {
-      result = p_instrument->tick() * max_value;
+      result = NumberConverter::clipT<T>(p_instrument->tick() * max_value);
     }
     return result;
   }
