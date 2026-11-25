@@ -3,6 +3,7 @@
 
 #include "AudioToolsConfig.h"
 #include "AudioTools/CoreAudio/AudioLogger.h"
+#include "AudioTools/CoreAudio/AudioBasic/Collections/Vector.h"
 #ifdef USE_TYPETRAITS
 #include <type_traits>
 #endif
@@ -923,6 +924,89 @@ class HighShelfFilterDF1 : public BiQuadDF1<T> {
   void begin(float frequency, float sampleRate, float gain,
              float slope = 1.0f) {
     BiQuadCoeffs c = calculateHighShelfCoeffs(frequency, sampleRate, gain, slope);
+    checkCoeffRange<T>(c);
+    BiQuadDF1<T>::b_0 = c.b_0;
+    BiQuadDF1<T>::b_1 = c.b_1;
+    BiQuadDF1<T>::b_2 = c.b_2;
+    BiQuadDF1<T>::a_1 = c.a_1;
+    BiQuadDF1<T>::a_2 = c.a_2;
+  }
+};
+
+/// Computes the b0/b1/b2/a1/a2 biquad coefficients for a peaking EQ filter
+/// (Audio EQ Cookbook): gain in dB at the frequency, q defines the width.
+inline BiQuadCoeffs calculatePeakCoeffs(float frequency, float sampleRate,
+                                        float q, float gain) {
+  float a = powf(10.0f, gain / 40.0f);
+  float w0 = frequency * (2.0f * PI / sampleRate);
+  float cosW0 = cosf(w0);
+  float alpha = sinf(w0) / (2.0f * q);
+  float scale = 1.0f / (1.0f + alpha / a);
+  BiQuadCoeffs c;
+  c.b_0 = (1.0f + alpha * a) * scale;
+  c.b_1 = -2.0f * cosW0 * scale;
+  c.b_2 = (1.0f - alpha * a) * scale;
+  c.a_1 = -2.0f * cosW0 * scale;
+  c.a_2 = (1.0f - alpha / a) * scale;
+  return c;
+}
+
+/**
+ * @brief Second-order peaking EQ filter (BiQuad DF2). Boosts or cuts a band
+ * around the center frequency by the specified gain (in dB) while leaving the
+ * other frequencies unchanged. Commonly used in tone controls and
+ * equalization (e.g. the mid control of a guitar amplifier). Coefficients are
+ * derived from the Audio EQ Cookbook.
+ * @param frequency center frequency in Hz
+ * @param sampleRate sample rate in Hz
+ * @param q quality factor: higher values give a narrower band
+ * @param gain boost/cut in dB (positive = boost, negative = cut)
+ * @ingroup filter
+ * @author  pschatzmann
+ * @copyright GNU General Public License v3.0
+ * @tparam T sample type (use float or double)
+ */
+template <typename T = float>
+class PeakFilter : public BiQuadDF2<T> {
+ public:
+  PeakFilter() = default;
+  PeakFilter(float frequency, float sampleRate, float q, float gain)
+      : BiQuadDF2<T>() {
+    begin(frequency, sampleRate, q, gain);
+  }
+  void begin(float frequency, float sampleRate, float q, float gain) {
+    BiQuadCoeffs c = calculatePeakCoeffs(frequency, sampleRate, q, gain);
+    checkCoeffRange<T>(c);
+    BiQuadDF2<T>::b_0 = c.b_0;
+    BiQuadDF2<T>::b_1 = c.b_1;
+    BiQuadDF2<T>::b_2 = c.b_2;
+    BiQuadDF2<T>::a_1 = c.a_1;
+    BiQuadDF2<T>::a_2 = c.a_2;
+  }
+};
+
+/**
+ * @brief Second-order peaking EQ filter (BiQuad DF1). Same coefficients as
+ * PeakFilter, but with separate x[]/y[] delay lines (see LowPassFilterDF1).
+ * @param frequency center frequency in Hz
+ * @param sampleRate sample rate in Hz
+ * @param q quality factor: higher values give a narrower band
+ * @param gain boost/cut in dB (positive = boost, negative = cut)
+ * @ingroup filter
+ * @author  pschatzmann
+ * @copyright GNU General Public License v3.0
+ * @tparam T sample type
+ */
+template <typename T = float>
+class PeakFilterDF1 : public BiQuadDF1<T> {
+ public:
+  PeakFilterDF1() = default;
+  PeakFilterDF1(float frequency, float sampleRate, float q, float gain)
+      : BiQuadDF1<T>() {
+    begin(frequency, sampleRate, q, gain);
+  }
+  void begin(float frequency, float sampleRate, float q, float gain) {
+    BiQuadCoeffs c = calculatePeakCoeffs(frequency, sampleRate, q, gain);
     checkCoeffRange<T>(c);
     BiQuadDF1<T>::b_0 = c.b_0;
     BiQuadDF1<T>::b_1 = c.b_1;

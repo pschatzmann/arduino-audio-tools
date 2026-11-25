@@ -204,7 +204,20 @@ class Fuzz : public AudioEffect {
 };
 
 /**
- * @brief Tremolo AudioEffect
+ * @brief Tremolo AudioEffect: periodic change of the volume (amplitude
+ * modulation) between (100 - depth)% and 100%.
+ *
+ * - Waveform: Triangle (default) or Sine (smoother, like the "vibrato" of an
+ *   electric piano)
+ * - Rate: as period in ms (setDuration()) or in Hz (setRate())
+ * - Auto pan: in a stereo AudioEffectStream each channel has its own clone of
+ *   the effect; add the effect for the right channel with
+ *   addEffect(1, effect) and setPhase(180) to move the sound between left and
+ *   right.
+ *
+ * The gain is calculated every 32 samples and interpolated linearly in
+ * between: per sample only one integer multiplication is needed (no float
+ * operation, no division), for the float and the fixed point configuration.
  * @ingroup effects
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -212,97 +225,125 @@ class Fuzz : public AudioEffect {
 
 class Tremolo : public AudioEffect {
  public:
+  /// Waveform of the modulation
+  enum Shape { Triangle, Sine };
+
   /// Tremolo constructor -  use e.g. duration_ms=2000; depthPercent=50;
   /// sampleRate=44100
   Tremolo(int16_t duration_ms = 2000, uint8_t depthPercent = 50,
           uint32_t sampleRate = 44100) {
-    this->duration_ms = duration_ms;
-    this->sampleRate = sampleRate;
-    this->p_percent = depthPercent;
-    int32_t rate_count = sampleRate * duration_ms / 1000;
-    rate_count_half = rate_count / 2;
-    recalculate();
+    this->sample_rate = sampleRate;
+    this->p_percent = depthPercent > 100 ? 100 : depthPercent;
+    setDuration(duration_ms);
+    gain = gainAt(phase);
   }
 
   Tremolo(const Tremolo& copy) = default;
 
+  /// Period of the modulation in ms (<= 0: no modulation)
   void setDuration(int16_t ms) {
-    this->duration_ms = ms;
-    int32_t rate_count = sampleRate * ms / 1000;
-    rate_count_half = rate_count / 2;
-    // tremolo_factor (float path) depends on rate_count_half too
+    duration_ms = ms;
+    rate_hz = ms > 0 ? 1000.0f / ms : 0.0f;
     recalculate();
   }
 
   int16_t duration() { return duration_ms; }
 
+  /// Speed of the modulation in Hz (e.g. 5.5 for an electric piano)
+  void setRate(float hz) {
+    rate_hz = hz > 0.0f ? hz : 0.0f;
+    duration_ms = rate_hz > 0.0f ? (int16_t)(1000.0f / rate_hz + 0.5f) : 0;
+    recalculate();
+  }
+
+  float rate() { return rate_hz; }
+
+  /// Depth in percent: the volume changes between (100 - depth)% and 100%
   void setDepth(uint8_t percent) {
-    p_percent = percent;
+    p_percent = percent > 100 ? 100 : percent;
     recalculate();
   }
 
   uint8_t depth() { return p_percent; }
 
+  /// Waveform: Triangle (default) or Sine
+  void setShape(Shape shape) {
+    this->p_shape = shape;
+    recalculate();
+  }
+
+  Shape shape() { return p_shape; }
+
+  /// Phase of the modulation in degrees, e.g. 180 for the right channel of a
+  /// stereo auto pan
+  void setPhase(float degrees) {
+    float p = degrees / 360.0f;
+    phase = p - floorf(p);
+    recalculate();
+    gain = gainAt(phase);  // jump to the new position
+  }
+
+  /// Sample rate of the processed audio
+  void setSampleRate(uint32_t sampleRate) {
+    sample_rate = sampleRate;
+    recalculate();
+  }
+
   effect_t process(effect_t input) {
     if (!active()) return input;
-    // guards the division below; also matches the float path's original
-    // (silent, non-crashing) behavior for this misconfiguration
-    if (rate_count_half <= 0) return input;
-
-#if PREFER_FIXEDPOINT
-    // triangle-wave position weight (count/rate_count_half) applied to the
-    // depth-scaled sample, all integer -- no per-sample float division
-    int32_t out =
-        signal_depth_q.scale(input) +
-        (int32_t)(((int64_t)tremolo_depth_q.scale(input) * count) /
-                   rate_count_half);
-#else
-    int32_t out = (int32_t)(signal_depth * input) +
-                   (int32_t)(tremolo_factor * count * input);
-#endif
-
-    // saw tooth shaped counter
-    count += inc;
-    if (count >= rate_count_half) {
-      inc = -1;
-    } else if (count <= 0) {
-      inc = +1;
-    }
-
-    return clip(out);
+    if (remaining == 0) nextSegment();
+    remaining--;
+    // gain in Q16 (65536 = 1.0): input * Q15 fits into 32 bits
+    int32_t out = ((int32_t)input * (gain >> 1)) >> 15;
+    gain += gain_step;
+    return (effect_t)out;
   }
 
   Tremolo* clone() { return new Tremolo(*this); }
 
  protected:
-  int16_t duration_ms;
-  uint32_t sampleRate;
-  int32_t count = 0;
-  int16_t inc = 1;
-  int32_t rate_count_half;  // number of samples for on raise and fall
-  uint8_t p_percent;
-#if PREFER_FIXEDPOINT
-  q1_14_t signal_depth_q{1.0f};
-  q1_14_t tremolo_depth_q{0.0f};
-#else
-  float signal_depth = 1.0f;
-  float tremolo_depth = 0.0f;
-  float tremolo_factor = 0.0f;
-#endif
+  static constexpr int SEGMENT = 32;  // samples between the gain calculations
+  int16_t duration_ms = 0;
+  float rate_hz = 0.0f;
+  uint32_t sample_rate = 44100;
+  uint8_t p_percent = 50;
+  Shape p_shape = Triangle;
+  float phase = 0.0f;           // position in the period 0..1
+  float segment_inc = 0.0f;     // phase increment per segment
+  int32_t gain = 65536;         // Q16
+  int32_t gain_step = 0;        // Q16 per sample
+  int remaining = 0;            // samples until the next segment
 
-  // p_percent only changes on setDepth(), so the depth split is computed
-  // once here instead of every process() call
+  /// Gain (Q16) at a position in the period: (1 - depth) .. 1
+  int32_t gainAt(float pos) {
+    float w;  // 0 .. 1, starts at 0 (minimum)
+    if (p_shape == Sine) {
+      w = 0.5f - 0.5f * cosf(6.2831853f * pos);
+    } else {
+      w = pos < 0.5f ? 2.0f * pos : 2.0f - 2.0f * pos;
+    }
+    float depth = 0.01f * p_percent;
+    return (int32_t)((1.0f - depth + depth * w) * 65536.0f);
+  }
+
+  /// Calculates the gain at the end of the next segment: the gain is
+  /// interpolated linearly inside of the segment
+  void nextSegment() {
+    if (segment_inc > 0.0f) {
+      phase += segment_inc;
+      if (phase >= 1.0f) phase -= 1.0f;
+    }
+    int32_t target = gainAt(phase);
+    gain_step = (target - gain) / SEGMENT;
+    remaining = SEGMENT;
+  }
+
+  /// Parameters changed: the next segment ramps from the current gain to
+  /// the new values (no clicks)
   void recalculate() {
-    float td = p_percent > 100 ? 1.0f : 0.01f * p_percent;
-    float sd = (100.0f - p_percent) / 100.0f;
-#if PREFER_FIXEDPOINT
-    tremolo_depth_q = q1_14_t(td);
-    signal_depth_q = q1_14_t(sd);
-#else
-    tremolo_depth = td;
-    signal_depth = sd;
-    tremolo_factor = rate_count_half > 0 ? tremolo_depth / rate_count_half : 0.0f;
-#endif
+    segment_inc = sample_rate > 0 ? rate_hz * SEGMENT / sample_rate : 0.0f;
+    gain_step = 0;
+    remaining = 0;
   }
 };
 
