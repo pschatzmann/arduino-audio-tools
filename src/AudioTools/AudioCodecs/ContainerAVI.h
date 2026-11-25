@@ -323,11 +323,20 @@ public:
     header_is_avi = false;
     is_parsing_active = true;
     current_pos = 0;
-    header_is_avi = false;
     stream_header_idx = -1;
     is_metadata_ready = false;
     is_wav_header_sent = false;
     riff_file_size = 0;
+    // forget everything from a previous file: unparsed bytes, a partially
+    // accumulated video chunk and the open LIST/chunk state would otherwise
+    // desync the parser when a new file (or the same one again) is started
+    parse_buffer.clear();
+    video_accumulator.clear();
+    object_stack.clear();
+    content_types.clear();
+    current_stream_data = ParseObject();
+    open_subchunk_len = 0;
+    movi_end_pos = 0;
     return true;
   }
 
