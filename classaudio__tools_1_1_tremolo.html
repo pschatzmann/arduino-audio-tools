@@ -74,15 +74,17 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#pro-static-attribs">Static Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_tremolo-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Tremolo Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__dsp.html">DSP</a> &raquo; <a class="el" href="group__effects.html">Effects</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="classaudio__tools_1_1_tremolo.html" title="Tremolo AudioEffect.">Tremolo</a> <a class="el" href="classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects.">AudioEffect</a>.  
+<p><a class="el" href="classaudio__tools_1_1_tremolo.html" title="Tremolo AudioEffect: periodic change of the volume (amplitude modulation) between (100 - depth)% and ...">Tremolo</a> <a class="el" href="classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects.">AudioEffect</a>: periodic change of the volume (amplitude modulation) between (100 - depth)% and 100%.  
  <a href="classaudio__tools_1_1_tremolo.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_audio_effect_8h_source.html">AudioEffect.h</a>&gt;</code></p>
@@ -91,7 +93,7 @@ Inheritance diagram for Tremolo:</div>
 <div class="dyncontent">
 <div class="center"><img src="classaudio__tools_1_1_tremolo__inherit__graph.png" border="0" usemap="#a_tremolo_inherit__map" alt="Inheritance graph"/></div>
 <map name="a_tremolo_inherit__map" id="a_tremolo_inherit__map">
-<area shape="rect" title="Tremolo AudioEffect." alt="" coords="16,81,90,109"/>
+<area shape="rect" title="Tremolo AudioEffect: periodic change of the volume (amplitude modulation) between (100 &#45; depth)% and ..." alt="" coords="16,81,90,109"/>
 <area shape="rect" href="classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects." alt="" coords="5,5,101,33"/>
 <area shape="poly" title=" " alt="" coords="55,47,56,81,50,80,51,51"/>
 </map>
@@ -101,31 +103,42 @@ Collaboration diagram for Tremolo:</div>
 <div class="dyncontent">
 <div class="center"><img src="classaudio__tools_1_1_tremolo__coll__graph.png" border="0" usemap="#a_tremolo_coll__map" alt="Collaboration graph"/></div>
 <map name="a_tremolo_coll__map" id="a_tremolo_coll__map">
-<area shape="rect" title="Tremolo AudioEffect." alt="" coords="323,225,396,252"/>
-<area shape="rect" href="classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects." alt="" coords="34,98,130,126"/>
-<area shape="poly" title=" " alt="" coords="104,135,140,169,183,198,219,212,256,222,325,235,320,235,255,228,217,218,181,203,136,173,102,140"/>
+<area shape="rect" title="Tremolo AudioEffect: periodic change of the volume (amplitude modulation) between (100 &#45; depth)% and ..." alt="" coords="457,231,531,259"/>
+<area shape="rect" href="classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects." alt="" coords="70,101,166,129"/>
+<area shape="poly" title=" " alt="" coords="133,140,161,175,177,192,196,205,246,220,317,230,459,242,454,242,316,235,245,225,194,209,174,196,157,179,132,145"/>
 <area shape="rect" href="classbool.html" title=" " alt="" coords="5,5,55,33"/>
-<area shape="poly" title=" " alt="" coords="26,46,33,73,43,85,57,96,52,98,39,89,29,75,26,51"/>
-<area shape="rect" href="classint.html" title=" " alt="" coords="116,5,155,33"/>
-<area shape="poly" title=" " alt="" coords="120,49,108,75,93,99,89,96,104,73,123,45"/>
-<area shape="rect" href="classint16__t.html" title=" " alt="" coords="154,98,220,126"/>
-<area shape="poly" title=" " alt="" coords="188,139,193,171,199,186,208,199,227,209,256,218,325,233,319,233,255,223,224,214,205,203,194,189,188,173,185,143"/>
-<area shape="rect" href="classuint32__t.html" title=" " alt="" coords="266,98,340,126"/>
-<area shape="poly" title=" " alt="" coords="299,139,300,170,308,199,318,212,332,225,327,223,314,216,303,202,294,171,296,143"/>
-<area shape="rect" href="classint32__t.html" title=" " alt="" coords="384,98,450,126"/>
-<area shape="poly" title=" " alt="" coords="412,139,403,171,390,202,373,226,370,222,385,199,398,169,408,142"/>
-<area shape="rect" href="classuint8__t.html" title=" " alt="" coords="516,98,582,126"/>
-<area shape="poly" title=" " alt="" coords="547,139,537,173,528,189,516,203,488,221,456,232,396,240,396,235,455,227,485,216,512,199,523,186,532,171,543,142"/>
-<area shape="rect" href="classfloat.html" title=" " alt="" coords="622,98,672,126"/>
-<area shape="poly" title=" " alt="" coords="647,139,638,174,629,190,617,203,600,212,577,220,517,230,397,239,396,234,517,225,575,215,598,207,614,199,625,186,633,172,643,143"/>
+<area shape="poly" title=" " alt="" coords="35,46,50,72,67,87,87,100,82,102,64,91,46,76,36,51"/>
+<area shape="rect" href="classint.html" title=" " alt="" coords="155,5,193,33"/>
+<area shape="poly" title=" " alt="" coords="190,44,198,56,211,95,217,112,228,130,250,157,270,175,324,205,358,218,394,227,460,240,454,240,392,232,357,223,322,209,267,179,246,161,224,134,212,114,206,97,193,58,189,49"/>
+<area shape="poly" title=" " alt="" coords="145,46,139,58,129,80,123,102,118,100,124,79,134,56,148,42"/>
+<area shape="rect" href="classint16__t.html" title=" " alt="" coords="306,101,372,129"/>
+<area shape="poly" title=" " alt="" coords="333,142,331,176,334,192,342,205,359,217,389,226,460,240,454,240,388,231,357,222,338,209,329,193,326,176,329,146"/>
+<area shape="rect" href="classfloat.html" title=" " alt="" coords="413,101,463,129"/>
+<area shape="poly" title=" " alt="" coords="434,142,433,175,441,206,452,218,466,231,461,230,448,222,437,208,428,176,430,146"/>
+<area shape="rect" href="classuint32__t.html" title=" " alt="" coords="514,101,588,129"/>
+<area shape="poly" title=" " alt="" coords="547,142,538,176,524,208,507,233,504,228,520,206,533,174,543,145"/>
+<area shape="rect" href="classuint8__t.html" title=" " alt="" coords="634,101,700,129"/>
+<area shape="poly" title=" " alt="" coords="665,142,655,178,646,195,633,209,609,225,583,236,531,245,531,240,581,230,607,220,630,205,641,191,650,176,661,145"/>
+<area shape="rect" title=" " alt="" coords="735,101,797,129"/>
+<area shape="poly" title=" " alt="" coords="765,142,756,178,747,195,734,209,698,225,643,236,531,245,531,240,642,230,696,220,731,205,743,192,751,176,761,146"/>
+<area shape="rect" href="classint32__t.html" title=" " alt="" coords="822,101,888,129"/>
+<area shape="poly" title=" " alt="" coords="856,142,848,179,839,195,826,209,803,221,771,231,690,242,603,246,531,247,531,242,603,241,690,237,770,225,801,216,823,205,835,192,843,177,852,146"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a55b506070847a13554f8b879c1bfb37c" id="r_a55b506070847a13554f8b879c1bfb37c"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tremolo.html#a55b506070847a13554f8b879c1bfb37c">Shape</a> { <a class="el" href="classaudio__tools_1_1_tremolo.html#a55b506070847a13554f8b879c1bfb37ca773e9be14af3bc697c412f3e6c5c509e">Triangle</a>
+, <a class="el" href="classaudio__tools_1_1_tremolo.html#a55b506070847a13554f8b879c1bfb37ca39672d21444bbd829bf8971223443724">Sine</a>
+ }</td></tr>
+<tr class="memdesc:a55b506070847a13554f8b879c1bfb37c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Waveform of the modulation.  <a href="classaudio__tools_1_1_tremolo.html#a55b506070847a13554f8b879c1bfb37c">More...</a><br /></td></tr>
+<tr class="separator:a55b506070847a13554f8b879c1bfb37c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ad0d60ea059b2a5cf82c1c74cf629644f" id="r_ad0d60ea059b2a5cf82c1c74cf629644f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tremolo.html#ad0d60ea059b2a5cf82c1c74cf629644f">Tremolo</a> (const <a class="el" href="classaudio__tools_1_1_tremolo.html">Tremolo</a> &amp;copy)=default</td></tr>
 <tr class="separator:ad0d60ea059b2a5cf82c1c74cf629644f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6cebfd2642670bb1b582f36d550d44e8" id="r_a6cebfd2642670bb1b582f36d550d44e8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tremolo.html#a6cebfd2642670bb1b582f36d550d44e8">Tremolo</a> (<a class="el" href="classint16__t.html">int16_t</a> <a class="el" href="classaudio__tools_1_1_tremolo.html#a1f7dda98eb65c86819b16bed72ed1caf">duration_ms</a>=2000, <a class="el" href="classuint8__t.html">uint8_t</a> depthPercent=50, <a class="el" href="classuint32__t.html">uint32_t</a> <a class="el" href="classaudio__tools_1_1_tremolo.html#a6fa8a5149596e320cf6918c74624e4b6">sampleRate</a>=44100)</td></tr>
+<tr class="memitem:a6cebfd2642670bb1b582f36d550d44e8" id="r_a6cebfd2642670bb1b582f36d550d44e8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tremolo.html#a6cebfd2642670bb1b582f36d550d44e8">Tremolo</a> (<a class="el" href="classint16__t.html">int16_t</a> <a class="el" href="classaudio__tools_1_1_tremolo.html#a1f7dda98eb65c86819b16bed72ed1caf">duration_ms</a>=2000, <a class="el" href="classuint8__t.html">uint8_t</a> depthPercent=50, <a class="el" href="classuint32__t.html">uint32_t</a> sampleRate=44100)</td></tr>
 <tr class="separator:a6cebfd2642670bb1b582f36d550d44e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3708b79a6e03c964327c2988b2a70668" id="r_a3708b79a6e03c964327c2988b2a70668"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect.html#a3708b79a6e03c964327c2988b2a70668">active</a> ()</td></tr>
 <tr class="memdesc:a3708b79a6e03c964327c2988b2a70668"><td class="mdescLeft">&#160;</td><td class="mdescRight">determines if the effect is active  <br /></td></tr>
@@ -142,16 +155,33 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3560bcb309efc4862dfbf1aae406b47d" id="r_a3560bcb309efc4862dfbf1aae406b47d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaudio__tools.html#a22141edfb51175c26033a5ddd3a847d0">effect_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tremolo.html#a3560bcb309efc4862dfbf1aae406b47d">process</a> (<a class="el" href="namespaceaudio__tools.html#a22141edfb51175c26033a5ddd3a847d0">effect_t</a> input)</td></tr>
 <tr class="memdesc:a3560bcb309efc4862dfbf1aae406b47d"><td class="mdescLeft">&#160;</td><td class="mdescRight">calculates the effect output from the input  <br /></td></tr>
 <tr class="separator:a3560bcb309efc4862dfbf1aae406b47d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63dc978bc66f4cfa356599df58773bfc" id="r_a63dc978bc66f4cfa356599df58773bfc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfloat.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tremolo.html#a63dc978bc66f4cfa356599df58773bfc">rate</a> ()</td></tr>
+<tr class="separator:a63dc978bc66f4cfa356599df58773bfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a392adf5d7d03b5339b77ec58bca5f9a9" id="r_a392adf5d7d03b5339b77ec58bca5f9a9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect.html#a392adf5d7d03b5339b77ec58bca5f9a9">setActive</a> (<a class="el" href="classbool.html">bool</a> value)</td></tr>
 <tr class="memdesc:a392adf5d7d03b5339b77ec58bca5f9a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the effect active/inactive  <br /></td></tr>
 <tr class="separator:a392adf5d7d03b5339b77ec58bca5f9a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08562abbe1f060212996f1ba3cd3b0d2" id="r_a08562abbe1f060212996f1ba3cd3b0d2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tremolo.html#a08562abbe1f060212996f1ba3cd3b0d2">setDepth</a> (<a class="el" href="classuint8__t.html">uint8_t</a> percent)</td></tr>
+<tr class="memdesc:a08562abbe1f060212996f1ba3cd3b0d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Depth in percent: the volume changes between (100 - depth)% and 100%.  <br /></td></tr>
 <tr class="separator:a08562abbe1f060212996f1ba3cd3b0d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6377ffb5adf3d71c8517d7e8ff4a4031" id="r_a6377ffb5adf3d71c8517d7e8ff4a4031"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tremolo.html#a6377ffb5adf3d71c8517d7e8ff4a4031">setDuration</a> (<a class="el" href="classint16__t.html">int16_t</a> ms)</td></tr>
+<tr class="memdesc:a6377ffb5adf3d71c8517d7e8ff4a4031"><td class="mdescLeft">&#160;</td><td class="mdescRight">Period of the modulation in ms (&lt;= 0: no modulation)  <br /></td></tr>
 <tr class="separator:a6377ffb5adf3d71c8517d7e8ff4a4031"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3d929477fef71d52c9c6df2ba2d50841" id="r_a3d929477fef71d52c9c6df2ba2d50841"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect.html#a3d929477fef71d52c9c6df2ba2d50841">setId</a> (<a class="el" href="classint.html">int</a> <a class="el" href="classaudio__tools_1_1_audio_effect.html#a4a716406d3d9d4fdbbe46f100e648f3b">id</a>)</td></tr>
 <tr class="memdesc:a3d929477fef71d52c9c6df2ba2d50841"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allows to identify an effect.  <br /></td></tr>
 <tr class="separator:a3d929477fef71d52c9c6df2ba2d50841"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43961eb538999660bb081959fa8014c5" id="r_a43961eb538999660bb081959fa8014c5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tremolo.html#a43961eb538999660bb081959fa8014c5">setPhase</a> (<a class="el" href="classfloat.html">float</a> degrees)</td></tr>
+<tr class="separator:a43961eb538999660bb081959fa8014c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96d70b03956853f9160fba4678314d80" id="r_a96d70b03956853f9160fba4678314d80"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tremolo.html#a96d70b03956853f9160fba4678314d80">setRate</a> (<a class="el" href="classfloat.html">float</a> hz)</td></tr>
+<tr class="memdesc:a96d70b03956853f9160fba4678314d80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Speed of the modulation in Hz (e.g. 5.5 for an electric piano)  <br /></td></tr>
+<tr class="separator:a96d70b03956853f9160fba4678314d80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5c93d484ec2c8d1db57588e8bd8c8b2" id="r_aa5c93d484ec2c8d1db57588e8bd8c8b2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tremolo.html#aa5c93d484ec2c8d1db57588e8bd8c8b2">setSampleRate</a> (<a class="el" href="classuint32__t.html">uint32_t</a> sampleRate)</td></tr>
+<tr class="memdesc:aa5c93d484ec2c8d1db57588e8bd8c8b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sample rate of the processed audio.  <br /></td></tr>
+<tr class="separator:aa5c93d484ec2c8d1db57588e8bd8c8b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39216c02064ec0c2d598aa12266bd499" id="r_a39216c02064ec0c2d598aa12266bd499"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tremolo.html#a39216c02064ec0c2d598aa12266bd499">setShape</a> (<a class="el" href="classaudio__tools_1_1_tremolo.html#a55b506070847a13554f8b879c1bfb37c">Shape</a> <a class="el" href="classaudio__tools_1_1_tremolo.html#abc350932871996693e5e52d20d7c7571">shape</a>)</td></tr>
+<tr class="memdesc:a39216c02064ec0c2d598aa12266bd499"><td class="mdescLeft">&#160;</td><td class="mdescRight">Waveform: <a class="el" href="classaudio__tools_1_1_triangle.html" title="Triangle FFT Window function.">Triangle</a> (default) or Sine.  <br /></td></tr>
+<tr class="separator:a39216c02064ec0c2d598aa12266bd499"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc350932871996693e5e52d20d7c7571" id="r_abc350932871996693e5e52d20d7c7571"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_tremolo.html#a55b506070847a13554f8b879c1bfb37c">Shape</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tremolo.html#abc350932871996693e5e52d20d7c7571">shape</a> ()</td></tr>
+<tr class="separator:abc350932871996693e5e52d20d7c7571"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -160,6 +190,11 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:af52bdd0b692ecf558d8bd97fac35bf6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab09618ef5ecbce364b46a4a0b44de2ef" id="r_ab09618ef5ecbce364b46a4a0b44de2ef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect.html#ab09618ef5ecbce364b46a4a0b44de2ef">copyParent</a> (<a class="el" href="classaudio__tools_1_1_audio_effect.html">AudioEffect</a> *copy)</td></tr>
 <tr class="separator:ab09618ef5ecbce364b46a4a0b44de2ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a331e63b4d2337e2318b9ea17d48b7f50" id="r_a331e63b4d2337e2318b9ea17d48b7f50"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint32__t.html">int32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tremolo.html#a331e63b4d2337e2318b9ea17d48b7f50">gainAt</a> (<a class="el" href="classfloat.html">float</a> pos)</td></tr>
+<tr class="memdesc:a331e63b4d2337e2318b9ea17d48b7f50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gain (Q16) at a position in the period: (1 - depth) .. 1.  <br /></td></tr>
+<tr class="separator:a331e63b4d2337e2318b9ea17d48b7f50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf4ffa7ecbcffadb24a9af9a13d5d385" id="r_adf4ffa7ecbcffadb24a9af9a13d5d385"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tremolo.html#adf4ffa7ecbcffadb24a9af9a13d5d385">nextSegment</a> ()</td></tr>
+<tr class="separator:adf4ffa7ecbcffadb24a9af9a13d5d385"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a467a786be42a2165aa15a26709674547" id="r_a467a786be42a2165aa15a26709674547"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tremolo.html#a467a786be42a2165aa15a26709674547">recalculate</a> ()</td></tr>
 <tr class="separator:a467a786be42a2165aa15a26709674547"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -167,32 +202,66 @@ Protected Member Functions</h2></td></tr>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a7816e2085c1adaae2c69ed5f65f1d212" id="r_a7816e2085c1adaae2c69ed5f65f1d212"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbool.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect.html#a7816e2085c1adaae2c69ed5f65f1d212">active_flag</a> = true</td></tr>
 <tr class="separator:a7816e2085c1adaae2c69ed5f65f1d212"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4858b400f708a13bd514376ab941b27d" id="r_a4858b400f708a13bd514376ab941b27d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint32__t.html">int32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tremolo.html#a4858b400f708a13bd514376ab941b27d">count</a> = 0</td></tr>
-<tr class="separator:a4858b400f708a13bd514376ab941b27d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1f7dda98eb65c86819b16bed72ed1caf" id="r_a1f7dda98eb65c86819b16bed72ed1caf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint16__t.html">int16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tremolo.html#a1f7dda98eb65c86819b16bed72ed1caf">duration_ms</a></td></tr>
+<tr class="memitem:a1f7dda98eb65c86819b16bed72ed1caf" id="r_a1f7dda98eb65c86819b16bed72ed1caf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint16__t.html">int16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tremolo.html#a1f7dda98eb65c86819b16bed72ed1caf">duration_ms</a> = 0</td></tr>
 <tr class="separator:a1f7dda98eb65c86819b16bed72ed1caf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d97b19756913cc6eda716db646e00a0" id="r_a4d97b19756913cc6eda716db646e00a0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint32__t.html">int32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tremolo.html#a4d97b19756913cc6eda716db646e00a0">gain</a> = 65536</td></tr>
+<tr class="separator:a4d97b19756913cc6eda716db646e00a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0e68a538543356ad7671119fb332a3f" id="r_aa0e68a538543356ad7671119fb332a3f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint32__t.html">int32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tremolo.html#aa0e68a538543356ad7671119fb332a3f">gain_step</a> = 0</td></tr>
+<tr class="separator:aa0e68a538543356ad7671119fb332a3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a55d6269c0eac19475dd606fe07eb8a48" id="r_a55d6269c0eac19475dd606fe07eb8a48"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect.html#a55d6269c0eac19475dd606fe07eb8a48">id_value</a> = -1</td></tr>
 <tr class="separator:a55d6269c0eac19475dd606fe07eb8a48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adafb7a60a5fbf460acc99d438731d4ee" id="r_adafb7a60a5fbf460acc99d438731d4ee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint16__t.html">int16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tremolo.html#adafb7a60a5fbf460acc99d438731d4ee">inc</a> = 1</td></tr>
-<tr class="separator:adafb7a60a5fbf460acc99d438731d4ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4fb1f2d47b97258967e2e0adcd802dff" id="r_a4fb1f2d47b97258967e2e0adcd802dff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classuint8__t.html">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tremolo.html#a4fb1f2d47b97258967e2e0adcd802dff">p_percent</a></td></tr>
+<tr class="memitem:a4fb1f2d47b97258967e2e0adcd802dff" id="r_a4fb1f2d47b97258967e2e0adcd802dff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classuint8__t.html">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tremolo.html#a4fb1f2d47b97258967e2e0adcd802dff">p_percent</a> = 50</td></tr>
 <tr class="separator:a4fb1f2d47b97258967e2e0adcd802dff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a94b921c2e66b3a7ade792f499c40d044" id="r_a94b921c2e66b3a7ade792f499c40d044"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint32__t.html">int32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tremolo.html#a94b921c2e66b3a7ade792f499c40d044">rate_count_half</a></td></tr>
-<tr class="separator:a94b921c2e66b3a7ade792f499c40d044"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6fa8a5149596e320cf6918c74624e4b6" id="r_a6fa8a5149596e320cf6918c74624e4b6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classuint32__t.html">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tremolo.html#a6fa8a5149596e320cf6918c74624e4b6">sampleRate</a></td></tr>
-<tr class="separator:a6fa8a5149596e320cf6918c74624e4b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab2385daa77737329a3b1c72f085aa503" id="r_ab2385daa77737329a3b1c72f085aa503"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfloat.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tremolo.html#ab2385daa77737329a3b1c72f085aa503">signal_depth</a> = 1.0f</td></tr>
-<tr class="separator:ab2385daa77737329a3b1c72f085aa503"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9e54d17b688e6d7a3f6d06c8c755f657" id="r_a9e54d17b688e6d7a3f6d06c8c755f657"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfloat.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tremolo.html#a9e54d17b688e6d7a3f6d06c8c755f657">tremolo_depth</a> = 0.0f</td></tr>
-<tr class="separator:a9e54d17b688e6d7a3f6d06c8c755f657"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a395f072efb26bf646674b5c959b8b80d" id="r_a395f072efb26bf646674b5c959b8b80d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfloat.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tremolo.html#a395f072efb26bf646674b5c959b8b80d">tremolo_factor</a> = 0.0f</td></tr>
-<tr class="separator:a395f072efb26bf646674b5c959b8b80d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accd1045783a8db0a48a87a2400ba2214" id="r_accd1045783a8db0a48a87a2400ba2214"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_tremolo.html#a55b506070847a13554f8b879c1bfb37c">Shape</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tremolo.html#accd1045783a8db0a48a87a2400ba2214">p_shape</a> = <a class="el" href="classaudio__tools_1_1_triangle.html">Triangle</a></td></tr>
+<tr class="separator:accd1045783a8db0a48a87a2400ba2214"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a275dd6dafe5d4455e599ffd15feb06f8" id="r_a275dd6dafe5d4455e599ffd15feb06f8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfloat.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tremolo.html#a275dd6dafe5d4455e599ffd15feb06f8">phase</a> = 0.0f</td></tr>
+<tr class="separator:a275dd6dafe5d4455e599ffd15feb06f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4fa81adf0fbf6a3b8d37d857f0f1068" id="r_ab4fa81adf0fbf6a3b8d37d857f0f1068"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfloat.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tremolo.html#ab4fa81adf0fbf6a3b8d37d857f0f1068">rate_hz</a> = 0.0f</td></tr>
+<tr class="separator:ab4fa81adf0fbf6a3b8d37d857f0f1068"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f742a514df155060c3a2cc0457680a9" id="r_a8f742a514df155060c3a2cc0457680a9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tremolo.html#a8f742a514df155060c3a2cc0457680a9">remaining</a> = 0</td></tr>
+<tr class="separator:a8f742a514df155060c3a2cc0457680a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fba55d9442e7dba4623825cd737e520" id="r_a2fba55d9442e7dba4623825cd737e520"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classuint32__t.html">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tremolo.html#a2fba55d9442e7dba4623825cd737e520">sample_rate</a> = 44100</td></tr>
+<tr class="separator:a2fba55d9442e7dba4623825cd737e520"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ce5b662d4e18b9796b8d4b5711dfa3a" id="r_a9ce5b662d4e18b9796b8d4b5711dfa3a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfloat.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tremolo.html#a9ce5b662d4e18b9796b8d4b5711dfa3a">segment_inc</a> = 0.0f</td></tr>
+<tr class="separator:a9ce5b662d4e18b9796b8d4b5711dfa3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
+Static Protected Attributes</h2></td></tr>
+<tr class="memitem:a84b32d48e2fa1f8e85a4176767009d49" id="r_a84b32d48e2fa1f8e85a4176767009d49"><td class="memItemLeft" align="right" valign="top">static constexpr <a class="el" href="classint.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tremolo.html#a84b32d48e2fa1f8e85a4176767009d49">SEGMENT</a> = 32</td></tr>
+<tr class="separator:a84b32d48e2fa1f8e85a4176767009d49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="classaudio__tools_1_1_tremolo.html" title="Tremolo AudioEffect.">Tremolo</a> <a class="el" href="classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects.">AudioEffect</a>. </p>
+<div class="textblock"><p><a class="el" href="classaudio__tools_1_1_tremolo.html" title="Tremolo AudioEffect: periodic change of the volume (amplitude modulation) between (100 - depth)% and ...">Tremolo</a> <a class="el" href="classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects.">AudioEffect</a>: periodic change of the volume (amplitude modulation) between (100 - depth)% and 100%. </p>
+<ul>
+<li>Waveform: <a class="el" href="classaudio__tools_1_1_triangle.html" title="Triangle FFT Window function.">Triangle</a> (default) or Sine (smoother, like the "vibrato" of an electric piano)</li>
+<li>Rate: as period in ms (<a class="el" href="classaudio__tools_1_1_tremolo.html#a6377ffb5adf3d71c8517d7e8ff4a4031" title="Period of the modulation in ms (&lt;= 0: no modulation)">setDuration()</a>) or in Hz (<a class="el" href="classaudio__tools_1_1_tremolo.html#a96d70b03956853f9160fba4678314d80" title="Speed of the modulation in Hz (e.g. 5.5 for an electric piano)">setRate()</a>)</li>
+<li>Auto pan: in a stereo <a class="el" href="classaudio__tools_1_1_audio_effect_stream.html" title="EffectsStream supporting variable bits_per_sample. This class is only available when __cplusplus &gt;= 2...">AudioEffectStream</a> each channel has its own clone of the effect; add the effect for the right channel with addEffect(1, effect) and setPhase(180) to move the sound between left and right.</li>
+</ul>
+<p>The gain is calculated every 32 samples and interpolated linearly in between: per sample only one integer multiplication is needed (no float operation, no division), for the float and the fixed point configuration.</p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+</div><h2 class="groupheader">Member Enumeration Documentation</h2>
+<a id="a55b506070847a13554f8b879c1bfb37c" name="a55b506070847a13554f8b879c1bfb37c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55b506070847a13554f8b879c1bfb37c">&#9670;&#160;</a></span>Shape</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="classaudio__tools_1_1_tremolo.html#a55b506070847a13554f8b879c1bfb37c">Shape</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Waveform of the modulation. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a55b506070847a13554f8b879c1bfb37ca773e9be14af3bc697c412f3e6c5c509e" name="a55b506070847a13554f8b879c1bfb37ca773e9be14af3bc697c412f3e6c5c509e"></a>Triangle&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a55b506070847a13554f8b879c1bfb37ca39672d21444bbd829bf8971223443724" name="a55b506070847a13554f8b879c1bfb37ca39672d21444bbd829bf8971223443724"></a>Sine&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a6cebfd2642670bb1b582f36d550d44e8" name="a6cebfd2642670bb1b582f36d550d44e8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6cebfd2642670bb1b582f36d550d44e8">&#9670;&#160;</a></span>Tremolo() <span class="overload">[1/2]</span></h2>
 
@@ -232,7 +301,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p><a class="el" href="classaudio__tools_1_1_tremolo.html" title="Tremolo AudioEffect.">Tremolo</a> constructor - use e.g. duration_ms=2000; depthPercent=50; sampleRate=44100 </p>
+<p><a class="el" href="classaudio__tools_1_1_tremolo.html" title="Tremolo AudioEffect: periodic change of the volume (amplitude modulation) between (100 - depth)% and ...">Tremolo</a> constructor - use e.g. duration_ms=2000; depthPercent=50; sampleRate=44100 </p>
 
 </div>
 </div>
@@ -437,6 +506,34 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a331e63b4d2337e2318b9ea17d48b7f50" name="a331e63b4d2337e2318b9ea17d48b7f50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a331e63b4d2337e2318b9ea17d48b7f50">&#9670;&#160;</a></span>gainAt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classint32__t.html">int32_t</a> gainAt </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classfloat.html">float</a>&#160;</td>
+          <td class="paramname"><em>pos</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gain (Q16) at a position in the period: (1 - depth) .. 1. </p>
+
+</div>
+</div>
 <a id="a4a716406d3d9d4fdbbe46f100e648f3b" name="a4a716406d3d9d4fdbbe46f100e648f3b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4a716406d3d9d4fdbbe46f100e648f3b">&#9670;&#160;</a></span>id()</h2>
 
@@ -461,6 +558,32 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Allows to identify an effect. </p>
+
+</div>
+</div>
+<a id="adf4ffa7ecbcffadb24a9af9a13d5d385" name="adf4ffa7ecbcffadb24a9af9a13d5d385"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf4ffa7ecbcffadb24a9af9a13d5d385">&#9670;&#160;</a></span>nextSegment()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nextSegment </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Calculates the gain at the end of the next segment: the gain is interpolated linearly inside of the segment </p>
 
 </div>
 </div>
@@ -494,6 +617,31 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a63dc978bc66f4cfa356599df58773bfc" name="a63dc978bc66f4cfa356599df58773bfc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63dc978bc66f4cfa356599df58773bfc">&#9670;&#160;</a></span>rate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classfloat.html">float</a> rate </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a467a786be42a2165aa15a26709674547" name="a467a786be42a2165aa15a26709674547"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a467a786be42a2165aa15a26709674547">&#9670;&#160;</a></span>recalculate()</h2>
 
@@ -516,6 +664,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Parameters changed: the next segment ramps from the current gain to the new values (no clicks) </p>
 
 </div>
 </div>
@@ -571,6 +720,8 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Depth in percent: the volume changes between (100 - depth)% and 100%. </p>
+
 </div>
 </div>
 <a id="a6377ffb5adf3d71c8517d7e8ff4a4031" name="a6377ffb5adf3d71c8517d7e8ff4a4031"></a>
@@ -596,6 +747,8 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Period of the modulation in ms (&lt;= 0: no modulation) </p>
 
 </div>
 </div>
@@ -627,6 +780,142 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a43961eb538999660bb081959fa8014c5" name="a43961eb538999660bb081959fa8014c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43961eb538999660bb081959fa8014c5">&#9670;&#160;</a></span>setPhase()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setPhase </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classfloat.html">float</a>&#160;</td>
+          <td class="paramname"><em>degrees</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Phase of the modulation in degrees, e.g. 180 for the right channel of a stereo auto pan </p>
+
+</div>
+</div>
+<a id="a96d70b03956853f9160fba4678314d80" name="a96d70b03956853f9160fba4678314d80"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96d70b03956853f9160fba4678314d80">&#9670;&#160;</a></span>setRate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setRate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classfloat.html">float</a>&#160;</td>
+          <td class="paramname"><em>hz</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Speed of the modulation in Hz (e.g. 5.5 for an electric piano) </p>
+
+</div>
+</div>
+<a id="aa5c93d484ec2c8d1db57588e8bd8c8b2" name="aa5c93d484ec2c8d1db57588e8bd8c8b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5c93d484ec2c8d1db57588e8bd8c8b2">&#9670;&#160;</a></span>setSampleRate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setSampleRate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classuint32__t.html">uint32_t</a>&#160;</td>
+          <td class="paramname"><em>sampleRate</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sample rate of the processed audio. </p>
+
+</div>
+</div>
+<a id="a39216c02064ec0c2d598aa12266bd499" name="a39216c02064ec0c2d598aa12266bd499"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39216c02064ec0c2d598aa12266bd499">&#9670;&#160;</a></span>setShape()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setShape </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_tremolo.html#a55b506070847a13554f8b879c1bfb37c">Shape</a>&#160;</td>
+          <td class="paramname"><em>shape</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Waveform: <a class="el" href="classaudio__tools_1_1_triangle.html" title="Triangle FFT Window function.">Triangle</a> (default) or Sine. </p>
+
+</div>
+</div>
+<a id="abc350932871996693e5e52d20d7c7571" name="abc350932871996693e5e52d20d7c7571"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc350932871996693e5e52d20d7c7571">&#9670;&#160;</a></span>shape()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_tremolo.html#a55b506070847a13554f8b879c1bfb37c">Shape</a> shape </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="a7816e2085c1adaae2c69ed5f65f1d212" name="a7816e2085c1adaae2c69ed5f65f1d212"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7816e2085c1adaae2c69ed5f65f1d212">&#9670;&#160;</a></span>active_flag</h2>
@@ -650,8 +939,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a4858b400f708a13bd514376ab941b27d" name="a4858b400f708a13bd514376ab941b27d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4858b400f708a13bd514376ab941b27d">&#9670;&#160;</a></span>count</h2>
+<a id="a1f7dda98eb65c86819b16bed72ed1caf" name="a1f7dda98eb65c86819b16bed72ed1caf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f7dda98eb65c86819b16bed72ed1caf">&#9670;&#160;</a></span>duration_ms</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -660,7 +949,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classint32__t.html">int32_t</a> count = 0</td>
+          <td class="memname"><a class="el" href="classint16__t.html">int16_t</a> duration_ms = 0</td>
         </tr>
       </table>
   </td>
@@ -672,8 +961,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a1f7dda98eb65c86819b16bed72ed1caf" name="a1f7dda98eb65c86819b16bed72ed1caf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1f7dda98eb65c86819b16bed72ed1caf">&#9670;&#160;</a></span>duration_ms</h2>
+<a id="a4d97b19756913cc6eda716db646e00a0" name="a4d97b19756913cc6eda716db646e00a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d97b19756913cc6eda716db646e00a0">&#9670;&#160;</a></span>gain</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -682,7 +971,29 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classint16__t.html">int16_t</a> duration_ms</td>
+          <td class="memname"><a class="el" href="classint32__t.html">int32_t</a> gain = 65536</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa0e68a538543356ad7671119fb332a3f" name="aa0e68a538543356ad7671119fb332a3f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0e68a538543356ad7671119fb332a3f">&#9670;&#160;</a></span>gain_step</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classint32__t.html">int32_t</a> gain_step = 0</td>
         </tr>
       </table>
   </td>
@@ -716,28 +1027,6 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="adafb7a60a5fbf460acc99d438731d4ee" name="adafb7a60a5fbf460acc99d438731d4ee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adafb7a60a5fbf460acc99d438731d4ee">&#9670;&#160;</a></span>inc</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classint16__t.html">int16_t</a> inc = 1</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a4fb1f2d47b97258967e2e0adcd802dff" name="a4fb1f2d47b97258967e2e0adcd802dff"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4fb1f2d47b97258967e2e0adcd802dff">&#9670;&#160;</a></span>p_percent</h2>
 
@@ -748,7 +1037,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classuint8__t.html">uint8_t</a> p_percent</td>
+          <td class="memname"><a class="el" href="classuint8__t.html">uint8_t</a> p_percent = 50</td>
         </tr>
       </table>
   </td>
@@ -760,8 +1049,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a94b921c2e66b3a7ade792f499c40d044" name="a94b921c2e66b3a7ade792f499c40d044"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a94b921c2e66b3a7ade792f499c40d044">&#9670;&#160;</a></span>rate_count_half</h2>
+<a id="accd1045783a8db0a48a87a2400ba2214" name="accd1045783a8db0a48a87a2400ba2214"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#accd1045783a8db0a48a87a2400ba2214">&#9670;&#160;</a></span>p_shape</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -770,7 +1059,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classint32__t.html">int32_t</a> rate_count_half</td>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_tremolo.html#a55b506070847a13554f8b879c1bfb37c">Shape</a> p_shape = <a class="el" href="classaudio__tools_1_1_triangle.html">Triangle</a></td>
         </tr>
       </table>
   </td>
@@ -782,8 +1071,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a6fa8a5149596e320cf6918c74624e4b6" name="a6fa8a5149596e320cf6918c74624e4b6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6fa8a5149596e320cf6918c74624e4b6">&#9670;&#160;</a></span>sampleRate</h2>
+<a id="a275dd6dafe5d4455e599ffd15feb06f8" name="a275dd6dafe5d4455e599ffd15feb06f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a275dd6dafe5d4455e599ffd15feb06f8">&#9670;&#160;</a></span>phase</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -792,7 +1081,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classuint32__t.html">uint32_t</a> sampleRate</td>
+          <td class="memname"><a class="el" href="classfloat.html">float</a> phase = 0.0f</td>
         </tr>
       </table>
   </td>
@@ -804,8 +1093,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ab2385daa77737329a3b1c72f085aa503" name="ab2385daa77737329a3b1c72f085aa503"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab2385daa77737329a3b1c72f085aa503">&#9670;&#160;</a></span>signal_depth</h2>
+<a id="ab4fa81adf0fbf6a3b8d37d857f0f1068" name="ab4fa81adf0fbf6a3b8d37d857f0f1068"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4fa81adf0fbf6a3b8d37d857f0f1068">&#9670;&#160;</a></span>rate_hz</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -814,7 +1103,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classfloat.html">float</a> signal_depth = 1.0f</td>
+          <td class="memname"><a class="el" href="classfloat.html">float</a> rate_hz = 0.0f</td>
         </tr>
       </table>
   </td>
@@ -826,8 +1115,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a9e54d17b688e6d7a3f6d06c8c755f657" name="a9e54d17b688e6d7a3f6d06c8c755f657"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9e54d17b688e6d7a3f6d06c8c755f657">&#9670;&#160;</a></span>tremolo_depth</h2>
+<a id="a8f742a514df155060c3a2cc0457680a9" name="a8f742a514df155060c3a2cc0457680a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f742a514df155060c3a2cc0457680a9">&#9670;&#160;</a></span>remaining</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -836,7 +1125,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classfloat.html">float</a> tremolo_depth = 0.0f</td>
+          <td class="memname"><a class="el" href="classint.html">int</a> remaining = 0</td>
         </tr>
       </table>
   </td>
@@ -848,8 +1137,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a395f072efb26bf646674b5c959b8b80d" name="a395f072efb26bf646674b5c959b8b80d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a395f072efb26bf646674b5c959b8b80d">&#9670;&#160;</a></span>tremolo_factor</h2>
+<a id="a2fba55d9442e7dba4623825cd737e520" name="a2fba55d9442e7dba4623825cd737e520"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2fba55d9442e7dba4623825cd737e520">&#9670;&#160;</a></span>sample_rate</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -858,7 +1147,51 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classfloat.html">float</a> tremolo_factor = 0.0f</td>
+          <td class="memname"><a class="el" href="classuint32__t.html">uint32_t</a> sample_rate = 44100</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a84b32d48e2fa1f8e85a4176767009d49" name="a84b32d48e2fa1f8e85a4176767009d49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84b32d48e2fa1f8e85a4176767009d49">&#9670;&#160;</a></span>SEGMENT</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classint.html">int</a> SEGMENT = 32</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9ce5b662d4e18b9796b8d4b5711dfa3a" name="a9ce5b662d4e18b9796b8d4b5711dfa3a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ce5b662d4e18b9796b8d4b5711dfa3a">&#9670;&#160;</a></span>segment_inc</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classfloat.html">float</a> segment_inc = 0.0f</td>
         </tr>
       </table>
   </td>

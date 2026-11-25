@@ -8,11 +8,12 @@ var searchData=
   ['timercallbackinthread_5',['TimerCallbackInThread',['../namespaceaudio__tools.html#a1a80d46b1fcf323c58eb596c016434f2a6671c687c9ccc98034b5610ac79031df',1,'audio_tools']]],
   ['title_6',['Title',['../group__metadata.html#gga6760f423085f8a63374b1e2db102a6d1aae37fab5e18e444f110064c349066675',1,'audio_tools']]],
   ['trace_7',['TRACE',['../_http_types_8h.html#a3a8d8d5989e593d770a33e5cb6c1ae84a7fa27e82c6c4f69434225ed81e5d151e',1,'HttpTypes.h']]],
-  ['trigo_5fbd_5flimit_8',['TRIGO_BD_LIMIT',['../classffft_1_1_f_f_t_real_fix_len_param.html#abc5c98fcc1211af2b80116dd6e0a035da48986ed13061a50f9dbb6c10d09347d9',1,'ffft::FFTRealFixLenParam']]],
-  ['tx_5fmode_9',['TX_MODE',['../group__basic.html#gga8cbd91a8bac9b5ab425112be1620eb49a736237ce367b7814c763eacd188cf9e5',1,'audio_tools']]],
-  ['txdata_10',['TxData',['../namespaceaudio__tools.html#a5215dca0bf7e06265945b65e039d2f24a5bb607fad1b50dc0268075ec00bdca52',1,'audio_tools']]],
-  ['txlenhi_11',['TxLenHi',['../classaudio__tools_1_1_s_p_i_audio_slave.html#ac9f1d458299e3a8dda366bb9700ef489a642b013086036e2207b68512c31d4705',1,'audio_tools::SPIAudioSlave']]],
-  ['txlenlo_12',['TxLenLo',['../classaudio__tools_1_1_s_p_i_audio_slave.html#ac9f1d458299e3a8dda366bb9700ef489aeb187b691b19134f12df3128bd874a21',1,'audio_tools::SPIAudioSlave']]],
-  ['txpayload_13',['TxPayload',['../classaudio__tools_1_1_s_p_i_audio_slave.html#ac9f1d458299e3a8dda366bb9700ef489a104b3feecaaaff633000d291ef4b9bab',1,'audio_tools::SPIAudioSlave']]],
-  ['txstatus_14',['TxStatus',['../classaudio__tools_1_1_s_p_i_audio_slave.html#ac9f1d458299e3a8dda366bb9700ef489ae280b220347c3b9d368b902dd1ff9eb6',1,'audio_tools::SPIAudioSlave']]]
+  ['triangle_8',['Triangle',['../classaudio__tools_1_1_tremolo.html#a55b506070847a13554f8b879c1bfb37ca773e9be14af3bc697c412f3e6c5c509e',1,'audio_tools::Tremolo']]],
+  ['trigo_5fbd_5flimit_9',['TRIGO_BD_LIMIT',['../classffft_1_1_f_f_t_real_fix_len_param.html#abc5c98fcc1211af2b80116dd6e0a035da48986ed13061a50f9dbb6c10d09347d9',1,'ffft::FFTRealFixLenParam']]],
+  ['tx_5fmode_10',['TX_MODE',['../group__basic.html#gga8cbd91a8bac9b5ab425112be1620eb49a736237ce367b7814c763eacd188cf9e5',1,'audio_tools']]],
+  ['txdata_11',['TxData',['../namespaceaudio__tools.html#a5215dca0bf7e06265945b65e039d2f24a5bb607fad1b50dc0268075ec00bdca52',1,'audio_tools']]],
+  ['txlenhi_12',['TxLenHi',['../classaudio__tools_1_1_s_p_i_audio_slave.html#ac9f1d458299e3a8dda366bb9700ef489a642b013086036e2207b68512c31d4705',1,'audio_tools::SPIAudioSlave']]],
+  ['txlenlo_13',['TxLenLo',['../classaudio__tools_1_1_s_p_i_audio_slave.html#ac9f1d458299e3a8dda366bb9700ef489aeb187b691b19134f12df3128bd874a21',1,'audio_tools::SPIAudioSlave']]],
+  ['txpayload_14',['TxPayload',['../classaudio__tools_1_1_s_p_i_audio_slave.html#ac9f1d458299e3a8dda366bb9700ef489a104b3feecaaaff633000d291ef4b9bab',1,'audio_tools::SPIAudioSlave']]],
+  ['txstatus_15',['TxStatus',['../classaudio__tools_1_1_s_p_i_audio_slave.html#ac9f1d458299e3a8dda366bb9700ef489ae280b220347c3b9d368b902dd1ff9eb6',1,'audio_tools::SPIAudioSlave']]]
 ];

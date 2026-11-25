@@ -1,19 +1,22 @@
 <map id="Tremolo" name="Tremolo">
-<area shape="rect" id="Node000001" title="Tremolo AudioEffect." alt="" coords="323,225,396,252"/>
-<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects." alt="" coords="34,98,130,126"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="104,135,140,169,183,198,219,212,256,222,325,235,320,235,255,228,217,218,181,203,136,173,102,140"/>
+<area shape="rect" id="Node000001" title="Tremolo AudioEffect: periodic change of the volume (amplitude modulation) between (100 &#45; depth)% and ..." alt="" coords="457,231,531,259"/>
+<area shape="rect" id="Node000002" href="$classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects." alt="" coords="70,101,166,129"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="133,140,161,175,177,192,196,205,246,220,317,230,459,242,454,242,316,235,245,225,194,209,174,196,157,179,132,145"/>
 <area shape="rect" id="Node000003" href="$classbool.html" title=" " alt="" coords="5,5,55,33"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="26,46,33,73,43,85,57,96,52,98,39,89,29,75,26,51"/>
-<area shape="rect" id="Node000004" href="$classint.html" title=" " alt="" coords="116,5,155,33"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="120,49,108,75,93,99,89,96,104,73,123,45"/>
-<area shape="rect" id="Node000005" href="$classint16__t.html" title=" " alt="" coords="154,98,220,126"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="188,139,193,171,199,186,208,199,227,209,256,218,325,233,319,233,255,223,224,214,205,203,194,189,188,173,185,143"/>
-<area shape="rect" id="Node000006" href="$classuint32__t.html" title=" " alt="" coords="266,98,340,126"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="299,139,300,170,308,199,318,212,332,225,327,223,314,216,303,202,294,171,296,143"/>
-<area shape="rect" id="Node000007" href="$classint32__t.html" title=" " alt="" coords="384,98,450,126"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="412,139,403,171,390,202,373,226,370,222,385,199,398,169,408,142"/>
-<area shape="rect" id="Node000008" href="$classuint8__t.html" title=" " alt="" coords="516,98,582,126"/>
-<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="547,139,537,173,528,189,516,203,488,221,456,232,396,240,396,235,455,227,485,216,512,199,523,186,532,171,543,142"/>
-<area shape="rect" id="Node000009" href="$classfloat.html" title=" " alt="" coords="622,98,672,126"/>
-<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="647,139,638,174,629,190,617,203,600,212,577,220,517,230,397,239,396,234,517,225,575,215,598,207,614,199,625,186,633,172,643,143"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="35,46,50,72,67,87,87,100,82,102,64,91,46,76,36,51"/>
+<area shape="rect" id="Node000004" href="$classint.html" title=" " alt="" coords="155,5,193,33"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="190,44,198,56,211,95,217,112,228,130,250,157,270,175,324,205,358,218,394,227,460,240,454,240,392,232,357,223,322,209,267,179,246,161,224,134,212,114,206,97,193,58,189,49"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="145,46,139,58,129,80,123,102,118,100,124,79,134,56,148,42"/>
+<area shape="rect" id="Node000005" href="$classint16__t.html" title=" " alt="" coords="306,101,372,129"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="333,142,331,176,334,192,342,205,359,217,389,226,460,240,454,240,388,231,357,222,338,209,329,193,326,176,329,146"/>
+<area shape="rect" id="Node000006" href="$classfloat.html" title=" " alt="" coords="413,101,463,129"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="434,142,433,175,441,206,452,218,466,231,461,230,448,222,437,208,428,176,430,146"/>
+<area shape="rect" id="Node000007" href="$classuint32__t.html" title=" " alt="" coords="514,101,588,129"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="547,142,538,176,524,208,507,233,504,228,520,206,533,174,543,145"/>
+<area shape="rect" id="Node000008" href="$classuint8__t.html" title=" " alt="" coords="634,101,700,129"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="665,142,655,178,646,195,633,209,609,225,583,236,531,245,531,240,581,230,607,220,630,205,641,191,650,176,661,145"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="735,101,797,129"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="765,142,756,178,747,195,734,209,698,225,643,236,531,245,531,240,642,230,696,220,731,205,743,192,751,176,761,146"/>
+<area shape="rect" id="Node000010" href="$classint32__t.html" title=" " alt="" coords="822,101,888,129"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="856,142,848,179,839,195,826,209,803,221,771,231,690,242,603,246,531,247,531,242,603,241,690,237,770,225,801,216,823,205,835,192,843,177,852,146"/>
 </map>

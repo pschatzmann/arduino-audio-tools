@@ -1833,6 +1833,12 @@ size_t size)</a> and <a class="el" href="classaudio__tools_1_1_base_stream.html#
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_path_names_registry.html">PathNamesRegistry</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interface for classes that can collect file names.  <a href="classaudio__tools_1_1_path_names_registry.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_peak_filter.html">PeakFilter</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second-order peaking EQ filter (BiQuad DF2). Boosts or cuts a band around the center frequency by the specified gain (in dB) while leaving the other frequencies unchanged. Commonly used in tone controls and equalization (e.g. the mid control of a guitar amplifier). Coefficients are derived from the Audio EQ Cookbook.  <a href="classaudio__tools_1_1_peak_filter.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_peak_filter_d_f1.html">PeakFilterDF1</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second-order peaking EQ filter (BiQuad DF1). Same coefficients as <a class="el" href="classaudio__tools_1_1_peak_filter.html" title="Second-order peaking EQ filter (BiQuad DF2). Boosts or cuts a band around the center frequency by the...">PeakFilter</a>, but with separate x[]/y[] delay lines (see <a class="el" href="classaudio__tools_1_1_low_pass_filter_d_f1.html" title="Second-order low-pass filter (BiQuad DF1). Same coefficients as LowPassFilter, but built on BiQuadDF1...">LowPassFilterDF1</a>).  <a href="classaudio__tools_1_1_peak_filter_d_f1.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_p_i_d_controller.html">PIDController</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A simple header only PID Controller.  <a href="classaudio__tools_1_1_p_i_d_controller.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2371,7 +2377,7 @@ size_t size)</a> and <a class="el" href="classaudio__tools_1_1_base_stream.html#
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_converter_stream.html" title="Both the data of the read or write operations will be converted with the help of the indicated conver...">ConverterStream</a> Helper class which implements the readBytes with the help of write.  <a href="classaudio__tools_1_1_transformation_reader.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tremolo.html">Tremolo</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_tremolo.html" title="Tremolo AudioEffect.">Tremolo</a> <a class="el" href="classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects.">AudioEffect</a>.  <a href="classaudio__tools_1_1_tremolo.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_tremolo.html" title="Tremolo AudioEffect: periodic change of the volume (amplitude modulation) between (100 - depth)% and ...">Tremolo</a> <a class="el" href="classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects.">AudioEffect</a>: periodic change of the volume (amplitude modulation) between (100 - depth)% and 100%.  <a href="classaudio__tools_1_1_tremolo.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_triangle.html">Triangle</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_triangle.html" title="Triangle FFT Window function.">Triangle</a> FFT Window function.  <a href="classaudio__tools_1_1_triangle.html#details">More...</a><br /></td></tr>
@@ -3407,6 +3413,8 @@ Functions</h2></td></tr>
 <tr class="separator:a62fcb264203db4f868a43cc28b92ff24"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af148040374e4504cff20b2dbcf0d7f79" id="r_af148040374e4504cff20b2dbcf0d7f79"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_bi_quad_coeffs.html">BiQuadCoeffs</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#af148040374e4504cff20b2dbcf0d7f79">calculateNotchCoeffs</a> (<a class="el" href="classfloat.html">float</a> frequency, <a class="el" href="classfloat.html">float</a> sampleRate, <a class="el" href="classfloat.html">float</a> q)</td></tr>
 <tr class="separator:af148040374e4504cff20b2dbcf0d7f79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a907578da5f6ebe41c192482c9fc371a4" id="r_a907578da5f6ebe41c192482c9fc371a4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_bi_quad_coeffs.html">BiQuadCoeffs</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a907578da5f6ebe41c192482c9fc371a4">calculatePeakCoeffs</a> (<a class="el" href="classfloat.html">float</a> frequency, <a class="el" href="classfloat.html">float</a> sampleRate, <a class="el" href="classfloat.html">float</a> q, <a class="el" href="classfloat.html">float</a> gain)</td></tr>
+<tr class="separator:a907578da5f6ebe41c192482c9fc371a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a336e063c01ea3f0e57ac7ac20fa59bfe" id="r_a336e063c01ea3f0e57ac7ac20fa59bfe"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a336e063c01ea3f0e57ac7ac20fa59bfe"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a336e063c01ea3f0e57ac7ac20fa59bfe">checkCoeffRange</a> (const <a class="el" href="structaudio__tools_1_1_bi_quad_coeffs.html">BiQuadCoeffs</a> &amp;c)</td></tr>
 <tr class="memdesc:a336e063c01ea3f0e57ac7ac20fa59bfe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Warns (once per call, via LOGE) about any coefficient that doesn't survive being stored in T. This is expected/harmless for float or double (T can represent the value, roundtrip is exact); it's a real problem for a bounded fixed-point type like <a class="el" href="classaudio__tools_1_1q1__14__t.html" title="Fixed-point Q1.14 number: a plain 16-bit signed integer holding 1 integer bit and 14 fractional bits ...">q1_14_t</a> (range ~[-2,2)), where a coefficient outside that range silently saturates instead of erroring, quietly producing a wrong filter &ndash; e.g. shelf filters, whose coefficients scale with the linear gain factor and can exceed +-2 even at modest gains (a limitation of <a class="el" href="classaudio__tools_1_1q1__14__t.html" title="Fixed-point Q1.14 number: a plain 16-bit signed integer holding 1 integer bit and 14 fractional bits ...">q1_14_t</a>'s 1-bit-of-headroom range, not of DF1 vs DF2; see LowShelfFilterDF1/HighShelfFilterDF1).  <br /></td></tr>
@@ -6151,6 +6159,55 @@ Norman Ritz </dd></dl>
 </table>
 </div><div class="memdoc">
 <p>Computes the b0/b1/b2/a1/a2 biquad coefficients for a notch (band-reject) filter. </p>
+
+</div>
+</div>
+<a id="a907578da5f6ebe41c192482c9fc371a4" name="a907578da5f6ebe41c192482c9fc371a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a907578da5f6ebe41c192482c9fc371a4">&#9670;&#160;</a></span>calculatePeakCoeffs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structaudio__tools_1_1_bi_quad_coeffs.html">BiQuadCoeffs</a> calculatePeakCoeffs </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classfloat.html">float</a>&#160;</td>
+          <td class="paramname"><em>frequency</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classfloat.html">float</a>&#160;</td>
+          <td class="paramname"><em>sampleRate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classfloat.html">float</a>&#160;</td>
+          <td class="paramname"><em>q</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classfloat.html">float</a>&#160;</td>
+          <td class="paramname"><em>gain</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Computes the b0/b1/b2/a1/a2 biquad coefficients for a peaking EQ filter (Audio EQ Cookbook): gain in dB at the frequency, q defines the width. </p>
 
 </div>
 </div>
