@@ -3,7 +3,6 @@
 #include "AudioTools/AudioCodecs/AudioCodecsBase.h"
 #include "AudioTools/AudioCodecs/AudioEncoded.h"
 #include "AudioTools/AudioCodecs/AudioFormat.h"
-#include "AudioTools/CoreAudio/AudioBasic/StrView.h"
 
 #define READ_BUFFER_SIZE 512
 #define MAX_WAV_HEADER_LEN 200
@@ -113,12 +112,17 @@ class WAVHeader {
     this->data_pos = 0l;
     memset((void *)&headerInfo, 0, sizeof(WAVAudioInfo));
 
-    if (!setPos("RIFF")) return false;
+    int fmt_pos = findChunk("fmt ");
+    int data_start = getDataPos();
+    if (fmt_pos < 0 || data_start == 0) return false;
+
+    data_pos = 4;
     // RIFF stores chunk_size (= file_size - 8): normalize to full file size
     headerInfo.file_size = read_int32() + 8;
-    if (!setPos("WAVE")) return false;
-    if (!setPos("fmt ")) return false;
-    int fmt_length = read_int32();
+    data_pos = fmt_pos + 4;
+    uint32_t fmt_length = read_int32();
+    if (fmt_length < 16 || fmt_length > buffer.available() - data_pos)
+      return false;
     headerInfo.format = (AudioFormat)read_int16();
     headerInfo.channels = read_int16();
     headerInfo.sample_rate = read_int32();
@@ -127,7 +131,7 @@ class WAVHeader {
     headerInfo.bits_per_sample = read_int16();
     extradata.clear();
     if (fmt_length >= 18) parseFormatExtension(fmt_length);
-    if (!setPos("data")) return false;
+    data_pos = data_start - 4;
     headerInfo.data_length = read_int32();
     if (headerInfo.data_length == 0 || headerInfo.data_length >= 0x7fff0000) {
       headerInfo.is_streamed = true;
@@ -139,11 +143,8 @@ class WAVHeader {
     return true;
   }
 
-  /// Returns true if the header is complete (containd data tag)
-  bool isDataComplete() {
-    int pos = getDataPos();
-    return pos > 0 && buffer.available() >= pos;
-  }
+  /// Returns true if the header includes the full data chunk header.
+  bool isDataComplete() { return getDataPos() > 0; }
 
   /// True if the header buffer has grown to its maximum allowed size
   /// (MAX_WAV_HEADER_LEN_LIMIT) without finding the 'data' chunk - indicates
@@ -157,10 +158,8 @@ class WAVHeader {
 
   /// Determines the data start position using the data tag
   int getDataPos() {
-    int pos =
-        StrView((char *)buffer.data(), MAX_WAV_HEADER_LEN, buffer.available())
-            .indexOf("data");
-    return pos > 0 ? pos + 8 : 0;
+    int pos = findChunk("data");
+    return pos >= 0 ? pos + 8 : 0;
   }
 
   /// provides the info from the header
@@ -279,18 +278,24 @@ class WAVHeader {
     return AudioFormat::EXTENSIBLE;
   }
 
-  bool setPos(const char *id) {
-    int id_len = strlen(id);
-    int pos = indexOf(id);
-    if (pos < 0) return false;
-    data_pos = pos + id_len;
-    return true;
-  }
+  int findChunk(const char *id) {
+    const uint8_t *bytes = buffer.data();
+    size_t len = buffer.available();
+    if (len < 12 || memcmp(bytes, "RIFF", 4) != 0 ||
+        memcmp(bytes + 8, "WAVE", 4) != 0)
+      return -1;
 
-  int indexOf(const char *str) {
-    return StrView((char *)buffer.data(), MAX_WAV_HEADER_LEN,
-                   buffer.available())
-        .indexOf(str);
+    for (size_t pos = 12; pos + 8 <= len;) {
+      if (memcmp(bytes + pos, id, 4) == 0) return pos;
+      const uint8_t *size = bytes + pos + 4;
+      uint32_t chunk_size = (uint32_t)size[0] | ((uint32_t)size[1] << 8) |
+                            ((uint32_t)size[2] << 16) |
+                            ((uint32_t)size[3] << 24);
+      pos += 8;
+      if (chunk_size > len - pos) break;
+      pos += chunk_size + (chunk_size & 1);  // RIFF pads odd-sized chunks.
+    }
+    return -1;
   }
 
   uint32_t read_tag() {
