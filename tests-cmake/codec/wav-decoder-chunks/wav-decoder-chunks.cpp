@@ -64,10 +64,22 @@ void setup() {
     trailing_list.push_back((uint8_t)(list_len >> (8 * i)));
   for (uint32_t i = 0; i < list_len; i++) trailing_list.push_back(0x55);
 
+  // An odd-sized JUNK chunk with a pad byte followed by a LIST title "data".
+  const std::vector<uint8_t> titled_wav = {
+      'R', 'I', 'F', 'F', 76, 0, 0, 0, 'W', 'A', 'V', 'E',
+      'f', 'm', 't', ' ', 16, 0, 0, 0,
+      1, 0, 1, 0, 0x80, 0x3e, 0, 0, 0x00, 0x7d, 0, 0, 2, 0, 16, 0,
+      'J', 'U', 'N', 'K', 1, 0, 0, 0, 0, 0,
+      'L', 'I', 'S', 'T', 18, 0, 0, 0, 'I', 'N', 'F', 'O',
+      'I', 'N', 'A', 'M', 5, 0, 0, 0, 'd', 'a', 't', 'a', 0, 0,
+      'd', 'a', 't', 'a', 4, 0, 0, 0, 0x12, 0x12, 0x56, 0x56,
+  };
+
   int failures = 0;
   failures += runCase("declared length", buildWav(pcm, true), pcm);
   failures += runCase("declared + trailing LIST", trailing_list, pcm);
   failures += runCase("streamed", buildWav(pcm, false), pcm);
+  failures += runCase("LIST title data", titled_wav, {0x1212, 0x5656});
 
   printf("%s\n", failures == 0 ? "PASS" : "FAIL");
   exit(failures == 0 ? 0 : 1);
